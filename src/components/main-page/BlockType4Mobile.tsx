@@ -29,8 +29,11 @@ export default function BlockType4Mobile({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -105,7 +108,12 @@ export default function BlockType4Mobile({
                                                             className="casino-card__image ibg--custom"
                                                             href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                         >
-                                                            <Image width={444} height={444} alt="Casino Image" src={item?.bonus_info?.bonus_image || ''} />
+                                                            <Image
+                                                                width={444}
+                                                                height={444}
+                                                                alt="Casino Image"
+                                                                src={item?.bonus_info?.bonus_image || ''}
+                                                            />
                                                         </Link>
                                                         {isShowPlayButton && (
                                                             <a
@@ -135,7 +143,12 @@ export default function BlockType4Mobile({
                                                                 className="casino-small-card__image-block"
                                                             >
                                                                 <div className="casino-small-card__image ibg--custom">
-                                                                    <Image width={444} height={444} alt="Casino Image" src={item?.casino_info?.casino_image || ''} />
+                                                                    <Image
+                                                                        width={444}
+                                                                        height={444}
+                                                                        alt="Casino Image"
+                                                                        src={item?.casino_info?.casino_image || ''}
+                                                                    />
                                                                 </div>
                                                             </Link>
                                                             <div className="casino-small-card__body">

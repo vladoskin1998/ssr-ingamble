@@ -349,11 +349,11 @@ export interface SeeAllEssentialCasinoResponse {
     results: SeeAllEssentialLoyaltyCasino[];
 }
 
-export interface SeeAllCasinosLoyaltyKeyPoint extends SeeAllEssentialLoyaltyKeypoint { }
+// export interface SeeAllCasinosLoyaltyKeyPoint extends SeeAllEssentialLoyaltyKeypoint { }
 
 export interface SeeAllCasinosLoyaltyProgram {
     id: number
-    loyalty_keypoint: SeeAllCasinosLoyaltyKeyPoint[];
+    loyalty_keypoint: SeeAllEssentialLoyaltyKeypoint[];
 }
 
 export enum PAYOUTSPEED {

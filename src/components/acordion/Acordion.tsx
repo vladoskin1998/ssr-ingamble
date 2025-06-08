@@ -1,14 +1,13 @@
 'use client'
 
-import React, { memo, useEffect, useRef, useState } from "react"
+import React, { JSX, memo, useEffect, useRef, useState } from "react"
 import { useAccordion } from "../../hooks/useAccordion"
 
 type AccordionItemProps = {
-    heading: any
-    content: any
+    heading: JSX.Element | string
+    content: JSX.Element | string
     defaultOpen?: boolean
     isNested?: boolean
-
 }
  //всегда в хедерт) добавлять accordion--title--element!!!!!!!!
 export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
@@ -103,7 +102,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
         <div className="cusom-react-accordion">
             <div
                 ref={headerRef}
-                //@ts-ignore
+          
                 style={styles.accordionItemHeader}
                 onClick={handleClick}
                 className="active"
@@ -125,10 +124,12 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
     )
 })
 
+AccordionItem.displayName = 'AccordionItem'
+
 const styles = {
     accordionItemHeader: {
         cursor: "pointer",
-        position: "relative",
+        position: "relative" as "relative",
         zIndex: "2",
     },
     accordionItemPanel: {

@@ -4,7 +4,7 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { BlockTypeNumber, DataHomeItemsBlock, HomeDataBlock } from '../../types'
 
 import { SeeAllButton } from './SeeAllButton'
@@ -16,14 +16,8 @@ import { useAdaptiveBehavior } from '../../context/AppContext'
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 
-export default function BlockType6({
-    data,
-    isAutoPlay = false,
-}: {
-    data: HomeDataBlock<DataHomeItemsBlock>
-
-    isAutoPlay?: boolean
-}) {
+export default function BlockType6({ data, src, isAutoPlay = false }: { data: HomeDataBlock<DataHomeItemsBlock>; src:string; isAutoPlay?: boolean }) {
+    const { isShowPlayButton } = useAdaptiveBehavior()
     const sliderRef = useRef<SwiperRef | null>(null)
     const paginationRef = useRef<HTMLDivElement | null>(null)
     const { data: Country, setCasinoFilters, setBonusFilters } = useFilterContext()
@@ -31,8 +25,11 @@ export default function BlockType6({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -45,21 +42,17 @@ export default function BlockType6({
     )
         return
 
-    const dataCard = useMemo(() => {
-        return shuffleArray(data?.items_block.data_cards).slice(0, 8)
-    }, [data?.items_block.data_cards])
+    const dataCard = shuffleArray(data?.items_block.data_cards).slice(0, 8)
 
-    // const titleHub: 'bonuses' | 'casinos' = window.location.href.includes('bonuses') ? 'bonuses' : 'casinos'
+     const titleHub: 'bonuses' | 'casinos' = src.includes('get-data-hub-page-bonus/') ? 'bonuses' : 'casinos'
 
-     const titleHub = 'bonuses' 
-    
-     let titleBlock =
+
+    const titleBlock =
         data.items_block.type_block === BlockTypeNumber.BlockType6
             ? data.items_block.block_title
             : data.items_block.block_title.replace('casinos', titleHub)
 
     const seeAllType6c = () => {
-        //@ts-ignore
         const idCountry = Country?.general.countries.find(
             (item) => item?.code === (data?.items_block?.country_code as unknown as string),
         )?.id
@@ -69,8 +62,6 @@ export default function BlockType6({
         }
         setCasinoFilters({ ...initialCasinoFilters, selected_countries: [idCountry as number] })
     }
-
-    const { isShowPlayButton } = useAdaptiveBehavior()
 
     const emojiTitle = Country?.general?.countries?.find((item) => item?.code === data?.items_block?.country_code)?.emoji_flag
 

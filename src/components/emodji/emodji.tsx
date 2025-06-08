@@ -1,6 +1,6 @@
 const OFFSET = 127397
 export const getCountryFlagEmoji = (countryCode: string) => {
-    //@ts-ignore
+
     return countryCode.toUpperCase().replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + OFFSET))
 }
 

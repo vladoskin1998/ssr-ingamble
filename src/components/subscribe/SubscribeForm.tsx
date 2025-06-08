@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 
 
@@ -23,11 +23,11 @@ export default function SubscribeForm() {
     const [focus, setFocus] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
 
-    const handleEmailChange = (e: any) => {
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!isChecked) {
             setIsErrorCheck(true)
@@ -79,7 +79,7 @@ export default function SubscribeForm() {
                             </div>
                         </div>
                         <div className="subscribe__column">
-                            <form onSubmit={handleSubmit} className="subscribe__form form-subscribe">
+                            <form onSubmit={e => handleSubmit(e)} className="subscribe__form form-subscribe">
                                 <div className="form-subscribe__row">
                                     <div
                                         className={`form-item form-subscribe__item item-form-subscribe ${focus && 'focus'} ${
@@ -98,7 +98,7 @@ export default function SubscribeForm() {
                                             name="email"
                                             className={`item-form-subscribe__input form-item__input ${hasError ? 'input-error' : ''}`}
                                             value={!isSuccess ? email : 'You have successfully subscribed!🎉'}
-                                            onChange={handleEmailChange}
+                                            onChange={e => handleEmailChange(e)}
                                             required
                                             onFocus={() => setFocus(true)}
                                             onBlur={() => setFocus(false)}

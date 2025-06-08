@@ -2,7 +2,7 @@
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
 import { useFilterContext } from '../../context/FilterContext'
 import { sliceString } from '@/helper'
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import { FormatedCategoryType } from '@/types'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -12,7 +12,7 @@ export default function CheckMoreWhatSuitsYouBest() {
     const { handlerSidebarActive } = useHandlerSidebarActive()
 
 
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile] = useState(false)
     // const [isMobile, setIsMobile] = useState(window.innerWidth <= 480)
 
     // useEffect(() => {

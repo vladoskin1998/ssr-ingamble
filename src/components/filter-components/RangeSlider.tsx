@@ -89,7 +89,7 @@ export const RangeSlider = <T extends CasinoFilterBodyType | BonusFilterBodyType
                     min={minmax[0]}
                     max={minmax[1]}
                     value={localRange}
-                    onChange={(v: any) => handleRangeChange(v)}
+                    onChange={(v) => handleRangeChange(v as number[])}
                 />
             </div>
         </div>

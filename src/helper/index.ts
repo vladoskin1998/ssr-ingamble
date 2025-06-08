@@ -62,7 +62,7 @@ export const NumberAssociaty = (n: number | string) => {
     else if (n >= 1000) {
         return s.replace(/000$/ig, "K")
     }
-    else n
+    else return n
 }
 
 
@@ -92,7 +92,7 @@ export const filterEmptyValues = <T>(body: T): Partial<T> => {
     };
 
     return Object.fromEntries(
-        Object.entries(body as Record<string, unknown>).filter(([_, value]) => {
+        Object.entries(body as Record<string, unknown>).filter(([, value]) => {
             if (value === null || value === undefined) return false;
             if (Array.isArray(value) && value.length === 0) return false;
             if (typeof value === "object" && value !== null && isEmptyObject(value)) return false;
@@ -165,7 +165,7 @@ export const cloacingFetch = async (link: string | undefined | null) => {
             link
         })
     } catch (error) {
-        (error);
+        throw error
 
     }
 

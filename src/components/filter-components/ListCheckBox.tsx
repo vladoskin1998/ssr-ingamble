@@ -74,7 +74,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
 
   
     useEffect(() => {
-        setLocalFilterItems(initState as any)
+        setLocalFilterItems(initState.map(item => Number(item)) )
     }, [initState])
 
     return (
@@ -108,38 +108,27 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
                         {({ index, style }) => {
                             const itemFilter = filteredCountries?.[index]
                             const isChecked = localFilterItems?.includes(
-                                itemFilter?.id || (0 as any)
+                                Number(itemFilter?.id) || 0
                             )
                             return (
-                                <div
-                                    className="radio-form-filter__item"
-                                    style={style}
-                                >
+                                <div className="radio-form-filter__item" style={style}>
                                     <input
                                         id={`${keyType}${field}formFilterPlayersFrom${itemFilter?.name}`}
                                         type="checkbox"
                                         checked={isChecked ?? false}
                                         className="radio-form-filter__input form-filter__input"
-                                        onChange={() =>
-                                            checkboxItem(
-                                                itemFilter?.id || (0 as any)
-                                            )
-                                        }
+                                        onChange={() => checkboxItem(Number(itemFilter?.id))}
                                     />
                                     <label
                                         htmlFor={`${keyType}${field}formFilterPlayersFrom${itemFilter?.name}`}
                                         className="radio-form-filter__label"
                                     >
-                                        {isImageShow && (itemFilter?.image ||
-                                            itemFilter?.flag_image) && (
+                                        {isImageShow && (itemFilter?.image || itemFilter?.flag_image) && (
                                             <span className="flag">
-                                                <img loading="lazy"
+                                                <img
+                                                    loading="lazy"
                                                     alt={itemFilter?.name}
-                                                    src={
-                                                        itemFilter?.image ||
-                                                        itemFilter?.flag_image ||
-                                                        ""
-                                                    }
+                                                    src={itemFilter?.image || itemFilter?.flag_image || ''}
                                                     width={20}
                                                     height="auto"
                                                 />
@@ -148,9 +137,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
                                         <span>{itemFilter?.name}</span>
                                     </label>
                                     {itemFilter?.allowed_casinos_count && (
-                                        <span className="number">
-                                            {itemFilter?.allowed_casinos_count}
-                                        </span>
+                                        <span className="number">{itemFilter?.allowed_casinos_count}</span>
                                     )}
                                 </div>
                             )

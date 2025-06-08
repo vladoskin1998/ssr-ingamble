@@ -1,7 +1,7 @@
 'use client'
 
 import { Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { useEffect, useRef, useState } from 'react'
@@ -23,7 +23,9 @@ export default function BlockType3({
 
     isAutoPlay?: boolean
 }) {
-    const sliderRef = useRef<any>(null)
+
+    const sliderRef = useRef<SwiperRef | null>(null)
+
     const paginationRef = useRef<HTMLDivElement | null>(null)
     const [screenState, setScreenState] = useState<number | 'auto'>('auto')
 
@@ -51,8 +53,11 @@ export default function BlockType3({
         if (sliderRef?.current && paginationRef?.current) {
             const swiper = sliderRef?.current?.swiper
             if (swiper && paginationRef?.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -135,7 +140,9 @@ export default function BlockType3({
                                                                             href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                             className="different-casino-standart__image ibg--custom"
                                                                         >
-                                                                            <Image width={444} height={444}
+                                                                            <Image
+                                                                                width={444}
+                                                                                height={444}
                                                                                 alt="Casino Image"
                                                                                 src={item?.[0]?.casino_info?.casino_image || ''}
                                                                             />
@@ -201,7 +208,9 @@ export default function BlockType3({
                                                                                 className="different-casino-standart__image ibg--custom"
                                                                                 href={`/casino/${item?.[1]?.casino_info?.casino_slug}`}
                                                                             >
-                                                                                <Image width={444} height={444}
+                                                                                <Image
+                                                                                    width={444}
+                                                                                    height={444}
                                                                                     alt="Casino Image"
                                                                                     src={item?.[1]?.casino_info?.casino_image || ''}
                                                                                 />
@@ -313,7 +322,9 @@ export default function BlockType3({
                                                                         href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                                         className="item-baner-row-block__image ibg--custom"
                                                                     >
-                                                                        <Image width={444} height={444}
+                                                                        <Image
+                                                                            width={444}
+                                                                            height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.bonus_info?.bonus_image || ''}
                                                                         />
@@ -326,7 +337,9 @@ export default function BlockType3({
                                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                                 >
                                                                                     <div className="casino-small-card__image ibg--custom">
-                                                                                        <Image width={444} height={444}
+                                                                                        <Image
+                                                                                            width={444}
+                                                                                            height={444}
                                                                                             alt="Casino Image"
                                                                                             src={item?.casino_info?.casino_image || ''}
                                                                                         />

@@ -29,8 +29,11 @@ export default function BlockMType3M({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -95,11 +98,9 @@ export default function BlockMType3M({
                                     }}
                                 >
                                     {
-                                        //@ts-ignore
                                         data.items_block.data_cards
-                                            .sort((a, b) => a.order - b.order)
-                                            //@ts-ignore
-                                            .map((item, index) => (
+                                            ?.sort((a, b) => a.order - b.order)
+                                            ?.map((item, index) => (
                                                 <SwiperSlide
                                                     key={index}
                                                     className="slider__slide slide-slider slide-slider-column slide-slider-column_standart swiper-slide"
@@ -113,7 +114,9 @@ export default function BlockMType3M({
                                                                     className="different-casino-standart__image-block"
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image width={444} height={444}
+                                                                        <Image
+                                                                            width={444}
+                                                                            height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.casino_info?.casino_image || ''}
                                                                         />
@@ -160,7 +163,6 @@ export default function BlockMType3M({
                                                                             <div className="info-casino-card__stake-rating">
                                                                                 <span className="info-casino-card__stake-rating-icon">
                                                                                     <img src="/img/icons/star.svg" alt="star" />
-                                                                                    
                                                                                 </span>
                                                                                 <span className="info-casino-card__stake__rating-number">
                                                                                     {item?.casino_info?.casino_rank}

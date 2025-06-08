@@ -1,10 +1,10 @@
-import { useState, useMemo, memo, useEffect } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { FixedSizeList as List } from 'react-window'
 import { CasinoFilterBodyType } from '../../../types'
 
 type ListCasinoPlayersFromContentType = { id: number; name: string; name2: string | null; code: string; image: string | null }[]
 
-export const CasinoPlayersFromContent = memo(
+export const CasinoPlayersFromContent = 
     ({ initState, countries, setLocalCasinoFilters }: { initState: number[]; countries: ListCasinoPlayersFromContentType | undefined; setLocalCasinoFilters: React.Dispatch<React.SetStateAction<CasinoFilterBodyType>> }) => {
         const [searchText, setSearchText] = useState('')
 
@@ -97,5 +97,5 @@ export const CasinoPlayersFromContent = memo(
                 </div>
             </div>
         )
-    },
-)
+    }
+

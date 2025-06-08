@@ -1,7 +1,7 @@
 'use client'
 
 import { Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { useEffect, useMemo, useRef } from 'react'
@@ -24,15 +24,18 @@ export default function BlockType2({
 
     isAutoPlay?: boolean
 }) {
-    const sliderRef = useRef<any>(null)
+    const sliderRef = useRef<SwiperRef | null>(null)
     const paginationRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -131,7 +134,9 @@ export default function BlockType2({
                                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                                     className="casino-small-card__image ibg--custom"
                                                                                 >
-                                                                                    <Image width={444} height={444}
+                                                                                    <Image
+                                                                                        width={444}
+                                                                                        height={444}
                                                                                         alt="Casino Image"
                                                                                         src={item?.casino_info?.casino_image || ''}
                                                                                     />
@@ -259,7 +264,12 @@ export default function BlockType2({
                                                             className="different-casino-bg__image-block"
                                                         >
                                                             <span className="different-casino-bg__image ibg--custom">
-                                                                <Image width={444} height={444} alt="Casino Image" src={item.casino_info.casino_image || ''} />
+                                                                <Image
+                                                                    width={444}
+                                                                    height={444}
+                                                                    alt="Casino Image"
+                                                                    src={item.casino_info.casino_image || ''}
+                                                                />
                                                             </span>
                                                         </Link>
                                                         <div className="different-casino-bg__content">

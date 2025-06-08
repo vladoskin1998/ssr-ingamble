@@ -48,8 +48,7 @@ export default function initializeAdaptiveBehavior() {
 
     attr_elements.push(...Array.from(da_elements).map((item) => item.dataset.da || ''));
     attr_elements.forEach((attr_element) => {
-        //@ts-ignore
-        const [className, index, maxWidth]: any = attr_element.split(', ');
+        const [, , maxWidth]: string[] = attr_element.split(', ');
         if (maxWidth) {
             const mediaQuery = window.matchMedia(`(max-width: ${maxWidth}px)`);
             match_media.push(mediaQuery);

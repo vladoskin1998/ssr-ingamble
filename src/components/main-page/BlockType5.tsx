@@ -1,13 +1,10 @@
 'use client'
 
-
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { useRef, useEffect, useState } from 'react'
-
-
 
 import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
 
@@ -33,8 +30,11 @@ export default function BlockType5({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -170,7 +170,12 @@ export default function BlockType5({
                                                             className="casino-big-card__image ibg--custom"
                                                             href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                         >
-                                                            <Image width={444} height={444} alt="Casino Image" src={item?.bonus_info?.bonus_image || ''} />
+                                                            <Image
+                                                                width={444}
+                                                                height={444}
+                                                                alt="Casino Image"
+                                                                src={item?.bonus_info?.bonus_image || ''}
+                                                            />
                                                         </Link>
                                                         <div className="casino-big-card__top">
                                                             <div className="casino-big-card__top-small-card casino-small-card">
@@ -179,7 +184,9 @@ export default function BlockType5({
                                                                     className="casino-small-card__image-block"
                                                                 >
                                                                     <div className="casino-small-card__image ibg--custom">
-                                                                        <Image width={444} height={444}
+                                                                        <Image
+                                                                            width={444}
+                                                                            height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.casino_info?.casino_image || ''}
                                                                         />

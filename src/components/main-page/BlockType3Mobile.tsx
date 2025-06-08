@@ -29,8 +29,11 @@ export default function BlockType3Mobile({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -117,7 +120,9 @@ export default function BlockType3Mobile({
                                                                 className="different-casino-standart__image-block"
                                                             >
                                                                 <span className="different-casino-standart__image ibg--custom">
-                                                                    <Image width={444} height={444}
+                                                                    <Image
+                                                                        width={444}
+                                                                        height={444}
                                                                         alt="Casino Image"
                                                                         src={item?.[0]?.casino_info?.casino_image || ''}
                                                                     />
@@ -182,7 +187,9 @@ export default function BlockType3Mobile({
                                                                     className="different-casino-standart__image-block"
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image width={444} height={444}
+                                                                        <Image
+                                                                            width={444}
+                                                                            height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.[1]?.casino_info?.casino_image || ''}
                                                                         />

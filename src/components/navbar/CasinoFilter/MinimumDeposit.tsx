@@ -79,7 +79,7 @@ export const MinimumDeposit = ({
                
                     max={max}
                     value={deposit}
-                    onChange={(v:any) => handlerChangeValue(v)}
+                    onChange={(v) => handlerChangeValue(Number(v))}
                 />
 
                 <div className="range-form-filter__min-max">

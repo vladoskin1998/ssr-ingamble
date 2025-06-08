@@ -1,5 +1,3 @@
-//@ts-ignore
-
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '../../helper'
 
 import { useAdaptiveBehavior } from '../../context/AppContext'
@@ -10,7 +8,7 @@ import Image from 'next/image'
 
 const ItemMainSlider = ({
     item,
-    index,
+
     isShowPlayButton,
 }: {
     item: {
@@ -25,7 +23,7 @@ const ItemMainSlider = ({
         casinoLink?: string
         bonuseLink?: string
     }
-    index: number
+
     isShowPlayButton: boolean
 }) => {
     const router = useRouter()

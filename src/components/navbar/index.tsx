@@ -57,7 +57,15 @@ const Navbar = () => {
     const [isGambleBodyHidden, setGambleBodyHidden] = useState(false)
     const [isDefaultOpen, setIsDefaultOpen] = useState<DefaultOpenType>('')
 
-    const { casinoFilters, bonusFilters, loyaltiesFilters, currentRouteFilter, handlerCurrentRouteFilter, handlerClearAllFilters, data } = useFilterContext()
+    const {
+        casinoFilters,
+        bonusFilters,
+        loyaltiesFilters,
+        currentRouteFilter,
+        handlerCurrentRouteFilter,
+        handlerClearAllFilters,
+        data: datasFilter,
+    } = useFilterContext()
 
     useLayoutEffect(() => {
         const sidebarGamble = document.querySelector('.sidebar-gamble') as HTMLElement
@@ -109,13 +117,13 @@ const Navbar = () => {
 
     const randomKey = useMemo(() => Math.random().toString(36).substring(2, 9), [isSidebarActive])
 
-    let datasFilter = data
+
 
     return (
         <aside className="gamble__sidebar sidebar-gamble">
             <div className="sidebar-gamble__top top-sidebar-gamble" data-da="mobile-header__top, 0, 650.98">
                 <Link rel="nofollow noopener" href="/" className="top-sidebar-gamble__logo">
-                    <Image alt={'logo-icon'} src='/img/logo-icon.svg' width={444} height={444}/>
+                    <Image alt={'logo-icon'} src='/img/logo-icon.svg' width={36} height={36}/>
                 </Link>
             </div>
             <div className="sidebar-gamble__filters filters-sidebar-gamble">

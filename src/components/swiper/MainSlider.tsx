@@ -1,22 +1,11 @@
-//@ts-ignore
-
-
-
-import React, { useEffect, useRef } from 'react'
-
+import React, {  useRef } from 'react'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { SwiperRef } from 'swiper/react'
-
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '../../helper'
-
 import { useAdaptiveBehavior } from '../../context/AppContext'
 import { Autoplay } from 'swiper/modules'
-import { useRouter } from 'next/compat/router'
-import Link from 'next/link'
-import Image from 'next/image'
 import ItemMainSlider from './MainSliderItem'
 
 const MainSlider = ({
@@ -43,20 +32,21 @@ const MainSlider = ({
     if (sliderRef.current && paginationRef.current) {
         const swiper = sliderRef.current.swiper
         if (swiper && paginationRef.current) {
-            //@ts-ignore
-            swiper.params.pagination.el = paginationRef.current
+          
+            if (swiper?.params?.pagination) {
+                if (typeof swiper.params.pagination === 'object') {
+                    swiper.params.pagination.el = paginationRef.current
+                }
+            }
             swiper.pagination.init()
             swiper.pagination.render()
             swiper.pagination.update()
         }
     }
 
-    const router = useRouter()
 
-    const navToImageLink = (e: React.MouseEvent, l: string) => {
-        e.preventDefault()
-        router?.push(l)
-    }
+
+
 
     const { isShowPlayButton } = useAdaptiveBehavior()
     return (
@@ -94,7 +84,7 @@ const MainSlider = ({
                         >
                             {data?.map((item, index) => (
                                 <SwiperSlide key={index}>
-                                    <ItemMainSlider index={index} item={item} isShowPlayButton={isShowPlayButton} />
+                                    <ItemMainSlider item={item} isShowPlayButton={isShowPlayButton} />
                                 </SwiperSlide>
                             ))}
                         </Swiper>

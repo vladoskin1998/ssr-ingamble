@@ -1,3 +1,5 @@
+'use client'
+
 import BigLogo from '/img/preloader/preloader-1/big-logo.svg'
 
 export const PreloaderPuls = () => {

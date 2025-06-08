@@ -8,8 +8,8 @@ import { UnlimitedCheckBox } from "../../filter-components/UnlimitedCheckBox"
 import { YesNoDoubleCheckbox } from "../../filter-components/YesNoDoubleCheckbox"
 import { Wagering } from "./Wagering"
 
-//@ts-ignore
-const DataWageringDifficulty = ["Easy", "Medium", "Hard"]
+
+// const DataWageringDifficulty = ["Easy", "Medium", "Hard"]
 
 export default function BonusFilter ({
     datasFilterBonus,

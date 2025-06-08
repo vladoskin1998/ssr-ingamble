@@ -135,7 +135,7 @@ type FilterContextType = {
 const FilterContext = createContext<FilterContextType | undefined>(undefined)
 
 export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    // const router = useRouter()
+     const router = useRouter()
     const [currentRouteFilter, setCurrentRouteFilter] = useState<RouteToNextFilter>(RouteToNextFilter.DEFAULT)
 
     const handlerCurrentRouteFilter = (v: RouteToNextFilter) => {
@@ -159,7 +159,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setCasinoFilters(initialCasinoFilters)
         setBonusFilters(initialBonusFilters)
         setLoyaltiesFilters(initialLoyaltiesFilters)
-        // router.push('/')
+         router?.push('/')
     }
 
     const { data } = useQuery<GetFilterDataTypeResponse>('get-datas-filter', getDatasFilter, {

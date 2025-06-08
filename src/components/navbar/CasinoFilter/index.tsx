@@ -2,10 +2,10 @@ import { CasinoFilterDataType, GeneralFilterDataType } from "../../../types"
 import { AccordionItem } from "../../acordion/Acordion"
 import "rc-slider/assets/index.css"
 import { useFilterContext } from "../../../context/FilterContext"
-//@ts-ignore
-import { CasinoPlayersFromContent } from "./CasinoPlayersFromContent"
-//@ts-ignore
-import { ByLicenses } from "./ByLicenses"
+
+// import { CasinoPlayersFromContent } from "./CasinoPlayersFromContent"
+
+// import { ByLicenses } from "./ByLicenses"
 import { RangeSlider } from "../../filter-components/RangeSlider"
 
 import { YesNoDoubleCheckbox } from "../../filter-components/YesNoDoubleCheckbox"
@@ -432,7 +432,7 @@ export default function CasinoFilterContent ({
                         <ListCheckBox
                             initState={casinoFilters?.responsible_gambling}
                             list={datasFilterCasino?.responsible_gambling.map((item) => ({
-                                id: item?.value as any,
+                                id: item?.value as string,
                                 name: item?.label,
                             }))}
                             field="responsible_gambling"

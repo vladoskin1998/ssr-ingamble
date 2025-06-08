@@ -31,7 +31,7 @@ export const LANGUAGES_WEBSITE: Language[] = [
 export const Header = () => {
 
      const pathname = usePathname()
-    //  const router = useRouter()
+      const router = useRouter()
     const { isSidebarActive } = useAdaptiveBehavior()
     const { handlerSidebarActive } = useHandlerSidebarActive()
     const inputRefMob = useRef<HTMLInputElement>(null)
@@ -65,10 +65,9 @@ export const Header = () => {
     }
 
     const handleFocus = () => {
-        ;('handleFocus')
-        //@ts-ignore
+     
         if (inputRefMob?.current) {
-            //@ts-ignore
+   
             inputRefMob?.current.focus()
         }
     }
@@ -106,7 +105,7 @@ export const Header = () => {
             return
         } else {
             setSearchShow(false)
-            // router.push('/filter-casinos')
+             router?.push('/filter-casinos')
         }
     }
 
@@ -170,7 +169,7 @@ export const Header = () => {
 
                             <Link rel="nofollow noopener" href="/" className="header__logo logo">
                                 <div className={`logo__img `}>
-                                    <Image alt= 'logo-ig-pc1' src='/img/logo-ingamble.svg' width={444} height={444} />
+                                    <Image alt= 'logo-ig-pc1' src='/img/logo-ingamble.svg' width={140} height={25} />
                                 </div>
                             </Link>
                         </div>
@@ -263,7 +262,7 @@ export const Header = () => {
                                         className="dropdown__btn dropdown-language-header__btn dropdown-language-header__btn-icon"
                                         // onClick={() => setIsLanguageOpen(true)}
                                     >
-                                        <Image alt={selectedLanguage.name} src={selectedLanguage.flag} width={20} height={20} />
+                                        <Image alt={selectedLanguage.name} src={selectedLanguage.flag} width={32} height={32} />
                                     </div>
 
                                     <div
@@ -493,8 +492,9 @@ export const Header = () => {
                                     </button>
                                  
                                         <ul className="dropdown__list dropdown-language-header__list">
-                                            {LANGUAGES_WEBSITE.map((item) => (
+                                            {LANGUAGES_WEBSITE.map((item, key) => (
                                                 <li
+                                                key={key}
                                                     onClick={() => handleLanguageSelect(item)}
                                                     className={`dropdown__list-item dropdown-language-header__list-item list-item-dropdown-language-header ${item.code === selectedLanguage.code && 'active'}`}
                                                 >

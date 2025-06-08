@@ -83,8 +83,8 @@ const formatDate = (date: Date): string => {
 
 export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-     //@ts-ignore
-    // const pathname = usePathname()
+
+    const pathname = usePathname()
     const [isSidebarActive, setSidebarActive] = useState(false)
     
     useEffect(() => {
@@ -99,7 +99,7 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
             window.removeEventListener('resize', handleResize);
         };
     }, [
-        // pathname
+         pathname
     ]);
 
     const [lastUpdate, setLastUpdate] = useState<string>('');

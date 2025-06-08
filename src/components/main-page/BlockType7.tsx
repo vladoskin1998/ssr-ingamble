@@ -30,8 +30,11 @@ export default function BlockType7({
         if (sliderRef.current && paginationRef.current) {
             const swiper = sliderRef.current.swiper
             if (swiper && paginationRef.current) {
-                //@ts-ignore
-                swiper.params.pagination.el = paginationRef.current
+                if (swiper?.params?.pagination) {
+                    if (typeof swiper.params.pagination === 'object') {
+                        swiper.params.pagination.el = paginationRef.current
+                    }
+                }
                 swiper.pagination.init()
                 swiper.pagination.render()
                 swiper.pagination.update()
@@ -108,7 +111,12 @@ export default function BlockType7({
                                                 className="different-casino-bg__image-block"
                                             >
                                                 <span className="different-casino-bg__image ibg--custom">
-                                                    <Image width={444} height={444} alt="Casino Image" src={item.casino_info.casino_image || ''} />
+                                                    <Image
+                                                        width={444}
+                                                        height={444}
+                                                        alt="Casino Image"
+                                                        src={item.casino_info.casino_image || ''}
+                                                    />
                                                 </span>
                                             </Link>
                                             <div className="different-casino-bg__content">
