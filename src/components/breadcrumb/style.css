@@ -1,0 +1,60 @@
+.breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.breadcrumbs__item {
+    padding: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbs__item:not(:last-child) {
+    margin: 0 8px 0 0;
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+    position: absolute;
+    content: "";
+    flex: 0 0 4px;
+    width: 4px;
+    height: 8px;
+    right: -8px;
+    background: url("/img/icons/arrow-yellow.svg") center no-repeat;
+    background-size: contain;
+}
+
+.breadcrumbs__item a {
+    color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
+
+@media (min-width: 1355.98px) {
+    .breadcrumbs__item a:hover {
+        color: #fff;
+    }
+}
+
+.breadcrumbs__item span {
+    color: #4C4C4C;
+}
+
+.breadcrumbs__link {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 17.76px;
+}
+
+@media (max-width: 650.98px) {
+    .breadcrumbs__link {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

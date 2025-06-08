@@ -1,0 +1,2027 @@
+.container {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 40px;
+}
+
+@media (max-width: 1650.98px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 650.98px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+@media (max-width: 650.98px) {
+  h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.info-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 8px;
+  background-color: transparent;
+}
+
+.info-info svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--Text-Txt_Main, #FFFFFF);
+  opacity: 0.25;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.top:not(:last-child) {
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 480.98px) {
+  .top:not(:last-child) {
+    margin: 0 0 16px 0;
+  }
+}
+
+.top__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 -8px;
+}
+
+.top__column {
+  padding: 0 8px;
+}
+
+.top__column:nth-child(1) {
+  flex: 1 1 100%;
+}
+
+.top__title-block {
+  display: flex;
+  align-items: center;
+}
+
+.top__title-block:not(:last-child) {
+  margin: 0 0 4px 0;
+}
+
+.top__title-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 12px 0 0;
+}
+
+@media (max-width: 480.98px) {
+  .top__title-icon {
+    margin: 0 6px 0 0;
+  }
+}
+
+.top__title-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.top__title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+@media (max-width: 480.98px) {
+  .top__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.top__subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--Colors-Accent, #FFCF23);
+}
+
+@media (max-width: 480.98px) {
+  .top__subtitle {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.top__btn {
+  padding: 6px 0 0 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  transform: translate(2px, 0);
+}
+
+@media (min-width: 1355.98px) {
+  .top__btn:hover {
+    color: var(--Colors-Accent, #FFCF23);
+  }
+
+  .top__btn:hover .top__btn-arrow svg {
+    stroke: var(--Colors-Accent, #FFCF23);
+  }
+}
+
+@media (max-width: 650.98px) {
+  .top__btn {
+    padding: 2px 0 0 0;
+  }
+}
+
+.top__btn-arrow {
+  margin: 0 0 0 9px;
+  display: flex;
+  align-items: center;
+  flex: 0 0 12px;
+  width: 12px;
+  height: 6px;
+}
+
+.top__btn-arrow svg {
+  stroke-width: 2px;
+  stroke: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+@media (max-width: 650.98px) {
+  .top__btn-arrow {
+    margin: 0 0 0 4px;
+    flex: 0 0 10px;
+    width: 10px;
+    height: 5px;
+  }
+}
+
+.slider {
+  margin: 0 0 39px 0;
+}
+
+.slider__body {
+  position: relative;
+}
+
+.slider__body:not(:last-child) {
+  margin: 0 0 22px 0;
+}
+
+.slider__body::before {
+  position: absolute;
+  content: "";
+  width: 64px;
+  height: 100%;
+  top: 0;
+  right: -40px;
+  background: linear-gradient(90deg, rgba(17, 17, 17, 0) 0%, #111111 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (max-width: 1650.98px) {
+  .slider__body::before {
+    width: 44px;
+    right: -20px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider__body::before {
+    display: none;
+  }
+}
+
+.slider__body .swiper {
+  overflow: visible;
+}
+
+
+@media (max-width: 480.98px) {
+  .slider__body:not(:last-child) {
+    margin: 0 0 6px 0;
+  }
+}
+
+.slide-slider {
+  position: relative;
+}
+
+.slide-slider__item-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-slider__item-column_standart:not(:last-child) {
+  margin: 0 0 20px 0;
+}
+
+.slide-slider__item-column_standart .different-casino-standart__info-link {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+}
+
+@media (max-width: 480.98px) {
+  .slide-slider__item-column_standart {
+    width: 100%;
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart__name:not(:last-child) {
+    margin: 0 0 4px 0;
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart__info-link {
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart__content {
+    flex: 1 1 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart {
+    width: 100%;
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart__body {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1355.98px) {
+  .slide-slider__item-column_standart .different-casino-standart__name:hover {
+    color: var(--Text-Txt_Main, #FFFFFF);
+  }
+
+  .slide-slider__item-column_standart .different-casino-standart__info-link:hover {
+    color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+  }
+}
+
+.different-casino-medium {
+  display: flex;
+  flex-direction: column;
+}
+
+.different-casino-medium__image-block {
+  flex: 0 0 128px;
+  width: 128px;
+  height: 128px;
+  border-radius: var(--SystemCorners-Small, 8px);
+  overflow: hidden;
+  position: relative;
+}
+
+.different-casino-medium__image-block:not(:last-child) {
+  margin: 0 0 12px 0;
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-medium__image-block {
+    flex: 0 0 90px;
+    width: 90px;
+    height: 90px;
+  }
+
+  .different-casino-medium__image-block:not(:last-child) {
+    margin: 0 0 8px 0;
+  }
+}
+
+.different-casino-medium__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.different-casino-medium__name {
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.different-casino-medium__name:not(:last-child) {
+  margin: 0 0 4px 0;
+}
+
+@media (min-width: 1355.98px) {
+  .different-casino-medium__name:hover {
+    color: var(--Colors-Accent, #FFCF23);
+  }
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-medium__name {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+  }
+}
+
+.different-casino-medium__rating {
+  display: flex;
+  align-items: center;
+}
+
+.different-casino-medium__rating-icon {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin: 0 4px 1.25px 0;
+}
+
+.different-casino-medium__rating-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-medium__rating-icon {
+    flex: 0 0 10px;
+    width: 10px;
+    height: 10px;
+    margin: 0 1px 0.5px 0;
+  }
+}
+
+.different-casino-medium__rationg-number {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-medium__rationg-number {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.different-casino-big {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+@media (max-width: 768.98px) {
+  .different-casino-big {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.different-casino-big__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.different-casino-big__image-block {
+  flex: 0 0 140px;
+  width: 140px;
+  height: 140px;
+  position: relative;
+  border-radius: var(--SystemCorners-Small, 8px);
+  overflow: hidden;
+  margin: 0 20px 0 0;
+}
+
+@media (max-width: 1650.98px) {
+  .different-casino-big__image-block {
+    flex: 0 0 110px;
+    width: 110px;
+    height: 110px;
+    margin: 0 16px 0 0;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .different-casino-big__image-block {
+    flex: 0 0 92px;
+    width: 92px;
+    height: 92px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .different-casino-big__image-block {
+    margin: 0 0 16px 0;
+    width: 100%;
+    height: 0;
+    padding: 0 0 100% 0;
+  }
+}
+
+.different-casino-big__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.different-casino-big__content {
+  position: relative;
+}
+
+.different-casino-big__name {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.different-casino-big__name:not(:last-child) {
+  margin: 0 0 8px 0;
+}
+
+@media (min-width: 1355.98px) {
+  .different-casino-big__name:hover {
+    color: var(--Colors-Accent, #FFCF23);
+  }
+}
+
+.different-casino-big__info {
+  max-width: 102px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.different-casino-big__info:not(:last-child) {
+  margin: 0 0 12px 0;
+}
+
+.different-casino-big__info-link {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.different-casino-big__info-link:not(:last-child) {
+  margin: 0 13px 0 0;
+}
+
+.different-casino-big__info-link:not(:last-child)::before {
+  position: absolute;
+  content: "";
+  right: -8px;
+  flex: 0 0 3px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+}
+
+.different-casino-big__rating {
+  display: flex;
+  align-items: center;
+}
+
+.different-casino-big__rating-icon {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin: 0 4px 1px 0;
+}
+
+.different-casino-big__rating-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1650.98px) {
+  .different-casino-big__rating-icon {
+    margin: 0 4px 1.5px 0;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-big__rating-icon {
+    flex: 0 0 10px;
+    width: 10px;
+    height: 10px;
+    margin: 0 1px 0 0;
+  }
+}
+
+.different-casino-big__rating-number {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+@media (max-width: 480.98px) {
+  .different-casino-big__rating-number {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.ibg {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ibg img {
+  display: none;
+}
+
+.gamble__body {
+  position: relative;
+  width: 100%;
+}
+
+.gamble__body.hide::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5019607843);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.main-gamble {
+  flex: 1 1 100%;
+  display: flex;
+  width: calc(100% - 80px);
+  transform: translate(80px, 0);
+}
+
+@media (max-width: 650.98px) {
+  .main-gamble {
+    width: 100%;
+    transform: translate(0, 0);
+  }
+}
+
+.main-gamble.resize {
+  width: calc(100% - 350px);
+  transform: translate(350px, 0);
+}
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize {
+    width: calc(100% - 320px);
+    transform: translate(320px, 0);
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .main-gamble.resize {
+    width: calc(100% - 80px);
+    transform: translate(80px, 0);
+  }
+}
+
+@media (max-width: 650.98px) {
+  .main-gamble.resize {
+    width: 100%;
+    transform: translate(0, 0);
+  }
+}
+
+.main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+  padding: 0 60px 0 0;
+}
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+    padding: 0 40px 0 0;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+    padding: 0 20px 0 0;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+    padding: 0 40px 0 0;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .main-gamble.resize .best-casinos-2024-gamble .slider-best-casinos-2024-gamble__top {
+    padding: 0 16px;
+  }
+}
+
+.main-gamble.resize .best-casinos-2024-2-gamble__column_small {
+  flex: 0 0 350px;
+}
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__column_small {
+    flex: 0 0 270px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__column_small {
+    flex: 0 1 50%;
+  }
+}
+
+
+.main-gamble.resize .best-casinos-2024-2-gamble__girl {
+  left: 11.333%;
+}
+
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__girl {
+    left: 3.6%;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__girl {
+    left: 21.639%;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__girl {
+    left: 16.33%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__girl {
+    left: 11.265%;
+  }
+}
+
+.main-gamble.resize .best-casinos-2024-2-gamble__content {
+  right: 13.333%;
+}
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__content {
+    right: 8%;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__content {
+    right: auto;
+    left: 58.517%;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__content {
+    left: 57.377%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__content {
+    left: 56.48%;
+  }
+}
+
+.main-gamble.resize .best-casinos-2024-2-gamble__waves {
+  transform: translate(0);
+  left: -14.09%;
+}
+
+@media (max-width: 1650.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__waves {
+    left: -34.4%;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__waves {
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__waves {
+    transform: translate(0, 0);
+    left: -5.64%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .main-gamble.resize .best-casinos-2024-2-gamble__waves {
+    left: -7.098%;
+  }
+}
+
+.main-gamble__body {
+  width: 100%;
+  padding: 24px 0 0 0;
+}
+
+@media (max-width: 650.98px) {
+  .main-gamble__body {
+    padding: 16px 0 0 0;
+  }
+}
+
+.main-gamble__top-bonuses:not(:last-child) {
+  margin: 0 0 40px 0;
+}
+
+@media (max-width: 480.98px) {
+  .main-gamble__top-bonuses {
+    display: none;
+  }
+}
+
+.main-gamble__best-casinos-2024 {
+  display: none;
+}
+
+.main-gamble__best-casinos-2024:not(:last-child) {
+  margin: 0 0 40px 0;
+}
+
+@media (max-width: 530.98px) {
+  .main-gamble__best-casinos-2024 {
+    display: block;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .main-gamble__best-casinos-2024 {
+    display: block;
+  }
+}
+
+.main-gamble__best-casinos-2024-2:not(:last-child) {
+  margin: 59px 0 60px 0;
+}
+
+@media (max-width: 480.98px) {
+  .main-gamble__best-casinos-2024-2 {
+    display: none;
+  }
+}
+
+.top-bonuses-gamble__row {
+  display: flex;
+  margin: 0 -10px;
+}
+
+@media (max-width: 1850.98px) {
+  .top-bonuses-gamble__row {
+    flex-direction: column;
+  }
+}
+
+.top-bonuses-gamble__column {
+  flex: 0 1 50%;
+  padding: 0 10px;
+}
+
+@media (max-width: 1850.98px) {
+  .top-bonuses-gamble__column:not(:last-child) {
+    margin: 0 0 20px 0;
+  }
+}
+
+.top-bonuses-gamble__block {
+  border-radius: var(--SystemCorners-Medium, 12px);
+  overflow: hidden;
+  padding: 24px 24px 0 24px;
+  background: url("/img/menu-bg.jpg") center repeat;
+  position: relative;
+  background-size: 20%;
+}
+
+.top-bonuses-gamble__top:not(:last-child) {
+  margin: 0 0 32px 0;
+}
+
+.top-bonuses-gamble__body {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+@media (max-width: 1850.98px) {
+  .top-bonuses-gamble__body {
+    margin: 0 -8px;
+  }
+}
+
+.top-bonuses-gamble__deposit {
+  margin: 0 0 32px 0;
+}
+
+.deposit-top-bonuses-gamble {
+  flex: 0 1 50%;
+  display: flex;
+  padding: 0 16px;
+}
+
+@media (max-width: 1850.98px) {
+  .deposit-top-bonuses-gamble {
+    flex: 0 1 33.333%;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .deposit-top-bonuses-gamble {
+    flex: 0 1 50%;
+  }
+}
+
+@media (max-width: 850.98px) {
+  .deposit-top-bonuses-gamble {
+    padding: 0 8px 44px 8px;
+    position: relative;
+  }
+}
+
+@media (max-width: 725.98px) {
+  .deposit-top-bonuses-gamble {
+    flex: 1 1 100%;
+  }
+}
+
+/* .deposit-top-bonuses-gamble:nth-child(3) .deposit-top-bonuses-gamble__title, .deposit-top-bonuses-gamble:nth-child(4) .deposit-top-bonuses-gamble__title {
+    line-height: 22px;
+  } */
+.deposit-top-bonuses-gamble__image-block {
+  position: relative;
+  flex: 0 0 120px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--SystemCorners-Small, 8px);
+  overflow: hidden;
+  margin: 0 16px 0 0;
+}
+
+.deposit-top-bonuses-gamble__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.deposit-top-bonuses-gamble__body {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+@media (max-width: 850.98px) {
+  .deposit-top-bonuses-gamble__body {
+    position: static;
+  }
+}
+
+.deposit-top-bonuses-gamble__title {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  margin: 0 0 4px 0;
+  max-width: 250px;
+}
+
+@media (min-width: 1355.98px) {
+  .deposit-top-bonuses-gamble__title:hover {
+    color: var(--Colors-Accent, #FFCF23);
+  }
+}
+
+.deposit-top-bonuses-gamble__stake {
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px 0;
+}
+
+.deposit-top-bonuses-gamble__stake-link {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  margin: 0 4px 0 0;
+}
+
+@media (min-width: 1355.98px) {
+  .deposit-top-bonuses-gamble__stake-link:hover {
+    color: var(--Colors-Accent, #FFCF23);
+  }
+}
+
+.deposit-top-bonuses-gamble__stake-icon {
+  flex: 0 0 14px;
+  height: 14px;
+  width: 14px;
+  margin: 0 4px 0.25px 0;
+}
+
+.deposit-top-bonuses-gamble__stake-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.deposit-top-bonuses-gamble__stake-number {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+.deposit-top-bonuses-gamble__btn {
+  flex: 0 1 50%;
+  height: 40px;
+  padding: 8px 20px;
+  border-radius: var(--SystemCorners-ExtraSmall, 6px);
+  overflow: hidden;
+  background: var(--Colors-Accent, #FFCF23);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 20px;
+  color: var(--Text-Txt_Dark, #020202);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.deposit-top-bonuses-gamble__btn::after {
+  position: relative;
+  content: "";
+  transition: opacity 0.3s, visibility 0.3s;
+  width: 0;
+  height: 16px;
+  background: url("/img/icons/btn-hover.svg") center no-repeat;
+  background-size: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: margin 0.3s;
+}
+
+@media (min-width: 1355.98px) {
+  .deposit-top-bonuses-gamble__btn:hover {
+    background: #FFDB5A;
+  }
+
+  .deposit-top-bonuses-gamble__btn:hover::after {
+    flex: 0 0 16px;
+    width: 16px;
+    opacity: 1;
+    visibility: visible;
+    margin: 0 0 0 15px;
+  }
+}
+
+.deposit-top-bonuses-gamble__btn:active {
+  background: #BF9B1A;
+}
+
+@media (max-width: 850.98px) {
+  .deposit-top-bonuses-gamble__btn {
+    position: absolute;
+    right: 0;
+    bottom: 44px;
+    height: 42px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    width: calc(100% - 132px);
+  }
+}
+
+.info-deposit-top-bonuses-gamble {
+  display: flex;
+  height: 52px;
+  width: 100%;
+  padding: 6px 6px 6px 8px;
+  border-radius: var(--SystemCorners-ExtraSmall, 6px);
+  background: var(--BG-Bg_2, #232320);
+}
+
+@media (max-width: 850.98px) {
+  .info-deposit-top-bonuses-gamble {
+    position: absolute;
+    height: 32px;
+    width: calc(100% - 16px);
+    left: 8px;
+    bottom: 0;
+  }
+}
+
+.info-deposit-top-bonuses-gamble__row {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 50%;
+}
+
+@media (max-width: 850px) {
+  .info-deposit-top-bonuses-gamble__row {
+    flex: 1 1 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.info-deposit-top-bonuses-gamble__column {
+  display: flex;
+  align-items: center;
+}
+
+.info-deposit-top-bonuses-gamble__column:first-child {
+  margin: 0 0 1px 0;
+}
+
+.info-deposit-top-bonuses-gamble__icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin: 0 6px 0 0;
+}
+
+.info-deposit-top-bonuses-gamble__icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.info-deposit-top-bonuses-gamble__text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+.info-deposit-top-bonuses-gamble__label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+}
+
+.info-deposit-top-bonuses-gamble__value {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 17.76px;
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+}
+
+.info-deposit-top-bonuses-gamble__no-deposit {
+  height: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble {
+    width: calc(100% + 32px);
+    transform: translate(-16px);
+  }
+
+  .best-casinos-2024-gamble .best-casinos-2024-gamble__top {
+    padding: 0 16px;
+  }
+}
+
+.best-casinos-2024-gamble__body {
+  height: 500px;
+  position: relative;
+  border-radius: var(--SystemCorners-Medium, 12px);
+  overflow: hidden;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-gamble__body {
+    height: 440px;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-gamble__body {
+    height: 400px;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__body {
+    height: 320px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__body {
+    height: 245px;
+    border-radius: 0;
+  }
+}
+
+.best-casinos-2024-gamble__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.best-casinos-2024-gamble__waves {
+  position: absolute;
+  top: -10.31px;
+  left: -217.14px;
+  width: 784px;
+  height: 784px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.best-casinos-2024-gamble__waves span {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.1;
+  background: linear-gradient(180deg, #FFE278 0%, rgba(255, 255, 255, 0.2) 100%, rgba(255, 227, 125, 0.2) 100%);
+}
+
+.best-casinos-2024-gamble__waves span:nth-child(1) {
+  flex: 0 0 784px;
+  width: 784px;
+  height: 784px;
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(1) {
+    flex: 0 0 503px;
+    width: 503px;
+    height: 503px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(1) {
+    flex: 0 0 400px;
+    width: 400px;
+    height: 400px;
+  }
+}
+
+.best-casinos-2024-gamble__waves span:nth-child(2) {
+  flex: 0 0 619px;
+  width: 619px;
+  height: 619px;
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(2) {
+    flex: 0 0 398px;
+    width: 398px;
+    height: 398px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(2) {
+    flex: 0 0 316px;
+    width: 316px;
+    height: 316px;
+  }
+}
+
+.best-casinos-2024-gamble__waves span:nth-child(3) {
+  flex: 0 0 441px;
+  width: 441px;
+  height: 441px;
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(3) {
+    flex: 0 0 284px;
+    width: 284px;
+    height: 284px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__waves span:nth-child(3) {
+    flex: 0 0 225px;
+    width: 225px;
+    height: 225px;
+  }
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-gamble__waves {
+    top: -70.31px;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-gamble__waves {
+    top: -110.31px;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__waves {
+    width: 503px;
+    height: 503px;
+    top: 30px;
+    left: -96.83px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__waves {
+    width: 400px;
+    height: 400px;
+    top: 40.44px;
+    left: -95px;
+  }
+}
+
+.best-casinos-2024-gamble__girl {
+  position: absolute;
+  left: 18px;
+  bottom: 0;
+  width: 356.73px;
+  height: 440px;
+}
+
+.best-casinos-2024-gamble__girl img {
+  max-width: 100%;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-gamble__girl {
+    width: 300px;
+    height: 370px;
+    left: 15.5px;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-gamble__girl {
+    width: 274px;
+    height: 339px;
+    left: -13px;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .best-casinos-2024-gamble__girl {
+    width: 196px;
+    height: 244px;
+    bottom: -7px;
+    left: 36px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .best-casinos-2024-gamble__girl {
+    width: 170px;
+    height: 210px;
+    bottom: -16.5px;
+    left: 15px;
+  }
+}
+
+.slider-best-casinos-2024-gamble {
+  height: 100%;
+  padding: 0 0 0 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translate(0, -4px);
+}
+
+@media (max-width: 1650.98px) {
+  .slider-best-casinos-2024-gamble {
+    padding: 0 0 0 368px;
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .slider-best-casinos-2024-gamble {
+    padding: 0 0 0 284px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble {
+    padding: 0 0 0 226px;
+  }
+}
+
+.slider-best-casinos-2024-gamble__top {
+  padding: 0 120px 0 0;
+}
+
+.slider-best-casinos-2024-gamble__top:not(:last-child) {
+  margin: 0 0 60px 0;
+}
+
+.slider-best-casinos-2024-gamble__top .top__title-big {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+  margin: 0 16px 0 0;
+}
+
+@media (max-width: 1355.98px) {
+  .slider-best-casinos-2024-gamble__top .top__title-big {
+    font-size: 36px;
+    line-height: 32px;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .slider-best-casinos-2024-gamble__top .top__title-big {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble__top .top__title-big {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 1650.98px) {
+  .slider-best-casinos-2024-gamble__top {
+    padding: 0 40px 0 0;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .slider-best-casinos-2024-gamble__top {
+    padding: 0 22px 0 0;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .slider-best-casinos-2024-gamble__top {
+    padding: 0 40px 0 0;
+  }
+
+  .slider-best-casinos-2024-gamble__top:not(:last-child) {
+    margin: 0 0 40px 0;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .slider-best-casinos-2024-gamble__top {
+    padding: 0 24px;
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble__top {
+    padding: 0 16px;
+    top: 12px;
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .slider-best-casinos-2024-gamble__body {
+    transform: translate(0, 38px);
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble__body {
+    transform: translate(0, 8px);
+  }
+}
+
+.slider-best-casinos-2024-gamble__slide.swiper-slide {
+  width: 128px;
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble__slide.swiper-slide {
+    width: 90px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .slider-best-casinos-2024-gamble__slide .different-casino-medium__image-block {
+    flex: 0 0 90px;
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.slider-best-casinos-2024-gamble__slide .different-casino-medium__name {
+  display: inline-flex;
+}
+
+.slider-best-casinos-2024-gamble__slide .different-casino-medium__name:not(:last-child) {
+  margin: 0 0 5px 0;
+}
+
+@media (max-width: 530.98px) {
+  .best-casinos-2024-2-gamble {
+    display: none;
+  }
+}
+
+.best-casinos-2024-2-gamble__row {
+  display: flex;
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__row {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__column:nth-child(1) {
+    order: 2;
+    margin: 0 8px 0 0;
+    flex: 0 1 calc(50% - 8px);
+  }
+
+  .best-casinos-2024-2-gamble__column:nth-child(3) {
+    order: 3;
+    margin: 0 0 0 8px;
+    flex: 0 1 calc(50% - 8px);
+  }
+}
+
+.best-casinos-2024-2-gamble__column_small {
+  flex: 0 0 400px;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__column_small {
+    flex: 0 0 270px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__column_small {
+    flex: 0 1 50%;
+    display: flex;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__column_small {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__column_small {
+    flex-direction: row;
+  }
+}
+
+.best-casinos-2024-2-gamble__column_big {
+  flex: 1 1 100%;
+  margin: 0 20px;
+  position: relative;
+  border-radius: var(--SystemCorners-Medium, 12px);
+  overflow: hidden;
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__column_big {
+    height: 380px;
+    margin: 0 0 20px 0;
+    order: 1;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__column_big {
+    height: 320px;
+  }
+}
+
+.best-casinos-2024-2-gamble__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.best-casinos-2024-2-gamble__waves {
+  position: absolute;
+  top: -81px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 686px;
+  height: 686px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__waves {
+    width: 624px;
+    height: 624px;
+    top: -96px;
+    left: -12.43%;
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__waves {
+    width: 686px;
+    height: 686px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__waves {
+    left: -5.64%;
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__waves {
+    width: 424px;
+    height: 424px;
+    top: 20px;
+    left: -7.098%;
+  }
+}
+
+.best-casinos-2024-2-gamble__waves span {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.1;
+  background: linear-gradient(180deg, #FFE278 0%, rgba(255, 255, 255, 0.2) 100%, rgba(255, 227, 125, 0.2) 100%);
+}
+
+.best-casinos-2024-2-gamble__waves span:nth-child(1) {
+  flex: 0 0 686px;
+  width: 686px;
+  height: 686px;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(1) {
+    flex: 0 0 624px;
+    width: 624px;
+    height: 624px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(1) {
+    flex: 0 0 686px;
+    width: 686px;
+    height: 686px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(1) {
+    flex: 0 0 424px;
+    width: 424px;
+    height: 424px;
+  }
+}
+
+.best-casinos-2024-2-gamble__waves span:nth-child(2) {
+  flex: 0 0 542px;
+  width: 542px;
+  height: 542px;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(2) {
+    flex: 0 0 493px;
+    width: 493px;
+    height: 493px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(2) {
+    flex: 0 0 542px;
+    width: 542px;
+    height: 542px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(2) {
+    flex: 0 0 335px;
+    width: 335px;
+    height: 335px;
+  }
+}
+
+.best-casinos-2024-2-gamble__waves span:nth-child(3) {
+  flex: 0 0 386px;
+  width: 386px;
+  height: 386px;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(3) {
+    flex: 0 0 351px;
+    width: 351px;
+    height: 351px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(3) {
+    flex: 0 0 386px;
+    width: 386px;
+    height: 386px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__waves span:nth-child(3) {
+    flex: 0 0 239px;
+    width: 239px;
+    height: 239px;
+  }
+}
+
+.best-casinos-2024-2-gamble__girl {
+  position: absolute;
+  left: 18.69%;
+  bottom: 0;
+  width: 290px;
+  height: 398px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.best-casinos-2024-2-gamble__girl img {
+  width: 100%;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__girl {
+    width: 245px;
+    height: 337px;
+    left: 14.459%;
+    bottom: -12px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__girl {
+    width: 320px;
+    height: 439.17px;
+    bottom: -18.41px;
+    left: 25.496%;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__girl {
+    left: 16.33%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__girl {
+    width: 225px;
+    height: 309px;
+    bottom: 0;
+    left: 11.265%;
+  }
+}
+
+.best-casinos-2024-2-gamble__content {
+  max-width: 219px;
+  position: absolute;
+  top: 58px;
+  right: 18.7%;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__content {
+    max-width: 168px;
+    top: 30px;
+    right: 20.54%;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__content {
+    max-width: 219px;
+    top: 58px;
+    right: auto;
+    left: 55.27%;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__content {
+    left: 57.377%;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__content {
+    max-width: 168px;
+    top: 46px;
+    left: 56.48%;
+  }
+}
+
+.best-casinos-2024-2-gamble__text {
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 60px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+.best-casinos-2024-2-gamble__text span {
+  color: var(--Colors-Accent, #FFCF23);
+}
+
+.best-casinos-2024-2-gamble__text:not(:last-child) {
+  margin: 0 0 32px 0;
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__text {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__text {
+    font-size: 52px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__text {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+.best-casinos-2024-2-gamble__btn {
+  width: 146px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--SystemCorners-Medium, 12px);
+  background: var(--Colors-Accent, #FFCF23);
+  padding: 5px 20px;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 28px;
+  color: var(--Text-Txt_Dark, #020202);
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+@media (min-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__btn:hover {
+    background: #fde075;
+  }
+}
+
+.best-casinos-2024-2-gamble__btn:active {
+  background: #BF9B1A;
+}
+
+.best-casinos-2024-2-gamble__item {
+  padding: 20px;
+  border-radius: var(--SystemCorners-Medium, 12px);
+  overflow: hidden;
+  position: relative;
+}
+
+.best-casinos-2024-2-gamble__item:not(:last-child) {
+  margin: 0 0 20px 0;
+}
+
+.best-casinos-2024-2-gamble__item::before {
+  position: absolute;
+  content: "";
+  width: 162.77px;
+  height: 268.69px;
+  -moz-transform: rotate(83deg);
+  -ms-transform: rotate(83deg);
+  -webkit-transform: rotate(83deg);
+  -o-transform: rotate(83deg);
+  transform: rotate(83deg);
+  background: radial-gradient(43.45% 46.62% at 50% 50%, rgba(255, 255, 255, 0.66) 0%, rgba(255, 255, 255, 0) 100%);
+  bottom: -125px;
+  right: 40px;
+  border-radius: 100%;
+  pointer-events: none;
+  filter: blur(267px);
+  -webkit-filter: blur(267px);
+}
+
+@media (max-width: 1650.98px) {
+  .best-casinos-2024-2-gamble__item {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 1425.98px) {
+  .best-casinos-2024-2-gamble__item {
+    flex: 0 1 50%;
+    padding: 14px 12px;
+  }
+
+  .best-casinos-2024-2-gamble__item:not(:last-child) {
+    margin: 0 16px 0 0;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .best-casinos-2024-2-gamble__item:not(:last-child) {
+    margin: 0 0 16px 0;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .best-casinos-2024-2-gamble__item {
+    padding: 12px;
+  }
+
+  .best-casinos-2024-2-gamble__item:not(:last-child) {
+    margin: 0 16px 0 0;
+  }
+}
+
+@media (min-width: 1650.98px) {
+  .top-bonuses-gamble .deposit-top-bonuses-gamble__stake-icon {
+    margin: 0 4px 1px 0;
+  }
+}
+
+@media (max-width: 768.98px) {
+  .top-bonuses-gamble .deposit-top-bonuses-gamble__stake-icon {
+    margin: 1px 4px 0 0;
+  }
+}
+
+@media (min-width: 1650.98px) {
+  .best-casinos-2024-gamble .different-casino-medium__rating-icon {
+    margin: 0px 4px 2.75px 0;
+  }
+}
+
+@media (min-width: 1650.98px) {
+  .best-casinos-2024-2-gamble .different-casino-big__rating-icon {
+    margin: 0px 4px 3.105px 0;
+  }
+}
+
+.isdegen-img-best-casinos-2024-2-gamble__girl img {
+  width: 95%;
+
+}
+
+.isdegen-img-best-casinos-2024-2-gamble__girl {
+  left: 13%;
+}

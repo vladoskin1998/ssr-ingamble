@@ -1,0 +1,144 @@
+.pages-pagination__page-numbers{
+  cursor: pointer;
+}
+
+.main-loyaltie-programs__btn-more {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 42px;
+    padding: 12px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: var(--Text-Txt_Main, #FFFFFF);
+    border-radius: var(--SystemCorners-Small, 8px);
+    background: var(--BG-Bg_2, #232320);
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    margin: 0 0 40px 0;
+  }
+  @media (min-width: 1355.98px) {
+    .main-loyaltie-programs__btn-more:hover {
+      background: var(--BG-Bg_3, #2C2C28);
+    }
+  }
+  @media (max-width: 768.98px) {
+    .main-loyaltie-programs__btn-more {
+      display: inline-flex;
+    }
+  }
+  @media (max-width: 992.98px) {
+    .main-loyaltie-programs__btn-more {
+      margin: 0 0 24px 0;
+    }
+  }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.main-loyaltie-programs__pagination {
+    margin: 0 0 40px 0;
+  }
+  @media (max-width: 992.98px) {
+    .main-loyaltie-programs__pagination {
+      margin: 0 0 24px 0;
+    }
+  }
+  @media (max-width: 768.98px) {
+    .main-loyaltie-programs__pagination {
+      display: none;
+    }
+  }
+
+  .pagination__btn {
+    margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--SystemCorners-Small, 8px);
+    border: 1px solid var(--BG-Bg_2, #232320);
+    background: transparent;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+  .pagination__btn svg {
+    width: 13px;
+    height: 12px;
+  }
+
+  .pagination__btn_next {
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  .pages-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pages-pagination__page-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--SystemCorners-Small, 8px);
+    background: var(--BG-Bg_2, #232320);
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: center;
+    color: var(--Text-Txt_Main, #FFFFFF);
+  }
+  .pages-pagination__page-numbers.dots {
+    border: 1px solid var(--BG-Bg_2, #232320);
+    background: transparent;
+    pointer-events: none;
+  }
+  .pages-pagination__page-numbers.current {
+    pointer-events: none;
+  }
+  @media (min-width: 1023.98px) {
+    .pages-pagination__page-numbers:hover {
+      background: var(--BG-Bg_3, #2C2C28);
+    }
+  }
+  
+
+  .pages-pagination__page-numbers a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .paginate--current{
+    background: var(--Colors-Accent, #FFCF23);
+    color: var(--Text-Txt_Dark, #020202);
+   
+  }

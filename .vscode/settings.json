@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": true, // Форматировать при сохранении
+    "editor.formatOnPaste": true, // Форматировать при вставке
+    "prettier.printWidth": 140, // Максимальная длина строки
+    "prettier.tabWidth": 4, // Размер отступа
+    "prettier.useTabs": false, // Использовать пробелы вместо табов
+    "prettier.singleQuote": true, // Одинарные кавычки
+    "prettier.trailingComma": "all", // Всегда добавлять запятую
+    "prettier.arrowParens": "always", // Всегда добавлять скобки вокруг параметров стрелочных функций
+    "prettier.bracketSpacing": true // Пробелы внутри объектов { key: value }
+}

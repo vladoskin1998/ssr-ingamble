@@ -1,0 +1,119 @@
+.no-results__filter-tags:not(:last-child) {
+  margin: 0 0 40px 0;
+}
+
+.no-results__main {
+  height: calc(100dvh - 196px);
+}
+
+@media (max-width: 650.98px) {
+  .no-results__main {
+    height: calc(100dvh - 166px);
+  }
+}
+
+.no-results__bottom-filter-tags {
+  margin: 0 0 60px 0;
+}
+
+@media (max-width: 1650.98px) {
+  .no-results__bottom-filter-tags {
+    margin: 0 0 40px 0;
+  }
+}
+
+.main-no-results__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px 0 0 0;
+}
+
+@media (max-width: 1650.98px) {
+  .main-no-results__body {
+    padding: 0;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .main-no-results__body {
+    padding: 24px 0 0 0;
+  }
+}
+
+.main-no-results__content {
+  width: 100%;
+  max-width: 427px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-no-results__image {
+  flex: 0 0 330px;
+  width: 330px;
+  height: 330px;
+}
+
+.main-no-results__image img {
+  max-width: 100%;
+}
+
+.main-no-results__image:not(:last-child) {
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 1650.98px) {
+  .main-no-results__image {
+    flex: 0 0 270px;
+    width: 270px;
+    height: 270px;
+  }
+}
+
+@media (max-width: 480.98px) {
+  .main-no-results__image {
+    flex: 0 0 215px;
+    width: 215px;
+    height: 215px;
+  }
+}
+
+.main-no-results__title {
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+.main-no-results__title:not(:last-child) {
+  margin: 0 0 24px 0;
+}
+
+@media (max-width: 480.98px) {
+  .main-no-results__title:not(:last-child) {
+    margin: 0 0 16px 0;
+  }
+}
+
+.main-no-results__subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--Text-Txt_Main, #FFFFFF);
+}
+
+@media (max-width: 480.98px) {
+  .main-no-results__subtitle {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.main-no-results__subtitle-value {
+  color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+}
+
+@media (max-width: 480.98px) {
+  .main-no-results__subtitle-value {
+    display: block;
+  }
+}

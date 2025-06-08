@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      'ig-api-prod.incasinowetrust.com',
+      // другие домены, если нужно
+    ],
+  },
 };
 
 export default nextConfig;
