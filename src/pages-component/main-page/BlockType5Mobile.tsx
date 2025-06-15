@@ -41,7 +41,7 @@ export default function BlockType5Mobile({
                         <span></span>
                     </div>
                     <div className={`best-casinos-2024-gamble__girl ${isScrolled && 'scrolled'}`}>
-                        <Image width={444} height={444} src="/img/girls/01.webp" alt="girl" loading="lazy" />
+                        <Image width={170} height={210} src="/img/girls/01.webp" alt="girl" loading="lazy" />
                     </div>
                     <div className={`best-casinos-2024-gamble__slider slider-best-casinos-2024-gamble ${isScrolled && 'scrolled'}`}>
                         <div className="slider-best-casinos-2024-gamble__top top">
