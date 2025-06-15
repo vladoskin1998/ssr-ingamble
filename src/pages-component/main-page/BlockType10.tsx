@@ -46,7 +46,12 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image width={444} height={444} alt="Casino Image" src={data.items_block.data_cards?.[0]?.casino_info?.casino_image || ''} />
+                                    <Image
+                                        width={444}
+                                        height={444}
+                                        alt="Casino Image"
+                                        src={data.items_block.data_cards?.[0]?.casino_info?.casino_image || ''}
+                                    />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -64,8 +69,8 @@ export default function BlockType10({
                                     ))}
                                 </div>
                                 <div className="different-casino-big__rating">
-                                    <span className="different-casino-big__rating-icon">
-                                        <img src="/img/icons/star.svg" alt="star" />
+                                    <span style={{ position: 'relative' }} className="different-casino-big__rating-icon">
+                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                     </span>
                                     <span className="different-casino-big__rating-number">
                                         {' '}
@@ -84,7 +89,12 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image width={444} height={444} alt="Casino Image" src={data.items_block.data_cards?.[1]?.casino_info?.casino_image || ''} />
+                                    <Image
+                                        width={444}
+                                        height={444}
+                                        alt="Casino Image"
+                                        src={data.items_block.data_cards?.[1]?.casino_info?.casino_image || ''}
+                                    />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -102,8 +112,8 @@ export default function BlockType10({
                                     ))}
                                 </div>
                                 <div className="different-casino-big__rating">
-                                    <span className="different-casino-big__rating-icon">
-                                        <img src="/img/icons/star.svg" alt="star" />
+                                    <span style={{ position: 'relative' }} className="different-casino-big__rating-icon">
+                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                     </span>
                                     <span className="different-casino-big__rating-number">
                                         {' '}
@@ -123,7 +133,7 @@ export default function BlockType10({
                             <span></span>
                         </div>
                         <div className={`best-casinos-2024-2-gamble__girl`}>
-        <Image width={320} height={380} src="/img/girls/02.webp" alt="girl" loading="lazy" />
+                            <Image width={320} height={380} src="/img/girls/02.webp" alt="girl" loading="lazy" />
                         </div>
                         <div className={`best-casinos-2024-2-gamble__content `}>
                             <div className="best-casinos-2024-2-gamble__text">
@@ -151,7 +161,12 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image width={444} height={444} alt="Casino Image" src={data.items_block.data_cards?.[2]?.casino_info?.casino_image || ''} />
+                                    <Image
+                                        width={444}
+                                        height={444}
+                                        alt="Casino Image"
+                                        src={data.items_block.data_cards?.[2]?.casino_info?.casino_image || ''}
+                                    />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -169,8 +184,8 @@ export default function BlockType10({
                                     ))}
                                 </div>
                                 <div className="different-casino-big__rating">
-                                    <span className="different-casino-big__rating-icon">
-                                        <img src="/img/icons/star.svg" alt="star" />
+                                    <span style={{ position: 'relative' }} className="different-casino-big__rating-icon">
+                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                     </span>
                                     <span className="different-casino-big__rating-number">
                                         {' '}
@@ -189,7 +204,12 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image width={444} height={444} alt="Casino Image" src={data.items_block.data_cards?.[3]?.casino_info?.casino_image || ''} />
+                                    <Image
+                                        width={444}
+                                        height={444}
+                                        alt="Casino Image"
+                                        src={data.items_block.data_cards?.[3]?.casino_info?.casino_image || ''}
+                                    />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -207,8 +227,8 @@ export default function BlockType10({
                                     ))}
                                 </div>
                                 <div className="different-casino-big__rating">
-                                    <span className="different-casino-big__rating-icon">
-                                        <img src="/img/icons/star.svg" alt="star" />
+                                    <span style={{ position: 'relative' }} className="different-casino-big__rating-icon">
+                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                     </span>
                                     <span className="different-casino-big__rating-number">
                                         {data.items_block.data_cards?.[3]?.casino_info.casino_rank}

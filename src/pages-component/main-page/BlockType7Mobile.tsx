@@ -80,7 +80,12 @@ export default function BlockType7Mobile({
                                                         className="different-casino-medium__image-block"
                                                     >
                                                         <span className="different-casino-medium__image ibg--custom">
-                                                            <Image width={444} height={444} alt="Casino Image" src={item.casino_info.casino_image || ''} />
+                                                            <Image
+                                                                width={444}
+                                                                height={444}
+                                                                alt="Casino Image"
+                                                                src={item.casino_info.casino_image || ''}
+                                                            />
                                                         </span>
                                                     </Link>
                                                     <div className="different-casino-medium__content">
@@ -92,8 +97,11 @@ export default function BlockType7Mobile({
                                                             {item.casino_info.casino_name}
                                                         </Link>
                                                         <div className="different-casino-medium__rating">
-                                                            <span className="different-casino-medium__rating-icon">
-                                                                <img src="/img/icons/star.svg" alt="star" />
+                                                            <span
+                                                                style={{ position: 'relative' }}
+                                                                className="different-casino-medium__rating-icon"
+                                                            >
+                                                                <Image fill src="/img/icons/star.svg" alt="star" />
                                                             </span>
                                                             <span className="different-casino-medium__rationg-number">
                                                                 {item.casino_info.casino_rank}

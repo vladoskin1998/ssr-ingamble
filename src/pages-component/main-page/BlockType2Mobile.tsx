@@ -181,8 +181,11 @@ export default function BlockType2Mobile({
                                                                         )}
                                                                     </div>
                                                                     <div className="casino-small-card__rating">
-                                                                        <span className="casino-small-card__rating-icon">
-                                                                            <img src="/img/icons/star.svg" alt="star" />
+                                                                        <span
+                                                                            style={{ position: 'relative' }}
+                                                                            className="casino-small-card__rating-icon"
+                                                                        >
+                                                                            <Image fill src="/img/icons/star.svg" alt="star" />
                                                                         </span>
                                                                         <span className="casino-small-card__rating-number">
                                                                             {item?.casino_info?.casino_rank}

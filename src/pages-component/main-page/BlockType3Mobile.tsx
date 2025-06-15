@@ -165,8 +165,11 @@ export default function BlockType3Mobile({
                                                                             {item?.[0]?.casino_info?.casino_name}
                                                                         </Link>
                                                                         <div className="info-casino-card__stake-rating">
-                                                                            <span className="info-casino-card__stake-rating-icon">
-                                                                                <img src="/img/icons/star.svg" alt="star" />
+                                                                            <span
+                                                                                style={{ position: 'relative' }}
+                                                                                className="info-casino-card__stake-rating-icon"
+                                                                            >
+                                                                                <Image fill src="/img/icons/star.svg" alt="star" />
                                                                             </span>
                                                                             <span className="info-casino-card__stake__rating-number">
                                                                                 {item?.[0]?.casino_info?.casino_rank}
@@ -232,8 +235,11 @@ export default function BlockType3Mobile({
                                                                                 {item?.[1]?.casino_info?.casino_name}
                                                                             </Link>
                                                                             <div className="info-casino-card__stake-rating">
-                                                                                <span className="info-casino-card__stake-rating-icon">
-                                                                                    <img src="/img/icons/star.svg" alt="star" />
+                                                                                <span
+                                                                                    style={{ position: 'relative' }}
+                                                                                    className="info-casino-card__stake-rating-icon"
+                                                                                >
+                                                                                    <Image fill src="/img/icons/star.svg" alt="star" />
                                                                                 </span>
                                                                                 <span className="info-casino-card__stake__rating-number">
                                                                                     {item?.[1]?.casino_info?.casino_rank}

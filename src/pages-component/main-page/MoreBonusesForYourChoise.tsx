@@ -23,7 +23,7 @@ export default function MoreBonusesForYourChoise() {
                             <span></span>
                         </div>
                         <div className="best-live-dealer-casinos-gamble__girl">
-                            <Image width={444} height={444} src="/img/girls/03.png" alt="girl" loading="lazy" />
+                            <Image width={193} height={222} src="/img/girls/03.png" alt="girl" loading="lazy" />
                         </div>
                         <div className="best-live-dealer-casinos-gamble__content">
                             <div className="best-live-dealer-casinos-gamble__title">

@@ -6,8 +6,6 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 
-
-
 import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
 import { SeeAllButton } from './SeeAllButton'
 
@@ -29,13 +27,13 @@ export default function BlockType5Mobile({
 
     return (
         <div
-            aria-label="BlockTypeNumber.BlockType5"
+            aria-label="BlockTypeNumber.BlockType5.Mobile"
             className="main-gamble__best-casinos-2024 best-casinos-2024-gamble main-gamble__different-casino-medium main-gamble__fastest-payout-casinos fastest-payout-casinos-gamble"
         >
             <div className="best-casinos-2024-gamble__container container">
                 <div className="best-casinos-2024-gamble__body">
                     <div className="best-casinos-2024-gamble__bg ibg--custom">
-                        <Image width={444} height={444} src="/img/bg/01.webp" alt="bg" loading="lazy" />
+                        <Image width={170} height={210} src="/img/bg/01.webp" alt="bg" loading="lazy" />
                     </div>
                     <div className="best-casinos-2024-gamble__waves">
                         <span></span>
@@ -106,7 +104,12 @@ export default function BlockType5Mobile({
                                                         className="different-casino-medium__image-block"
                                                     >
                                                         <span className="different-casino-medium__image ibg--custom">
-                                                            <Image width={444} height={444} alt="Casino Image" src={item?.casino_info?.casino_image || ''} />
+                                                            <Image
+                                                                width={444}
+                                                                height={444}
+                                                                alt="Casino Image"
+                                                                src={item?.casino_info?.casino_image || ''}
+                                                            />
                                                         </span>
                                                     </Link>
                                                     <div className="different-casino-medium__content">
@@ -118,8 +121,11 @@ export default function BlockType5Mobile({
                                                             {item?.casino_info?.casino_name}
                                                         </Link>
                                                         <div className="different-casino-medium__rating">
-                                                            <span className="different-casino-medium__rating-icon">
-                                                                <img src="/img/icons/star.svg" alt="star" />
+                                                            <span
+                                                                style={{ position: 'relative' }}
+                                                                className="different-casino-medium__rating-icon"
+                                                            >
+                                                                <Image fill src="/img/icons/star.svg" alt="star" />
                                                             </span>
                                                             <span className="different-casino-medium__rationg-number">
                                                                 {item?.casino_info?.casino_rank}

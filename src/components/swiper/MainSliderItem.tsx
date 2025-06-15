@@ -76,15 +76,18 @@ const ItemMainSlider = ({
                             {item.casinoName}
                         </Link>
                         <div className="info-casino-card__stake-rating">
-                            <span className="info-casino-card__stake-rating-icon casino-small-card__rating-icon">
-                                <img src="/img/icons/star.svg" alt="star" />
+                            <span
+                                style={{ position: 'relative' }}
+                                className="info-casino-card__stake-rating-icon casino-small-card__rating-icon"
+                            >
+                                <Image fill src="/img/icons/star.svg" alt="star" />
                             </span>
                             <span>{item.raiting}</span>
                         </div>
                     </div>
                     <div className="info-casino-card__likes">
-                        <span className="info-casino-card__likes-icon">
-                            <img src="/img/icons/like.svg" alt="like" />
+                        <span style={{ position: 'relative' }} className="info-casino-card__likes-icon">
+                            <Image fill src="/img/icons/like.svg" alt="like" />
                         </span>
                         <span className="info-casino-card__likes-number">{sanitizeNumberLike(item?.likes || 0)}</span>
                     </div>

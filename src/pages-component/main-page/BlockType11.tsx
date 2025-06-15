@@ -1,6 +1,5 @@
 'use client'
 
-
 import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
 import '../../../styles/style-type-10-11.css'
 
@@ -62,7 +61,12 @@ export default function BlockType11({
                                             className="deposit-top-bonuses-gamble__image-block"
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
-                                                <Image width={444} height={444} alt="Casino Image" src={item?.casino_info?.casino_image || ''} />
+                                                <Image
+                                                    width={444}
+                                                    height={444}
+                                                    alt="Casino Image"
+                                                    src={item?.casino_info?.casino_image || ''}
+                                                />
                                             </span>
                                         </Link>
                                         <div className="deposit-top-bonuses-gamble__body">
@@ -81,8 +85,11 @@ export default function BlockType11({
                                                     >
                                                         {item?.casino_info?.casino_name}
                                                     </Link>
-                                                    <span className="deposit-top-bonuses-gamble__stake-icon">
-                                                        <img src="/img/icons/star.svg" alt="star" />
+                                                    <span
+                                                        style={{ position: 'relative' }}
+                                                        className="deposit-top-bonuses-gamble__stake-icon"
+                                                    >
+                                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                                     </span>
                                                     <span className="deposit-top-bonuses-gamble__stake-number">
                                                         {item?.casino_info?.casino_rank}
@@ -162,7 +169,12 @@ export default function BlockType11({
                                             className="deposit-top-bonuses-gamble__image-block"
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
-                                                <Image width={444} height={444} alt="Casino Image" src={item?.casino_info?.casino_image || ''} />
+                                                <Image
+                                                    width={444}
+                                                    height={444}
+                                                    alt="Casino Image"
+                                                    src={item?.casino_info?.casino_image || ''}
+                                                />
                                             </span>
                                         </Link>
                                         <div className="deposit-top-bonuses-gamble__body">
@@ -180,8 +192,11 @@ export default function BlockType11({
                                                     >
                                                         {item.casino_info.casino_name}
                                                     </Link>
-                                                    <span className="deposit-top-bonuses-gamble__stake-icon">
-                                                        <img src="/img/icons/star.svg" alt="star" />
+                                                    <span
+                                                        style={{ position: 'relative' }}
+                                                        className="deposit-top-bonuses-gamble__stake-icon"
+                                                    >
+                                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                                     </span>
                                                     <span className="deposit-top-bonuses-gamble__stake-number">
                                                         {item.casino_info.casino_rank}

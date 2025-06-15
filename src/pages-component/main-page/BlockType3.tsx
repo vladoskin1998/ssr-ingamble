@@ -23,7 +23,6 @@ export default function BlockType3({
 
     isAutoPlay?: boolean
 }) {
-
     const sliderRef = useRef<SwiperRef | null>(null)
 
     const paginationRef = useRef<HTMLDivElement | null>(null)
@@ -186,8 +185,11 @@ export default function BlockType3({
                                                                                     {item?.[0]?.casino_info?.casino_name}
                                                                                 </Link>
                                                                                 <div className="info-casino-card__stake-rating">
-                                                                                    <span className="info-casino-card__stake-rating-icon">
-                                                                                        <img src="/img/icons/star.svg" alt="star" />
+                                                                                    <span
+                                                                                        style={{ position: 'relative' }}
+                                                                                        className="info-casino-card__stake-rating-icon"
+                                                                                    >
+                                                                                        <Image fill src="/img/icons/star.svg" alt="star" />
                                                                                     </span>
                                                                                     <span className="info-casino-card__stake__rating-number">
                                                                                         {item?.[0]?.casino_info?.casino_rank}
@@ -259,8 +261,15 @@ export default function BlockType3({
                                                                                         {item?.[1]?.casino_info?.casino_name}
                                                                                     </Link>
                                                                                     <div className="info-casino-card__stake-rating">
-                                                                                        <span className="info-casino-card__stake-rating-icon">
-                                                                                            <img src="/img/icons/star.svg" alt="star" />
+                                                                                        <span
+                                                                                            style={{ position: 'relative' }}
+                                                                                            className="info-casino-card__stake-rating-icon"
+                                                                                        >
+                                                                                            <Image
+                                                                                                fill
+                                                                                                src="/img/icons/star.svg"
+                                                                                                alt="star"
+                                                                                            />
                                                                                         </span>
                                                                                         <span className="info-casino-card__stake__rating-number">
                                                                                             {item?.[1]?.casino_info?.casino_rank}
@@ -353,8 +362,15 @@ export default function BlockType3({
                                                                                         {item?.casino_info?.casino_name}
                                                                                     </Link>
                                                                                     <div className="casino-small-card__rating">
-                                                                                        <span className="casino-small-card__rating-icon">
-                                                                                            <img src="/img/icons/star.svg" alt="star" />
+                                                                                        <span
+                                                                                            style={{ position: 'relative' }}
+                                                                                             className="casino-small-card__rating-icon"
+                                                                                        >
+                                                                                            <Image
+                                                                                                fill
+                                                                                                src="/img/icons/star.svg"
+                                                                                                alt="star"
+                                                                                            />
                                                                                         </span>
                                                                                         <span className="casino-small-card__rating-number">
                                                                                             {item?.casino_info?.casino_rank}

@@ -97,86 +97,87 @@ export default function BlockMType3M({
                                         },
                                     }}
                                 >
-                                    {
-                                        data.items_block.data_cards
-                                            ?.sort((a, b) => a.order - b.order)
-                                            ?.map((item, index) => (
-                                                <SwiperSlide
-                                                    key={index}
-                                                    className="slider__slide slide-slider slide-slider-column slide-slider-column_standart swiper-slide"
-                                                >
-                                                    <div className="slide-slider__item slide-slider__item-column slide-slider__item-column">
-                                                        <div className="different-casino-standart">
-                                                            <div className="different-casino-standart__body">
-                                                                <Link
-                                                                    rel="nofollow noopener"
-                                                                    href={`/casino/${item?.casino_info?.casino_slug}`}
-                                                                    className="different-casino-standart__image-block"
-                                                                >
-                                                                    <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image
-                                                                            width={444}
-                                                                            height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.casino_info?.casino_image || ''}
-                                                                        />
-                                                                    </span>
-                                                                </Link>
-                                                                <div className="different-casino-standart__content">
-                                                                    <div className="different-casino-standart__content-row">
+                                    {data.items_block.data_cards
+                                        ?.sort((a, b) => a.order - b.order)
+                                        ?.map((item, index) => (
+                                            <SwiperSlide
+                                                key={index}
+                                                className="slider__slide slide-slider slide-slider-column slide-slider-column_standart swiper-slide"
+                                            >
+                                                <div className="slide-slider__item slide-slider__item-column slide-slider__item-column">
+                                                    <div className="different-casino-standart">
+                                                        <div className="different-casino-standart__body">
+                                                            <Link
+                                                                rel="nofollow noopener"
+                                                                href={`/casino/${item?.casino_info?.casino_slug}`}
+                                                                className="different-casino-standart__image-block"
+                                                            >
+                                                                <span className="different-casino-standart__image ibg--custom">
+                                                                    <Image
+                                                                        width={444}
+                                                                        height={444}
+                                                                        alt="Casino Image"
+                                                                        src={item?.casino_info?.casino_image || ''}
+                                                                    />
+                                                                </span>
+                                                            </Link>
+                                                            <div className="different-casino-standart__content">
+                                                                <div className="different-casino-standart__content-row">
+                                                                    <Link
+                                                                        rel="nofollow noopener"
+                                                                        href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
+                                                                        aria-label="Put your description here."
+                                                                        className="different-casino-standart__name"
+                                                                    >
+                                                                        {item?.bonus_info?.bonus_name}
+                                                                    </Link>
+                                                                    {item?.bonus_info?.labels?.length && (
+                                                                        <div className="different-casino-standart__tags tags-casino-card">
+                                                                            {item?.bonus_info?.labels
+                                                                                ?.sort((a: string, b: string) => a.localeCompare(b))
+                                                                                ?.map((item, index) => (
+                                                                                    <div
+                                                                                        key={index}
+                                                                                        className={`tags-casino-card__item ${getTagColorByindex(
+                                                                                            index,
+                                                                                        )}`}
+                                                                                    >
+                                                                                        <span className="tags-casino-card__item-label">
+                                                                                            {item}
+                                                                                        </span>
+                                                                                    </div>
+                                                                                ))}
+                                                                        </div>
+                                                                    )}
+
+                                                                    <div className="info-casino-card__stake">
                                                                         <Link
                                                                             rel="nofollow noopener"
-                                                                            href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
+                                                                            href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                             aria-label="Put your description here."
-                                                                            className="different-casino-standart__name"
+                                                                            className="info-casino-card__stake-link"
                                                                         >
-                                                                            {item?.bonus_info?.bonus_name}
+                                                                            {item?.casino_info?.casino_name}
                                                                         </Link>
-                                                                        {item?.bonus_info?.labels?.length && (
-                                                                            <div className="different-casino-standart__tags tags-casino-card">
-                                                                                {item?.bonus_info?.labels
-                                                                                    ?.sort((a: string, b: string) => a.localeCompare(b))
-                                                                                    ?.map((item, index) => (
-                                                                                        <div
-                                                                                            key={index}
-                                                                                            className={`tags-casino-card__item ${getTagColorByindex(
-                                                                                                index,
-                                                                                            )}`}
-                                                                                        >
-                                                                                            <span className="tags-casino-card__item-label">
-                                                                                                {item}
-                                                                                            </span>
-                                                                                        </div>
-                                                                                    ))}
-                                                                            </div>
-                                                                        )}
-
-                                                                        <div className="info-casino-card__stake">
-                                                                            <Link
-                                                                                rel="nofollow noopener"
-                                                                                href={`/casino/${item?.casino_info?.casino_slug}`}
-                                                                                aria-label="Put your description here."
-                                                                                className="info-casino-card__stake-link"
+                                                                        <div className="info-casino-card__stake-rating">
+                                                                            <span
+                                                                                style={{ position: 'relative' }}
+                                                                                className="info-casino-card__stake-rating-icon"
                                                                             >
-                                                                                {item?.casino_info?.casino_name}
-                                                                            </Link>
-                                                                            <div className="info-casino-card__stake-rating">
-                                                                                <span className="info-casino-card__stake-rating-icon">
-                                                                                    <img src="/img/icons/star.svg" alt="star" />
-                                                                                </span>
-                                                                                <span className="info-casino-card__stake__rating-number">
-                                                                                    {item?.casino_info?.casino_rank}
-                                                                                </span>
-                                                                            </div>
+                                                                                <Image fill src="/img/icons/star.svg" alt="star" />
+                                                                            </span>
+                                                                            <span className="info-casino-card__stake__rating-number">
+                                                                                {item?.casino_info?.casino_rank}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </SwiperSlide>
-                                            ))
-                                    }
+                                                </div>
+                                            </SwiperSlide>
+                                        ))}
                                 </Swiper>
                             </div>
                         </div>

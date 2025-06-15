@@ -298,12 +298,12 @@ export const Header = () => {
                         <div className="header__column header__column_first">
                             <div className="sidebar-gamble__top top-sidebar-gamble">
                                 <Link href="/" className="top-sidebar-gamble__logo">
-                                    <Image src="/img/logo-icon.svg" width={444} height={444} alt="logo-icon" />
+                                    <Image src="/img/logo-icon.svg" width={22} height={22} alt="logo-icon" />
                                 </Link>
                             </div>
                             <Link href="/" className="header__logo logo">
                                 <div className={`logo__img`}>
-                                    <Image src='/img/logo-ingamble.svg' alt={ 'logo-ig1'} width={444} height={444}/>
+                                    <Image src='/img/logo-ingamble.svg' alt={ 'logo-ig1'} width={140} height={25}/>
                                 </div>
                             </Link>
                         </div>

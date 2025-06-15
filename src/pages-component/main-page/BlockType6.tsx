@@ -16,7 +16,15 @@ import { useAdaptiveBehavior } from '../../context/AppContext'
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 
-export default function BlockType6({ data, src, isAutoPlay = false }: { data: HomeDataBlock<DataHomeItemsBlock>; src:string; isAutoPlay?: boolean }) {
+export default function BlockType6({
+    data,
+    src,
+    isAutoPlay = false,
+}: {
+    data: HomeDataBlock<DataHomeItemsBlock>
+    src: string
+    isAutoPlay?: boolean
+}) {
     const { isShowPlayButton } = useAdaptiveBehavior()
     const sliderRef = useRef<SwiperRef | null>(null)
     const paginationRef = useRef<HTMLDivElement | null>(null)
@@ -44,8 +52,7 @@ export default function BlockType6({ data, src, isAutoPlay = false }: { data: Ho
 
     const dataCard = shuffleArray(data?.items_block.data_cards).slice(0, 8)
 
-     const titleHub: 'bonuses' | 'casinos' = src.includes('get-data-hub-page-bonus/') ? 'bonuses' : 'casinos'
-
+    const titleHub: 'bonuses' | 'casinos' = src.includes('get-data-hub-page-bonus/') ? 'bonuses' : 'casinos'
 
     const titleBlock =
         data.items_block.type_block === BlockTypeNumber.BlockType6
@@ -217,8 +224,11 @@ export default function BlockType6({ data, src, isAutoPlay = false }: { data: Ho
                                                                 ))}
                                                             </div>
                                                             <div className="casino-small-card__rating">
-                                                                <span className="casino-small-card__rating-icon">
-                                                                    <img src="/img/icons/star.svg" alt="star" />
+                                                                <span
+                                                                    style={{ position: 'relative' }}
+                                                                    className="casino-small-card__rating-icon"
+                                                                >
+                                                                    <Image fill src="/img/icons/star.svg" alt="star" />
                                                                 </span>
                                                                 <span className="casino-small-card__rating-number">
                                                                     {item.casino_info.casino_rank}
