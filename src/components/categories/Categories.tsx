@@ -144,7 +144,7 @@ const ItemCategory = ({ item }: { item: FormatedCategoryType }) => {
     return (
         <Link
             rel="nofollow noopener"
-            href={seeAllLink}
+            href={`${seeAllLink}/1`}
             onClick={seeAllFoo}
             aria-label="Put your description here."
             className="slide-filter-tags-gamble__btn"

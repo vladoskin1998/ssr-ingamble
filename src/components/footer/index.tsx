@@ -373,14 +373,14 @@ export default function Footer() {
                     <div className="top-footer__socials-block">
                         <a href="" target="_blank" className="footer__logo logo">
                             <div className="logo__img">
-                                <Image src="/img/logo-ingamble.svg" alt="logo" width={40} height={40} />
+                                <Image src="/img/logo-ingamble.svg" alt="logo" width={140} height={25} />
                             </div>
                             <div className="logo__text">IN GAMBLE WE TRUST</div>
                         </a>
                         <div className="top-footer__socials socials-top-footer">
                             <div className="socials-top-footer__label" data-da="top-footer__socials-block, 1, 1355.98">
                                 <div className="socials-top-footer__label-icon">
-                                    <Image src="/img/icons/socials-icon.svg" alt="socials-icon" width={24} height={24} />
+                                    <Image src="/img/icons/socials-icon.svg" alt="socials-icon" width={28} height={30} />
                                 </div>
                                 <div className="socials-top-footer__label-text">
                                     You need help?
@@ -405,52 +405,52 @@ export default function Footer() {
                         <div className="bottom-footer__logos logos-bottom-footer">
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/01.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/01.svg" alt="logo" width={53} height={20} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/02.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/02.svg" alt="logo" width={21} height={21} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/03.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/03.svg" alt="logo" width={43} height={21} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/04.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/04.svg" alt="logo" width={146} height={20} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/05.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/05.svg" alt="logo" width={70} height={20} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/06.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/06.svg" alt="logo" width={85} height={16} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/07.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/07.svg" alt="logo" width={89} height={17} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/08.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/08.svg" alt="logo" width={68} height={21} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/09.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/09.svg" alt="logo" width={68} height={19} loading="lazy" />
                                 </div>
                             </div>
                             <div className="logos-bottom-footer__column">
                                 <div className="logos-bottom-footer__item">
-                                    <Image src="/img/logos/10.svg" alt="logo" width={40} height={40} loading="lazy" />
+                                    <Image src="/img/logos/10.svg" alt="logo" width={65} height={25} loading="lazy" />
                                 </div>
                             </div>
                         </div>

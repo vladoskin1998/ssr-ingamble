@@ -1,7 +1,7 @@
 import '../../../styles/style.css'
 
 import $api from '@/http'
-
+import { headers } from 'next/headers'
 import {
     DataHomeItemsBlockCategoryType,
     DataHomeItemsBlockEnumCategory,
@@ -33,6 +33,7 @@ import BlockType6 from './BlockType6'
 import BlockType7 from './BlockType7'
 import BlockType7Mobile from './BlockType7Mobile'
 import BlockType9 from './BlockType9'
+import { baseURL } from '@/helper'
 
 export type LazyImgHomeType = 'lazy' | 'eager' | undefined
 
@@ -62,15 +63,25 @@ const categoriesTypeBySrc = (
 }
 
 const getHomeDataFetch = async (src: string) => {
-    const response = await $api.get(src)
+    const response = await fetch(baseURL + src, {
+        method: 'GET',
+
+        // next: { revalidate: 3600 },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
+    })
+
+    const data = await response.json()
     const headers = response.headers
 
     return {
-        dataHome: response?.data?.data_blocks,
-        dataHomeMobile: response?.data?.data_blocks_m,
+        dataHome: data?.data_blocks,
+        dataHomeMobile: data?.data_blocks_m,
         headers,
     }
 }
+
 
 const getBlockByCountry = async (): Promise<HomeDataBlock> => {
     const response = await $api.get('get-block-by-country/')
@@ -78,7 +89,7 @@ const getBlockByCountry = async (): Promise<HomeDataBlock> => {
     return response.data
 }
 
-const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlock>, index: number,src:string) => {
+const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlock>, index: number, src: string) => {
     const isAutoPlay = !index
 
     switch (block?.items_block?.type_block) {
@@ -145,12 +156,13 @@ const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlo
     }
 }
 
-export default async function MainPage({src}: { src: string }) {
-
+export default async function MainPage({ src }: { src: string }) {
+    const userAgent = (await headers()).get('user-agent') || ''
+    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
 
     const data: { dataHome: HomeDataBlock[]; dataHomeMobile: HomeDataBlockMobile[]; headers: AxiosHeaders } = {
         ...(await getHomeDataFetch(src)),
-        headers: await getHomeDataFetch(src).then((response) => response.headers as AxiosHeaders),
+        headers: await getHomeDataFetch(src).then((response) => response.headers as unknown as AxiosHeaders),
     }
 
     let blockByCountry: HomeDataBlock = await getBlockByCountry()
@@ -164,7 +176,7 @@ export default async function MainPage({src}: { src: string }) {
     }
 
     const blocksToRender = [
-        ...(data?.dataHome || []),
+        ...(isMobile ? data.dataHomeMobile : data?.dataHome || []),
         blockByCountry,
         {
             blocks_sequence_number: Number(data?.dataHome?.length) + 10,
@@ -178,9 +190,7 @@ export default async function MainPage({src}: { src: string }) {
         <main className="gamble__main main-gamble">
             <div className="main-gamble__body">
                 <Categories type_category={categoriesTypeBySrc(src).type_category} />
-                {blocksToRender.map((block, index) => (
-                    renderBlock(block, index, src)
-                ))}
+                {blocksToRender.map((block, index) => renderBlock(block, index, src))}
             </div>
         </main>
     )

@@ -112,8 +112,8 @@ export default function BlockType7({
                                             >
                                                 <span className="different-casino-bg__image ibg--custom">
                                                     <Image
-                                                        width={444}
-                                                        height={444}
+                                                        width={137}
+                                                        height={137}
                                                         alt="Casino Image"
                                                         src={item.casino_info.casino_image || ''}
                                                     />
@@ -150,12 +150,12 @@ export default function BlockType7({
                             </Swiper>
                         </div>
                     </div>
-                    <div className="slider__bottom bottom-slider">
+                    {/* <div className="slider__bottom bottom-slider">
                         <div
                             ref={paginationRef}
                             className="bottom-slider__pagination low-risk-bonuses-gamble__pagination swiper-pagination"
                         ></div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

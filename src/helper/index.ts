@@ -1,6 +1,8 @@
 import { MakeListFilterHeaderType } from "../components/filter-components/FilterHeaderList"
 import $api from "../http"
 
+export const baseURL = 'https://ig-api-prod.incasinowetrust.com/api/v1/';
+
 export const euroToDolar = (s?: string) => {
 
     if (s === "EUR" || s === "Euro" || !s) {

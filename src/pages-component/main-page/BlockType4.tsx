@@ -4,8 +4,7 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
-import { useRef, useEffect, useState } from 'react'
-
+import { useEffect, useRef } from 'react'
 import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
 
 import { SeeAllButton } from './SeeAllButton'
@@ -16,7 +15,7 @@ import { useAdaptiveBehavior } from '../../context/AppContext'
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
 
-export default function BlockType5({
+export default function BlockType4({
     data,
     isAutoPlay = false,
 }: {
@@ -41,45 +40,21 @@ export default function BlockType5({
             }
         }
     }, [])
-
-    const [isBeginning, setIsBeginning] = useState<boolean>(true)
-    const [isEnd, setIsEnd] = useState<boolean>(false)
-
-    const handleSlideChange = () => {
-        if (sliderRef.current) {
-            setIsBeginning(sliderRef.current.swiper.isBeginning)
-            setIsEnd(sliderRef.current.swiper.isEnd)
-        }
-    }
-
-    const nextSlide = () => {
-        if (sliderRef.current) {
-            sliderRef.current.swiper.slideNext()
-            handleSlideChange()
-        }
-    }
-
-    const prevSlide = () => {
-        if (sliderRef.current) {
-            sliderRef.current.swiper.slidePrev()
-            handleSlideChange()
-        }
-    }
     const { isShowPlayButton } = useAdaptiveBehavior()
 
     return (
         <section
-            aria-label="BlockTypeNumber.BlockType5"
-            className="main-gamble__best-live-dealer-casinos best-live-dealer-casinos-gamble  main-gamble__different-casino-bg main-gamble__baner-block"
+            aria-label="BlockTypeNumber.BlockType4"
+            className="main-gamble__highest-max-bet-bonuses-2 highest-max-bet-bonuses-2-gamble main-gamble__casino-big-cards"
         >
-            <div className="best-live-dealer-casinos-gamble__container container">
-                <div className="best-live-dealer-casinos-gamble__top top">
+            <div className="highest-max-bet-bonuses-2-gamble__container container">
+                <div className="highest-max-bet-bonuses-2-gamble__top top">
                     <div className="top__row">
                         <div className="top__column">
                             <div className="top__title-block">
                                 {data.items_block.title_image && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" loading="lazy" />
+                                        <img src={data.items_block.title_image} alt="security" />
                                     </span>
                                 )}
                                 <h2 className="top__title">{data.items_block.block_title}</h2>
@@ -91,77 +66,43 @@ export default function BlockType5({
                         </div>
                     </div>
                 </div>
-                <div className="best-live-dealer-casinos-gamble__row">
-                    <div className="best-live-dealer-casinos-gamble__bg ibg--custom">
-                        <Image width={444} height={444} src="/img/bg/07.webp" alt="bg" loading="lazy" />
-                    </div>
-                    <div className="best-live-dealer-casinos-gamble__slider slider-best-live-dealer-casinos-gamble">
-                        <div className="slider-best-live-dealer-casinos-gamble__top">
-                            <div className="slider-best-live-dealer-casinos-gamble__title">
-                                <span>
-                                    <img src="/img/icons/roulette.svg" alt="roulette" loading="lazy" />
-                                </span>
-                                Blackjack, Roulette, Table Games
-                            </div>
-                            <div className="slider-best-live-dealer-casinos-gamble__navigation navigation-btns">
-                                <button
-                                    onClick={prevSlide}
-                                    className={`navigation-btn navigation-btn_prev slider-best-live-dealer-casinos-gamble__btn_prev ${
-                                        isBeginning ? 'swiper-button-disabled' : ''
-                                    }`}
-                                >
-                                    <svg>
-                                        <use xlinkHref="#arrow"></use>
-                                    </svg>
-                                </button>
-                                <button
-                                    onClick={nextSlide}
-                                    className={`navigation-btn navigation-btn_next slider-best-live-dealer-casinos-gamble__btn_next ${
-                                        isEnd ? 'swiper-button-disabled' : ''
-                                    }`}
-                                >
-                                    <svg>
-                                        <use xlinkHref="#arrow"></use>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="slider-best-live-dealer-casinos-gamble__content">
-                            <div className="slider__body">
-                                <div className="slider-best-live-dealer-casinos-gamble__swiper slider__swiper swiper">
-                                    <Swiper
-                                        speed={1000}
-                                        onSlideChange={handleSlideChange}
-                                        className="slider__wrapper swiper-wrapper"
-                                        slidesPerView="auto"
-                                        modules={[Pagination, Autoplay]}
-                                        autoplay={
-                                            isAutoPlay && {
-                                                delay: 4000,
-                                                disableOnInteraction: false,
-                                            }
+                <div className="highest-max-bet-bonuses-2-gamble__slider slider">
+                    <div className="slider__body">
+                        <div className="highest-max-bet-bonuses-2-gamble__swiper slider__swiper swiper">
+                            <div className="slider__wrapper swiper-wrapper">
+                                <Swiper
+                                    speed={1000}
+                                    className="slider__wrapper swiper-wrapper"
+                                    slidesPerView="auto"
+                                    modules={[Pagination, Autoplay]}
+                                    autoplay={
+                                        isAutoPlay && {
+                                            delay: 4000,
+                                            disableOnInteraction: false,
                                         }
-                                        ref={sliderRef}
-                                        pagination={{
-                                            el: paginationRef.current,
-                                            clickable: true,
-                                        }}
-                                        breakpoints={{
-                                            320: {
-                                                spaceBetween: 16,
-                                            },
-                                            1650.98: {
-                                                spaceBetween: 20,
-                                            },
-                                            1920: {
-                                                spaceBetween: 20,
-                                            },
-                                        }}
-                                    >
-                                        {data.items_block.data_cards
-                                            ?.sort((a, b) => a.order - b.order)
-                                            ?.map((item, index) => (
-                                                <SwiperSlide key={index} className="slider__slide slide-slider swiper-slide">
+                                    }
+                                    ref={sliderRef}
+                                    pagination={{
+                                        el: paginationRef.current,
+                                        clickable: true,
+                                    }}
+                                    breakpoints={{
+                                        320: {
+                                            spaceBetween: 16,
+                                        },
+                                        1650.98: {
+                                            spaceBetween: 20,
+                                        },
+                                        1920: {
+                                            spaceBetween: 20,
+                                        },
+                                    }}
+                                >
+                                    {data.items_block.data_cards
+                                        .sort((a, b) => a.order - b.order)
+                                        .map((item, index) => (
+                                            <SwiperSlide key={index}>
+                                                <div className="slider__slide slide-slider swiper-slide">
                                                     <div
                                                         aria-label="Put your description here."
                                                         className="slide-slider__item casino-big-card"
@@ -181,6 +122,7 @@ export default function BlockType5({
                                                             <div className="casino-big-card__top-small-card casino-small-card">
                                                                 <Link
                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
+                                                                    aria-label="Put your description here."
                                                                     className="casino-small-card__image-block"
                                                                 >
                                                                     <div className="casino-small-card__image ibg--custom">
@@ -201,11 +143,13 @@ export default function BlockType5({
                                                                         {item?.casino_info?.casino_name}
                                                                     </Link>
                                                                     <div className="casino-small-card__info">
-                                                                        {item?.casino_info?.additional_casino_params?.map((it, id) => (
-                                                                            <span key={id} className="casino-small-card__info-link">
-                                                                                {it}
-                                                                            </span>
-                                                                        ))}
+                                                                        {item?.casino_info?.additional_casino_params?.map(
+                                                                            (item, cindex) => (
+                                                                                <span key={cindex} className="casino-small-card__info-link">
+                                                                                    {item}
+                                                                                </span>
+                                                                            ),
+                                                                        )}
                                                                     </div>
                                                                     <div className="casino-small-card__rating">
                                                                         <span className="casino-small-card__rating-icon">
@@ -223,6 +167,9 @@ export default function BlockType5({
                                                                 href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                                 aria-label="Put your description here."
                                                                 className="casino-big-card__title"
+                                                                style={{
+                                                                    maxWidth: '60%',
+                                                                }}
                                                             >
                                                                 <span className="casino-big-card__title-label">
                                                                     {item?.bonus_info?.bonus_name}
@@ -242,48 +189,26 @@ export default function BlockType5({
                                                                             'noopener,noreferrer',
                                                                         )
                                                                     }}
-                                                                    className="casino-big-card__btn "
+                                                                    className="casino-big-card__btn"
                                                                 >
                                                                     Play
                                                                 </a>
                                                             )}
                                                         </div>
                                                     </div>
-                                                </SwiperSlide>
-                                            ))}
-                                    </Swiper>
-                                </div>
-                            </div>
-                            <div className="slider__bottom bottom-slider">
-                                <div
-                                    ref={paginationRef}
-                                    className="bottom-slider__pagination slider-best-live-dealer-casinos-gamble__pagination swiper-pagination"
-                                ></div>
+                                                </div>
+                                            </SwiperSlide>
+                                        ))}
+                                </Swiper>
                             </div>
                         </div>
                     </div>
-                    <div className="best-live-dealer-casinos-gamble__body">
-                        <div className="best-live-dealer-casinos-gamble__waves">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div className="best-live-dealer-casinos-gamble__girl">
-                            <Image width={444} height={444} src="/img/girls/03.webp" alt="girl" loading="lazy" />
-                        </div>
-                        <div className="best-live-dealer-casinos-gamble__content">
-                            <div className="best-live-dealer-casinos-gamble__title">
-                                Bonus from <br />
-                                <span>Live Dealers</span>
-                            </div>
-                            <Link href={'/all-bonuses/best-live-bonuses'} className="best-live-dealer-casinos-gamble__btn ">
-                                <span>
-                                    <img src="/img/icons/gift.svg" alt="gift" loading="lazy" />
-                                </span>
-                                Get Bonus
-                            </Link>
-                        </div>
-                    </div>
+                    {/* <div className="slider__bottom bottom-slider">
+                        <div
+                            ref={paginationRef}
+                            className="bottom-slider__pagination highest-max-bet-bonuses-2-gamble__pagination swiper-pagination"
+                        ></div>
+                    </div> */}
                 </div>
             </div>
         </section>

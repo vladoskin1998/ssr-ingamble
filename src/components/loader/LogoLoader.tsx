@@ -1,6 +1,19 @@
 'use client'
 
+import { useEffect } from "react"
+
 export const LogoLoader = () => {
+
+    useEffect(() => {
+        // Скрыть скролл
+        document.body.style.overflow = 'hidden'
+        return () => {
+            // Вернуть скролл при размонтировании
+            document.body.style.overflow = ''
+        }
+    }, [])
+
+
     return (
         <div className="loader-body-line">
             <div style={{ height: '100%' }}>

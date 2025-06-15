@@ -14,7 +14,7 @@ import {
 
 import $api from '../http'
 import { useQuery } from 'react-query'
-import { CURRENTYEAR } from '../helper'
+import { baseURL, CURRENTYEAR } from '../helper'
 import { useRouter } from 'next/compat/router'
 
 export const SeeAllRoutes = {
@@ -25,10 +25,16 @@ export const SeeAllRoutes = {
 }
 
 const getDatasFilter = async () => {
-    const response = await $api.get('get-datas-filter/')
-    return response.data
+    const response = await fetch(baseURL + 'get-datas-filter/', {
+        method: 'GET',
+        // Кеширование на сутки (24 часа)
+        next: { revalidate: 86400 },
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
 }
-
 export const initialCasinoFilters: CasinoFilterBodyType = {
     payout_speed: [],
     casino_rank: null,

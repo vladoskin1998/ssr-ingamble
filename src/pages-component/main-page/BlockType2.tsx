@@ -225,7 +225,7 @@ export default function BlockType2({
                                 </div>
                             </div>
                         </div>
-                        <div className="safest-casino-2-gamble__slider row-block__slider slider">
+                        <div style={{overflow:'hidden'}} className="safest-casino-2-gamble__slider row-block__slider slider">
                             <div className="slider__body">
                                 <div className="safest-casino-2-gamble__swiper slider__swiper swiper">
                                     <div>
