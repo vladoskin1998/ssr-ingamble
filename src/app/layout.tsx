@@ -9,6 +9,7 @@ import Footer from '@/components/footer'
 import { Header } from '@/components/header'
 import RootLayoutProvider from '@/context/RootLayoutProvider'
 import Script from 'next/script'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
     title: 'inGamble - Premium Gambling Platform',
@@ -64,7 +65,9 @@ export default function RootLayout({
                             <div className="gamble__body">
                                 <Header />
                                 <>{children}</>
-                                <Footer />
+                                <Suspense>
+                                    <Footer />
+                                </Suspense>
                             </div>
                         </div>
                     </div>
