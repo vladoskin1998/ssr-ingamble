@@ -5,8 +5,8 @@ export default async function Main() {
     const src = 'get-data-home-page/'
 
     return (
-        <>
+        <div style={{ minHeight: '100vh' }}>
             <MainPage src={src} />
-        </>
+        </div>
     )
 }

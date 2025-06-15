@@ -64,7 +64,7 @@ export default function RootLayout({
                             <Navbar />
                             <div className="gamble__body">
                                 <Header />
-                                <>{children}</>
+                            < >{children}</>
                                 <Suspense>
                                     <Footer />
                                 </Suspense>
