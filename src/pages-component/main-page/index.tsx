@@ -1,5 +1,5 @@
 import '../../../styles/style.css'
-
+import { lazy, Suspense } from 'react'
 import $api from '@/http'
 import { headers } from 'next/headers'
 import {
@@ -14,7 +14,7 @@ import {
 
 import { AxiosHeaders } from 'axios'
 import { Categories } from '@/components/categories/Categories'
-import { BlockFooter } from './BlockFooter'
+import dynamic from 'next/dynamic'
 import BlockMType2M from './BlockMType2M'
 import BlockMType3M from './BlockMType3M'
 import BlockType1 from './BlockType1'
@@ -34,6 +34,11 @@ import BlockType7 from './BlockType7'
 import BlockType7Mobile from './BlockType7Mobile'
 import BlockType9 from './BlockType9'
 import { baseURL } from '@/helper'
+
+
+
+const BlockFooter = lazy(() => import('./BlockFooter'))
+
 
 export type LazyImgHomeType = 'lazy' | 'eager' | undefined
 
@@ -152,7 +157,7 @@ const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlo
         case BlockTypeNumber.BlockType11:
             return <BlockType11 data={block as HomeDataBlock<DataHomeItemsBlock>} />
         default:
-            return <BlockFooter />
+            return <></>
     }
 }
 
@@ -191,6 +196,9 @@ export default async function MainPage({ src }: { src: string }) {
             <div className="main-gamble__body">
                 <Categories type_category={categoriesTypeBySrc(src).type_category} />
                 {blocksToRender.map((block, index) => renderBlock(block, index, src))}
+                <Suspense>
+                    <BlockFooter />
+                </Suspense>
             </div>
         </main>
     )

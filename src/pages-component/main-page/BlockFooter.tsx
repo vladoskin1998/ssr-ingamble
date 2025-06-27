@@ -3,7 +3,7 @@ import CheckMoreWhatSuitsYouBest from '../../components/categories/CheckMoreWhat
 import SubscribeForm from '../../components/subscribe/SubscribeForm'
 import BottomInfo from '../../components/footer/BottomInfo'
 
-export const BlockFooter = () => {
+export default function BlockFooter ()  {
     return (
         <div>
             <MoreBonusesForYourChoise />
