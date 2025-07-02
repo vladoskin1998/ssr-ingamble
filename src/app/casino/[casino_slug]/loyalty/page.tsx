@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { Metadata } from 'next'
+
 import { LoyaltieCasinoInfo } from './LoyaltieCasinoInfo'
 import { LoyaltyRewnew } from './LoyaltyRewnew'
 import { LoyaltyText } from './LoyaltyText'
@@ -7,30 +10,75 @@ import $api from '@/http'
 
 import { LogoLoader } from '@/components/loader/LogoLoader'
 
-
-
 import { Categories } from '@/components/categories/Categories'
 import { BreadCrumb } from '@/components/breadcrumb'
 import { GeoLocationAllowdType, LoyaltieProgramDataResponse } from '@/types'
 import { EssentialVIPLoyaltyPrograms } from '../bonuses/bonus_slug/EssentialVIPLoyaltyPrograms'
 import { SiblingBonus } from '../bonuses/bonus_slug/SiblingBonus'
-import { OtherBestReloadBonus } from '../bonuses/bonus_slug/OtherBestBonus'
+// import { OtherBestReloadBonus } from '../bonuses/bonus_slug/OtherBestBonus'
 import { HarryStyles } from '../bonuses/bonus_slug/HarryStyles'
 import { lazy, Suspense } from 'react'
 
-const CheckMoreWhatSuitsYouBest = lazy(() => import('../../../../components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = lazy(() => import('../../../../components/subscribe/SubscribeForm'))
-const BottomInfo = lazy(() => import('../../../../components/footer/BottomInfo'))
+const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
+const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
+const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
 
 // Типы для geoLocation
-interface CountryType {
-    code: string
-    name: string
-    flag_image?: string
-}
+// interface CountryType {
+//     code: string
+//     name: string
+//     flag_image?: string
+// }
 interface BlockedCountryType {
     code: string
     id: number
+}
+
+// SEO оптимізація метаданих для сторінки лояльності казино
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { casino_slug: string } 
+}): Promise<Metadata> {
+  try {
+    const data = await getCurrentLoyaltiesFetchData(params.casino_slug)
+    
+    return {
+       // SEO метадані для сторінки лояльності казино
+      title: `${data.dataCurrentLoyaltie?.casino_name} VIP Loyalty Program 2025 - inGamble`,
+      description: `Explore ${data.dataCurrentLoyaltie?.casino_name} VIP loyalty program. Get exclusive rewards, bonuses and benefits. Comprehensive review with latest updates.`,
+      keywords: `${data.dataCurrentLoyaltie?.casino_name}, VIP loyalty, casino rewards, exclusive bonuses, loyalty program`,
+      // Open Graph метадані для соціальних мереж
+      openGraph: {
+        title: `${data.dataCurrentLoyaltie?.casino_name} VIP Loyalty Program`,
+        description: `Explore ${data.dataCurrentLoyaltie?.casino_name} VIP loyalty program with exclusive rewards`,
+        images: [
+          {
+            url: data.dataCurrentLoyaltie?.casino_image || '/img/default-casino.webp',
+            width: 1200,
+            height: 630,
+            alt: `${data.dataCurrentLoyaltie?.casino_name} Casino`,
+          }
+        ],
+        type: 'website',
+        siteName: 'inGamble',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${data.dataCurrentLoyaltie?.casino_name} VIP Loyalty Program`,
+        description: `Explore ${data.dataCurrentLoyaltie?.casino_name} VIP loyalty program`,
+        images: [data.dataCurrentLoyaltie?.casino_image || '/img/default-casino.webp'],
+      },
+      alternates: {
+        canonical: `/casino/${params.casino_slug}/loyalty`,
+      },
+    }
+  } catch {
+    return {
+      title: 'Casino VIP Loyalty Program - inGamble',
+      description: 'Explore casino VIP loyalty programs and exclusive benefits',
+    }
+  }
 }
 
 async function getCurrentLoyaltiesFetchData(slug: string) {
@@ -69,7 +117,7 @@ export default async function SimpleLoyalties({ params }: { params: { casino_slu
                 idCountry,
             }
         }
-    } catch (e) {
+    } catch {
         // обработка ошибки
         return <LogoLoader />
     }
@@ -80,7 +128,7 @@ export default async function SimpleLoyalties({ params }: { params: { casino_slu
                 <Categories />
                 <BreadCrumb
                     path={[
-                        { name: 'Home', link: '/    ' },
+                        { name: 'Home', link: '/' },
                         { name: 'Casino', link: '/all-casinos' },
                         {
                             name: data.dataCurrentLoyaltie?.casino_name || 'Casino Name',

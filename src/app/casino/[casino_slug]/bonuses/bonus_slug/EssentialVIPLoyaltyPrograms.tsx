@@ -1,4 +1,4 @@
-
+'use client'
 import { useQuery } from 'react-query'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -16,8 +16,8 @@ const getFilteringLoyaltiesList = async () => {
     const response = await $api.get(`loyalty-programs-in-rank-range/`)
     return response.data
 }
-//@ts-ignore
-export const EssentialVIPLoyaltyPrograms = ({ casinoName }: { casinoName?: string }) => {
+
+export const EssentialVIPLoyaltyPrograms = () => {
     const { data: LoyaltieDataHigh } = useQuery<LoyaltyInRankRangeResponse[]>(['loyalty-programs-in-rank-range/'], () => getFilteringLoyaltiesList(), {
         keepPreviousData: true,
         staleTime: Infinity,
@@ -71,9 +71,8 @@ export const EssentialVIPLoyaltyPrograms = ({ casinoName }: { casinoName?: strin
                                 className="slider__wrapper swiper-wrapper"
                             >
                                 {LoyaltieDataHigh?.map((item, index) => (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={index}>
                                         <div
-                                            key={index}
                                             className="slide-slider__item essential-programs-gamble__item item-essential-programs-gamble"
                                         >
                                             <div className="item-essential-programs-gamble__top">

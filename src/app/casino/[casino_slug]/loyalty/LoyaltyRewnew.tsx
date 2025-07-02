@@ -18,6 +18,10 @@ const blockWidth = (l: number | undefined) => {
 }
 
 export const LoyaltyRewnew = ({ loyalty_subtype }: { loyalty_subtype: SeeAllEssentialLoyaltyKeypoint[] | undefined }) => {
+    if (!loyalty_subtype?.length) {
+        return null
+    }
+
     return (
         <section className="simple-bonus__deposits deposits loyaltie__loyalty loyalty-review">
             <div className="deposits__container container loyalty-review__container ">
@@ -35,10 +39,11 @@ export const LoyaltyRewnew = ({ loyalty_subtype }: { loyalty_subtype: SeeAllEsse
                         <div className="deposits__row">
                             {loyalty_subtype?.map((item, index) => {
                                 return (
-                                    <div className={`deposits__column ${blockWidth(loyalty_subtype?.length)}`}>
+                                    <div key='`${item.text_1}-${item.text_2}-${index}`'
+                                     className={`deposits__column ${blockWidth(loyalty_subtype?.length)}`}>
                                         <div className={`deposits__item item-deposits ${color_gifts[index % 4]}`}>
                                             <div className="item-loyalty-review__image">
-                                                <Image width={444} height={444} src={item?.image || ''} alt={''} />
+                                                <Image width={444} height={444} src={item?.image || ''} alt={`${item?.text_1} - ${item?.text_2}`} loading="lazy" />
                                             </div>
                                             <div className="item-loyalty-review__content">
                                                 <div className="item-loyalty-review__label">{item?.text_1}</div>

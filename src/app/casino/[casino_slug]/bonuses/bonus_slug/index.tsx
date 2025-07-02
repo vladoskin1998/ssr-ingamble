@@ -1,31 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'swiper/css'
 import { useQuery } from 'react-query'
 import { lazy, useEffect, useState } from 'react'
-import $api from '../../http'
-import { BreadCrumb } from '../../components/breadcrumb/BreadCrumb'
-import { GeoLocationAllowdType, GetDataBonusResponse } from '../../types'
+import $api from '@/http'
+import { BreadCrumb } from '@/components/breadcrumb/index'
+import { GeoLocationAllowdType, GetDataBonusResponse } from '@/types'
 import { BonusSubType } from './BonusSubType'
-import { Categories } from '../../components/categories/Categories'
+import { Categories } from '@/components/categories/Categories'
 import { LastUpdate } from './LastUpdate'
 import { Wraper } from '../Wraper'
 
 
-import { LogoLoader } from '../../components/loader/LogoLoader'
+import { LogoLoader } from '@/components/loader/LogoLoader'
 import { HeaderSimpleBonus } from './HeaderSimpleBonus'
 import { HowToGetBonus } from './HowToGetBonus'
 
 import { HarryStyles } from './HarryStyles'
 import { useParams } from 'react-router-dom'
 import { EssentialVIPLoyaltyPrograms } from './EssentialVIPLoyaltyPrograms'
-import { useFilterContext } from '../../context/FilterContext'
+import { useFilterContext } from '@/context/FilterContext'
 import { SiblingBonus } from './SiblingBonus'
 
 import { OtherBestReloadBonus } from './OtherBestBonus'
 import ASHLINGOBRIEN from '../../assets/img/casino-person/5.webp'
-import initializeAdaptiveBehavior from '../../helper/adaprive-bahavior'
-const BottomInfo = lazy(() => import('../../components/footer/BottomInfo'))
-const SubscribeForm = lazy(() => import('../../components/subscribe/SubscribeForm'))
-const CheckMoreWhatSuitsYouBest = lazy(() => import('../../components/categories/CheckMoreWhatSuitsYouBest'))
+import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
+const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
+const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
+const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 
 const getBonusDataFetch = async ({ slug }: { slug: string | null }) => {
     const response = await $api.get(`get-data-bonus/${slug}/`)
@@ -149,7 +150,7 @@ export default function SimpleBonus() {
                     />
                     <OtherBestReloadBonus />
                     <EssentialVIPLoyaltyPrograms />
-                    <HarryStyles img={ASHLINGOBRIEN} title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
+                    <HarryStyles img={ASHLINGOBRIEN.src} title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />

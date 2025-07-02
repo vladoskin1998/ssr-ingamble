@@ -195,7 +195,11 @@ export default async function MainPage({ src }: { src: string }) {
         <main className="gamble__main main-gamble">
             <div className="main-gamble__body">
                 <Categories type_category={categoriesTypeBySrc(src).type_category} />
-                {blocksToRender.map((block, index) => renderBlock(block, index, src))}
+                {blocksToRender.map((block, index) => (
+                    <div key={`block-${block?.blocks_sequence_number || index}`}>
+                        {renderBlock(block, index, src)}
+                    </div>
+                ))}
                 <Suspense>
                     <BlockFooter />
                 </Suspense>

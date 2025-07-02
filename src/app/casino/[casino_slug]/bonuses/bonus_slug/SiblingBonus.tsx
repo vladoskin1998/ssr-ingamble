@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
-import { SiblingBonuses } from '../../types'
-import { getTagColorByindex } from '../../helper'
-import MainSlider from '../../components/swiper/MainSlider'
+import Link from 'next/link'
+import { SiblingBonuses } from '@/types'
+import { getTagColorByindex } from '@/helper'
+import MainSlider from '@/components/swiper/MainSlider'
 
 export const SiblingBonus = ({
     casinoName,
@@ -27,7 +27,7 @@ export const SiblingBonus = ({
                             </div>
                         </div>
                         <div className="top__column">
-                            <Link rel="nofollow noopener" to="/all-casinos" aria-label="Put your description here." className="top__btn">
+                            <Link rel="nofollow noopener" href="/all-casinos" aria-label="Put your description here." className="top__btn">
                                 <span>See All</span>
                                 <span className="top__btn-arrow">
                                     <svg>
@@ -54,7 +54,10 @@ export const SiblingBonus = ({
                                 {c.labels
                                     ?.sort((a, b) => a?.name.localeCompare(b?.name))
                                     ?.map((l, ct) => (
-                                        <div className={`tags-casino-card__item ${getTagColorByindex(ct)}`}>
+                                        <div
+                                            key={l.name + '-' + ct}
+                                            className={`tags-casino-card__item ${getTagColorByindex(ct)}`}
+                                        >
                                             <span className="tags-casino-card__item-label">{l.name}</span>
                                         </div>
                                     ))}
