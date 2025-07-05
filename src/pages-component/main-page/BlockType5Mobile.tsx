@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 
 import Link from 'next/link'

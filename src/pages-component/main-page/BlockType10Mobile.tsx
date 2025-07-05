@@ -1,14 +1,14 @@
 'use client'
 
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import '../../../styles/style-type-10-11.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
 import Link from 'next/link'
-import { SeeAllRoutes } from '../../context/FilterContext'
-import { CURRENTYEAR } from '../../helper'
+import { SeeAllRoutes } from '@/context/FilterContext'
+import { CURRENTYEAR } from '@/helper'
 
 import { Autoplay } from 'swiper/modules'
 

@@ -4,9 +4,9 @@ import { memo } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { EssentialItemsBlock, HomeDataBlock } from '../../types'
+import { EssentialItemsBlock, HomeDataBlock } from '@/types'
 
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '../../helper'
+import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 import Link from 'next/link'
 
 import { Autoplay } from 'swiper/modules'

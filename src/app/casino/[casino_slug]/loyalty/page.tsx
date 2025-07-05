@@ -13,10 +13,10 @@ import { LogoLoader } from '@/components/loader/LogoLoader'
 import { Categories } from '@/components/categories/Categories'
 import { BreadCrumb } from '@/components/breadcrumb'
 import { GeoLocationAllowdType, LoyaltieProgramDataResponse } from '@/types'
-import { EssentialVIPLoyaltyPrograms } from '../bonuses/bonus_slug/EssentialVIPLoyaltyPrograms'
-import { SiblingBonus } from '../bonuses/bonus_slug/SiblingBonus'
+import { EssentialVIPLoyaltyPrograms } from '../bonuses/[bonus_slug]/EssentialVIPLoyaltyPrograms'
+import { SiblingBonus } from '../bonuses/[bonus_slug]/SiblingBonus'
 // import { OtherBestReloadBonus } from '../bonuses/bonus_slug/OtherBestBonus'
-import { HarryStyles } from '../bonuses/bonus_slug/HarryStyles'
+import { HarryStyles } from '../bonuses/[bonus_slug]/HarryStyles'
 import { lazy, Suspense } from 'react'
 
 const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
@@ -38,10 +38,11 @@ interface BlockedCountryType {
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { casino_slug: string } 
+  params: Promise<{ casino_slug: string }> 
 }): Promise<Metadata> {
   try {
-    const data = await getCurrentLoyaltiesFetchData(params.casino_slug)
+    const resolvedParams = await params
+    const data = await getCurrentLoyaltiesFetchData(resolvedParams.casino_slug)
     
     return {
        // SEO метадані для сторінки лояльності казино
@@ -70,7 +71,7 @@ export async function generateMetadata({
         images: [data.dataCurrentLoyaltie?.casino_image || '/img/default-casino.webp'],
       },
       alternates: {
-        canonical: `/casino/${params.casino_slug}/loyalty`,
+        canonical: `/casino/${resolvedParams.casino_slug}/loyalty`,
       },
     }
   } catch {
@@ -87,8 +88,9 @@ async function getCurrentLoyaltiesFetchData(slug: string) {
     return { dataCurrentLoyaltie: response.data, headers }
 }
 
-export default async function SimpleLoyalties({ params }: { params: { casino_slug: string } }) {
-    const slug = params.casino_slug
+export default async function SimpleLoyalties({ params }: { params: Promise<{ casino_slug: string }> }) {
+    const resolvedParams = await params
+    const slug = resolvedParams.casino_slug
     let data: { dataCurrentLoyaltie: LoyaltieProgramDataResponse; headers: any } | null = null
     let geoLocation: GeoLocationAllowdType = {
         countryCode: '',

@@ -1,6 +1,6 @@
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '../../helper'
+import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 
-import { useAdaptiveBehavior } from '../../context/AppContext'
+import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { useRouter } from 'next/compat/router'
 import Link from 'next/link'

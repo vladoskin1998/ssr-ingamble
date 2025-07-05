@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 
 
-import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
+import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 
 export default function MoreBonusesForYourChoise() {
     const { isSidebarActive } = useAdaptiveBehavior()

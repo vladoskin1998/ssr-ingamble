@@ -1,5 +1,5 @@
 import '../../../styles/style.css'
-import { lazy, Suspense } from 'react'
+import { Suspense } from 'react'
 import $api from '@/http'
 import { headers } from 'next/headers'
 import {
@@ -7,14 +7,12 @@ import {
     DataHomeItemsBlockEnumCategory,
     HomeDataBlock,
     BlockTypeNumber,
-    HomeDataBlockMobile,
     DataHomeItemsBlock,
     EssentialItemsBlock,
 } from '@/types'
 
-import { AxiosHeaders } from 'axios'
 import { Categories } from '@/components/categories/Categories'
-import dynamic from 'next/dynamic'
+import BlockFooterWrapper from '@/components/client-wrappers/BlockFooterWrapper'
 import BlockMType2M from './BlockMType2M'
 import BlockMType3M from './BlockMType3M'
 import BlockType1 from './BlockType1'
@@ -33,11 +31,6 @@ import BlockType6 from './BlockType6'
 import BlockType7 from './BlockType7'
 import BlockType7Mobile from './BlockType7Mobile'
 import BlockType9 from './BlockType9'
-import { baseURL } from '@/helper'
-
-
-
-const BlockFooter = lazy(() => import('./BlockFooter'))
 
 
 export type LazyImgHomeType = 'lazy' | 'eager' | undefined
@@ -68,30 +61,31 @@ const categoriesTypeBySrc = (
 }
 
 const getHomeDataFetch = async (src: string) => {
-    const response = await fetch(baseURL + src, {
-        method: 'GET',
-
-        // next: { revalidate: 3600 },
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // },
-    })
-
-    const data = await response.json()
-    const headers = response.headers
-
-    return {
-        dataHome: data?.data_blocks,
-        dataHomeMobile: data?.data_blocks_m,
-        headers,
+    try {
+        const response = await $api.get(src)
+        
+        return {
+            dataHome: response.data?.data_blocks || [],
+            dataHomeMobile: response.data?.data_blocks_m || [],
+            headers: response.headers,
+        }
+    } catch {
+        return {
+            dataHome: [],
+            dataHomeMobile: [],
+            headers: {},
+        }
     }
 }
 
 
-const getBlockByCountry = async (): Promise<HomeDataBlock> => {
-    const response = await $api.get('get-block-by-country/')
-
-    return response.data
+const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
+    try {
+        const response = await $api.get('get-block-by-country/')
+        return response.data
+    } catch {
+        return null
+    }
 }
 
 const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlock>, index: number, src: string) => {
@@ -157,53 +151,68 @@ const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlo
         case BlockTypeNumber.BlockType11:
             return <BlockType11 data={block as HomeDataBlock<DataHomeItemsBlock>} />
         default:
-            return <></>
+            return (
+                <div style={{ padding: '20px', backgroundColor: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '8px', margin: '10px 0' }}>
+                    <h3>Невідомий тип блоку</h3>
+                    <p>Блок #{index + 1} не може бути відображений</p>
+                </div>
+            )
     }
 }
 
 export default async function MainPage({ src }: { src: string }) {
-    const userAgent = (await headers()).get('user-agent') || ''
-    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
+    try {
+        const userAgent = (await headers()).get('user-agent') || ''
+        const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
 
-    const data: { dataHome: HomeDataBlock[]; dataHomeMobile: HomeDataBlockMobile[]; headers: AxiosHeaders } = {
-        ...(await getHomeDataFetch(src)),
-        headers: await getHomeDataFetch(src).then((response) => response.headers as unknown as AxiosHeaders),
-    }
+        // Load data from API
+        const data = await getHomeDataFetch(src)
+        let blockByCountry: HomeDataBlock | null = await getBlockByCountry()
 
-    let blockByCountry: HomeDataBlock = await getBlockByCountry()
-
-    const { blocks_sequence_number } = categoriesTypeBySrc(src)
-    if (blockByCountry) {
-        blockByCountry = {
-            ...blockByCountry,
-            blocks_sequence_number: blocks_sequence_number,
+        const { blocks_sequence_number } = categoriesTypeBySrc(src)
+        if (blockByCountry) {
+            blockByCountry = {
+                ...blockByCountry,
+                blocks_sequence_number: blocks_sequence_number,
+            }
         }
-    }
 
-    const blocksToRender = [
-        ...(isMobile ? data.dataHomeMobile : data?.dataHome || []),
-        blockByCountry,
-        {
-            blocks_sequence_number: Number(data?.dataHome?.length) + 10,
-            items_block: {} as DataHomeItemsBlock,
-        },
-    ]
-        .filter(Boolean)
-        .sort((a, b) => (a?.blocks_sequence_number || 0) - (b?.blocks_sequence_number || 0))
+        const blocksToRender = [
+            ...(isMobile ? data.dataHomeMobile : data?.dataHome || []),
+            ...(blockByCountry ? [blockByCountry] : []),
+            {
+                blocks_sequence_number: Number(data?.dataHome?.length) + 10,
+                items_block: {} as DataHomeItemsBlock,
+            },
+        ]
+            .filter(Boolean)
+            .sort((a, b) => (a?.blocks_sequence_number || 0) - (b?.blocks_sequence_number || 0))
 
-    return (
-        <main className="gamble__main main-gamble">
-            <div className="main-gamble__body">
-                <Categories type_category={categoriesTypeBySrc(src).type_category} />
-                {blocksToRender.map((block, index) => (
-                    <div key={`block-${block?.blocks_sequence_number || index}`}>
-                        {renderBlock(block, index, src)}
+        return (
+            <main className="gamble__main main-gamble">
+                <div className="main-gamble__body">
+                    <Categories type_category={categoriesTypeBySrc(src).type_category} />
+                    {blocksToRender.map((block, index) => (
+                        <div key={`block-${block?.blocks_sequence_number || index}`}>
+                            {renderBlock(block, index, src)}
+                        </div>
+                    ))}
+                    <Suspense>
+                        <BlockFooterWrapper />
+                    </Suspense>
+                </div>
+            </main>
+        )
+    } catch {
+        return (
+            <main className="gamble__main main-gamble">
+                <div className="main-gamble__body">
+                    <div style={{ padding: '40px 20px', textAlign: 'center', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '8px', margin: '20px' }}>
+                        <h2>Помилка завантаження сторінки</h2>
+                        <p>Виникла помилка при завантаженні даних. Спробуйте оновити сторінку.</p>
                     </div>
-                ))}
-                <Suspense>
-                    <BlockFooter />
-                </Suspense>
-            </div>
-        </main>
-    )
+                </div>
+            </main>
+        )
+    }
 }

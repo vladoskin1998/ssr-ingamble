@@ -1,10 +1,7 @@
-import giftIcon from '../../assets/img/icons/gift.svg'
-import bg08 from '../../assets/img/bg/08.webp'
-
-import { GetDataBonusResponse } from '../../types'
+import { GetDataBonusResponse } from '@/types'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { cloacingFetch, cloacingLink, getLikeByIdAndType, sanitizeNumberLike, saveLikesToStorage } from '../../helper'
+import Link from 'next/link'
+import { cloacingFetch, cloacingLink, getLikeByIdAndType, sanitizeNumberLike, saveLikesToStorage } from '@/helper'
 
 export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined }) => {
     const [like, setLike] = useState<'' | 'like' | 'dislike'>('')
@@ -31,7 +28,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
             <div className="get-bonus__container container">
                 <div className="get-bonus__body">
                     <div className="get-bonus__bg ibg--custom">
-                        <img src={bg08} alt="bg" loading="lazy" />
+                        <img src="/img/bg/08.webp" alt="bg" loading="lazy" />
                     </div>
                     <div className="get-bonus__row">
                         <div className="get-bonus__main main-get-bonus">
@@ -56,7 +53,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
                                             className="main-get-bonus__btn main-get-bonus__btn_bonus"
                                         >
                                             <span>
-                                                <img loading="lazy" src={giftIcon} alt="gift" />
+                                                <img loading="lazy" src="/img/icons/gift.svg" alt="gift" />
                                             </span>
                                             Get Bonus
                                         </a>
@@ -64,7 +61,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
                                     <div className="main-get-bonus__btns-item">
                                         <Link
                                             rel="nofollow noopener"
-                                            to={`/casino/${data?.casino_slug}`}
+                                            href={`/casino/${data?.casino_slug}`}
                                             aria-label="Put your description here."
                                             className="main-get-bonus__btn main-get-bonus__btn_review"
                                         >

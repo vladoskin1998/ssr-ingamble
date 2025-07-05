@@ -2,8 +2,8 @@
 
 import MainSlider from '../../components/swiper/MainSlider'
 
-import { getTagColorByindex, shuffleArray } from '../../helper'
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { getTagColorByindex, shuffleArray } from '@/helper'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 import { useMemo } from 'react'
 

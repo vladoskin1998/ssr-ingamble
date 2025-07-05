@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-import arrowYellowIcon from '../../assets/img/icons/arrow-yellow.svg'
-import closeIcon from '../../assets/img/icons/close.svg'
-import slotsIcon from '../../assets/img/games/01.svg'
-import { GetDataBonusResponse } from '../../types'
-import { AccordionItem } from '../../components/acordion/Acordion'
+import { GetDataBonusResponse } from '@/types'
+import { AccordionItem } from '@/components/acordion/Acordion'
 import { WagerPrettier } from './HeaderSimpleBonus'
 
 export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefined }) => {
@@ -83,7 +80,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Bonus General Info</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }
@@ -190,7 +187,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element `}>
                                     <div className="top-item-bonus-information__title">Wagering Info</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }
@@ -271,7 +268,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Wagering Contribution</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }
@@ -305,7 +302,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                     <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                         <div className="top-item-bonus-information__title">Special Notes</div>
                                         <div className="top-item-bonus-information__icon">
-                                            <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                            <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                         </div>
                                     </div>
                                 }
@@ -332,7 +329,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Free Spins</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }
@@ -387,7 +384,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 >
                                     <div className="top-item-bonus-information__title">Restrictions</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }
@@ -433,7 +430,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src={closeIcon} alt="close" />
+                                                                        <img src="/img/icons/close.svg" alt="close" />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
@@ -490,7 +487,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src={closeIcon} alt="close" />
+                                                                        <img src="/img/icons/close.svg" alt="close" />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
@@ -501,7 +498,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                                 className="popup-item-content-bonus-information__game game-popup-item-content-bonus-information popup-item-content-bonus-information__column"
                                                                             >
                                                                                 <span className="game-popup-item-content-bonus-information__icon">
-                                                                                    <img loading="lazy" src={item?.image || slotsIcon} alt="Slots" />
+                                                                                    <img loading="lazy" src={item?.image || "/img/games/01.svg"} alt="Slots" />
                                                                                 </span>
                                                                                 <span className="game-popup-item-content-bonus-information__name">{item.name || 'slot'}</span>
                                                                             </a>
@@ -551,7 +548,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src={closeIcon} alt="close" />
+                                                                        <img src="/img/icons/close.svg" alt="close" />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
@@ -613,7 +610,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Description</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src={arrowYellowIcon} alt="arrowYellowIcon" />
+                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
                                     </div>
                                 </div>
                             }

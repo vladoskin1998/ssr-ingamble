@@ -1,5 +1,5 @@
 import React from "react"
-import { BonusFilterBodyType, CasinoFilterBodyType } from "../../types"
+import { BonusFilterBodyType, CasinoFilterBodyType } from "@/types"
 
 export const UnlimitedCheckBox = <
     M extends CasinoFilterBodyType | BonusFilterBodyType

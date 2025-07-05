@@ -1,6 +1,6 @@
 
 
-import { useFilterContext } from "../../../context/FilterContext"
+import { useFilterContext } from "@/context/FilterContext"
 import { AccordionItem } from "../../acordion/Acordion"
 import { RangeSlider } from "../../filter-components/RangeSlider"
 import { YesNoDoubleCheckbox } from "../../filter-components/YesNoDoubleCheckbox"

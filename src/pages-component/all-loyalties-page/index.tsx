@@ -9,13 +9,13 @@ import {
     NAMETITLECATEGORYSLUGType,
     SeeAllEssentialLoyaltyCasino,
 
-} from '../../types'
+} from '@/types'
 
 import '../../../styles/all-loyalties.css'
 
 
 import '../../../styles/style.css'
-import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '../../helper'
+import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
 
 import Link from 'next/link'
 import Image from 'next/image'

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { JSX, memo, useEffect, useRef, useState } from "react"
-import { useAccordion } from "../../hooks/useAccordion"
+import { useAccordion } from "@/hooks/useAccordion"
 
 type AccordionItemProps = {
     heading: JSX.Element | string

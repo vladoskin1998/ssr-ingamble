@@ -6,10 +6,10 @@ import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { useRef } from 'react'
 import { Autoplay } from 'swiper/modules'
-import { DataHomeItemsBlock, HomeDataBlock, HomeDataCard } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock, HomeDataCard } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 
-import { cloacingFetch, cloacingLink } from '../../helper'
+import { cloacingFetch, cloacingLink } from '@/helper'
 import Link from 'next/link'
 import Image from 'next/image'
 

@@ -2,7 +2,7 @@
 
 import Slider from "rc-slider"
 import { useEffect, useState } from "react"
-import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from "../../types"
+import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from "@/types"
 
 export const RangeSlider = <T extends CasinoFilterBodyType | BonusFilterBodyType | LoyaltiesFilterBodyType>({
     initState,

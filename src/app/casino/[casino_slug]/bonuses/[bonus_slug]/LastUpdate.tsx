@@ -1,6 +1,6 @@
 import { BonusInformation } from './BonusInformation'
-import { GetDataBonusResponse } from '../../types'
-import { useAdaptiveBehavior } from '../../context/AppContext'
+import { GetDataBonusResponse } from '@/types'
+import { useAdaptiveBehavior } from '@/context/AppContext'
 
 interface LastUpdateProps {
     data?: GetDataBonusResponse

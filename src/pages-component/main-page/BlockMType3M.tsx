@@ -6,10 +6,10 @@ import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { useRef, useEffect } from 'react'
 
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 
-import { getTagColorByindex } from '../../helper'
+import { getTagColorByindex } from '@/helper'
 import Link from 'next/link'
 
 import { Autoplay } from 'swiper/modules'

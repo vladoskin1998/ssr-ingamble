@@ -1,6 +1,6 @@
 'use client'
-import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
-import { useFilterContext } from '../../context/FilterContext'
+import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
+import { useFilterContext } from '@/context/FilterContext'
 import { sliceString } from '@/helper'
 import {  useState } from 'react'
 import { FormatedCategoryType } from '@/types'

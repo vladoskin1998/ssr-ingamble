@@ -6,7 +6,7 @@ type VisitCasinoButtonProps = {
     urlCasino: string
 }
 
-import { cloacingFetch, cloacingLink } from '../../helper'
+import { cloacingFetch, cloacingLink } from '@/helper'
 
 export function CloakingButton({ casinoName, affiliateLink, urlCasino }: VisitCasinoButtonProps) {
     return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 import MainSlider from '@/components/swiper/MainSlider'
@@ -18,7 +19,8 @@ const getFilteringBonusList = async () => {
 
 //@ts-ignore
 export const OtherBestReloadBonus = ({ casinoName }: { casinoName?: string }) => {
-       const { bonus_slug } = useParams()
+       const params = useParams()
+       const bonus_slug = Array.isArray(params.bonus_slug) ? params.bonus_slug[0] : params.bonus_slug
 
     const [slug, setSlug] = useState<string>(bonus_slug || '')
 

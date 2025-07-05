@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'swiper/css'
 import { useQuery } from 'react-query'
@@ -8,7 +10,6 @@ import { GeoLocationAllowdType, GetDataBonusResponse } from '@/types'
 import { BonusSubType } from './BonusSubType'
 import { Categories } from '@/components/categories/Categories'
 import { LastUpdate } from './LastUpdate'
-import { Wraper } from '../Wraper'
 
 
 import { LogoLoader } from '@/components/loader/LogoLoader'
@@ -16,13 +17,11 @@ import { HeaderSimpleBonus } from './HeaderSimpleBonus'
 import { HowToGetBonus } from './HowToGetBonus'
 
 import { HarryStyles } from './HarryStyles'
-import { useParams } from 'react-router-dom'
 import { EssentialVIPLoyaltyPrograms } from './EssentialVIPLoyaltyPrograms'
 import { useFilterContext } from '@/context/FilterContext'
 import { SiblingBonus } from './SiblingBonus'
 
 import { OtherBestReloadBonus } from './OtherBestBonus'
-import ASHLINGOBRIEN from '../../assets/img/casino-person/5.webp'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
 const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
@@ -35,21 +34,26 @@ const getBonusDataFetch = async ({ slug }: { slug: string | null }) => {
     return { dataBonus: response.data, headers }
 }
 
-export default function SimpleBonus() {
-    // document.title = "Simple Bonus"
+import { useParams } from 'next/navigation'
 
+export default function SimpleBonus() {
+    const params = useParams()
+    const bonusSlug = params.bonus_slug as string
+
+    return <SimpleBonusClient bonusSlug={bonusSlug} />
+}
+
+function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
     const { data: Country } = useFilterContext()
 
-     const { bonus_slug } = useParams()
-
-    const [slug, setSlug] = useState<string>(bonus_slug || '')
+    const [slug, setSlug] = useState<string>(bonusSlug || '')
 
     useEffect(() => {
-        if (bonus_slug) {
-            setSlug(bonus_slug)
+        if (bonusSlug) {
+            setSlug(bonusSlug)
             window.scrollTo(0, 0)
         }
-    }, [bonus_slug])
+    }, [bonusSlug])
 
     const [geoLocation, setGeoLocation] = useState<GeoLocationAllowdType>({
         countryCode: '',
@@ -108,7 +112,7 @@ export default function SimpleBonus() {
      if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
 
     return (
-        <Wraper>
+        <div>
             <main className="gamble__simple-bonus main-gamble simple-bonus">
                 <div className="main-gamble__body">
                     <Categories />
@@ -150,12 +154,12 @@ export default function SimpleBonus() {
                     />
                     <OtherBestReloadBonus />
                     <EssentialVIPLoyaltyPrograms />
-                    <HarryStyles img={ASHLINGOBRIEN.src} title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
+                    <HarryStyles img="/img/casino-person/5.webp" title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
                 </div>
             </main>
-        </Wraper>
+        </div>
     )
 }

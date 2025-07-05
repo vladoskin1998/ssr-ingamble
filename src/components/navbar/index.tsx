@@ -6,17 +6,17 @@
 import {  useLayoutEffect, useMemo, useState } from 'react'
 import { AccordionItem } from '../acordion/Acordion'
 
-import { RouteToNextFilter, useFilterContext } from '../../context/FilterContext'
+import { RouteToNextFilter, useFilterContext } from '@/context/FilterContext'
 
 
 import { makeListFilterHeader } from '../filter-components/FilterHeaderList'
-import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from '../../types'
+import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from '@/types'
 import CasinoFilterContent from './CasinoFilter'
 import BonusFilter from './BonusFilter'
 import LoyaltiesFilter from './LoyaltiesFilter'
 
 
-import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
+import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import Link from 'next/link'
 import Image from 'next/image'
 

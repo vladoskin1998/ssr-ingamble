@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "command": "npm run dev",
+      "group": "serve",
+      "isBackground": true,
+      "label": "Start Next.js Dev Server",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "type": "shell"
+    }
+  ]
+}

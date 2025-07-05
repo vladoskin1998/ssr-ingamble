@@ -3,7 +3,7 @@
 import 'swiper/css'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 
 import Link from 'next/link'

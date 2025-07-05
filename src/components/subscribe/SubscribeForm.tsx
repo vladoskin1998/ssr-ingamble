@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 
 
 
-import $api from '../../http'
+import $api from '@/http'
 import Link from 'next/link'
 import './style.css'
 import Image from 'next/image'

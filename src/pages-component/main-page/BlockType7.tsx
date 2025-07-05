@@ -7,10 +7,10 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 
 import { SeeAllButton } from './SeeAllButton'
-import { shuffleArray } from '../../helper'
+import { shuffleArray } from '@/helper'
 import Link from 'next/link'
 
 import { Autoplay } from 'swiper/modules'

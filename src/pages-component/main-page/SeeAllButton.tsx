@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { DataHomeItemsBlockCategoryType } from '../../types'
-import { useFilterContext } from '../../context/FilterContext'
+import { DataHomeItemsBlockCategoryType } from '@/types'
+import { useFilterContext } from '@/context/FilterContext'
 
 export const SeeAllButton = (prop: { type_category: DataHomeItemsBlockCategoryType; slug: string }) => {
     const { fooCategorySanitazeLink } = useFilterContext()

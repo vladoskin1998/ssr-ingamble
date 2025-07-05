@@ -1,10 +1,10 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
+import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import { useEffect, useState, useMemo } from 'react'
-import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '../../types'
-import { useFilterContext } from '../../context/FilterContext'
+import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '@/types'
+import { useFilterContext } from '@/context/FilterContext'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation' // добавьте импорт
 

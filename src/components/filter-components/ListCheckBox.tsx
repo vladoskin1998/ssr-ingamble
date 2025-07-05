@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect, memo } from "react"
 import { FixedSizeList as List } from "react-window"
-import { BonusFilterBodyType, CasinoFilterBodyType } from "../../types"
+import { BonusFilterBodyType, CasinoFilterBodyType } from "@/types"
 
 // Типизация для ключей, которые содержат массивы чисел
 // type NumberArrayKeys<T> = {

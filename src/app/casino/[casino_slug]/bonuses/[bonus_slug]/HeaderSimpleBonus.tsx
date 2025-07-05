@@ -1,14 +1,8 @@
-import starIcon from '../../assets/img/icons/star.svg'
-import likeIcon from '../../assets/img/icons/like.svg'
-
-import { GeoLocationAllowdType, GetDataBonusResponse, WageringBonusPlusDepositType } from '../../types'
-
-import giftIcon from '../../assets/img/icons/gift.svg'
+import { GeoLocationAllowdType, GetDataBonusResponse, WageringBonusPlusDepositType } from '@/types'
 import { useState, useEffect } from 'react'
-import { LazyCardImg } from '../../components/lazy-img/LazyCardImg'
-import { Link } from 'react-router-dom'
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '../../helper'
-import { useFilterContext } from '../../context/FilterContext'
+import Link from 'next/link'
+import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
+import { useFilterContext } from '@/context/FilterContext'
 
 const color_label = ['tags-casino-card__item_green', 'tags-casino-card__item_blue', 'tags-casino-card__item_purple', 'tags-casino-card__item_grass', 'tags-casino-card__item_orange']
 
@@ -64,31 +58,31 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                         <div className="casino-info__main main-casino-info">
                             <div className="main-casino-info__image-block">
                                 <div className="main-casino-info__image ibg--custom">
-                                    <LazyCardImg img={data?.bonus_image || ''} imgLoading={'eager'} height="100%" width="100%" />
-                                    {/* <img
-                                        src={data?.bonus_image || mainImg}
+                                    <img
+                                        src={data?.bonus_image || ''}
                                         alt="main-img"
-                                    /> */}
+                                        style={{ height: "100%", width: "100%" }}
+                                    />
                                 </div>
                             </div>
                             {!isSmallScreen ? (
                                 <div className="main-casino-info__name name-main-casino-info">
-                                    <Link className="name-main-casino-info__logo" to={`/casino/${data?.casino_slug}`}>
-                                        <LazyCardImg img={data?.casino_logo || ''} />
+                                    <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
+                                        <img src={data?.casino_logo || ''} alt={`${data?.casino_name} logo`} />
                                     </Link>
                                     <div className="name-main-casino-info__content">
-                                        <Link to={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
+                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
                                             {data?.casino_name}
                                         </Link>
                                         <div className="info-casino-card__stake-rating name-main-casino-info__stake-rating">
                                             <span className="info-casino-card__stake-rating-icon">
-                                                <img src={starIcon} alt="star" />
+                                                <img src="/img/icons/star.svg" alt="star" />
                                             </span>
                                             <span className="info-casino-card__stake__rating-number">{data?.bonus_rank || '4.8'}</span>
                                         </div>
                                         <div className="info-casino-card__likes name-main-casino-info__likes">
                                             <span className="info-casino-card__likes-icon">
-                                                <img src={likeIcon} alt="like" />
+                                                <img src="/img/icons/like.svg" alt="like" />
                                             </span>
                                             <span className="info-casino-card__likes-number">{sanitizeNumberLike(data?.likes)}</span>
                                         </div>
@@ -98,21 +92,21 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                 <div className="main-casino-info__name name-main-casino-info">
                                     <div className="info-casino-card__stake-rating name-main-casino-info__stake-rating">
                                         <span className="info-casino-card__stake-rating-icon">
-                                            <img src={starIcon} alt="star" />
+                                            <img src="/img/icons/star.svg" alt="star" />
                                         </span>
                                         <span className="info-casino-card__stake__rating-number">{data?.bonus_rank || '4.8'}</span>
                                     </div>
-                                    <Link className="name-main-casino-info__logo" to={`/casino/${data?.casino_slug}`}>
+                                    <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
                                         <img src={data?.casino_logo} alt="stake" />
                                     </Link>
                                     <div className="info-casino-card__likes name-main-casino-info__likes">
                                         <span className="info-casino-card__likes-icon">
-                                            <img src={likeIcon} alt="like" />
+                                            <img src="/img/icons/like.svg" alt="like" />
                                         </span>
                                         <span className="info-casino-card__likes-number">{sanitizeNumberLike(data?.likes)}</span>
                                     </div>
                                     <div className="name-main-casino-info__content">
-                                        <Link to={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
+                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
                                             {data?.casino_name}
                                         </Link>
                                     </div>
@@ -158,13 +152,13 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         className="main-get-bonus__btn main-get-bonus__btn_bonus"
                                     >
                                         <span>
-                                            <img loading="lazy" src={giftIcon} alt="gift" />
+                                            <img loading="lazy" src="/img/icons/gift.svg" alt="gift" />
                                         </span>
                                         Get Bonus and Play
                                     </a>
                                 ) : (
                                     <Link
-                                        to={'/filter-casinos'}
+                                        href={'/filter-casinos'}
                                         onClick={() => {
                                             setCasinoFilters((s) => ({ ...s, selected_countries: [geoLocation?.idCountry as number] }))
                                         }}
@@ -172,7 +166,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         className="main-get-bonus__btn main-get-bonus__btn_bonus"
                                     >
                                         <span>
-                                            <img loading="lazy" src={giftIcon} alt="gift" />
+                                            <img loading="lazy" src="/img/icons/gift.svg" alt="gift" />
                                         </span>
                                         Browse Recommended Bonuses
                                     </Link>
@@ -189,19 +183,19 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                                 <div className="item-features-content-casino-info__number">{data?.bonus_rank || 0}</div>
                                                 <div className="item-features-content-casino-info__rating">
                                                     <div className="item-features-content-casino-info__star">
-                                                        <img loading="lazy" src={starIcon} alt="star" />
+                                                        <img loading="lazy" src="/img/icons/star.svg" alt="star" />
                                                     </div>
                                                     <div className="item-features-content-casino-info__star">
-                                                        <img loading="lazy" src={starIcon} alt="star" />
+                                                        <img loading="lazy" src="/img/icons/star.svg" alt="star" />
                                                     </div>
                                                     <div className="item-features-content-casino-info__star">
-                                                        <img loading="lazy" src={starIcon} alt="star" />
+                                                        <img loading="lazy" src="/img/icons/star.svg" alt="star" />
                                                     </div>
                                                     <div className="item-features-content-casino-info__star">
-                                                        <img loading="lazy" src={starIcon} alt="star" />
+                                                        <img loading="lazy" src="/img/icons/star.svg" alt="star" />
                                                     </div>
                                                     <div className="item-features-content-casino-info__star">
-                                                        <img loading="lazy" src={starIcon} alt="star" />
+                                                        <img loading="lazy" src="/img/icons/star.svg" alt="star" />
                                                     </div>
                                                 </div>
                                             </div>

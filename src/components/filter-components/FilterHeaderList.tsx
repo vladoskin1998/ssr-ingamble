@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from '../../types'
-import { sliceString } from '../../helper'
+import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from '@/types'
+import { sliceString } from '@/helper'
 
 export interface MakeListFilterHeaderType {
     value: string

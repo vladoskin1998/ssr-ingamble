@@ -6,12 +6,12 @@ import 'swiper/css/pagination'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { useRef, useEffect, useState } from 'react'
 
-import { DataHomeItemsBlock, HomeDataBlock } from '../../types'
+import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 
 import { SeeAllButton } from './SeeAllButton'
-import { cloacingFetch, cloacingLink } from '../../helper'
+import { cloacingFetch, cloacingLink } from '@/helper'
 import Link from 'next/link'
-import { useAdaptiveBehavior } from '../../context/AppContext'
+import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'

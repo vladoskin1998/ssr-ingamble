@@ -2,8 +2,8 @@
 
 
 import { useEffect, useRef, useState } from 'react'
-import { initialCasinoFilters, useFilterContext } from '../../context/FilterContext'
-import { useAdaptiveBehavior, useHandlerSidebarActive } from '../../context/AppContext'
+import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
+import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import Link from 'next/link'
 import { useRouter } from 'next/compat/router'
 import { usePathname } from 'next/navigation'

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { SwiperRef } from 'swiper/react'
-import { useAdaptiveBehavior } from '../../context/AppContext'
+import { useAdaptiveBehavior } from '@/context/AppContext'
 import { Autoplay } from 'swiper/modules'
 import ItemMainSlider from './MainSliderItem'
 

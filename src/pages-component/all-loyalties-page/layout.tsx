@@ -4,15 +4,15 @@ import { Categories } from '@/components/categories/Categories'
 import { BreadCrumb } from '@/components/breadcrumb'
 import { PaginationPage } from '../../components/pagination/PaginationPage'
 
-import { DataHomeItemsBlockEnumCategory, NAMETITLECATEGORYSLUGType } from '../../types'
+import { DataHomeItemsBlockEnumCategory, NAMETITLECATEGORYSLUGType } from '@/types'
 import { useParams } from 'next/navigation'
 import '../../../styles/all-loyalties.css'
 
 import { useRouter } from 'next/navigation'
 import React, { lazy, useEffect, useState } from 'react'
-import { LOYALTIECATEGORYIES } from '../../helper'
+import { LOYALTIECATEGORYIES } from '@/helper'
 
-import { initialLoyaltiesFilters, useFilterContext } from '../../context/FilterContext'
+import { initialLoyaltiesFilters, useFilterContext } from '@/context/FilterContext'
 
 
 const SubscribeForm = lazy(() => import('../../components/subscribe/SubscribeForm'))
