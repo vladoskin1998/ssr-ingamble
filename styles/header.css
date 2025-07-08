@@ -55,11 +55,11 @@ header {
         width: auto;
         position: absolute;
         right: 46px;
-        -webkit-transition: all 0.3s ease 0s;
-        -moz-transition: all 0.3s ease 0s;
-        -ms-transition: all 0.3s ease 0s;
-        -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s;
+        -webkit-transition: width 0.15s ease;
+        -moz-transition: width 0.15s ease;
+        -ms-transition: width 0.15s ease;
+        -o-transition: width 0.15s ease;
+        transition: width 0.15s ease;
         z-index: 1;
         width: 38px;
     }
@@ -88,11 +88,11 @@ header {
         height: 38px;
         border-radius: var(--SystemCorners-Small, 8px);
         background: var(--BG-Bg_2, #232320);
-        -webkit-transition: all 0.3s ease 0s;
-        -moz-transition: all 0.3s ease 0s;
-        -ms-transition: all 0.3s ease 0s;
-        -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s;
+        -webkit-transition: background-color 0.15s ease, transform 0.15s ease;
+        -moz-transition: background-color 0.15s ease, transform 0.15s ease;
+        -ms-transition: background-color 0.15s ease, transform 0.15s ease;
+        -o-transition: background-color 0.15s ease, transform 0.15s ease;
+        transition: background-color 0.15s ease, transform 0.15s ease;
     }
 
     .form-header__icon svg {
@@ -143,11 +143,11 @@ header {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    -webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;
-    -ms-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    transition: all 1s ease 0s;
+    -webkit-transition: opacity 0.3s ease, visibility 0.3s ease;
+    -moz-transition: opacity 0.3s ease, visibility 0.3s ease;
+    -ms-transition: opacity 0.3s ease, visibility 0.3s ease;
+    -o-transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .header.resize {
@@ -193,11 +193,11 @@ header {
         height: 69.8px;
         width: 100%;
         border-left: 0;
-        -webkit-transition: all 0.5s ease 0s;
-        -moz-transition: all 0.5s ease 0s;
-        -ms-transition: all 0.5s ease 0s;
-        -o-transition: all 0.5s ease 0s;
-        transition: all 0.5s ease 0s;
+        -webkit-transition: transform 0.2s ease;
+        -moz-transition: transform 0.2s ease;
+        -ms-transition: transform 0.2s ease;
+        -o-transition: transform 0.2s ease;
+        transition: transform 0.2s ease;
     }
 
     .header.hide {
@@ -299,7 +299,7 @@ header {
 
 
 @media (max-width: 1425.98px) {
-    .header__column:nth-child(3) {}
+    /* Empty rule removed for optimization */
 }
 
 @media (max-width: 650.98px) {

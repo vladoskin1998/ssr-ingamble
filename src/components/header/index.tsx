@@ -1,7 +1,7 @@
 'use client'
 
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import Link from 'next/link'
@@ -50,19 +50,15 @@ export const Header = () => {
     const modalLanguageRef = useRef<HTMLDivElement | null>(null)
 
     const [searchShow, setSearchShow] = useState(false)
-    const [activeLink, setActiveLink] = useState<string>(
-    //    window.location.pathname 
-        '/')
+    const [activeLink, setActiveLink] = useState<string>('/')
 
     const [showHeader, setShowHeader] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0)
 
-    const handleLanguageSelect = (language: Language) => {
- 
-
+    const handleLanguageSelect = useCallback((language: Language) => {
         setSelectedLanguage(language)
         setIsLanguageOpen(false)
-    }
+    }, [])
 
     const handleFocus = () => {
      
@@ -73,16 +69,16 @@ export const Header = () => {
     }
 
 
-    const handleBurgerOpen = (event: React.MouseEvent) => {
+    const handleBurgerOpen = useCallback((event: React.MouseEvent) => {
         event.preventDefault()
         setIsMenuOpen((s) => !s)
         setIsBodyLocked((s) => !s)
-    }
+    }, [])
 
-    const handleBurgerClose = () => {
+    const handleBurgerClose = useCallback(() => {
         setIsMenuOpen(false)
         setIsBodyLocked(false)
-    }
+    }, [])
 
     useEffect(() => {
         if (isBodyLocked || isSidebarActive) {
@@ -100,14 +96,14 @@ export const Header = () => {
         }
     }, [isSidebarActive])
 
-    const navTo = () => {
+    const navTo = useCallback(() => {
         if (window.location.href.includes('filter-casinos')) {
             return
         } else {
             setSearchShow(false)
-             router?.push('/filter-casinos')
+            router?.push('/filter-casinos')
         }
-    }
+    }, [router])
 
     useEffect(() => {
         const onKeydown = (e: KeyboardEvent) => {
@@ -139,21 +135,21 @@ export const Header = () => {
         setActiveLink('/')
     }, [pathname])
 
-    const handleScroll = () => {
+    const handleScroll = useCallback(() => {
         if (window.scrollY > lastScrollY && window.scrollY > 50) {
             setShowHeader(false)
         } else {
             setShowHeader(true)
         }
         setLastScrollY(window.scrollY)
-    }
+    }, [lastScrollY])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
         return () => {
             window.removeEventListener('scroll', handleScroll)
         }
-    }, [lastScrollY])
+    }, [handleScroll])
 
     return (
         <header className={`header header-animated  ${!showHeader && 'header-animated-hide'}`}>
