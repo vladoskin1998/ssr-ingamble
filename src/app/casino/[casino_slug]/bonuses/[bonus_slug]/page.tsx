@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'swiper/css'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { lazy, useEffect, useState } from 'react'
 import $api from '@/http'
 import { BreadCrumb } from '@/components/breadcrumb/index'
@@ -64,11 +64,9 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
         idCountry: null,
     })
 
-    const { data, isLoading } = useQuery<{
-        dataBonus: GetDataBonusResponse
-        headers: any
-    }>(['get-data-bonus', slug], () => getBonusDataFetch({ slug }), {
-        keepPreviousData: true,
+    const { data, isLoading } = useQuery({
+        queryKey: ['get-data-bonus', slug],
+        queryFn: () => getBonusDataFetch({ slug }),
         staleTime: Infinity,
         enabled: !!slug,
     })
@@ -83,7 +81,7 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                 return it.code === countryCode || it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase()
             })?.flag_image
 
-            const idCountry = data.dataBonus?.blocked_countries?.find((item) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
+            const idCountry = data.dataBonus?.blocked_countries?.find((item: any) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
 
             setGeoLocation({
                 countryCode,

@@ -1,6 +1,7 @@
 'use client'
 
 import MainSlider from '../../components/swiper/MainSlider'
+import Image from 'next/image'
 
 import { getTagColorByindex, shuffleArray } from '@/helper'
 import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
@@ -22,7 +23,7 @@ export default function BlockType1({ data, isAutoPlay = false }: { data: HomeDat
                                 <div className="top__title-block">
                                     {data.items_block.title_image && (
                                         <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                            <img src={data.items_block.title_image} alt="security" loading="lazy" />
+                                            <Image src={data.items_block.title_image} alt="security" loading="lazy" width={40} height={40} />
                                         </span>
                                     )}
                                     <h2 className="top__title">{data.items_block.block_title}</h2>

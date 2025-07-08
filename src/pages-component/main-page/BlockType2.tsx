@@ -68,7 +68,7 @@ export default function BlockType2({
                                 <div className="top__title-block">
                                     {data.items_block.title_image && (
                                         <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                            <img src={data.items_block.title_image} alt="security" loading="lazy" />
+                                            <Image src={data.items_block.title_image} alt="security" width={32} height={32} />
                                         </span>
                                     )}
                                     <h2 className="top__title ">{data.items_block.block_title}</h2>
@@ -120,10 +120,12 @@ export default function BlockType2({
                                                                     href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                                     onClick={(e) => e.stopPropagation()}
                                                                 >
-                                                                    <img
-                                                                        src={item?.bonus_info?.bonus_image || ''}
-                                                                        height="100%"
-                                                                        width="100%"
+                                                                    <Image
+                                                                        src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
+                                                                        alt="Bonus Image"
+                                                                        width={500}
+                                                                        height={300}
+                                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                                     />
                                                                 </Link>
                                                                 <div className="item-baner-row-block__row">
@@ -138,7 +140,7 @@ export default function BlockType2({
                                                                                         width={444}
                                                                                         height={444}
                                                                                         alt="Casino Image"
-                                                                                        src={item?.casino_info?.casino_image || ''}
+                                                                                        src={item?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                                     />
                                                                                 </Link>
                                                                             </div>
@@ -167,7 +169,7 @@ export default function BlockType2({
                                                                         </div>
                                                                         <div className="item-baner-row-block__index">
                                                                             <div className="item-baner-row-block__index-icon">
-                                                                                <img src="/img/icons/shield.svg" alt="shield" />
+                                                                                <Image src="/img/icons/shield.svg" alt="shield" width={24} height={24} />
                                                                             </div>
                                                                             <div className="item-baner-row-block__index-number">
                                                                                 {item?.casino_info?.casino_rank}
@@ -268,7 +270,7 @@ export default function BlockType2({
                                                                     width={444}
                                                                     height={444}
                                                                     alt="Casino Image"
-                                                                    src={item.casino_info.casino_image || ''}
+                                                                    src={item.casino_info.casino_image || '/img/no-results.svg'}
                                                                 />
                                                             </span>
                                                         </Link>
@@ -290,7 +292,7 @@ export default function BlockType2({
                                                             </div>
                                                             <div className="different-casino-bg__rating">
                                                                 <span className="different-casino-bg__rating-icon">
-                                                                    <img src="/img/icons/shield.svg" alt="shield" />
+                                                                    <Image src="/img/icons/shield.svg" alt="shield" width={24} height={24} />
                                                                 </span>
                                                                 <span className="different-casino-bg__rating-number">
                                                                     {item.casino_info.casino_rank}

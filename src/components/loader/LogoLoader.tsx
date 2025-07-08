@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from "react"
+import Image from 'next/image'
 
 export const LogoLoader = () => {
 
@@ -20,7 +21,7 @@ export const LogoLoader = () => {
                 <div className="preloader-1__body">
                     <div className="loader-body-logo">
                         <div className="loader-body-logo-img">
-                            <img src="/img/logo-icon.svg" alt="" />
+                            <Image src="/img/logo-icon.svg" alt="Logo" width={60} height={60} />
                         </div>
 
                         <div className="loader-body-logo-load loader-body-infinite-fade-text">Loading...</div>

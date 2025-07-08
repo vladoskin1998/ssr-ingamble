@@ -1,4 +1,5 @@
 
+import React from "react"
 import { SeeAllEssentialLoyaltyKeypoint } from "@/types"
 import Image from "next/image"
 
@@ -43,7 +44,7 @@ export const LoyaltyRewnew = ({ loyalty_subtype }: { loyalty_subtype: SeeAllEsse
                                      className={`deposits__column ${blockWidth(loyalty_subtype?.length)}`}>
                                         <div className={`deposits__item item-deposits ${color_gifts[index % 4]}`}>
                                             <div className="item-loyalty-review__image">
-                                                <Image width={444} height={444} src={item?.image || ''} alt={`${item?.text_1} - ${item?.text_2}`} loading="lazy" />
+                                                <Image width={444} height={444} src={item?.image || '/img/no-results.svg'} alt={`${item?.text_1} - ${item?.text_2}`} loading="lazy" />
                                             </div>
                                             <div className="item-loyalty-review__content">
                                                 <div className="item-loyalty-review__label">{item?.text_1}</div>

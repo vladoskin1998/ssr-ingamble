@@ -53,7 +53,7 @@ export default function BlockType3Mobile({
                             <div className="top__title-block">
                                 {data.items_block.title_image && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" />
+                                        <Image src={data.items_block.title_image} alt="security" width={400} height={250} />
                                     </span>
                                 )}
                                 <h2 className="top__title">{data?.items_block.block_title}</h2>
@@ -124,7 +124,7 @@ export default function BlockType3Mobile({
                                                                         width={444}
                                                                         height={444}
                                                                         alt="Casino Image"
-                                                                        src={item?.[0]?.casino_info?.casino_image || ''}
+                                                                        src={item?.[0]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                     />
                                                                 </span>
                                                             </Link>
@@ -194,7 +194,7 @@ export default function BlockType3Mobile({
                                                                             width={444}
                                                                             height={444}
                                                                             alt="Casino Image"
-                                                                            src={item?.[1]?.casino_info?.casino_image || ''}
+                                                                            src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                         />
                                                                     </span>
                                                                 </Link>

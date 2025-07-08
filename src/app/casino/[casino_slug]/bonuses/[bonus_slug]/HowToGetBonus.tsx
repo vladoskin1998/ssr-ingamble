@@ -2,6 +2,7 @@ import { GetDataBonusResponse } from '@/types'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cloacingFetch, cloacingLink, getLikeByIdAndType, sanitizeNumberLike, saveLikesToStorage } from '@/helper'
+import Image from 'next/image'
 
 export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined }) => {
     const [like, setLike] = useState<'' | 'like' | 'dislike'>('')
@@ -28,7 +29,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
             <div className="get-bonus__container container">
                 <div className="get-bonus__body">
                     <div className="get-bonus__bg ibg--custom">
-                        <img src="/img/bg/08.webp" alt="bg" loading="lazy" />
+                        <Image src="/img/bg/08.webp" alt="bg" width={1920} height={1080} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div className="get-bonus__row">
                         <div className="get-bonus__main main-get-bonus">
@@ -53,7 +54,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
                                             className="main-get-bonus__btn main-get-bonus__btn_bonus"
                                         >
                                             <span>
-                                                <img loading="lazy" src="/img/icons/gift.svg" alt="gift" />
+                                                <Image src="/img/icons/gift.svg" alt="gift" width={20} height={20} />
                                             </span>
                                             Get Bonus
                                         </a>

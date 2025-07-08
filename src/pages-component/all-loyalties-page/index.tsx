@@ -8,15 +8,10 @@ import {
     FilterLoyaltiesPostResponse,
     NAMETITLECATEGORYSLUGType,
     SeeAllEssentialLoyaltyCasino,
-
+    SeeAllEssentialLoyaltyKeypoint
 } from '@/types'
-
-import '../../../styles/all-loyalties.css'
-
-
-import '../../../styles/style.css'
-import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
-
+// ✅ ЗМІНА: all-loyalties.css та style.css тепер імпортуються в layout.tsx
+import { filterEmptyValues } from '@/helper'
 import Link from 'next/link'
 import Image from 'next/image'
 import AllLoyaltyLayout from './layout'
@@ -84,7 +79,8 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
     return (
         <AllLoyaltyLayout totalPages={totalCountPage}>
             <div className="main-loyaltie-programs__items loyaltie-programs__items">
-                {allData?.map((item: any, index: number) => (
+                {/* ✅ ЗМІНА: Типізовано allData mapping з правильним типом */}
+                {allData?.map((item: SeeAllEssentialLoyaltyCasino, index: number) => (
                     <div key={index} className="loyaltie-programs__item item-loyaltie-programs">
                         <div className="item-loyaltie-programs__row">
                             <div className="item-loyaltie-programs__main">
@@ -107,7 +103,8 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                     </div>
                                 </div>
                                 <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
-                                    {item.loyalty_program.loyalty_keypoint.map((it: any, index: number) => (
+                                    {/* ✅ ЗМІНА: Типізовано loyalty_keypoint mapping */}
+                                    {item.loyalty_program.loyalty_keypoint.map((it: SeeAllEssentialLoyaltyKeypoint, index: number) => (
                                         <div key={index} className="features-essential-programs-gamble__column">
                                             <div className="features-essential-programs-gamble__item">
                                                 <div className="features-essential-programs-gamble__icon " style={{ position: 'relative' }}>
@@ -169,7 +166,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                         <CloakingButton
                                             casinoName={item?.casino_name}
                                             affiliateLink={item?.casino_affiliate_link}
-                                            urlCasino={item?.url_casino}
+                                            urlCasino={item?.url_casino || ''}
                                         />
                                         <Link
                                             href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`}

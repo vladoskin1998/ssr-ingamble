@@ -1,5 +1,7 @@
-import { MakeListFilterHeaderType } from "../components/filter-components/FilterHeaderList"
+import { MakeListFilterHeaderType, makeListFilterHeader } from "../components/filter-components/FilterHeaderList"
 import $api from "../http"
+import { RouteToNextFilter } from '../context/FilterContext'
+import { CasinoFilterBodyType, BonusFilterBodyType, LoyaltiesFilterBodyType } from '../types'
 
 export const baseURL = 'https://ig-api-prod.incasinowetrust.com/api/v1/';
 
@@ -258,3 +260,32 @@ export const getTitleFilterCategories = ({
 
     return categories[slug] || '';
 };
+
+export const LengthApplyFilter = ({
+    currentRouteFilter,
+    casinoFilters,
+    bonusFilters,
+    loyaltiesFilters,
+}: {
+    currentRouteFilter: RouteToNextFilter
+    casinoFilters: CasinoFilterBodyType
+    bonusFilters: BonusFilterBodyType
+    loyaltiesFilters: LoyaltiesFilterBodyType
+}) => {
+    if (currentRouteFilter === RouteToNextFilter.BONUS) {
+        const bl = makeListFilterHeader(bonusFilters).length
+        return bl ? `(${bl})` : ''
+    }
+
+    if (currentRouteFilter === RouteToNextFilter.CASINOS) {
+        const cl = makeListFilterHeader(casinoFilters).length
+        return cl ? `(${cl})` : ''
+    }
+
+    if (currentRouteFilter === RouteToNextFilter.LOYALTIES) {
+        const ll = makeListFilterHeader(loyaltiesFilters).length
+        return ll ? `(${ll})` : ''
+    }
+
+    return ''
+}

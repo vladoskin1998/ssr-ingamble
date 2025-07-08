@@ -79,7 +79,7 @@ export default function BlockType5({
                             <div className="top__title-block">
                                 {data.items_block.title_image && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" loading="lazy" />
+                                        <Image src={data.items_block.title_image} alt="security" width={32} height={32} />
                                     </span>
                                 )}
                                 <h2 className="top__title">{data.items_block.block_title}</h2>
@@ -99,7 +99,7 @@ export default function BlockType5({
                         <div className="slider-best-live-dealer-casinos-gamble__top">
                             <div className="slider-best-live-dealer-casinos-gamble__title">
                                 <span>
-                                    <img src="/img/icons/roulette.svg" alt="roulette" loading="lazy" />
+                                    <Image src="/img/icons/roulette.svg" alt="roulette" width={24} height={24} />
                                 </span>
                                 Blackjack, Roulette, Table Games
                             </div>
@@ -183,13 +183,12 @@ export default function BlockType5({
                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                     className="casino-small-card__image-block"
                                                                 >
-                                                                    <div className="casino-small-card__image ibg--custom">
-                                                                        <Image
-                                                                            width={444}
-                                                                            height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.casino_info?.casino_image || ''}
-                                                                        />
+                                                                    <div className="casino-small-card__image ibg--custom">                                                        <Image
+                                                            width={444}
+                                                            height={444}
+                                                            alt="Casino Image"
+                                                            src={item?.casino_info?.casino_image || ''}
+                                                        />
                                                                     </div>
                                                                 </Link>
                                                                 <div className="casino-small-card__body">
@@ -281,7 +280,7 @@ export default function BlockType5({
                             </div>
                             <Link href={'/all-bonuses/best-live-bonuses'} className="best-live-dealer-casinos-gamble__btn ">
                                 <span>
-                                    <img src="/img/icons/gift.svg" alt="gift" loading="lazy" />
+                                    <Image src="/img/icons/gift.svg" alt="gift" width={20} height={20} />
                                 </span>
                                 Get Bonus
                             </Link>

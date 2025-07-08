@@ -55,7 +55,7 @@ export default function BlockType2Mobile({
                                 <div className="top__title-block">
                                     {data.items_block.title_image && (
                                         <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                            <img src={data.items_block.title_image} alt="security" />
+                                            <Image src={data.items_block.title_image} alt="security" width={400} height={250} />
                                         </span>
                                     )}
                                     <h2 className="top__title">{data?.items_block?.block_title}</h2>

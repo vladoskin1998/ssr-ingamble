@@ -50,7 +50,7 @@ export default function BlockType10({
                                         width={444}
                                         height={444}
                                         alt="Casino Image"
-                                        src={data.items_block.data_cards?.[0]?.casino_info?.casino_image || ''}
+                                        src={data.items_block.data_cards?.[0]?.casino_info?.casino_image || '/img/no-results.svg'}
                                     />
                                 </span>
                             </Link>
@@ -93,7 +93,7 @@ export default function BlockType10({
                                         width={444}
                                         height={444}
                                         alt="Casino Image"
-                                        src={data.items_block.data_cards?.[1]?.casino_info?.casino_image || ''}
+                                        src={data.items_block.data_cards?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
                                     />
                                 </span>
                             </Link>
@@ -165,7 +165,7 @@ export default function BlockType10({
                                         width={444}
                                         height={444}
                                         alt="Casino Image"
-                                        src={data.items_block.data_cards?.[2]?.casino_info?.casino_image || ''}
+                                        src={data.items_block.data_cards?.[2]?.casino_info?.casino_image || '/img/no-results.svg'}
                                     />
                                 </span>
                             </Link>
@@ -208,7 +208,7 @@ export default function BlockType10({
                                         width={444}
                                         height={444}
                                         alt="Casino Image"
-                                        src={data.items_block.data_cards?.[3]?.casino_info?.casino_image || ''}
+                                        src={data.items_block.data_cards?.[3]?.casino_info?.casino_image || '/img/no-results.svg'}
                                     />
                                 </span>
                             </Link>

@@ -1,7 +1,7 @@
 'use client'
 
 import Icons from "@/components/wraper/Icons"
-import { QueryClient, QueryClientProvider } from "react-query"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { AdaptiveProvider } from "./AppContext"
 import { FilterProvider } from "./FilterContext"
 

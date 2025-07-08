@@ -1,8 +1,11 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
+import Image from 'next/image'
 import { BonusFilterBodyType, CasinoFilterBodyType, LoyaltiesFilterBodyType } from '@/types'
 import { sliceString } from '@/helper'
+
+type FilterInputType = CasinoFilterBodyType | BonusFilterBodyType | LoyaltiesFilterBodyType
 
 export interface MakeListFilterHeaderType {
     value: string
@@ -18,7 +21,7 @@ const BooleanValue: BooleanValueType = {
     false: 'No',
 }
 
-export const makeListFilterHeader = (o: any): MakeListFilterHeaderType[] => {
+export const makeListFilterHeader = (o: FilterInputType): MakeListFilterHeaderType[] => {
     const result: MakeListFilterHeaderType[] = []
 
     for (const [key, value] of Object.entries(o)) {
@@ -125,7 +128,7 @@ export const FilterHeaderList = ({ initList, clearAll, clearOne }: { initList: C
                                 <div className="filter-selected__btns-column filter-selected__btns-column_clear" data-da="filter-selected__bottom, 0, 650.98">
                                     <button onClick={clearAll} className="filter-selected__btn filter-selected__btn_clear">
                                         <span className="bottom-form-filters__btn-icon">
-                                            <img src="img/icons/clear-all.svg" alt="clear-all" />
+                                            <Image src="/img/icons/clear-all.svg" alt="clear-all" width={16} height={16} />
                                         </span>
                                         Clear All
                                     </button>

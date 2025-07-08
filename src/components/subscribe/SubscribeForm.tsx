@@ -67,7 +67,7 @@ export default function SubscribeForm() {
                     <div className="subscribe__row">
                         <div className="subscribe__column">
                             <Link href="/" aria-label="Put your description here." rel="noopener noreferrer" className="subscribe__logo">
-                                <img loading="lazy" src="/img/logo-icon.svg" alt="logo" />
+                                <Image src="/img/logo-icon.svg" alt="logo" width={60} height={60} />
                             </Link>
                             <div className="subscribe__content">
                                 <div className="subscribe__title">
@@ -115,12 +115,12 @@ export default function SubscribeForm() {
 
                                         {isSubscribed && (
                                             <span className="form-item__icon form-item__icon_confired">
-                                                <img loading="lazy" src="/img/icons/check-icon.svg" alt="check" />
+                                                <Image src="/img/icons/check-icon.svg" alt="check" width={20} height={20} />
                                             </span>
                                         )}
 
                                         <span className="form-item__icon form-item__icon_error">
-                                            <img loading="lazy" src="/img/icons/error-icon.svg" alt="error" />
+                                            <Image src="/img/icons/error-icon.svg" alt="error" width={20} height={20} />
                                         </span>
                                     </div>
                                     <button type="submit" className="form-subscribe__btn">

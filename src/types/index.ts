@@ -1,5 +1,3 @@
-
-
 interface MinimumDeposit {
     value: number;
     unlimited: boolean;
@@ -900,5 +898,37 @@ export interface NAMETITLECATEGORYSLUGType {
     [key: string]: {
         key: string
         value: boolean | { min: number; max: number }
+    }
+}
+
+// Loyalty Accordion типи
+export interface LoyaltyAccordionImage {
+    id: number
+    image?: string
+    alt?: string
+    width?: number
+    height?: number
+}
+
+export interface LoyaltyAccordionItem {
+    id: number
+    level?: number
+    images?: LoyaltyAccordionImage[]
+    rank?: number
+    status?: string
+    created_at?: string
+    point_accumulation?: {
+        value?: string
+        point?: number
+    }
+    cashback?: {
+        cashback_period?: string
+        percentage?: number
+    }
+    vip_manager_access?: boolean | string
+    level_up_bonus?: {
+        bonus?: string
+        wager?: number | null
+        freespins?: number | null
     }
 }

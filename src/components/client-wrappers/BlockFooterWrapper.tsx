@@ -1,10 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const BlockFooter = dynamic(() => import('@/pages-component/main-page/BlockFooter'), {
-    ssr: false
-})
+import BlockFooter from '@/pages-component/main-page/BlockFooter'
 
 export default function BlockFooterWrapper() {
     return <BlockFooter />

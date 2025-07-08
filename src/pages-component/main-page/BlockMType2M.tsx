@@ -41,7 +41,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                 <div className="top__title-block">
                                     {data?.items_block?.title_image && (
                                         <span className="top__title-icon">
-                                            <img src={data?.items_block?.title_image} alt="security" loading="lazy" />
+                                            <Image src={data?.items_block?.title_image} alt="security" width={32} height={32} />
                                         </span>
                                     )}
                                     <h2 className="top__title">{data?.items_block?.block_title}</h2>
@@ -106,7 +106,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
                                                                             alt="Casino Image"
-                                                                            src={item?.[0].casino_info.casino_image || ''}
+                                                                            src={item?.[0].casino_info.casino_image || '/img/no-results.svg'}
                                                                         />
                                                                     </span>
                                                                 </Link>
@@ -163,7 +163,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
                                                                             alt="Casino Image"
-                                                                            src={item?.[1]?.casino_info?.casino_image || ''}
+                                                                            src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                         />
                                                                     </span>
                                                                 </Link>
@@ -220,7 +220,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
                                                                             alt="Casino Image"
-                                                                            src={item?.[2]?.casino_info?.casino_image || ''}
+                                                                            src={item?.[2]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                            
                                                                         />
                                                                     </span>

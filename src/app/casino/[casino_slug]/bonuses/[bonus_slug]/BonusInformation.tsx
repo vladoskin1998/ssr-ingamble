@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 import { GetDataBonusResponse } from '@/types'
 import { AccordionItem } from '@/components/acordion/Acordion'
@@ -21,8 +22,14 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
         CountryRestrictions: false,
     })
 
+    type ModalState = {
+        BonusRestrictionGames: boolean
+        ProviderRestrictions: boolean
+        CountryRestrictions: boolean
+    }
+
     // Рефы для модалок
-    const modalRefs = {
+    const modalRefs: Record<keyof ModalState, React.RefObject<HTMLDivElement | null>> = {
         BonusRestrictionGames: useRef<HTMLDivElement | null>(null),
         ProviderRestrictions: useRef<HTMLDivElement | null>(null),
         CountryRestrictions: useRef<HTMLDivElement | null>(null),
@@ -30,8 +37,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
 
     const handleClickOutside = (event: MouseEvent): void => {
         Object.keys(modalRefs).forEach((key) => {
-            //@ts-ignore
-            const ref = modalRefs[key as keyof ModalState]?.current as any
+            const ref = modalRefs[key as keyof ModalState]?.current
             if (ref && !ref.contains(event.target as Node)) {
                 setOpenModal((prevState) => ({
                     ...prevState,
@@ -80,7 +86,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Bonus General Info</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }
@@ -187,7 +193,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element `}>
                                     <div className="top-item-bonus-information__title">Wagering Info</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }
@@ -268,7 +274,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Wagering Contribution</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }
@@ -302,7 +308,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                     <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                         <div className="top-item-bonus-information__title">Special Notes</div>
                                         <div className="top-item-bonus-information__icon">
-                                            <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                            <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                         </div>
                                     </div>
                                 }
@@ -329,7 +335,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Free Spins</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }
@@ -384,7 +390,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 >
                                     <div className="top-item-bonus-information__title">Restrictions</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }
@@ -430,7 +436,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src="/img/icons/close.svg" alt="close" />
+                                                                        <Image src="/img/icons/close.svg" alt="close" width={16} height={16} />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
@@ -487,21 +493,21 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src="/img/icons/close.svg" alt="close" />
+                                                                        <Image src="/img/icons/close.svg" alt="close" width={16} height={16} />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
                                                                     <div className="popup-item-content-bonus-information__row">
-                                                                        {data?.game_providers?.map((item) => (
-                                                                            <a
-                                                                                aria-label="Put your description here."
+                                                                        {data?.game_providers?.map((item, index) => (
+                                                                            <div
+                                                                                key={index}
                                                                                 className="popup-item-content-bonus-information__game game-popup-item-content-bonus-information popup-item-content-bonus-information__column"
                                                                             >
                                                                                 <span className="game-popup-item-content-bonus-information__icon">
-                                                                                    <img loading="lazy" src={item?.image || "/img/games/01.svg"} alt="Slots" />
+                                                                                    <Image loading="lazy" src={item?.image || "/img/games/01.svg"} alt="Slots" width={40} height={40} />
                                                                                 </span>
                                                                                 <span className="game-popup-item-content-bonus-information__name">{item.name || 'slot'}</span>
-                                                                            </a>
+                                                                            </div>
                                                                         ))}
                                                                     </div>
                                                                 </div>
@@ -548,7 +554,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                         aria-label="Put your description here."
                                                                         className="top-popup-item-content-bonus-information__btn-close info-popup-close"
                                                                     >
-                                                                        <img src="/img/icons/close.svg" alt="close" />
+                                                                        <Image src="/img/icons/close.svg" alt="close" width={16} height={16} />
                                                                     </button>
                                                                 </div>
                                                                 <div className="popup-item-content-bonus-information__content">
@@ -610,7 +616,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                 <div className={`item-bonus-information__top top-item-bonus-information accordion--title--element`}>
                                     <div className="top-item-bonus-information__title">Description</div>
                                     <div className="top-item-bonus-information__icon">
-                                        <img src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" />
+                                        <Image src="/img/icons/arrow-yellow.svg" alt="arrow-yellow" width={16} height={16} />
                                     </div>
                                 </div>
                             }

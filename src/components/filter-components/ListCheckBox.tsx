@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, memo } from "react"
 import { FixedSizeList as List } from "react-window"
 import { BonusFilterBodyType, CasinoFilterBodyType } from "@/types"
+import Image from "next/image"
 
 // Типизация для ключей, которые содержат массивы чисел
 // type NumberArrayKeys<T> = {
@@ -125,12 +126,12 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
                                     >
                                         {isImageShow && (itemFilter?.image || itemFilter?.flag_image) && (
                                             <span className="flag">
-                                                <img
+                                                <Image
                                                     loading="lazy"
-                                                    alt={itemFilter?.name}
-                                                    src={itemFilter?.image || itemFilter?.flag_image || ''}
+                                                    alt={itemFilter?.name || 'Filter item'}
+                                                    src={itemFilter?.image || itemFilter?.flag_image || '/img/no-results.svg'}
                                                     width={20}
-                                                    height="auto"
+                                                    height={20}
                                                 />
                                             </span>
                                         )}

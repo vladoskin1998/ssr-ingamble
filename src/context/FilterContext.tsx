@@ -13,9 +13,9 @@ import {
 } from '../types'
 
 import $api from '../http'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { baseURL, CURRENTYEAR } from '../helper'
-import { useRouter } from 'next/compat/router'
+import { useRouter } from 'next/navigation'
 
 export const SeeAllRoutes = {
     [DataHomeItemsBlockEnumCategory.bonus_category as DataHomeItemsBlockCategoryType]: 'bonuses',
@@ -168,7 +168,9 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
          router?.push('/')
     }
 
-    const { data } = useQuery<GetFilterDataTypeResponse>('get-datas-filter', getDatasFilter, {
+    const { data } = useQuery({
+        queryKey: ['get-datas-filter'],
+        queryFn: getDatasFilter,
         staleTime: Infinity,
     })
 

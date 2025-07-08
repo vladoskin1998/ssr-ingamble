@@ -1,13 +1,17 @@
 import { LogoLoader } from '@/components/loader/LogoLoader'
 import MainPage from '@/pages-component/main-page'
 import { Suspense } from 'react'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 export const metadata: Metadata = {
     title: 'Best Casino Bonuses 2024 | Exclusive Bonus Offers - inGamble',
     description: 'Find the best casino bonuses and exclusive offers for 2024. No deposit bonuses, welcome bonuses, and VIP rewards from top online casinos.',
     keywords: 'casino bonuses, no deposit bonus, welcome bonus, free spins, VIP rewards, casino offers, gambling bonuses',
-    viewport: 'width=device-width, initial-scale=1',
     openGraph: {
         title: 'Best Casino Bonuses 2024 | Exclusive Bonus Offers - inGamble',
         description: 'Find the best casino bonuses and exclusive offers for 2024. No deposit bonuses, welcome bonuses, and VIP rewards from top online casinos.',

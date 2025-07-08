@@ -129,7 +129,6 @@ export default function AllLoyaltyLayout({
                         </div>
                         {children}
                         <PaginationPage
-                            //@ts-ignore
                             countElem={totalPages}
                             currentPage={Number(currentPage || 1)}
                             countPageElem={10}

@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { FixedSizeList as List } from 'react-window'
 import { CasinoFilterBodyType } from '../../../types'
+import Image from 'next/image'
 
 type ListCasinoPlayersFromContentType = { id: number; name: string; name2: string | null; code: string; image: string | null }[]
 
@@ -84,7 +85,7 @@ export const CasinoPlayersFromContent =
                                         <input id={`formFilterPlayersFrom${country?.name}`} type="checkbox" checked={isChecked} className="radio-form-filter__input form-filter__input" onChange={() => checkboxItem(country?.id || 0)} />
                                         <label htmlFor={`formFilterPlayersFrom${country?.name}`} className="radio-form-filter__label">
                                             <span className="flag">
-                                                <img loading="lazy" alt={country?.name} src={country?.image || ''} width={20} height={20} />
+                                                <Image alt={country?.name || 'Country'} src={country?.image || '/img/no-results.svg'} width={20} height={20} />
                                             </span>
                                             <span>{country?.name}</span>
                                         </label>

@@ -2,7 +2,8 @@ import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 
 import { useAdaptiveBehavior } from '@/context/AppContext'
 
-import { useRouter } from 'next/compat/router'
+// ✅ ЗМІНА: Замінено next/compat/router на next/navigation для App Router
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -43,7 +44,7 @@ const ItemMainSlider = ({
                     aria-label="Put your description here."
                     className="casino-card__image"
                 >
-                    <Image fill src={item.img || ''} alt={item.casinoName} />
+                    <Image fill src={item.img || '/img/no-results.svg'} alt={item.casinoName} sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 400px" />
                 </Link>
                 {isShowPlayButton && (
                     <a
@@ -80,14 +81,14 @@ const ItemMainSlider = ({
                                 style={{ position: 'relative' }}
                                 className="info-casino-card__stake-rating-icon casino-small-card__rating-icon"
                             >
-                                <Image fill src="/img/icons/star.svg" alt="star" />
+                                <Image fill src="/img/icons/star.svg" alt="star" sizes="16px" />
                             </span>
                             <span>{item.raiting}</span>
                         </div>
                     </div>
                     <div className="info-casino-card__likes">
                         <span style={{ position: 'relative' }} className="info-casino-card__likes-icon">
-                            <Image fill src="/img/icons/like.svg" alt="like" />
+                            <Image fill src="/img/icons/like.svg" alt="like" sizes="16px" />
                         </span>
                         <span className="info-casino-card__likes-number">{sanitizeNumberLike(item?.likes || 0)}</span>
                     </div>

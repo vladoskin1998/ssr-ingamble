@@ -1,12 +1,13 @@
 import './style.css'
 import noresult from '/img/no-results.svg'
+import Image from 'next/image'
 export const NoResult = () => {
     return (
         <section className="no-results__main main-no-results">
             <div className="main-no-results__body">
                 <div className="main-no-results__content">
                     <div className="main-no-results__image">
-                        <img src={noresult} alt="no-results" />
+                        <Image src={noresult} alt="no-results" width={200} height={200} />
                     </div>
                     <div className="main-no-results__info">
                         <h1 className="main-no-results__title">No results found</h1>

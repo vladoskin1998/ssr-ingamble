@@ -100,7 +100,7 @@ export default function BlockType11({
                                                 <div className="info-deposit-top-bonuses-gamble__row">
                                                     <div className="info-deposit-top-bonuses-gamble__column">
                                                         <div className="info-deposit-top-bonuses-gamble__icon">
-                                                            <img src="/img/icons/deposit-icon.svg" alt="deposit-icon" loading="lazy" />
+                                                            <Image src="/img/icons/deposit-icon.svg" alt="deposit-icon" width={24} height={24} />
                                                         </div>
                                                         <div className="info-deposit-top-bonuses-gamble__text">{`WR: ${
                                                             typeof item?.bonus_info?.wr === 'number' ? item?.bonus_info.wr + 'X' : '-'
@@ -207,7 +207,7 @@ export default function BlockType11({
                                                 <div className="info-deposit-top-bonuses-gamble__row">
                                                     <div className="info-deposit-top-bonuses-gamble__column">
                                                         <div className="info-deposit-top-bonuses-gamble__icon">
-                                                            <img src="/img/icons/deposit-icon.svg" alt="deposit-icon" loading="lazy" />
+                                                            <Image src="/img/icons/deposit-icon.svg" alt="deposit-icon" width={24} height={24} />
                                                         </div>
                                                         <div className="info-deposit-top-bonuses-gamble__text">{`WR: ${
                                                             typeof item?.bonus_info?.wr === 'number' ? item?.bonus_info.wr + 'X' : '-'

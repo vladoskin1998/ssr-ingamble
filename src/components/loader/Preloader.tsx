@@ -1,6 +1,7 @@
 'use client'
 
 import BigLogo from '/img/preloader/preloader-1/big-logo.svg'
+import Image from 'next/image'
 
 export const PreloaderPuls = () => {
     return (
@@ -13,7 +14,7 @@ export const PreloaderPuls = () => {
                             <div className="preloader-2__circle preloader-2__circle_2"></div>
                             <div className="preloader-2__circle preloader-2__circle_3"></div>
                             <div className="preloader-2__logo">
-                                <img src={BigLogo} alt="big-logo" />
+                                <Image src={BigLogo} alt="big-logo" width={200} height={100} />
                             </div>
                         </div>
                     </div>
@@ -34,7 +35,7 @@ export const PreloaderSpin = () => {
                             <div className="preloader-3__circle-small"></div>
                             <div className="preloader-3__circle-big"></div>
                             <div className="preloader-3__logo">
-                                <img src={BigLogo} alt="big-logo" />
+                                <Image src={BigLogo} alt="big-logo" width={200} height={100} />
                             </div>
                         </div>
                     </div>

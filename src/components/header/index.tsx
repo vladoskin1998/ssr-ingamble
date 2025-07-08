@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import Link from 'next/link'
-import { useRouter } from 'next/compat/router'
+import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 
@@ -280,7 +280,7 @@ export const Header = () => {
                                                     onClick={() => handleLanguageSelect(language)}
                                                 >
                                                     <span className="list-item-dropdown-language-header__icon">
-                                                        <img alt={language.name} src={language.flag} width={20} height={20} />
+                                                        <Image alt={language.name} src={language.flag} width={20} height={20} />
                                                     </span>
                                                     <span className="list-item-dropdown-language-header__text">{language.name}</span>
                                                 </li>
@@ -465,7 +465,7 @@ export const Header = () => {
                                 // onClick={() => setIsLanguageOpen(true)}
                             >
                                 <span className="dropdown-language-header__btn-icon">
-                                    <img alt={selectedLanguage.name} src={selectedLanguage.flag} width={20} height={20} />
+                                    <Image alt={selectedLanguage.name} src={selectedLanguage.flag} width={20} height={20} />
                                 </span>
                                 <span className="dropdown-language-header__btn-text">{selectedLanguage.name}</span>
                                 <span className="dropdown-language-header__btn-arrow">
@@ -499,7 +499,7 @@ export const Header = () => {
                                                     className={`dropdown__list-item dropdown-language-header__list-item list-item-dropdown-language-header ${item.code === selectedLanguage.code && 'active'}`}
                                                 >
                                                     <span className="list-item-dropdown-language-header__icon">
-                                                        <img src={item.flag} loading="lazy" width="20" height="20" alt={item.name} />
+                                                        <Image src={item.flag} loading="lazy" width={20} height={20} alt={item.name} />
                                                     </span>
                                                     <span className="list-item-dropdown-language-header__text">{item.name}</span>
                                                 </li>

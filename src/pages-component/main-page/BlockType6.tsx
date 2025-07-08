@@ -81,7 +81,7 @@ export default function BlockType6({
                             <div className="top__title-block">
                                 {data.items_block.title_image && data.items_block.type_block === BlockTypeNumber.BlockType6 && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" />
+                                        <Image src={data.items_block.title_image} alt="security" width={400} height={250} />
                                     </span>
                                 )}
                                 <h2 className="top__title">
@@ -166,7 +166,7 @@ export default function BlockType6({
                                                             width={444}
                                                             height={444}
                                                             alt="Casino Image"
-                                                            src={item.bonus_info.bonus_image || ''}
+                                                            src={item.bonus_info.bonus_image || '/img/no-results.svg'}
                                                         />
                                                     </Link>
                                                     {isShowPlayButton && (
@@ -204,7 +204,7 @@ export default function BlockType6({
                                                                     width={444}
                                                                     height={444}
                                                                     alt="Casino Image"
-                                                                    src={item.casino_info.casino_image || ''}
+                                                                    src={item.casino_info.casino_image || '/img/no-results.svg'}
                                                                 />
                                                             </Link>
                                                         </div>

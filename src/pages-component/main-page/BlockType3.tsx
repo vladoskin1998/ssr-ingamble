@@ -29,22 +29,27 @@ export default function BlockType3({
     const [screenState, setScreenState] = useState<number | 'auto'>('auto')
 
     useEffect(() => {
+        // ✅ ЗМІНА: Додав SSR перевірку для window.innerWidth
         const handleResize = () => {
-            const width = window.innerWidth
-            if (width < 1020) {
-                setScreenState('auto')
-            } else if (width < 1220) {
-                setScreenState(1)
-            } else if (width < 1600) {
-                setScreenState(2)
-            } else if (width > 2100) {
-                setScreenState(3)
+            if (typeof window !== 'undefined') {
+                const width = window.innerWidth
+                if (width < 1020) {
+                    setScreenState('auto')
+                } else if (width < 1220) {
+                    setScreenState(1)
+                } else if (width < 1600) {
+                    setScreenState(2)
+                } else if (width > 2100) {
+                    setScreenState(3)
+                }
             }
         }
         handleResize()
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
+        if (typeof window !== 'undefined') {
+            window.addEventListener('resize', handleResize)
+            return () => {
+                window.removeEventListener('resize', handleResize)
+            }
         }
     }, [])
 
@@ -78,7 +83,7 @@ export default function BlockType3({
                                 <div className="top__title-block">
                                     {data.items_block.title_image && (
                                         <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                            <img src={data.items_block.title_image} alt="security" />
+                                            <Image src={data.items_block.title_image} alt="security" width={400} height={250} />
                                         </span>
                                     )}
                                     <h2 className="top__title">{data?.items_block?.block_title}</h2>
@@ -143,7 +148,7 @@ export default function BlockType3({
                                                                                 width={444}
                                                                                 height={444}
                                                                                 alt="Casino Image"
-                                                                                src={item?.[0]?.casino_info?.casino_image || ''}
+                                                                                src={item?.[0]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                             />
                                                                         </Link>
                                                                     </div>
@@ -214,7 +219,7 @@ export default function BlockType3({
                                                                                     width={444}
                                                                                     height={444}
                                                                                     alt="Casino Image"
-                                                                                    src={item?.[1]?.casino_info?.casino_image || ''}
+                                                                                    src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                                 />
                                                                             </Link>
                                                                         </div>
@@ -335,7 +340,7 @@ export default function BlockType3({
                                                                             width={444}
                                                                             height={444}
                                                                             alt="Casino Image"
-                                                                            src={item?.bonus_info?.bonus_image || ''}
+                                                                            src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
                                                                         />
                                                                     </Link>
                                                                     <div className="item-baner-row-block__row">
@@ -350,7 +355,7 @@ export default function BlockType3({
                                                                                             width={444}
                                                                                             height={444}
                                                                                             alt="Casino Image"
-                                                                                            src={item?.casino_info?.casino_image || ''}
+                                                                                            src={item?.casino_info?.casino_image || '/img/no-results.svg'}
                                                                                         />
                                                                                     </div>
                                                                                 </Link>

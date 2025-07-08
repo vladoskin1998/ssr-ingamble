@@ -6,6 +6,7 @@ import { getTagColorByindex, shuffleArray } from '@/helper'
 import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 import { useMemo } from 'react'
+import Image from 'next/image'
 
 export default function BlockType8({
     data,
@@ -28,7 +29,7 @@ export default function BlockType8({
                             <div className="top__title-block">
                                 {data.items_block.title_image && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" />
+                                        <Image src={data.items_block.title_image} alt="security" width={32} height={32} />
                                     </span>
                                 )}
                                 <h2 className="top__title">{data.items_block.block_title}</h2>

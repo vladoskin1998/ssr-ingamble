@@ -11,7 +11,7 @@ export const HarryStyles = ({ img, title, subtitle }: { img: string; title: stri
                         <div className="casino-person__row">
                             <div className="casino-person__info info-casino-person">
                                 <div className="info-casino-person__img">
-                                    <img src={img} alt="HARRY STYLES" />
+                                    <Image src={img} alt="HARRY STYLES" width={200} height={200} />
                                 </div>
                                 <div className="info-casino-person__content">
                                     <h3 className="info-casino-person__name h3">{title}</h3>

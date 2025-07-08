@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext, useEffect, ReactNode, useState, useMemo, useCallback } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { AllCategoriesHomeDataResponse, DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '../types'
 import $api from '../http';
@@ -131,16 +131,16 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
 
 
 
-    const { data: dataCategories } = useQuery<AllCategoriesHomeDataResponse>('get-data-home-page-categories/', getDataHomePageCategories, {
-    
+    const { data: dataCategories } = useQuery({
+        queryKey: ['get-data-home-page-categories/'],
+        queryFn: getDataHomePageCategories,
         staleTime: Infinity,
-        cacheTime: 1000 * 60 * 100,
     })
 
-      const { data: isTogglePlay } = useQuery<{id: number, is_play: boolean}>('get-toggle-play/', getTogglePlay, {
-        
-          staleTime: Infinity,
-          cacheTime: 1000 * 60 * 100,
+      const { data: isTogglePlay } = useQuery({
+        queryKey: ['get-toggle-play/'],
+        queryFn: getTogglePlay,
+        staleTime: Infinity,
       })
 
     

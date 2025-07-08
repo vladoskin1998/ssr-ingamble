@@ -1,5 +1,5 @@
 'use client'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -18,8 +18,9 @@ const getFilteringLoyaltiesList = async () => {
 }
 
 export const EssentialVIPLoyaltyPrograms = () => {
-    const { data: LoyaltieDataHigh } = useQuery<LoyaltyInRankRangeResponse[]>(['loyalty-programs-in-rank-range/'], () => getFilteringLoyaltiesList(), {
-        keepPreviousData: true,
+    const { data: LoyaltieDataHigh } = useQuery({
+        queryKey: ['loyalty-programs-in-rank-range/'],
+        queryFn: () => getFilteringLoyaltiesList(),
         staleTime: Infinity,
     })
 
@@ -70,7 +71,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                 }}
                                 className="slider__wrapper swiper-wrapper"
                             >
-                                {LoyaltieDataHigh?.map((item, index) => (
+                                {LoyaltieDataHigh?.map((item: LoyaltyInRankRangeResponse, index: number) => (
                                     <SwiperSlide key={index}>
                                         <div
                                             className="slide-slider__item essential-programs-gamble__item item-essential-programs-gamble"
@@ -81,7 +82,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                     aria-label="Put your description here."
                                                     className="item-essential-programs-gamble__logo"
                                                 >
-                                                    <Image src={item.card_logo || ''} alt={'card_logo'} width={444} height={444} />
+                                                    <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
                                                 </Link>
                                             </div>
                                             <div className="item-essential-programs-gamble__body">
@@ -152,7 +153,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                     {item.keypoints.map((itp, idk) => (
                                                         <div className="features-essential-programs-gamble__item" key={idk}>
                                                             <div className="features-essential-programs-gamble__icon">
-                                                                <Image width={444} height={444} src={itp.image || ''} alt="medium" />
+                                                                <Image width={444} height={444} src={itp.image || '/img/no-results.svg'} alt="medium" />
                                                             </div>
                                                             <div className="features-essential-programs-gamble__info">
                                                                 <div className="features-essential-programs-gamble__name">{itp.text_1}</div>

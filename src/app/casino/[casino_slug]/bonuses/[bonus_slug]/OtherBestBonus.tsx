@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
+'use client'
 
 import MainSlider from '@/components/swiper/MainSlider'
 import $api from '@/http'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { BonusInRankRangeResponse } from '@/types'
-import {  getTagColorByindex, shuffleArray } from '@/helper'
-
+import { getTagColorByindex, shuffleArray } from '@/helper'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -17,10 +16,9 @@ const getFilteringBonusList = async () => {
     return response.data
 }
 
-//@ts-ignore
 export const OtherBestReloadBonus = ({ casinoName }: { casinoName?: string }) => {
-       const params = useParams()
-       const bonus_slug = Array.isArray(params.bonus_slug) ? params.bonus_slug[0] : params.bonus_slug
+    const params = useParams()
+    const bonus_slug = Array.isArray(params.bonus_slug) ? params.bonus_slug[0] : params.bonus_slug
 
     const [slug, setSlug] = useState<string>(bonus_slug || '')
 
@@ -29,8 +27,10 @@ export const OtherBestReloadBonus = ({ casinoName }: { casinoName?: string }) =>
             setSlug(bonus_slug)
         }
     }, [bonus_slug])
-    const { data: BonusDataHigh } = useQuery<BonusInRankRangeResponse[]>(['bonuses-in-rank-range/'], () => getFilteringBonusList(), {
-        keepPreviousData: true,
+    
+    const { data: BonusDataHigh } = useQuery({
+        queryKey: ['bonuses-in-rank-range/'],
+        queryFn: () => getFilteringBonusList(),
         staleTime: Infinity,
     })
 
@@ -58,33 +58,31 @@ export const OtherBestReloadBonus = ({ casinoName }: { casinoName?: string }) =>
                         </div>
                     </div>
                     <MainSlider
-                        data={shuffleArray(BonusDataHigh?.filter((item) => item.bonus_slug !== slug))
-                            ?.slice(0, 10)
-                            .map((b: BonusInRankRangeResponse) => ({
-                                img: b?.bonus_image || '',
-                                raiting: b?.casino_rank,
-                                likes: b?.bonus_likes,
-                                casinoName: b?.casino_name,
-                                bonuseName: b?.bonus_name,
-                                imageLink: `/casino/${b?.casino_slug}/bonuses/${b?.bonus_slug}`,
-                                playLink: b?.casino_affiliate_link || b?.url_casino,
-                                casinoLink: `/casino/${b?.casino_slug}`,
-                                bonuseLink: b?.bonus_type === null ? '' : `/casino/${b?.casino_slug}/bonuses/${b?.bonus_slug}`,
+                        data={(BonusDataHigh?.filter((item: BonusInRankRangeResponse) => item.bonus_slug !== slug) || [])
+                            .slice(0, 10)
+                            .map((bonus: BonusInRankRangeResponse) => ({
+                                img: bonus?.bonus_image || '',
+                                raiting: bonus?.casino_rank,
+                                likes: bonus?.bonus_likes,
+                                casinoName: bonus?.casino_name,
+                                bonuseName: bonus?.bonus_name,
+                                imageLink: `/casino/${bonus?.casino_slug}/bonuses/${bonus?.bonus_slug}`,
+                                playLink: bonus?.casino_affiliate_link || bonus?.url_casino,
+                                casinoLink: `/casino/${bonus?.casino_slug}`,
+                                bonuseLink: bonus?.bonus_type === null ? '' : `/casino/${bonus?.casino_slug}/bonuses/${bonus?.bonus_slug}`,
                                 tags: (
                                     <>
-                                        {typeof b !== 'string'
-                                            ? b?.labels
-                                                  ?.sort((a, b) => {
-                                                      const labelA = typeof a === 'string' ? a : a?.name || ''
-                                                      const labelB = typeof b === 'string' ? b : b?.name || ''
-                                                      return labelA.localeCompare(labelB)
-                                                  })
-                                                  .map((l, ct) => (
-                                                      <div key={ct} className={`tags-casino-card__item ${getTagColorByindex(ct)}`}>
-                                                          <span className="tags-casino-card__item-label">{typeof l !== 'string' && 'name' in l ? l?.name : ''}</span>
-                                                      </div>
-                                                  ))
-                                            : []}
+                                        {bonus?.labels
+                                            ?.sort((a: any, b: any) => {
+                                                const labelA = typeof a === 'string' ? a : a?.name || ''
+                                                const labelB = typeof b === 'string' ? b : b?.name || ''
+                                                return labelA.localeCompare(labelB)
+                                            })
+                                            .map((l: any, ct: number) => (
+                                                <div key={ct} className={`tags-casino-card__item ${getTagColorByindex(ct)}`}>
+                                                    <span className="tags-casino-card__item-label">{typeof l !== 'string' && 'name' in l ? l?.name : ''}</span>
+                                                </div>
+                                            ))}
                                     </>
                                 ),
                             }))}

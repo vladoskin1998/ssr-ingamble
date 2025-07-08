@@ -31,7 +31,7 @@ const BlockType9 = memo(function BlockType9({
                             <div className="top__title-block">
                                 {data.items_block.title_image && (
                                     <span className="top__title-icon ibg--custom ibg--custom-width-auto">
-                                        <img src={data.items_block.title_image} alt="security" />
+                                        <Image src={data.items_block.title_image} alt="security" width={400} height={250} />
                                     </span>
                                 )}
 
@@ -103,7 +103,7 @@ const BlockType9 = memo(function BlockType9({
                                                         style={{ position: 'relative' }}
                                                         className="item-essential-programs-gamble__provider-rating-star"
                                                     >
-                                                        <Image fill src="/img/icons/star.svg" alt="star" />
+                                                        <Image fill src="/img/icons/star.svg" alt="star" sizes="20px" />
                                                     </span>
                                                     <span className="item-essential-programs-gamble__provider-rating-number">
                                                         {item.casino_rank}
@@ -111,7 +111,7 @@ const BlockType9 = memo(function BlockType9({
                                                 </span>
                                                 <div className="info-casino-card__likes">
                                                     <span style={{position:'relative'}} className="info-casino-card__likes-icon">
-                                                        <Image fill src="/img/icons/like.svg" alt="like" />
+                                                        <Image fill src="/img/icons/like.svg" alt="like" sizes="20px" />
                                                     </span>
                                                     <span className="info-casino-card__likes-number">
                                                         {sanitizeNumberLike(item?.loyalty_likes)}
@@ -134,7 +134,7 @@ const BlockType9 = memo(function BlockType9({
                                                                             key={idstar}
                                                                             className="value-item-stats-essential-programs-gamble__star"
                                                                         >
-                                                                            <Image fill src="/img/icons/star.svg" alt="star" />
+                                                                            <Image fill src="/img/icons/star.svg" alt="star" sizes="16px" />
                                                                         </div>
                                                                     ))}
                                                                 </div>
