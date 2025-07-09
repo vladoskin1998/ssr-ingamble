@@ -1,0 +1,20 @@
+/* CSS для роботи з footer-cls-fix.js - оновлено для сумісності з React */
+
+/* Початково приховуємо футер */
+.footer {
+  opacity: 0;
+  visibility: hidden;
+  transition: none;
+}
+
+/* Показуємо футер після завантаження контенту */
+.footer.footer-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Запобігає CLS - резервуємо мінімальну висоту */
+.gamble__body {
+  min-height: 100vh;
+}

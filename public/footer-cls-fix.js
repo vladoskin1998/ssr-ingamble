@@ -1,17 +1,22 @@
 // Footer CLS Prevention Script
 // Shows footer only after main content has loaded to prevent layout shifts
+// Модифіковано для роботи з React гідратацією
 
 (function() {
     'use strict';
     
+    // Використовуємо унікальні класи, які не будуть конфліктувати з гідратацією
     function showFooter() {
-        document.body.classList.add('loaded');
-        document.documentElement.classList.add('loaded');
-        
-        const footer = document.querySelector('.footer');
-        if (footer) {
-            footer.classList.add('loaded');
-        }
+        // Запускаємо з затримкою, щоб дати React закінчити гідратацію
+        setTimeout(function() {
+            document.body.classList.add('footer-visible');
+            document.documentElement.classList.add('footer-visible');
+            
+            const footer = document.querySelector('.footer');
+            if (footer) {
+                footer.classList.add('footer-visible');
+            }
+        }, 50);
     }
     
     function checkContentLoaded() {
@@ -70,6 +75,6 @@
         if (window.React || window.__NEXT_DATA__) {
             showFooter();
         }
-    }, 200);
+    }, 300);
     
 })();
