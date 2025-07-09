@@ -8,20 +8,25 @@ const dinamicAdapt = (
     match_media: MediaQueryList[],
     parents_original: ParentOriginal[]
 ) => {
-    match_media.forEach((mediaQuery, i) => {
-        const [className, index] = attr_elements[i].split(', ');
-        const element = document.querySelector(`.${className}`);
-        const targetIndex = parseInt(index, 10);
+    // Add requestAnimationFrame to reduce layout thrashing
+    requestAnimationFrame(() => {
+        match_media.forEach((mediaQuery, i) => {
+            const [className, index] = attr_elements[i].split(', ');
+            const element = document.querySelector(`.${className}`);
+            const targetIndex = parseInt(index, 10);
 
-        if (mediaQuery.matches && element) {
-            const childElement = element.children[targetIndex];
-            if (childElement) {
-                element.insertBefore(da_elements[i], childElement);
+            if (mediaQuery.matches && element) {
+                const childElement = element.children[targetIndex];
+                if (childElement && da_elements[i].parentElement !== element) {
+                    element.insertBefore(da_elements[i], childElement);
+                }
+            } else {
+                const { parent, index } = parents_original[i];
+                if (da_elements[i].parentElement !== parent) {
+                    parent.insertBefore(da_elements[i], parent.children[index]);
+                }
             }
-        } else {
-            const { parent, index } = parents_original[i];
-            parent.insertBefore(da_elements[i], parent.children[index]);
-        }
+        });
     });
 };
 

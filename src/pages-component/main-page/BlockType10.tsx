@@ -17,7 +17,7 @@ export default function BlockType10({
     isAutoPlay?: boolean
 }) {
     return (
-        <section aria-label="BlockType10" className="main-gamble__best-casinos-2024-2 best-casinos-2024-2-gamble">
+        <section aria-label="BlockType10" className="main-gamble__best-casinos-2024-2 best-casinos-2024-2-gamble" style={{ marginTop: '59px', marginBottom: '60px' }}>
             <div className="best-casinos-2024-2-gamble__container container">
                 <div className="low-wager-bonuses-gamble__top top">
                     <div className="top__row">
@@ -133,7 +133,19 @@ export default function BlockType10({
                             <span></span>
                         </div>
                         <div className={`best-casinos-2024-2-gamble__girl`}>
-                            <Image width={320} height={380} src="/img/girls/02.webp" alt="girl" loading="lazy" />
+                            <Image 
+                                fill 
+                                src="/img/girls/02.webp" 
+                                alt="girl" 
+                                loading="lazy"
+                                sizes="(max-width: 768px) 225px, (max-width: 1355px) 320px, (max-width: 1425px) 320px, (max-width: 1650px) 245px, 290px"
+                                style={{
+                                    objectFit: 'contain',
+                                    objectPosition: 'bottom center',
+                                    width: '100%',
+                                    height: '100%'
+                                }}
+                            />
                         </div>
                         <div className={`best-casinos-2024-2-gamble__content `}>
                             <div className="best-casinos-2024-2-gamble__text">

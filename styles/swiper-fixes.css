@@ -1,0 +1,41 @@
+/* Fix for Swiper pagination */
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.2;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #fa9901;
+  transform: scale(1.2);
+}
+
+.bottom-slider__pagination {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 10;
+  position: relative;
+}
+
+/* Ensure pagination is visible on mobile */
+@media (max-width: 767.98px) {
+  .slider__bottom {
+    margin-top: 10px;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    margin: 0 4px;
+  }
+}

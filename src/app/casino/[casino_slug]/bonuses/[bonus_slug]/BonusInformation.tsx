@@ -417,8 +417,9 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                             See all
                                                         </button>
                                                         <div
-                                                            className={`item-content-bonus-information__popup popup-item-content-bonus-information accordion--title--element ${openModal.BonusRestrictionGames && 'active'}`}
+                                                            className={`item-content-bonus-information__popup popup-item-content-bonus-information ${openModal.BonusRestrictionGames && 'active'}`}
                                                             ref={modalRefs.BonusRestrictionGames}
+                                                            style={{ zIndex: 100 }}
                                                         >
                                                             <div className="popup-item-content-bonus-information__body">
                                                                 <div className="popup-item-content-bonus-information__top top-popup-item-content-bonus-information">
@@ -476,7 +477,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                         >
                                                             See all
                                                         </button>
-                                                        <div className={`item-content-bonus-information__popup popup-item-content-bonus-information ${openModal.ProviderRestrictions && 'active'}`} ref={modalRefs.ProviderRestrictions}>
+                                                        <div className={`item-content-bonus-information__popup popup-item-content-bonus-information ${openModal.ProviderRestrictions && 'active'}`} ref={modalRefs.ProviderRestrictions} style={{ zIndex: 100 }}>
                                                             <div className="popup-item-content-bonus-information__body">
                                                                 <div className="popup-item-content-bonus-information__top top-popup-item-content-bonus-information">
                                                                     <div className="top-popup-item-content-bonus-information__title">
@@ -537,7 +538,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                         >
                                                             See all
                                                         </button>
-                                                        <div className={`item-content-bonus-information__popup popup-item-content-bonus-information ${openModal?.CountryRestrictions && 'active'}`} ref={modalRefs?.CountryRestrictions}>
+                                                        <div className={`item-content-bonus-information__popup popup-item-content-bonus-information ${openModal?.CountryRestrictions && 'active'}`} ref={modalRefs?.CountryRestrictions} style={{ zIndex: 100 }}>
                                                             <div className="popup-item-content-bonus-information__body">
                                                                 <div className="popup-item-content-bonus-information__top top-popup-item-content-bonus-information">
                                                                     <div className="top-popup-item-content-bonus-information__title">

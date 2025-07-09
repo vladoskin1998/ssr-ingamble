@@ -113,6 +113,9 @@ export default function BlockType4Mobile({
                                                                 height={444}
                                                                 alt="Casino Image"
                                                                 src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
+                                                                priority={index === 0}
+                                                                loading={index === 0 ? 'eager' : 'lazy'}
+                                                                sizes="(max-width: 768px) 90vw, 320px"
                                                             />
                                                         </Link>
                                                         {isShowPlayButton && (
@@ -148,6 +151,9 @@ export default function BlockType4Mobile({
                                                                         height={444}
                                                                         alt="Casino Image"
                                                                         src={item?.casino_info?.casino_image || '/img/no-results.svg'}
+                                                                        priority={index === 0}
+                                                                        loading={index === 0 ? 'eager' : 'lazy'}
+                                                                        sizes="(max-width: 768px) 50px, 64px"
                                                                     />
                                                                 </div>
                                                             </Link>

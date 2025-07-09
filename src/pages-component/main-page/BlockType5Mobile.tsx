@@ -41,7 +41,20 @@ export default function BlockType5Mobile({
                         <span></span>
                     </div>
                     <div className={`best-casinos-2024-gamble__girl ${isScrolled && 'scrolled'}`}>
-                        <Image width={170} height={210} src="/img/girls/01.webp" alt="girl" loading="lazy" />
+                        <Image 
+                            width={357} 
+                            height={440} 
+                            src="/img/girls/01.webp" 
+                            alt="girl" 
+                            loading="lazy"
+                            sizes="(max-width: 480px) 170px, (max-width: 1000px) 196px, (max-width: 1355px) 274px, (max-width: 1650px) 300px, 357px"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'center bottom'
+                            }}
+                        />
                     </div>
                     <div className={`best-casinos-2024-gamble__slider slider-best-casinos-2024-gamble ${isScrolled && 'scrolled'}`}>
                         <div className="slider-best-casinos-2024-gamble__top top">

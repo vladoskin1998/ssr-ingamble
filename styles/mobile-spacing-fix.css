@@ -1,0 +1,20 @@
+/* Mobile spacing fixes for adjacent blocks */
+@media (max-width: 767.98px) {
+  /* Add margin between consecutive best-live-dealer-casinos-gamble__body blocks */
+  .best-live-dealer-casinos-gamble__body + .best-live-dealer-casinos-gamble__body,
+  .best-live-dealer-casinos-gamble_mobile + .best-live-dealer-casinos-gamble,
+  section.best-live-dealer-casinos-gamble + section.best-live-dealer-casinos-gamble,
+  div.best-live-dealer-casinos-gamble__row + div.best-live-dealer-casinos-gamble__row {
+    margin-top: 40px;
+  }
+
+  /* Add margin for the specific section */
+  .best-live-dealer-casinos-gamble_mobile {
+    margin-bottom: 40px;
+  }
+
+  /* Fix for specific layout in mobile view */
+  .main-gamble__body > div + div {
+    margin-top: 20px;
+  }
+}

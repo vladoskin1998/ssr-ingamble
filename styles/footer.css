@@ -3,35 +3,53 @@ footer{
 }
 
 .footer {
+    /* Default state - DO NOT CHANGE - CLS fixes override this */
     width: calc(100% - 80px);
-    transform: translate(80px, 0);
+    margin-left: 80px;
+    contain: layout style paint;
+    min-height: 600px;
+    will-change: auto;
+    transition: none;
+    position: relative;
   }
+  
   @media (max-width: 650.98px) {
     .footer {
       width: 100%;
-      transform: translate(0, 0);
+      margin-left: 0;
+      min-height: 500px;
     }
   }
+  
   .footer.resize {
+    /* Resize state - DO NOT CHANGE - CLS fixes override this */
     width: calc(100% - 350px);
-    transform: translate(350px, 0);
+    margin-left: 350px;
+    min-height: 600px;
+    transition: none;
   }
+  
   @media (max-width: 1650.98px) {
     .footer.resize {
-      transform: translate(320px, 0);
+      margin-left: 320px;
       width: calc(100% - 320px);
+      min-height: 600px;
     }
   }
+  
   @media (max-width: 1355.98px) {
     .footer.resize {
       width: calc(100% - 80px);
-      transform: translate(80px, 0);
+      margin-left: 80px;
+      min-height: 600px;
     }
   }
+  
   @media (max-width: 650.98px) {
     .footer.resize {
       width: 100%;
-      transform: translate(0, 0);
+      margin-left: 0;
+      min-height: 500px;
     }
   }
   @media (max-width: 1650.98px) {
@@ -183,6 +201,7 @@ footer{
   
 .top-footer {
     background: linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, #1E1E1E 100%);
+    min-height: 400px;
   }
   .top-footer__socials-block {
     padding: 60px 0 40px 0;
@@ -214,6 +233,8 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 40px 0 0 0;
+    contain: content;
+    min-height: 300px;
   }
   @media (max-width: 1820.98px) {
     .menu-footer {
@@ -644,6 +665,8 @@ footer{
   .bottom-footer {
     background-color: #111111;
     padding: 60px 0 40px 0;
+    contain: content;
+    min-height: 200px;
   }
   @media (max-width: 480.98px) {
     .bottom-footer {
@@ -674,6 +697,8 @@ footer{
     font-weight: 500;
     line-height: 17.76px;
     color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+    contain: content;
+    min-height: 80px;
   }
   .bottom-footer__text:not(:last-child) {
     margin: 0 0 40px 0;
@@ -697,6 +722,8 @@ footer{
     font-weight: 500;
     line-height: 17.76px;
     color: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
+    contain: content;
+    min-height: 20px;
   }
   .bottom-footer__copyright p:not(:last-child) {
     margin: 0 0 20px 0;
@@ -718,6 +745,8 @@ footer{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    contain: size layout;
+    min-height: 60px;
   }
   .logos-bottom-footer__column {
     margin: 0 16px 12px 0;
@@ -726,6 +755,8 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 50px;
+    min-height: 30px;
   }
   .casino-person__socials .socials-top-footer__item {
     margin-bottom: 0;

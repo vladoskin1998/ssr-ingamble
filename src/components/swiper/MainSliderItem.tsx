@@ -9,8 +9,8 @@ import Image from 'next/image'
 
 const ItemMainSlider = ({
     item,
-
     isShowPlayButton,
+    index = 0,
 }: {
     item: {
         img: string | null
@@ -24,8 +24,8 @@ const ItemMainSlider = ({
         casinoLink?: string
         bonuseLink?: string
     }
-
     isShowPlayButton: boolean
+    index?: number
 }) => {
     const router = useRouter()
 
@@ -44,7 +44,14 @@ const ItemMainSlider = ({
                     aria-label="Put your description here."
                     className="casino-card__image"
                 >
-                    <Image fill src={item.img || '/img/no-results.svg'} alt={item.casinoName} sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 400px" />
+                    <Image 
+                        fill 
+                        src={item.img || '/img/no-results.svg'} 
+                        alt={item.casinoName} 
+                        sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 400px"
+                        priority={index === 0}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                    />
                 </Link>
                 {isShowPlayButton && (
                     <a

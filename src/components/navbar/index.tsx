@@ -70,30 +70,30 @@ const Navbar = () => {
     useLayoutEffect(() => {
         const sidebarGamble = document.querySelector('.sidebar-gamble') as HTMLElement
 
-        const header = document.querySelector('.header') as HTMLElement
-        const footer = document.querySelector('.footer') as HTMLElement
-        const main = document.querySelector('main') as HTMLElement
-
         if (sidebarGamble) {
             sidebarGamble.classList.toggle('active', isSidebarActive)
         }
-        // if (gambleBody && window.innerWidth <= 650.98) {
-        //     gambleBody.classList.toggle("hide", isGambleBodyHidden)
-        // }
 
-        if (header && window.innerWidth > 650.98) {
-            header?.classList.toggle('resize', isSidebarActive)
-        }
-        if (footer && window.innerWidth > 650.98) {
-            footer?.classList.toggle('resize', isSidebarActive)
-        }
-        if (main && window.innerWidth > 650.98) {
-            main?.classList.toggle('resize', isSidebarActive)
-        }
+        // Use CSS variables instead of class manipulation to prevent CLS
+        requestAnimationFrame(() => {
+            // Set CSS variable on body for sidebar state
+            document.body.classList.toggle('sidebar-active', isSidebarActive)
+            
+            // Keep original logic for compatibility but with reduced CLS impact
+            const header = document.querySelector('.header') as HTMLElement
+            const footer = document.querySelector('.footer') as HTMLElement
+            const main = document.querySelector('main') as HTMLElement
+            
+            if (window.innerWidth > 650.98) {
+                if (header) header.classList.toggle('resize', isSidebarActive)
+                if (footer) footer.classList.toggle('resize', isSidebarActive)
+                if (main) main.classList.toggle('resize', isSidebarActive)
+            }
+        })
+        
         if (!isSidebarActive) {
             setIsDefaultOpen(() => '')
         }
-        // initializeAdaptiveBehavior()
     }, [isSidebarActive, isGambleBodyHidden])
 
     const handleFilterOpenBtnClick = (event: React.MouseEvent, s: DefaultOpenType) => {

@@ -150,13 +150,13 @@ const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlo
             )
         case BlockTypeNumber.BlockType11:
             return <BlockType11 data={block as HomeDataBlock<DataHomeItemsBlock>} />
-        default:
-            return (
-                <div style={{ padding: '20px', backgroundColor: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '8px', margin: '10px 0' }}>
-                    <h3>Невідомий тип блоку</h3>
-                    <p>Блок #{index + 1} не може бути відображений</p>
-                </div>
-            )
+        // default:
+        //     return (
+        //         <div style={{ padding: '20px', backgroundColor: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '8px', margin: '10px 0' }}>
+        //             <h3>Невідомий тип блоку</h3>
+        //             <p>Блок #{index + 1} не може бути відображений</p>
+        //         </div>
+        //     )
     }
 }
 

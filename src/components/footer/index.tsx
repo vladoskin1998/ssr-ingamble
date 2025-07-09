@@ -370,17 +370,17 @@ export default function Footer() {
                             </li>
                         </ul>
                     </nav>
-                    <div className="top-footer__socials-block">
+                    <div className="top-footer__socials-block" style={{ minHeight: '120px' }}>
                         <a href="" target="_blank" className="footer__logo logo">
                             <div className="logo__img">
-                                <Image src="/img/logo-ingamble.svg" alt="logo" width={140} height={25} />
+                                <Image src="/img/logo-ingamble.svg" alt="logo" width={140} height={25} loading="lazy" />
                             </div>
                             <div className="logo__text">IN GAMBLE WE TRUST</div>
                         </a>
                         <div className="top-footer__socials socials-top-footer">
-                            <div className="socials-top-footer__label" data-da="top-footer__socials-block, 1, 1355.98">
+                            <div className="socials-top-footer__label" data-da-disabled="top-footer__socials-block, 1, 1355.98">
                                 <div className="socials-top-footer__label-icon">
-                                    <Image src="/img/icons/socials-icon.svg" alt="socials-icon" width={28} height={30} />
+                                    <Image src="/img/icons/socials-icon.svg" alt="socials-icon" width={28} height={30} loading="lazy" />
                                 </div>
                                 <div className="socials-top-footer__label-text">
                                     You need help?

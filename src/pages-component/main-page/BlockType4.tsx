@@ -116,6 +116,9 @@ export default function BlockType4({
                                                                 height={444}
                                                                 alt="Casino Image"
                                                                 src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
+                                                                priority={index === 0}
+                                                                loading={index === 0 ? 'eager' : 'lazy'}
+                                                                sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 400px"
                                                             />
                                                         </Link>
                                                         <div className="casino-big-card__top">
@@ -131,6 +134,9 @@ export default function BlockType4({
                                                                             height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.casino_info?.casino_image || '/img/no-results.svg'}
+                                                                            priority={index === 0}
+                                                                            loading={index === 0 ? 'eager' : 'lazy'}
+                                                                            sizes="(max-width: 768px) 50px, 64px"
                                                                         />
                                                                     </div>
                                                                 </Link>

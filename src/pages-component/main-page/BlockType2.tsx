@@ -141,6 +141,8 @@ export default function BlockType2({
                                                                                         height={444}
                                                                                         alt="Casino Image"
                                                                                         src={item?.casino_info?.casino_image || '/img/no-results.svg'}
+                                                                                        loading="lazy"
+                                                                                        sizes="(max-width: 768px) 100px, (max-width: 1024px) 120px, 150px"
                                                                                     />
                                                                                 </Link>
                                                                             </div>
@@ -271,6 +273,8 @@ export default function BlockType2({
                                                                     height={444}
                                                                     alt="Casino Image"
                                                                     src={item.casino_info.casino_image || '/img/no-results.svg'}
+                                                                    loading="lazy"
+                                                                    sizes="(max-width: 768px) 200px, (max-width: 1024px) 250px, 300px"
                                                                 />
                                                             </span>
                                                         </Link>

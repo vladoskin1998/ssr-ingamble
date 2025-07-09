@@ -1,0 +1,113 @@
+/* ====================================
+   LCP OPTIMIZATION FOR CASINO IMAGES
+   ==================================== */
+
+/* Critical: Optimize container performance for casino images */
+.main-casino-info__image-block img,
+.casino-big-card__image img,
+.name-main-casino-info__logo img,
+.main-casino-info__image img {
+  /* Prevent layout shifts while loading */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  
+  /* Force GPU acceleration for smooth rendering */
+  transform: translateZ(0) !important;
+  will-change: auto !important;
+}
+
+/* LCP CRITICAL: First above-the-fold images */
+.casino-big-card:first-child .casino-big-card__image img,
+.casino-card:first-child .casino-card__image img {
+  /* Immediate paint for LCP */
+  image-rendering: auto !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  backface-visibility: hidden !important;
+  
+  /* Priority containment */
+  contain: layout style paint !important;
+}
+
+/* Specific optimization for the main casino logo (LCP candidate) */
+.name-main-casino-info__logo img {
+  /* Prevent any render delay */
+  image-rendering: auto !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  
+  /* Ensure immediate paint */
+  contain: layout style paint !important;
+}
+
+/* Casino card images optimization */
+.casino-card__image img,
+.different-casino-big__image img,
+.different-casino-medium__image img {
+  /* Stable dimensions */
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Image block container optimization */
+.main-casino-info__image-block,
+.casino-big-card__image,
+.name-main-casino-info__logo {
+  /* Prevent layout shifts */
+  contain: layout !important;
+  
+  /* Force composite layer for smooth rendering */
+  transform: translateZ(0) !important;
+  will-change: auto !important;
+  
+  /* Optimize background rendering */
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .main-casino-info__image-block img,
+  .name-main-casino-info__logo img {
+    /* Slightly lower quality on mobile for faster loading */
+    image-rendering: auto !important;
+  }
+}
+
+/* Desktop optimization */
+@media (min-width: 769px) {
+  .main-casino-info__image-block {
+    /* Desktop gets full quality immediately */
+    background-size: cover !important;
+  }
+}
+
+/* Critical WebP/AVIF support optimization */
+.main-casino-info__image-block,
+.casino-big-card__image {
+  /* Ensure efficient image formats are used when available */
+  image-rendering: -webkit-optimize-contrast !important;
+}
+
+/* Remove any blocking transitions on critical images */
+.main-casino-info__image-block img,
+.name-main-casino-info__logo img {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Force immediate rendering for above-the-fold content */
+.casino-info__main,
+.main-casino-info {
+  /* Prevent render blocking */
+  contain: layout style !important;
+  transform: translateZ(0) !important;
+}
+
+/* Optimize image containers for faster paint */
+.main-casino-info__image-block::before {
+  /* Remove overlay delays */
+  transition: none !important;
+  animation: none !important;
+}

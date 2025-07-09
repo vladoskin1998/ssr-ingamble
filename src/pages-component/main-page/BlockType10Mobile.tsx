@@ -50,7 +50,20 @@ export default function BlockType10Mobile({
                         <span></span>
                     </div>
                     <div className="best-casinos-2024-gamble__girl">
-                        <Image width={444} height={444} src="/img/girls/02.webp" alt="girl" loading="lazy" />
+                        <Image 
+                            width={357} 
+                            height={440} 
+                            src="/img/girls/02.webp" 
+                            alt="girl" 
+                            loading="lazy"
+                            sizes="(max-width: 480px) 170px, (max-width: 1000px) 196px, (max-width: 1355px) 274px, (max-width: 1650px) 300px, 357px"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'center bottom'
+                            }}
+                        />
                     </div>
                     <div className="best-casinos-2024-gamble__slider slider-best-casinos-2024-gamble">
                         <div className="slider-best-casinos-2024-gamble__top top">

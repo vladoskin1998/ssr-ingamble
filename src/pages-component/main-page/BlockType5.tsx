@@ -271,7 +271,19 @@ export default function BlockType5({
                             <span></span>
                         </div>
                         <div className="best-live-dealer-casinos-gamble__girl">
-                            <Image fill src="/img/girls/03.webp" alt="girl" loading="lazy" />
+                            <Image 
+                                fill 
+                                src="/img/girls/03.webp" 
+                                alt="girl" 
+                                loading="lazy"
+                                sizes="(max-width: 750px) 194px, (max-width: 990px) 267px, (max-width: 1355px) 293px, (max-width: 1650px) 320px, 362px"
+                                style={{
+                                    objectFit: 'contain',
+                                    objectPosition: 'bottom center',
+                                    width: '100%',
+                                    height: '100%'
+                                }}
+                            />
                         </div>
                         <div className="best-live-dealer-casinos-gamble__content">
                             <div className="best-live-dealer-casinos-gamble__title">

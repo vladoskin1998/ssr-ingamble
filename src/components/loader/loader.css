@@ -1,10 +1,7 @@
 .loader-body {
-
   width: 100%;
   height: 100%;
-  
   z-index: 999999;
-
   background-color: #171719;
   display: flex;
   justify-content: center;
@@ -12,6 +9,7 @@
   display: -webkit-flex;
   -webkit-justify-content: center;
   -webkit-align-items: center;
+  contain: layout style paint;
 }
 
 
@@ -28,11 +26,14 @@
   position: relative;
   width: 48px;
   height: 48px;
+  contain: layout style paint;
 }
 
 .lds-spinner div {
   transform-origin: 24px 24px;
   animation: lds-spinner 1.2s linear infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .lds-spinner div:after {
@@ -181,8 +182,9 @@
   will-change: transform, top;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   z-index: 999999;
+  contain: layout style paint;
 }
 
 
@@ -207,7 +209,9 @@
 }
 
 .loader-body-infinite-fade-text {
-  animation: fadeInOut 1.15s infinite; /* Анимация длится 4 секунды и повторяется бесконечно */
+  animation: fadeInOut 1.15s infinite;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 
@@ -288,14 +292,32 @@
   height: 22px;
   -webkit-mask: linear-gradient(90deg, #000 80%, #0000 80%) 0/7.8%;
   mask: linear-gradient(90deg, #000 80%, #0000 80%) 0/7.8%;
-  background:
-    linear-gradient(to bottom, #FFCF23 50%, #F96B2F 50%) 0/0% no-repeat #111;
+  background: #111;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+.progress-4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #FFCF23 50%, #F96B2F 50%);
+  transform: translateX(-100%) translateZ(0);
   animation: p4 2.5s infinite steps(13);
+  will-change: transform;
 }
 
 @keyframes p4 {
+  0% {
+    transform: translateX(-100%) translateZ(0);
+  }
   100% {
-    background-size: 100%
+    transform: translateX(0%) translateZ(0);
   }
 }
 
@@ -316,6 +338,7 @@
   .progress-4{
     width: 231px;
     height: 30px;
+    contain: layout style paint;
   }
   .loader-body-svg-4, 
   .loader-body-svg-1,

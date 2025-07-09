@@ -30,21 +30,23 @@ const MainSlider = ({
 }) => {
     const sliderRef = useRef<SwiperRef | null>(null)
     const paginationRef = useRef<HTMLDivElement | null>(null)
-
-    if (sliderRef.current && paginationRef.current) {
-        const swiper = sliderRef.current.swiper
-        if (swiper && paginationRef.current) {
-          
-            if (swiper?.params?.pagination) {
-                if (typeof swiper.params.pagination === 'object') {
-                    swiper.params.pagination.el = paginationRef.current
-                }
+    
+    // Use React's useEffect to initialize pagination after component mount
+    React.useEffect(() => {
+        if (sliderRef.current && paginationRef.current && sliderRef.current.swiper) {
+            const swiper = sliderRef.current.swiper;
+            
+            // Update pagination element
+            if (swiper.params && swiper.params.pagination && typeof swiper.params.pagination === 'object') {
+                swiper.params.pagination.el = paginationRef.current;
+                
+                // Re-initialize pagination
+                swiper.pagination.init();
+                swiper.pagination.render();
+                swiper.pagination.update();
             }
-            swiper.pagination.init()
-            swiper.pagination.render()
-            swiper.pagination.update()
         }
-    }
+    }, []);
 
 
 
@@ -61,7 +63,7 @@ const MainSlider = ({
                             slidesPerView="auto"
                             ref={sliderRef}
                             pagination={{
-                                el: paginationRef.current,
+                                el: '.bottom-slider__pagination',  // Use CSS selector instead of direct ref
                                 clickable: true,
                             }}
                             modules={[Pagination, Autoplay]}

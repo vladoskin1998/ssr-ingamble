@@ -64,13 +64,20 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         alt="main-img"
                                         fill
                                         style={{ objectFit: "cover" }}
+                                        priority
                                     />
                                 </div>
                             </div>
                             {!isSmallScreen ? (
                                 <div className="main-casino-info__name name-main-casino-info">
                                     <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
-                                        <Image src={data?.casino_logo || ''} alt={`${data?.casino_name} logo`} width={80} height={80} loading="lazy" />
+                                        <Image 
+                                            src={data?.casino_logo || ''} 
+                                            alt={`${data?.casino_name} logo`} 
+                                            width={80} 
+                                            height={80} 
+                                            priority
+                                        />
                                     </Link>
                                     <div className="name-main-casino-info__content">
                                         <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
@@ -99,7 +106,13 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         <span className="info-casino-card__stake__rating-number">{data?.bonus_rank || '4.8'}</span>
                                     </div>
                                     <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
-                                        <Image src={data?.casino_logo || ''} alt="stake" width={60} height={60} loading="lazy" />
+                                        <Image 
+                                            src={data?.casino_logo || ''} 
+                                            alt={`${data?.casino_name} logo`} 
+                                            width={60} 
+                                            height={60} 
+                                            priority
+                                        />
                                     </Link>
                                     <div className="info-casino-card__likes name-main-casino-info__likes">
                                         <span className="info-casino-card__likes-icon">

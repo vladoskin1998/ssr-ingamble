@@ -107,6 +107,9 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                         <Image width={444} height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.[0].casino_info.casino_image || '/img/no-results.svg'}
+                                                                            priority={index === 0}
+                                                                            loading={index === 0 ? "eager" : "lazy"}
+                                                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                                                         />
                                                                     </span>
                                                                 </Link>
@@ -164,6 +167,9 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                         <Image width={444} height={444}
                                                                             alt="Casino Image"
                                                                             src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
+                                                                            priority={index === 0}
+                                                                            loading={index === 0 ? "eager" : "lazy"}
+                                                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                                                         />
                                                                     </span>
                                                                 </Link>
