@@ -9,7 +9,8 @@ export const PaginationPage = ({
     countElem = 30, 
     countPageElem = 5,
     onShowMore = null, // Новий проп для функції "Show More"
-    isLoading = false // Новий проп для стану завантаження
+    isLoading = false, // Новий проп для стану завантаження
+    totalPages: directTotalPages = null // New prop to directly set total pages
 }: { 
     currentPage?: number; 
     countElem?: number; 
@@ -17,8 +18,10 @@ export const PaginationPage = ({
     countPageElem?: number;
     onShowMore?: ((nextPage: number) => void) | null;
     isLoading?: boolean;
+    totalPages?: number | null; // Add new optional prop
 }) => {
-    const totalPages = Math.ceil(countElem / countPageElem)
+    // Use directTotalPages if provided, otherwise calculate
+    const totalPages = directTotalPages !== null ? directTotalPages : Math.ceil(countElem / countPageElem)
     const [isMobile, setIsMobile] = useState(false)
 
     // Визначаємо тип пристрою при монтуванні компонента
@@ -65,8 +68,6 @@ export const PaginationPage = ({
             return totalPages > currentPage;
         }
     };
-
-
 
     return (
         <>

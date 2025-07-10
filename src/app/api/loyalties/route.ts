@@ -47,7 +47,13 @@ async function getLoyaltiesPageData({ page, slug }: { page: number; slug?: strin
     
     try {
         const response = await $api.post(`filter/loyalty/?page=${page}&page_size=10`, body);
-        return response.data;
+        const data = response.data;
+        
+        // Make sure we're returning both count and calculated total_pages
+        return {
+            ...data,
+            total_pages: Math.ceil(data.count / 10) // Calculate total_pages if not provided by API
+        };
     } catch (error) {
         console.error('API Error:', error);
         throw new Error('Failed to fetch loyalty data from API');

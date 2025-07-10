@@ -86,13 +86,17 @@ export default function AllLoyaltyLayout({
     
     // Ініціалізація на клієнті
     useEffect(() => {
-        // Якщо сторінка не 1, редіректимо на 1 і не ініціалізуємо стани
-        if (Number(currentPage) > 1) {
+        // Перевіряємо чи це мобільний пристрій перед редиректом
+        const isMobileScreen = isMobileDevice();
+        
+        // Редирект на першу сторінку тільки для мобільних пристроїв
+        if (isMobileScreen && Number(currentPage) > 1) {
             const link = loyaltie_slug ? `/all-loyalties/${loyaltie_slug}/1` : `/all-loyalties/1`;
             router.replace(link);
             return;
         }
-        setIsMobile(isMobileDevice());
+        
+        setIsMobile(isMobileScreen);
         setMobileContent([children]);
         setLoadedPages([Number(currentPage || 1)]);
         setHighestLoadedPage(Number(currentPage || 1));
@@ -115,7 +119,7 @@ export default function AllLoyaltyLayout({
             setLoyaltiesFilters(initialLoyaltiesFilters)
         }
     }, [loyaltie_slug, children, currentPage, setLoyaltiesFilters, router])
-
+    
     // Функція для завантаження додаткових елементів
     const loadMoreItems = async (nextPage: number) => {
         if (loadedPages.includes(nextPage)) return;
@@ -292,9 +296,9 @@ export default function AllLoyaltyLayout({
                         )}
                         
                         <PaginationPage
-                            countElem={apiTotalPages}
+                            totalPages={apiTotalPages} // Pass apiTotalPages directly as totalPages instead of countElem
                             currentPage={isMobile ? highestLoadedPage : Number(currentPage || 1)}
-                            countPageElem={1}
+                            countPageElem={1} // Keep this for backward compatibility
                             onShowMore={isMobile ? loadMoreItems : null}
                             isLoading={isLoading}
                             setCurrentPage={(page) => {

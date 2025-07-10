@@ -31,6 +31,9 @@ const NAMETITLECATEGORYSLUG: NAMETITLECATEGORYSLUGType = {
     gifts: { key: 'gifts', value: true },
 }
 
+// Add a constant for page size to make it clear
+const PAGE_SIZE = 10;
+
 const getFilteringLoyaltiesList = async (
     dto: keyof NAMETITLECATEGORYSLUGType | undefined,
     page: number,
@@ -41,11 +44,9 @@ const getFilteringLoyaltiesList = async (
             [NAMETITLECATEGORYSLUG[dto].key]: NAMETITLECATEGORYSLUG[dto].value,
         }
     }
-
-
     
     const body = filterEmptyValues(payload)
-    const response = await $api.post(`filter/loyalty/?page=${page}&page_size=${10}`, body)
+    const response = await $api.post(`filter/loyalty/?page=${page}&page_size=${PAGE_SIZE}`, body)
     return response.data
 }
 
@@ -53,27 +54,32 @@ const getFilteringLoyaltiesList = async (
 export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPage }: { loyaltie_slug?: string; currentPage?: number }) {
     const userAgent = (await headers()).get('user-agent') || ''
     const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
-    let totalCountPage = 1
-
+    let totalItems = 0
+    let totalPages = 1
 
     let allData: SeeAllEssentialLoyaltyCasino[] = []
 
     // console.log('loyaltie_slug', loyaltie_slug)
-    if (isMobile) {
-        // Для мобільних: завжди вантажимо тільки першу сторінку на SSR/ISR
-        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, 1)
-        totalCountPage = data?.count || 1
+    if (!isMobile) {
+        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, Number(currentPage || 1))
+        totalItems = data?.count || 0
+        // Calculate total pages based on total items and page size
+        totalPages = Math.ceil(totalItems / PAGE_SIZE)
         allData = data?.results || []
     } else {
-        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, Number(currentPage || 1))
-        totalCountPage = data?.count || 1
-        allData = data?.results || []
+        for (let i = 1; i <= Number(currentPage || 1); i++) {
+            const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, i)
+            totalItems = data?.count || 0
+            // Calculate total pages based on total items and page size
+            totalPages = Math.ceil(totalItems / PAGE_SIZE)
+            allData = [...(allData || []), ...(data?.results || [])]
+        }
     }
 
-    console.log(totalCountPage)
+    console.log(`Total items: ${totalItems}, Total pages: ${totalPages}`)
 
     return (
-        <AllLoyaltyLayout totalPages={totalCountPage}>
+        <AllLoyaltyLayout totalPages={totalPages}>
             <div className="main-loyaltie-programs__items loyaltie-programs__items">
                 {/* ✅ ЗМІНА: Типізовано allData mapping з правильним типом */}
                 {allData?.map((item: SeeAllEssentialLoyaltyCasino, index: number) => (
@@ -82,7 +88,6 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                             <div className="item-loyaltie-programs__main">
                                 <Link
                                     href={`/casino/${item.casino_slug}`}
-                                    prefetch={false}
                                     className="item-loyaltie-programs__image loyalty-img-custom"
                                     style={{ position: 'relative' }}
                                 >
@@ -167,7 +172,6 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                         />
                                         <Link
                                             href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`}
-                                            prefetch={false}
                                             aria-label="Put your description here."
                                             className="bottom-content-item-loyaltie-programs__btn-more"
                                         >
