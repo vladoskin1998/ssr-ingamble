@@ -70,7 +70,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                             </div>
                             {!isSmallScreen ? (
                                 <div className="main-casino-info__name name-main-casino-info">
-                                    <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
+                                    <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`} prefetch={false}>
                                         <Image 
                                             src={data?.casino_logo || ''} 
                                             alt={`${data?.casino_name} logo`} 
@@ -80,7 +80,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         />
                                     </Link>
                                     <div className="name-main-casino-info__content">
-                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
+                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title" prefetch={false}>
                                             {data?.casino_name}
                                         </Link>
                                         <div className="info-casino-card__stake-rating name-main-casino-info__stake-rating">
@@ -105,7 +105,11 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         </span>
                                         <span className="info-casino-card__stake__rating-number">{data?.bonus_rank || '4.8'}</span>
                                     </div>
-                                    <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`}>
+                                    <Link
+                                        className="name-main-casino-info__logo"
+                                        href={`/casino/${data?.casino_slug}`}
+                                        prefetch={false}
+                                    >
                                         <Image 
                                             src={data?.casino_logo || ''} 
                                             alt={`${data?.casino_name} logo`} 
@@ -121,7 +125,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                         <span className="info-casino-card__likes-number">{sanitizeNumberLike(data?.likes)}</span>
                                     </div>
                                     <div className="name-main-casino-info__content">
-                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title">
+                                        <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title" prefetch={false}>
                                             {data?.casino_name}
                                         </Link>
                                     </div>

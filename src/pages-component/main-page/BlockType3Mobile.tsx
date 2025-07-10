@@ -118,6 +118,7 @@ export default function BlockType3Mobile({
                                                             <Link
                                                                 href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                 className="different-casino-standart__image-block"
+                                                                prefetch={false}
                                                             >
                                                                 <span className="different-casino-standart__image ibg--custom">
                                                                     <Image
@@ -134,6 +135,7 @@ export default function BlockType3Mobile({
                                                                         href={`/casino/${item?.[0]?.casino_info?.casino_slug}/bonuses/${item?.[0]?.bonus_info?.bonus_slug}`}
                                                                         aria-label="Put your description here."
                                                                         className="different-casino-standart__name"
+                                                                        prefetch={false}
                                                                     >
                                                                         {item?.[0]?.bonus_info?.bonus_name}
                                                                     </Link>
@@ -161,6 +163,7 @@ export default function BlockType3Mobile({
                                                                             href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                             aria-label="Put your description here."
                                                                             className="info-casino-card__stake-link"
+                                                                            prefetch={false}
                                                                         >
                                                                             {item?.[0]?.casino_info?.casino_name}
                                                                         </Link>
@@ -188,6 +191,7 @@ export default function BlockType3Mobile({
                                                                 <Link
                                                                     href={`/casino/${item?.[1]?.casino_info?.casino_slug}`}
                                                                     className="different-casino-standart__image-block"
+                                                                    prefetch={false}
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image
@@ -204,6 +208,7 @@ export default function BlockType3Mobile({
                                                                             href={`/casino/${item?.[1]?.casino_info?.casino_slug}/bonuses/${item?.[1]?.bonus_info?.bonus_slug}`}
                                                                             aria-label="Put your description here."
                                                                             className="different-casino-standart__name"
+                                                                            prefetch={false}
                                                                         >
                                                                             {item?.[1]?.bonus_info?.bonus_name}
                                                                         </Link>
@@ -231,6 +236,7 @@ export default function BlockType3Mobile({
                                                                                 href={`/casino/${item?.[1]?.casino_info?.casino_slug}`}
                                                                                 aria-label="Put your description here."
                                                                                 className="info-casino-card__stake-link"
+                                                                                prefetch={false}
                                                                             >
                                                                                 {item?.[1]?.casino_info?.casino_name}
                                                                             </Link>

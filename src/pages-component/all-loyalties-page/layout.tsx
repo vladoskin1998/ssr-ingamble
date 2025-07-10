@@ -141,6 +141,7 @@ export default function AllLoyaltyLayout({
                                 <div className="item-loyaltie-programs__row">
                                     <div className="item-loyaltie-programs__main">
                                         <Link
+                                            prefetch={false}
                                             href={`/casino/${item.casino_slug}`}
                                             className="item-loyaltie-programs__image loyalty-img-custom"
                                             style={{ position: 'relative' }}

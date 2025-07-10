@@ -82,6 +82,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                             <div className="item-loyaltie-programs__main">
                                 <Link
                                     href={`/casino/${item.casino_slug}`}
+                                    prefetch={false}
                                     className="item-loyaltie-programs__image loyalty-img-custom"
                                     style={{ position: 'relative' }}
                                 >
@@ -166,6 +167,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                         />
                                         <Link
                                             href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`}
+                                            prefetch={false}
                                             aria-label="Put your description here."
                                             className="bottom-content-item-loyaltie-programs__btn-more"
                                         >
