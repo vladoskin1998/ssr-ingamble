@@ -79,6 +79,7 @@ export default function BlockType10Mobile({
                                             data?.items_block?.category?.slug || '/img/no-results.svg' ? `/${data?.items_block?.category?.slug}` : ''
                                         }`}
                                         className="top__btn"
+                                        prefetch={false} 
                                     >
                                         <span>See All</span>
                                         <span className="top__btn-arrow">
@@ -119,6 +120,7 @@ export default function BlockType10Mobile({
                                                     rel="nofollow noopener"
                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                     className="different-casino-medium__image-block"
+                                                    prefetch={false} 
                                                 >
                                                     <span className="different-casino-medium__image ibg--custom">
                                                         <Image
@@ -134,6 +136,7 @@ export default function BlockType10Mobile({
                                                         rel="nofollow noopener"
                                                         href={`/casino/${item?.casino_info?.casino_slug}`}
                                                         className="different-casino-medium__name"
+                                                        prefetch={false} 
                                                     >
                                                         {item?.casino_info?.casino_name}
                                                     </Link>

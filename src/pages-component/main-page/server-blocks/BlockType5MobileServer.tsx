@@ -96,6 +96,7 @@ export default function BlockType5MobileServer({
                                         <Link
                                             href={`/bonuses/${card.bonus_info.bonus_slug}`}
                                             className="card-casino-crypto__button btn btn-primary"
+                                            prefetch={false} 
                                         >
                                             Get Bonus
                                         </Link>
@@ -109,6 +110,7 @@ export default function BlockType5MobileServer({
                     <Link
                         href={`/bonuses/${category.slug}`}
                         className="crypto-casinos-gamble__btn btn btn-secondary"
+                        prefetch={false} 
                     >
                         See All {category.name}
                     </Link>

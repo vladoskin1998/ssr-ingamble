@@ -102,6 +102,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                 <Link
                                                                     href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                     className="different-casino-standart__image-block"
+                                                                    prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
@@ -120,6 +121,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                             href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                             aria-label="Put your description here."
                                                                             className="different-casino-standart__name"
+                                                                            prefetch={false} // отключаем предзагрузку для мобильных
                                                                         >
                                                                             {item?.[0]?.casino_info?.casino_name}
                                                                         </Link>
@@ -129,6 +131,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                                 rel="nofollow noopener"
                                                                                 aria-label="Put your description here."
                                                                                 className="different-casino-standart__info-link"
+                                                                                prefetch={false} // отключаем предзагрузку для мобильных
                                                                             >
                                                                                 {item?.[0]?.bonus_info?.bonus_name}
                                                                             </Link>
@@ -162,6 +165,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                 <Link
                                                                     href={`/casino/${item?.[1]?.casino_info?.casino_slug}`}
                                                                     className="different-casino-standart__image-block"
+                                                                    prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
@@ -180,6 +184,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                             rel="nofollow noopener"
                                                                             aria-label="Put your description here."
                                                                             className="different-casino-standart__name"
+                                                                            prefetch={false} // отключаем предзагрузку для мобильных
                                                                         >
                                                                             {item?.[1]?.casino_info?.casino_name}
                                                                         </Link>
@@ -189,6 +194,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                                 href={`/casino/${item?.[1]?.casino_info?.casino_slug}/bonuses/${item?.[1]?.bonus_info?.bonus_slug}`}
                                                                                 aria-label="Put your description here."
                                                                                 className="different-casino-standart__info-link"
+                                                                                prefetch={false} // отключаем предзагрузку для мобильных
                                                                             >
                                                                                 {item?.[1]?.bonus_info?.bonus_name}
                                                                             </Link>
@@ -222,6 +228,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                 <Link
                                                                     href={`/casino/${item?.[2]?.casino_info?.casino_slug}`}
                                                                     className="different-casino-standart__image-block"
+                                                                    prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
                                                                         <Image width={444} height={444}
@@ -238,6 +245,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                             href={`/casino/${item?.[2]?.casino_info?.casino_slug}`}
                                                                             aria-label="Put your description here."
                                                                             className="different-casino-standart__name"
+                                                                            prefetch={false} // отключаем предзагрузку для мобильных
                                                                         >
                                                                             {item?.[2]?.casino_info?.casino_name}
                                                                         </Link>
@@ -247,6 +255,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                                 href={`/casino/${item?.[1]?.casino_info?.casino_slug}/bonuses/${item?.[2]?.bonus_info?.bonus_slug}`}
                                                                                 aria-label="Put your description here."
                                                                                 className="different-casino-standart__info-link"
+                                                                                prefetch={false} // отключаем предзагрузку для мобильных
                                                                             >
                                                                                 {item?.[2]?.bonus_info?.bonus_name}
                                                                             </Link>

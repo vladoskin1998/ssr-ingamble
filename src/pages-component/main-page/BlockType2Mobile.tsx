@@ -112,6 +112,7 @@ export default function BlockType2Mobile({
                                                             <Link
                                                                 className="casino-card__image ibg--custom"
                                                                 href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
+                                                                prefetch={false} 
                                                             >
                                                                 {item?.bonus_info?.bonus_image && (
                                                                     <Image
@@ -150,6 +151,7 @@ export default function BlockType2Mobile({
                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                     aria-label="Put your description here."
                                                                     className="casino-small-card__image-block"
+                                                                    prefetch={false} 
                                                                 >
                                                                     <div className="casino-small-card__image ibg--custom">
                                                                         {item?.casino_info?.casino_image && (
@@ -168,6 +170,7 @@ export default function BlockType2Mobile({
                                                                         href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                         aria-label="Put your description here."
                                                                         className="casino-small-card__name"
+                                                                        prefetch={false} 
                                                                     >
                                                                         {item?.casino_info?.casino_name}
                                                                     </Link>

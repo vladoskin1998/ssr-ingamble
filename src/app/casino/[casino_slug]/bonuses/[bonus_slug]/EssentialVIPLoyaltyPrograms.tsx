@@ -81,6 +81,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                     href={`/casino/${item?.casino_slug}`}
                                                     aria-label="Put your description here."
                                                     className="item-essential-programs-gamble__logo"
+                                                    prefetch={false} // отключаем предзагрузку для мобильных
                                                 >
                                                     <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
                                                 </Link>
@@ -187,6 +188,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                         href={`/casino/${item?.loyalty_slug}/loyalty`}
                                                         aria-label="Put your description here."
                                                         className="item-essential-programs-gamble__btn"
+                                                        prefetch={false} // отключаем предзагрузку для мобильных
                                                     >
                                                         Read More
                                                     </Link>

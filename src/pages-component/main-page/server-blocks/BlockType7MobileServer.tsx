@@ -100,6 +100,7 @@ export default function BlockType7MobileServer({
                                         <Link
                                             href={`/bonuses/${card.bonus_info.bonus_slug}`}
                                             className="item-no-deposit-bonus__button btn btn-primary"
+                                            prefetch={false} 
                                         >
                                             Claim Now
                                         </Link>
@@ -112,6 +113,7 @@ export default function BlockType7MobileServer({
                         <Link
                             href={`/bonuses/${category.slug}`}
                             className="no-deposit-bonuses-gamble__btn btn btn-secondary"
+                            prefetch={false} 
                         >
                             See All {category.name}
                         </Link>

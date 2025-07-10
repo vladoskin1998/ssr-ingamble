@@ -78,6 +78,7 @@ export default function BlockType7Mobile({
                                                     <Link
                                                         href={`/casino/${item?.casino_info?.casino_slug}`}
                                                         className="different-casino-medium__image-block"
+                                                        prefetch={false} 
                                                     >
                                                         <span className="different-casino-medium__image ibg--custom">
                                                             <Image
@@ -93,6 +94,7 @@ export default function BlockType7Mobile({
                                                             href={`/casino/${item?.casino_info?.casino_slug}`}
                                                             aria-label="Put your descripton here."
                                                             className="different-casino-medium__name"
+                                                            prefetch={false} 
                                                         >
                                                             {item.casino_info.casino_name}
                                                         </Link>

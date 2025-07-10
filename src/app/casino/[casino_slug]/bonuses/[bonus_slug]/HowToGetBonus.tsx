@@ -65,6 +65,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
                                             href={`/casino/${data?.casino_slug}`}
                                             aria-label="Put your description here."
                                             className="main-get-bonus__btn main-get-bonus__btn_review"
+                                            prefetch={false} // отключаем предзагрузку для мобильных
                                         >
                                             <span>
                                                 <svg>

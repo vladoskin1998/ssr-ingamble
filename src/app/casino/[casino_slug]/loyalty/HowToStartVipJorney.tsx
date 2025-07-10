@@ -94,6 +94,7 @@ export const HowToStartVipJorney = (data: {
                       href={`/casino/${data.slug}`}
                       className="main-get-bonus__btn main-get-bonus__btn_review"
                       aria-label={`${data?.casino_name} Casino Review`}
+                      prefetch={false} // Вимкнення предзавантаження для мобільних
                     >
                       <span>
                         <svg>

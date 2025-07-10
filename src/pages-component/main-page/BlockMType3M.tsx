@@ -111,6 +111,7 @@ export default function BlockMType3M({
                                                                 rel="nofollow noopener"
                                                                 href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                 className="different-casino-standart__image-block"
+                                                                prefetch={false} // отключаем предзагрузку для мобильных
                                                             >
                                                                 <span className="different-casino-standart__image ibg--custom">
                                                                     <Image
@@ -128,6 +129,7 @@ export default function BlockMType3M({
                                                                         href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                                         aria-label="Put your description here."
                                                                         className="different-casino-standart__name"
+                                                                        prefetch={false} // отключаем предзагрузку для мобильных
                                                                     >
                                                                         {item?.bonus_info?.bonus_name}
                                                                     </Link>
@@ -156,6 +158,7 @@ export default function BlockMType3M({
                                                                             href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                             aria-label="Put your description here."
                                                                             className="info-casino-card__stake-link"
+                                                                            prefetch={false} 
                                                                         >
                                                                             {item?.casino_info?.casino_name}
                                                                         </Link>

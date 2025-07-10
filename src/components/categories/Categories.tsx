@@ -86,6 +86,7 @@ export const Categories = ({
                                         href={'/bonuses'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
+                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Bonuses
                                     </Link>
@@ -99,6 +100,7 @@ export const Categories = ({
                                         href={'/casinos'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
+                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Casinos
                                     </Link>
@@ -111,6 +113,7 @@ export const Categories = ({
                                         href={'/all-loyalties'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
+                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Loyalty
                                     </Link>
@@ -148,6 +151,7 @@ const ItemCategory = ({ item }: { item: FormatedCategoryType }) => {
             onClick={seeAllFoo}
             aria-label="Put your description here."
             className="slide-filter-tags-gamble__btn"
+            prefetch={false} // отключаем предзагрузку для мобильных
         >
             {item?.name}
         </Link>

@@ -88,6 +88,7 @@ export default function BlockType3MobileServer({
                                         <Link
                                             href={`/bonuses/${card.bonus_info.bonus_slug}`}
                                             className="card-casino__button btn btn-primary"
+                                            prefetch={false} 
                                         >
                                             View Bonus
                                         </Link>
@@ -98,6 +99,7 @@ export default function BlockType3MobileServer({
                     </div>
                     <div className="vpn-friendly-casinos-2-gamble__bottom">
                         <Link
+                            prefetch={false} 
                             href={`/bonuses/${category.slug}`}
                             className="vpn-friendly-casinos-2-gamble__btn btn btn-secondary"
                         >

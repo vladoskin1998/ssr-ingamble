@@ -93,6 +93,7 @@ export default function BlockType4MobileServer({
                                 </div>
                                 <div className="card-casino__actions">
                                     <Link
+                                        prefetch={false} 
                                         href={`/bonuses/${card.bonus_info.bonus_slug}`}
                                         className="card-casino__button btn btn-primary"
                                     >
@@ -106,6 +107,7 @@ export default function BlockType4MobileServer({
                         <Link
                             href={`/bonuses/${category.slug}`}
                             className="live-casino-table-games-gamble__btn btn btn-secondary"
+                            prefetch={false} 
                         >
                             See All {category.name}
                         </Link>

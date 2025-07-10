@@ -97,6 +97,7 @@ export default function BlockType10MobileServer({
                                         <Link
                                             href={`/bonuses/${card.bonus_info.bonus_slug}`}
                                             className="slide-slots-rating__button btn btn-primary"
+                                            prefetch={false} 
                                         >
                                             Play Now
                                         </Link>
@@ -110,6 +111,7 @@ export default function BlockType10MobileServer({
                     <Link
                         href={`/bonuses/${category.slug}`}
                         className="slots-rating-gamble__btn btn btn-secondary"
+                        prefetch={false} 
                     >
                         See All {category.name}
                     </Link>

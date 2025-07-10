@@ -208,6 +208,7 @@ export default function AllLoyaltyLayout({
                                                 <Link
                                                     href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`}
                                                     className="bottom-content-item-loyaltie-programs__btn-more"
+                                                    prefetch={false} // Вимкнення предзавантаження для мобільних
                                                 >
                                                     Read More
                                                 </Link>

@@ -28,6 +28,7 @@ export default function BlockType11MServer({
                                         <Link
                                             href="/filter-casinos"
                                             className="top__btn"
+                                            prefetch={false} 
                                         >
                                             <span>See All</span>
                                             <span className="top__btn-arrow">
@@ -45,6 +46,7 @@ export default function BlockType11MServer({
                                         <Link
                                             href={`/casino/${item?.casino_info?.casino_slug}`}
                                             className="deposit-top-bonuses-gamble__image-block"
+                                            prefetch={false} 
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
                                                 <Image
@@ -60,6 +62,7 @@ export default function BlockType11MServer({
                                                 <Link
                                                     href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                     className="deposit-top-bonuses-gamble__title"
+                                                    prefetch={false} 
                                                 >
                                                     {item?.bonus_info?.bonus_name}
                                                 </Link>
@@ -68,6 +71,7 @@ export default function BlockType11MServer({
                                                         href={`/casino/${item?.casino_info?.casino_slug}`}
                                                         aria-label="Casino details"
                                                         className="deposit-top-bonuses-gamble__stake-link"
+                                                        prefetch={false} 
                                                     >
                                                         {item?.casino_info?.casino_name}
                                                     </Link>
@@ -125,7 +129,7 @@ export default function BlockType11MServer({
                                         </div>
                                     </div>
                                     <div className="top__column">
-                                        <Link href="/all-casinos/top-crypto-casinos" className="top__btn">
+                                        <Link href="/all-casinos/top-crypto-casinos" className="top__btn" prefetch={false} >
                                             <span>See All</span>
                                             <span className="top__btn-arrow">
                                                 <svg>
@@ -142,6 +146,7 @@ export default function BlockType11MServer({
                                         <Link
                                             href={`/casino/${item?.casino_info?.casino_slug}`}
                                             className="deposit-top-bonuses-gamble__image-block"
+                                            prefetch={false} 
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
                                                 <Image
@@ -157,6 +162,7 @@ export default function BlockType11MServer({
                                                 <Link
                                                     href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                     className="deposit-top-bonuses-gamble__title"
+                                                    prefetch={false} 
                                                 >
                                                     {item?.bonus_info?.bonus_name}
                                                 </Link>
@@ -164,6 +170,7 @@ export default function BlockType11MServer({
                                                     <Link
                                                         href={`/casino/${item?.casino_info?.casino_slug}`}
                                                         className="deposit-top-bonuses-gamble__stake-link"
+                                                        prefetch={false} 
                                                     >
                                                         {item.casino_info.casino_name}
                                                     </Link>
