@@ -1,6 +1,3 @@
-
-
-
 import $api from '../../http'
 
 import {
@@ -62,16 +59,15 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
     let allData: SeeAllEssentialLoyaltyCasino[] = []
 
     // console.log('loyaltie_slug', loyaltie_slug)
-    if (!isMobile) {
-        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, Number(currentPage || 1))
+    if (isMobile) {
+        // Для мобільних: завжди вантажимо тільки першу сторінку на SSR/ISR
+        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, 1)
         totalCountPage = data?.count || 1
         allData = data?.results || []
     } else {
-        for (let i = 1; i <= Number(currentPage || 1); i++) {
-            const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, i)
-            totalCountPage = data?.count || 1
-            allData = [...(allData || []), ...(data?.results || [])]
-        }
+        const data = await getFilteringLoyaltiesList(loyaltie_slug as keyof NAMETITLECATEGORYSLUGType, Number(currentPage || 1))
+        totalCountPage = data?.count || 1
+        allData = data?.results || []
     }
 
     console.log(totalCountPage)

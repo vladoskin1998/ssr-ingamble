@@ -174,7 +174,7 @@ export default function BlockType5({
                                                                 width={444}
                                                                 height={444}
                                                                 alt="Casino Image"
-                                                                src={item?.bonus_info?.bonus_image || ''}
+                                                                src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
                                                             />
                                                         </Link>
                                                         <div className="casino-big-card__top">
