@@ -2,10 +2,6 @@ import type { Metadata } from 'next'
 import '../../styles/style.css'
 import '../components/loader/loader.css'
 import '../../styles//header.css'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import '../../styles/mobile-spacing-fix.css'
-import '../../styles/footer-cls-fix.css'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Header } from '@/components/header'
@@ -34,13 +30,6 @@ export default function RootLayout({
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" />
                 </noscript>
 
-                {/* Оптимізація LCP - запускається першим */}
-                <Script src="/critical-lcp-preload.js" strategy="beforeInteractive" />
-                
-                {/* Запобігання CLS з футером - запускається після гідратації */}
-                <Script src="/footer-cls-fix.js" strategy="lazyOnload" />
-                
-                {/* Google Analytics */}
                 <Script src={`https://www.googletagmanager.com/gtag/js?id=G-42W5MNLRR0`} strategy="afterInteractive" async />
                 <Script id="gtag-init" strategy="afterInteractive">
                     {`

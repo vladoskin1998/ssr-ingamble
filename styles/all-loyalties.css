@@ -9,3 +9,44 @@
     height: 100% !important;
     overflow: hidden;
 }
+
+/* Стилі для мобільного контенту Show More */
+.mobile-loaded-content {
+    width: 100%;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.loading-indicator p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Медіа-запити для мобільних пристроїв */
+@media (max-width: 768px) {
+    .main-loyaltie-programs__btn-more {
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    .mobile-loaded-content {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}

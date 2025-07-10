@@ -73,4 +73,38 @@ export default function initializeAdaptiveBehavior() {
 
      
     dinamicAdapt(da_elements, attr_elements, match_media, parents_original);
+}
+
+import { useState, useEffect } from 'react';
+
+// Функція для визначення мобільного пристрою на основі CSS медіа-запитів
+export const isMobileDevice = (): boolean => {
+    if (typeof window === 'undefined') return false; // SSR check
+    
+    // Використовуємо window.matchMedia для перевірки CSS медіа-запитів
+    return window.matchMedia('(max-width: 768px)').matches;
+};
+
+// Хук для відстеження змін розміру екрану
+export const useMobileDetection = () => {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+    
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(isMobileDevice());
+        };
+        
+        // Початкова перевірка
+        checkMobile();
+        
+        // Відстеження змін розміру
+        const handleResize = () => {
+            checkMobile();
+        };
+        
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    return isMobile;
 };
