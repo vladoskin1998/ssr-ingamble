@@ -61,6 +61,7 @@ export default function AllLoyaltyLayout({
     const [isMobile, setIsMobile] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [apiTotalPages, setApiTotalPages] = useState(totalPages)
+    const [highestLoadedPage, setHighestLoadedPage] = useState(1)
 
     const params = useParams()
     let loyaltie_slug: string | undefined = undefined
@@ -85,36 +86,41 @@ export default function AllLoyaltyLayout({
     
     // Ініціалізація на клієнті
     useEffect(() => {
+        // Якщо сторінка не 1, редіректимо на 1 і не ініціалізуємо стани
+        if (Number(currentPage) > 1) {
+            const link = loyaltie_slug ? `/all-loyalties/${loyaltie_slug}/1` : `/all-loyalties/1`;
+            router.replace(link);
+            return;
+        }
         setIsMobile(isMobileDevice());
         setMobileContent([children]);
         setLoadedPages([Number(currentPage || 1)]);
+        setHighestLoadedPage(Number(currentPage || 1));
         
         const handleResize = () => {
             setIsMobile(isMobileDevice());
         };
-        
         window.addEventListener('resize', handleResize);
 
         if (loyaltie_slug) {
             const { key, value } = NAMETITLECATEGORYSLUG[loyaltie_slug]
-
             setLoyaltiesFilters({
                 ...initialLoyaltiesFilters,
                 [key]: value,
             })
         }
-
         window.scrollTo(0, 0)
-
         return () => {
             window.removeEventListener('resize', handleResize);
             setLoyaltiesFilters(initialLoyaltiesFilters)
         }
-    }, [loyaltie_slug, children, currentPage, setLoyaltiesFilters])
+    }, [loyaltie_slug, children, currentPage, setLoyaltiesFilters, router])
 
     // Функція для завантаження додаткових елементів
     const loadMoreItems = async (nextPage: number) => {
         if (loadedPages.includes(nextPage)) return;
+        
+        console.log(`Loading page ${nextPage}, current highestLoadedPage: ${highestLoadedPage}, total pages: ${apiTotalPages}`);
         
         setIsLoading(true);
         try {
@@ -123,6 +129,8 @@ export default function AllLoyaltyLayout({
             if (!response.ok) throw new Error('Failed to fetch data');
             
             const data = await response.json();
+            
+            console.log(`Loaded page ${nextPage}, got ${data.results?.length} items, total pages from API: ${data.total_pages}`);
             
             // Створюємо новий контент на основі отриманих даних
             const newContent = (
@@ -215,6 +223,7 @@ export default function AllLoyaltyLayout({
             // Додаємо нові елементи до списку
             setMobileContent(prev => [...prev, newContent]);
             setLoadedPages(prev => [...prev, nextPage]);
+            setHighestLoadedPage(nextPage);
             
             // Оновлюємо загальну кількість сторінок, якщо вона змінилася
             if (data.total_pages) {
@@ -274,11 +283,6 @@ export default function AllLoyaltyLayout({
                                         {content}
                                     </div>
                                 ))}
-                                {isLoading && (
-                                    <div className="loading-indicator">
-                                        <p>Loading more items...</p>
-                                    </div>
-                                )}
                             </>
                         ) : (
                             // Для десктопів стандартна поведінка
@@ -287,11 +291,12 @@ export default function AllLoyaltyLayout({
                         
                         <PaginationPage
                             countElem={apiTotalPages}
-                            currentPage={Math.max(...loadedPages)}
-                            countPageElem={10}
+                            currentPage={isMobile ? highestLoadedPage : Number(currentPage || 1)}
+                            countPageElem={1}
                             onShowMore={isMobile ? loadMoreItems : null}
+                            isLoading={isLoading}
                             setCurrentPage={(page) => {
-                                if (isMobile && page === Math.max(...loadedPages) + 1) {
+                                if (isMobile && page === highestLoadedPage + 1) {
                                     // Для мобільних завантажуємо додаткові елементи
                                     // Ця логіка тепер в onShowMore
                                     return;

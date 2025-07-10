@@ -8,13 +8,15 @@ export const PaginationPage = ({
     setCurrentPage = () => {}, 
     countElem = 30, 
     countPageElem = 5,
-    onShowMore = null // Новий проп для функції "Show More"
+    onShowMore = null, // Новий проп для функції "Show More"
+    isLoading = false // Новий проп для стану завантаження
 }: { 
     currentPage?: number; 
     countElem?: number; 
     setCurrentPage?: (n: number) => void; 
     countPageElem?: number;
     onShowMore?: ((nextPage: number) => void) | null;
+    isLoading?: boolean;
 }) => {
     const totalPages = Math.ceil(countElem / countPageElem)
     const [isMobile, setIsMobile] = useState(false)
@@ -52,14 +54,27 @@ export const PaginationPage = ({
         }
     }
 
+    // Логіка показу кнопки "Show More"
+    const shouldShowMoreButton = () => {
+        if (isMobile && onShowMore) {
+            // Для мобільних з накопичувальним завантаженням показуємо кнопку, 
+            // якщо поточна сторінка менше загальної кількості сторінок
+            return currentPage < totalPages;
+        } else {
+            // Для десктопів стандартна логіка
+            return totalPages > currentPage;
+        }
+    };
+
 
 
     return (
         <>
-            {totalPages > currentPage ? (
+            {shouldShowMoreButton() ? (
                 <button
                     onClick={handleShowMore}
                     className="main-loyaltie-programs__btn-more"
+                    disabled={isLoading}
                 >
                     Show More
                 </button>
