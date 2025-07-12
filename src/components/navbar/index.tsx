@@ -115,7 +115,17 @@ const Navbar = () => {
         setGambleBodyHidden(false)
     }
 
+    // Generate unique base key that changes when sidebar state changes to force accordion re-renders
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const randomKey = useMemo(() => Math.random().toString(36).substring(2, 9), [isSidebarActive])
+
+    // Create unique keys for each accordion to prevent React reconciliation issues
+    const accordionKeys = useMemo(() => ({
+        casinos: `casinos-${randomKey}`,
+        bonuses: `bonuses-${randomKey}`,
+        loyalties: `loyalties-${randomKey}`,
+        slots: `slots-${randomKey}`
+    }), [randomKey])
 
 
 
@@ -163,7 +173,7 @@ const Navbar = () => {
                             >
                                 <AccordionItem
                                     defaultOpen={isDefaultOpen === 'casinos'}
-                                    key={randomKey}
+                                    key={accordionKeys.casinos}
                                     heading={
                                         <div className={`item-form-filters__title title-item-form-filters  accordion--title--element`}>
                                             <span
@@ -211,7 +221,7 @@ const Navbar = () => {
                             >
                                 <AccordionItem
                                     defaultOpen={isDefaultOpen === 'bonuses'}
-                                    key={randomKey}
+                                    key={accordionKeys.bonuses}
                                     heading={
                                         <div className={`item-form-filters__title title-item-form-filters accordion--title--element`}>
                                             <span
@@ -259,7 +269,7 @@ const Navbar = () => {
                             >
                                 <AccordionItem
                                     defaultOpen={isDefaultOpen === 'loyalties'}
-                                    key={randomKey}
+                                    key={accordionKeys.loyalties}
                                     heading={
                                         <div className="item-form-filters__title title-item-form-filters accordion--title--element">
                                             <span
@@ -289,7 +299,7 @@ const Navbar = () => {
                                 className={`form-filters__item item-form-filters `}
                             >
                                 <AccordionItem
-                                    key={randomKey}
+                                    key={accordionKeys.slots}
                                     defaultOpen={isDefaultOpen === "slots"}
                                     heading={
                                         <div className="item-form-filters__title title-item-form-filters accordion--title--element">

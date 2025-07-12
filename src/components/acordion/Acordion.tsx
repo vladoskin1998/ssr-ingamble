@@ -1,6 +1,6 @@
-'use client'
+'use client' 
 
-import React, { JSX, memo, useEffect, useRef, useState } from "react"
+import React, { JSX, memo, useCallback, useEffect, useRef, useState } from "react"
 import { useAccordion } from "@/hooks/useAccordion"
 
 type AccordionItemProps = {
@@ -9,25 +9,48 @@ type AccordionItemProps = {
     defaultOpen?: boolean
     isNested?: boolean
 }
- //всегда в хедерт) добавлять accordion--title--element!!!!!!!!
+
+//всегда в хедерт) добавлять accordion--title--element!!!!!!!!
 export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
     heading,
     content,
     defaultOpen = false,
     isNested = false,
-
 }) => {
-    const [isOpen, setIsOpen] = useState(defaultOpen ||  isNested)
+    const [isOpen, setIsOpen] = useState(defaultOpen || isNested)
+    const [maxHeight, setMaxHeight] = useState<string>("0")
     const [isAnimating, setIsAnimating] = useState<boolean>(false)
+    const [isHidden, setIsHidden] = useState<"hidden" | "visible">(
+        isOpen ? "visible" : "hidden"
+    )
     const { toggle } = useAccordion()
     const headerRef = useRef<HTMLDivElement>(null)
     const bodyRefAcc = useRef<HTMLDivElement | null>(null)
 
-    useEffect(() => {
-        // Remove the maxHeight calculation since we're using transform
+    const calculateTotalHeight = useCallback((element: HTMLElement): number => {
+        let totalHeight = element.scrollHeight
+        const nestedAccordions = element.querySelectorAll(".accordion-item")
+
+        nestedAccordions.forEach((nestedAccordion) => {
+            if (nestedAccordion instanceof HTMLElement) {
+                totalHeight += calculateTotalHeight(nestedAccordion)
+            }
+        })
+
+        return totalHeight
     }, [])
 
+    useEffect(() => {
+        if (bodyRefAcc?.current) {
+            const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
+            setMaxHeight(`${contentHeight}px`)
+        }
+    }, [calculateTotalHeight])
 
+    // Sync internal state with defaultOpen prop changes
+    useEffect(() => {
+        setIsOpen(defaultOpen || isNested)
+    }, [defaultOpen, isNested])
 
     useEffect(() => {
         const headerElement = headerRef.current
@@ -51,7 +74,19 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
         if (isAnimating) return
 
         setIsAnimating(true)
-        setIsOpen((prevState) => !prevState)
+
+        setIsOpen((prevState) => {
+            const newState = !prevState
+            if (newState === true) {
+                setTimeout(() => {
+                    setIsHidden("visible")
+                }, 300)
+            } else {
+                setIsHidden("hidden")
+            }
+            return newState
+        })
+
         toggle()
 
         setTimeout(() => {
@@ -59,21 +94,24 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
         }, 300)
     }
 
- 
-
     return (
         <div className="cusom-react-accordion">
             <div
                 ref={headerRef}
-          
                 style={styles.accordionItemHeader}
                 onClick={handleClick}
                 className="active"
             >
                 {heading}
             </div>
-            <div className={`accordion-item ${isOpen ? 'accordion-open' : 'accordion-closed'}`} 
+            <div 
+                className="accordion-item" 
                 ref={bodyRefAcc}
+                style={{
+                    ...styles.accordionItemPanel,
+                    overflow: isHidden,
+                    maxHeight: isOpen ? maxHeight : "0",
+                }}
             >
                 {content}
             </div>
@@ -90,7 +128,6 @@ const styles = {
         zIndex: "2",
     },
     accordionItemPanel: {
-        transition: "transform 0.3s ease-in-out, opacity 0.3s ease-in-out",
-        willChange: "transform, opacity",
+        transition: "max-height 0.3s ease-in-out",
     },
 }

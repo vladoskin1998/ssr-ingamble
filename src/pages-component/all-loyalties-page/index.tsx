@@ -99,7 +99,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                     <h2 className="top-content-item-loyaltie-programs__name">{item.casino_name}</h2>
                                     <div className="info-casino-card__stake-rating">
                                         <span className="info-casino-card__stake-rating-icon">
-                                            <Image src={'/img/icons/star.svg'} alt="star" width={20} height={20} />
+                                          <Image src="/img/icons/star.svg" width={12} height={12} alt="star" />
                                         </span>
                                         <span className="info-casino-card__stake__rating-number">{item.casino_rank}</span>
                                     </div>
@@ -110,7 +110,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                         <div key={index} className="features-essential-programs-gamble__column">
                                             <div className="features-essential-programs-gamble__item">
                                                 <div className="features-essential-programs-gamble__icon " style={{ position: 'relative' }}>
-                                                    <Image src={it?.image || ''} fill alt={'loyalty_keypoint'} />
+                                                    <Image src={it?.image || ''} width={44} height={44} alt={'loyalty_keypoint'} />
                                                 </div>
                                                 <div className="features-essential-programs-gamble__info">
                                                     <div className="features-essential-programs-gamble__name">{it.text_1}</div>

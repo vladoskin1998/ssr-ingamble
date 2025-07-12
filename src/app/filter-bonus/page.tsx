@@ -315,7 +315,6 @@ const ListDisplayData = memo(({ displayedData, isShowPlayButton }: { displayedDa
                                       alt="like" 
                                       width={12} 
                                       height={12}
-                                      className="svg-icon"
                                   />
                                 </span>
                                     <span className="info-casino-card__likes-number">{sanitizeNumberLike(item?.bonus_likes)}</span>

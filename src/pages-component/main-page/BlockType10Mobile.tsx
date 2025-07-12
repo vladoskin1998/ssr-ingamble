@@ -145,7 +145,7 @@ export default function BlockType10Mobile({
                                                             style={{ position: 'relative' }}
                                                             className="different-casino-medium__rating-icon"
                                                         >
-                                                            <Image fill src="/img/icons/star.svg" alt="star" />
+                                                            <Image src="/img/icons/star.svg" width={12} height={12} alt="star" />
                                                         </span>
                                                         <span className="different-casino-medium__rationg-number">
                                                             {item?.casino_info?.casino_rank}

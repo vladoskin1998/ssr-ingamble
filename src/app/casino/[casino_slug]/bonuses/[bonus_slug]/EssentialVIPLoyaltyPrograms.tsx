@@ -77,14 +77,20 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                             className="slide-slider__item essential-programs-gamble__item item-essential-programs-gamble"
                                         >
                                             <div className="item-essential-programs-gamble__top">
-                                                <Link
-                                                    href={`/casino/${item?.casino_slug}`}
-                                                    aria-label="Put your description here."
-                                                    className="item-essential-programs-gamble__logo"
-                                                    prefetch={false} // отключаем предзагрузку для мобильных
-                                                >
-                                                    <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
-                                                </Link>
+                                                {item?.casino_slug ? (
+                                                    <Link
+                                                        href={`/casino/${item.casino_slug}`}
+                                                        aria-label="Put your description here."
+                                                        className="item-essential-programs-gamble__logo"
+                                                        prefetch={false} // отключаем предзагрузку для мобильных
+                                                    >
+                                                        <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
+                                                    </Link>
+                                                ) : (
+                                                    <div className="item-essential-programs-gamble__logo">
+                                                        <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className="item-essential-programs-gamble__body">
                                                 <div className="item-essential-programs-gamble__provider">
@@ -154,7 +160,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                     {item.keypoints.map((itp, idk) => (
                                                         <div className="features-essential-programs-gamble__item" key={idk}>
                                                             <div className="features-essential-programs-gamble__icon">
-                                                                <Image width={444} height={444} src={itp.image || '/img/no-results.svg'} alt="medium" />
+                                                                <Image width={44} height={44} src={itp.image || '/img/no-results.svg'} alt="medium" />
                                                             </div>
                                                             <div className="features-essential-programs-gamble__info">
                                                                 <div className="features-essential-programs-gamble__name">{itp.text_1}</div>

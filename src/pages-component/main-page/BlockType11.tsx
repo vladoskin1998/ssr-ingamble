@@ -89,7 +89,7 @@ export default function BlockType11({
                                                         style={{ position: 'relative' }}
                                                         className="deposit-top-bonuses-gamble__stake-icon"
                                                     >
-                                                        <Image fill src="/img/icons/star.svg" alt="star" />
+                                                        <Image src="/img/icons/star.svg" width={12} height={12} alt="star" />
                                                     </span>
                                                     <span className="deposit-top-bonuses-gamble__stake-number">
                                                         {item?.casino_info?.casino_rank}
@@ -196,7 +196,7 @@ export default function BlockType11({
                                                         style={{ position: 'relative' }}
                                                         className="deposit-top-bonuses-gamble__stake-icon"
                                                     >
-                                                        <Image fill src="/img/icons/star.svg" alt="star" />
+                                                        <Image src="/img/icons/star.svg" width={12} height={12} alt="star" />
                                                     </span>
                                                     <span className="deposit-top-bonuses-gamble__stake-number">
                                                         {item.casino_info.casino_rank}

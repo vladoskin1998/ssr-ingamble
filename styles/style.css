@@ -1709,9 +1709,18 @@ h3 {
 }
 
 .bottom-slider__pagination.swiper-pagination {
-  position: relative;
+  position: relative !important;
   bottom: auto !important;
   top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+  min-height: 20px;
 }
 .bottom-slider__pagination .swiper-pagination-bullet {
   width: 20.8px;
@@ -4295,7 +4304,7 @@ h3 {
 }
 
 .ibg--custom img{
-  object-fit: cover;
+  object-fit: contain;
   width: 100% ;
   height: 100% ;
   overflow: hidden;
@@ -10127,6 +10136,7 @@ h3 {
   border-radius: 50%;
   overflow: hidden;
   margin: 0 12px 0 0;
+  position: relative;
 }
 @media (max-width: 768.98px) {
   .block-info-review_languages .element-block-info-review__icon {
@@ -10134,6 +10144,8 @@ h3 {
     width: 20px;
     height: 20px;
     margin: 0 8px 0 0;
+    position: relative;
+    overflow: hidden;
   }
 }
 .block-info-review_languages .element-block-info-review__value {
@@ -10287,6 +10299,8 @@ h3 {
   width: 20px;
   height: 20px;
   margin: 0 0 6px 0;
+  position: relative;
+  overflow: hidden;
 }
 .block-info-review_types .element-block-info-review__icon img {
   max-width: 100%;
@@ -10318,6 +10332,8 @@ h3 {
 }
 .block-info-review_types .popup-item-content-bonus-information__content .element-block-info-review__icon {
   margin: 0 10px 0 0;
+  position: relative;
+  overflow: hidden;
 }
 .block-info-review_tools .block-info-review__elements {
   padding: 0;
@@ -10374,6 +10390,8 @@ h3 {
   width: 24px;
   height: 24px;
   margin: 0 12px 0 0;
+  position: relative;
+  overflow: hidden;
 }
 .block-info-review_tools .element-block-info-review__icon img {
   max-width: 100%;
@@ -10384,6 +10402,8 @@ h3 {
     width: 20px;
     height: 20px;
     margin: 0 8px 0 0;
+    position: relative;
+    overflow: hidden;
   }
 }
 .block-info-review_tools .element-block-info-review__value {
@@ -10672,13 +10692,20 @@ h3 {
   border-radius: var(--SystemCorners-Minimum, 4px);
   overflow: hidden;
   background: var(--BG-Bg_2, #232320);
+  position: relative;
 }
-.element-block-info-review__image img {
-  max-width: 100%;
+.element-block-info-review__image {
+  /* flex: 0 0 48px; */
+  /* position: relative; */
+  overflow: hidden;
 }
+
 .element-block-info-review__icon img {
   width: 100%;
   height: 100%;
+  object-fit: contain !important;
+  max-width: 100%;
+  max-height: 100%;
 }
 .loyaltie__breadcrumbs:not(:last-child) {
   margin: 0 0 24px 0;
@@ -12164,6 +12191,8 @@ h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 .item-loyaltie-programs__image img {
   width: 305px;
@@ -15149,7 +15178,7 @@ h3 {
   }
 }
 .main-gamble__casino-big-cards .slider .swiper-slide {
-  width: calc(100vw/3 - 67px);
+  width: 483px;
 }
 @media (max-width: 1650.98px) {
   .main-gamble__casino-big-cards .slider .swiper-slide {
@@ -16233,7 +16262,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -webkit-transform: scale(1);
@@ -16605,6 +16634,13 @@ h3 {
   align-items: center;
   justify-content: center;
   margin: 0 12px 0 0;
+  position: relative;
+}
+
+.features-essential-programs-gamble__icon img {
+  object-fit: contain !important;
+  max-width: 100%;
+  max-height: 100%;
 }
 @media (max-width: 768.98px) {
   .features-essential-programs-gamble__icon {
@@ -18558,4 +18594,162 @@ white-space: nowrap;
     min-height: 200px; /* Запобігає layout shift */
 }
 
+/* Desktop slider styles for other-сasinos-review__slider */
+.other-сasinos-review__slider .swiper-slide {
+  width: auto !important;
+  flex-shrink: 0;
+}
+
+.other-сasinos-review__slider .item-slide-slider {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.other-сasinos-review__slider .item-slide-slider__image-block {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.other-сasinos-review__slider .item-slide-slider__content {
+  padding: 16px 0;
+}
+
+.other-сasinos-review__slider .item-slide-slider__name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__name:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__tags:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__tags .tags-casino-card__item {
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__tags .tags-casino-card__item:not(:last-child) {
+  margin-right: 8px;
+}
+
+.other-сasinos-review__slider .item-slide-slider__bottom {
+  margin-top: auto;
+}
+
+.other-сasinos-review__slider .item-slide-slider__bottom .info-casino-card__stake-rating {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.other-сasinos-review__slider .item-slide-slider__bottom .info-casino-card__stake-rating-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 1024px) {
+  .other-сasinos-review__slider .item-slide-slider__image-block {
+    height: 180px;
+  }
+  
+  .other-сasinos-review__slider .item-slide-slider__name {
+    font-size: 18px;
+  }
+  
+  .other-сasinos-review__slider .item-slide-slider__bottom .info-casino-card__stake-rating {
+    font-size: 16px;
+  }
+}
+
+/* Fix for iwild-casino-bonuses slider */
+.iwild-casino-bonuses__slider .swiper-slide {
+  width: auto !important;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1355.98px) {
+  .review__iwild-casino-bonuses .slider__body .swiper-slide {
+    width: auto !important;
+    max-width: 425px;
+  }
+}
+
+/* Fix for tabs container */
+.tabs-container .swiper-wrapper {
+  display: flex !important;
+  align-items: stretch;
+}
+
+.tabs-container .swiper-slide {
+  height: auto !important;
+  width: auto !important;
+  flex-shrink: 0;
+}
+
+/* Fix for info-review tabs */
+.info-review__tabs .swiper-wrapper {
+  display: flex !important;
+}
+
+.info-review__tabs .swiper-slide {
+  width: auto !important;
+  flex-shrink: 0;
+}
+
 /* ... existing code ... */
+
+/* Фіксація для іконок в блоках info-review */
+.element-block-info-review__icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Override ibg--custom styles for info review icons */
+.element-block-info-review__icon.ibg--custom img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Забезпечуємо правильне позиціонування батьківського контейнера */
+.element-block-info-review__icon {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Специфічні стилі для різних типів блоків */
+.block-info-review_languages .element-block-info-review__icon img,
+.block-info-review_tools .element-block-info-review__icon img {
+  border-radius: 50%;
+}
+
+.block-info-review_types .element-block-info-review__icon img {
+  border-radius: 0;
+}

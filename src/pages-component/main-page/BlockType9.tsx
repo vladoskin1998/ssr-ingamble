@@ -83,12 +83,14 @@ const BlockType9 = memo(function BlockType9({
                             }}
                             className="slider__wrapper swiper-wrapper"
                         >
-                            {data.items_block.data_cards?.map((item, index) => (
+                            {data.items_block.data_cards?.map((item, index) => {
+                                if (!item?.casino_slug) return null;
+                                return (
                                 <SwiperSlide key={index} className="slider__slide slide-slider ">
                                     <div className="slide-slider__item essential-programs-gamble__item item-essential-programs-gamble">
                                         <div className="item-essential-programs-gamble__top">
                                             <Link
-                                                href={`/casino/${item?.casino_slug}`}
+                                                href={`/casino/${item.casino_slug}`}
                                                 aria-label="Put your description here."
                                                 className="item-essential-programs-gamble__logo"
                                             >
@@ -160,7 +162,7 @@ const BlockType9 = memo(function BlockType9({
                                                 {item?.keypoints?.map((itp, idk) => (
                                                     <div className="features-essential-programs-gamble__item" key={idk}>
                                                         <div className="features-essential-programs-gamble__icon">
-                                                            <Image width={444} height={444} alt="Casino Image" src={itp.image || ''} />
+                                                            <Image width={44} height={44} alt="Casino Image" src={itp.image || ''} />
                                                         </div>
                                                         <div className="features-essential-programs-gamble__info">
                                                             <div className="features-essential-programs-gamble__name">{itp.text_1}</div>
@@ -201,7 +203,8 @@ const BlockType9 = memo(function BlockType9({
                                         </div>
                                     </div>
                                 </SwiperSlide>
-                            ))}
+                                );
+                            })}
                         </Swiper>
                     </div>
                 </div>
