@@ -1,10 +1,10 @@
 import { GeoLocationAllowdType, GetDataBonusResponse, WageringBonusPlusDepositType } from '@/types'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 import { useFilterContext } from '@/context/FilterContext'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
+import { useResponsive } from '@/hooks/useResponsive'
 
 const color_label = ['tags-casino-card__item_green', 'tags-casino-card__item_blue', 'tags-casino-card__item_purple', 'tags-casino-card__item_grass', 'tags-casino-card__item_orange']
 
@@ -32,21 +32,22 @@ export const WagerPrettier = (wager: WageringBonusPlusDepositType | undefined): 
 }
 
 export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusResponse | undefined; geoLocation: GeoLocationAllowdType }) => {
-    const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 1023.98)
+    // ✅ ЗМІНА: Використовуємо безпечний hook замість прямого доступу до window
+    const { isMobile: isSmallScreen } = useResponsive(1023.98, false)
 
     const { setCasinoFilters } = useFilterContext()
 
-    const handleResize = (): void => {
-        setIsSmallScreen(window.innerWidth <= 1023.98)
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize)
-
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
+    // ❌ ВИДАЛЕНО: Старий код з прямим доступом до window
+    // const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 1023.98)
+    // const handleResize = (): void => {
+    //     setIsSmallScreen(window.innerWidth <= 1023.98)
+    // }
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize)
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize)
+    //     }
+    // }, [])
 
     const wagerValue = WagerPrettier(data?.wagering_bonus_plus_deposit)
 
