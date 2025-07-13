@@ -495,10 +495,10 @@ footer{
   }
   @media (max-width: 1355.98px) {
     .socials-top-footer {
-      flex: 1 1 100%;
+      flex: 1 1;
     }
     .socials-top-footer:not(:first-child) {
-      margin: 40px 0 0 0;
+      /* margin: 40px 0 0 0; */
     }
   }
   .socials-top-footer__label {
@@ -745,7 +745,7 @@ footer{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    contain: size layout;
+    /* contain: size layout; */
     min-height: 60px;
   }
   .logos-bottom-footer__column {
