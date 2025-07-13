@@ -505,7 +505,8 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                                 className="popup-item-content-bonus-information__game game-popup-item-content-bonus-information popup-item-content-bonus-information__column"
                                                                             >
                                                                                 <span className="game-popup-item-content-bonus-information__icon">
-                                                                                    <Image loading="lazy" src={item?.image || "/img/games/01.svg"} alt="Slots" width={40} height={40} />
+                                                                        
+                                                                                    <img loading="lazy" src={item?.image || "/img/games/01.svg"} alt="Slots" />
                                                                                 </span>
                                                                                 <span className="game-popup-item-content-bonus-information__name">{item.name || 'slot'}</span>
                                                                             </div>
