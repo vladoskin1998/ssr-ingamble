@@ -89,18 +89,19 @@ export default function SimpleCasinos() {
 
     useEffect(() => {
         if (data?.headers) {
+            // Axios нормалізує заголовки до lowercase, тому треба використовувати правильні імена
             const countryCode = data?.headers?.['cf-ipcountry-code']
             const countryName = data?.headers?.['cf-ipcountry']
 
             const countryImg = Country?.general?.countries?.find((it) => {
-                return it.code === countryCode || it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase()
+                return it.code === countryCode || it.name.toLocaleLowerCase() === countryName?.toLocaleLowerCase()
             })?.flag_image
 
-            const idCountry = data.dataCurrentCasinos?.blocked_countries?.find((item) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
+            const idCountry = data.dataCurrentCasinos?.blocked_countries?.find((item: any) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
 
             setGeoLocation({
-                countryCode,
-                countryName,
+                countryCode: countryCode || '',
+                countryName: countryName || '',
                 isAllowed: !idCountry,
                 isLoadedGeo: true,
                 countryImg,

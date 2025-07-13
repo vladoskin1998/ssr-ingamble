@@ -4304,7 +4304,7 @@ h3 {
 }
 
 .ibg--custom img{
-  object-fit: contain;
+  object-fit: cover;
   width: 100% ;
   height: 100% ;
   overflow: hidden;
@@ -18678,13 +18678,11 @@ white-space: nowrap;
 
 /* Fix for iwild-casino-bonuses slider */
 .iwild-casino-bonuses__slider .swiper-slide {
-  width: auto !important;
   flex-shrink: 0;
 }
 
 @media (min-width: 1355.98px) {
   .review__iwild-casino-bonuses .slider__body .swiper-slide {
-    width: auto !important;
     max-width: 425px;
   }
 }
