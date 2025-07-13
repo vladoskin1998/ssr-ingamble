@@ -14,6 +14,7 @@ import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType2Mobile({
     data,
@@ -115,12 +116,7 @@ export default function BlockType2Mobile({
                                                                 prefetch={false} 
                                                             >
                                                                 {item?.bonus_info?.bonus_image && (
-                                                                    <Image
-                                                                        width={444}
-                                                                        height={444}
-                                                                        alt="Casino Image"
-                                                                        src={item?.bonus_info?.bonus_image}
-                                                                    />
+                                                                    <LazyCardImg img={item?.bonus_info?.bonus_image || ''} height="100%" width="100%" />
                                                                 )}
                                                             </Link>
                                                             {isShowPlayButton && (
@@ -155,12 +151,7 @@ export default function BlockType2Mobile({
                                                                 >
                                                                     <div className="casino-small-card__image ibg--custom">
                                                                         {item?.casino_info?.casino_image && (
-                                                                            <Image
-                                                                                width={444}
-                                                                                height={444}
-                                                                                alt="Casino Image"
-                                                                                src={item?.casino_info?.casino_image}
-                                                                            />
+                                                                            <LazyCardImg img={item?.casino_info?.casino_image || ''} height="100%" width="100%" />
                                                                         )}
                                                                     </div>
                                                                 </Link>

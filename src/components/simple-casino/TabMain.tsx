@@ -608,7 +608,7 @@ export const TabMain = ({
                                                                 <div key={index} className="block-info-review__elements-column">
                                                                     <div className="block-info-review__element element-block-info-review">
                                                                         <div className="element-block-info-review__icon">
-                                                                            <Image src="/img/icons/info-review-check.svg" sizes="(max-width: 768px) 20px, 20px" width={24} height={24} alt="check" />
+                                                                          <img src="/img/icons/info-review-check.svg" alt="check" />
                                                                         </div>
                                                                         <div className="element-block-info-review__value">{responsibleGameLabels[index]}</div>
                                                                     </div>

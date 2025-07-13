@@ -1,58 +1,34 @@
-import { memo, useEffect } from 'react'
+'use client'
+import { memo, useEffect, useState } from 'react'
 import { LineLoader } from '../loader/LineLoader'
 import { LazyImgHomeType } from '@/pages-component/main-page'
 import Image from 'next/image'
 
-export const LazyCardImg = memo(({ img, size, width, height, imgLoading = 'lazy' }: { 
-    img: string; 
-    size?: 'large' | 'medium' | 'small'; 
-    width?: string;
-    height?: string;
-    imgLoading?: LazyImgHomeType 
-}) => {
-    useEffect(() => {
-        // Можна додати логіку preloading якщо потрібно
-    }, [img])
+export const LazyCardImg = memo(({ img, size, width = 'auto', height, imgLoading = 'lazy' }: { height?: string; img: string; size?: 'large' | 'medium' | 'small'; width?: string; imgLoading?: LazyImgHomeType }) => {
+  //@ts-ignore
+  const [loading, setLoading] = useState(true)
 
-    // Якщо батьківський контейнер має фіксовані розміри і передані width="100%" height="100%"
-    // використовуємо fill для заповнення контейнера
-    if (width === "100%" && height === "100%") {
-        return (
-            <>
-                {!img ? <LineLoader size={size} /> : <></>}
-                <Image
-                    src={img}
-                    alt={img}
-                    fill
-                    loading={imgLoading}
-                    style={{
-                        objectFit: 'cover'
-                    }}
-                />
-            </>
-        )
-    }
+  useEffect(() => {
+      if (img) {
+          setLoading(false)
+      }
+  }, [img])
 
-    // Інакше використовуємо адаптивний підхід
-    return (
-        <>
-            {!img ? <LineLoader size={size} /> : <></>}
+  return (
+      <>
+          {!img ? <LineLoader size={size} /> : <></>}
 
-            <Image
-                src={img}
-                alt={img}
-                width={0}
-                height={0}
-                sizes="100vw"
-                loading={imgLoading}
-                style={{
-                    width: width || '100%',
-                    height: height || 'auto',
-                    objectFit: 'contain'
-                }}
-            />
-        </>
-    )
+          <img
+              src={img}
+              alt={img}
+              loading={imgLoading}
+              style={{
+                  height,
+                  width: width,
+              }}
+          />
+      </>
+  )
 })
 
 LazyCardImg.displayName = 'LazyCardImg'

@@ -5,6 +5,7 @@ import { GeoLocationAllowdType, LoyaltieProgramDataResponse } from '@/types'
 import { useFilterContext } from '@/context/FilterContext'
 import Link from 'next/link'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export const LoyaltieCasinoInfo = ({ 
     data, 
@@ -25,17 +26,12 @@ export const LoyaltieCasinoInfo = ({
                     <div className="casino-info__row">
                         <div className="casino-info__main main-casino-info">
                             
-                            {/* ✅ Виправлено структуру - видалено порожній div */}
-                            <div className="main-casino-info__image ibg--custom">
-                                <Image
-                                    width={200}  // ✅ Зменшено розмір для оптимізації
-                                    height={200}
-                                    alt={`${data.casino_name} Casino Logo`}  // ✅ Покращений alt
-                                    src={data.casino_image || '/img/default-casino.webp'}  // ✅ Fallback зображення
-                                    priority  // ✅ Критичне зображення
-                                />
-                            </div>
-                            
+                          <div className="">
+                                  <div className="main-casino-info__image ibg--custom">
+                                      <LazyCardImg img={data?.casino_image || ''} height="100%" width="100%" imgLoading={'eager'} />
+                                  </div>
+                          </div>
+                              
                         </div>
                         
                         <div className="casino-info__content content-casino-info">

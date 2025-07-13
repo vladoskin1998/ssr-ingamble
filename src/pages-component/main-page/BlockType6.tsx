@@ -15,6 +15,7 @@ import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType6({
     data,
@@ -162,12 +163,7 @@ export default function BlockType6({
                                                         onClick={(e) => e.stopPropagation()}
                                                         href={`/casino/${item?.casino_info?.casino_name}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                     >
-                                                        <Image
-                                                            width={444}
-                                                            height={444}
-                                                            alt="Casino Image"
-                                                            src={item.bonus_info.bonus_image || '/img/no-results.svg'}
-                                                        />
+                                                        <LazyCardImg img={item.bonus_info.bonus_image || ''} />
                                                     </Link>
                                                     {isShowPlayButton && (
                                                         <a
@@ -200,12 +196,7 @@ export default function BlockType6({
                                                                 }}
                                                                 href={`/casino/${item?.casino_info?.casino_slug}`}
                                                             >
-                                                                <Image
-                                                                    width={444}
-                                                                    height={444}
-                                                                    alt="Casino Image"
-                                                                    src={item.casino_info.casino_image || '/img/no-results.svg'}
-                                                                />
+                                                                <LazyCardImg img={item.casino_info.casino_image || ''} size="medium" />
                                                             </Link>
                                                         </div>
                                                         <div className="casino-small-card__body">

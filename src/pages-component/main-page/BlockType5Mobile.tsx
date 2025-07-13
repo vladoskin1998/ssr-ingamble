@@ -13,6 +13,7 @@ import Link from 'next/link'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType5Mobile({
     data,
@@ -118,12 +119,7 @@ export default function BlockType5Mobile({
                                                         prefetch={false} 
                                                     >
                                                         <span className="different-casino-medium__image ibg--custom">
-                                                            <Image
-                                                                width={444}
-                                                                height={444}
-                                                                alt="Casino Image"
-                                                                src={item?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                            />
+                                                          <LazyCardImg img={item?.casino_info?.casino_image || ''} size="medium" />
                                                         </span>
                                                     </Link>
                                                     <div className="different-casino-medium__content">

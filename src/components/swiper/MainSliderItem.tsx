@@ -6,6 +6,7 @@ import { useAdaptiveBehavior } from '@/context/AppContext'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { LazyCardImg } from '../lazy-img/LazyCardImg'
 
 const ItemMainSlider = ({
     item,
@@ -44,14 +45,7 @@ const ItemMainSlider = ({
                     aria-label="Put your description here."
                     className="casino-card__image"
                 >
-                    <Image 
-                        fill 
-                        src={item.img || '/img/no-results.svg'} 
-                        alt={item.casinoName} 
-                        sizes="(max-width: 768px) 280px, (max-width: 1024px) 320px, 400px"
-                        priority={index === 0}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                    />
+                    <LazyCardImg img={item.img || ''} width="100%" height="100%" />
                 </Link>
                 {isShowPlayButton && (
                     <a

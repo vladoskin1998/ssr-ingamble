@@ -8,6 +8,7 @@ import { cloacingFetch, cloacingLink } from '@/helper'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType11({
     data,
@@ -61,12 +62,7 @@ export default function BlockType11({
                                             className="deposit-top-bonuses-gamble__image-block"
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
-                                                <Image
-                                                    width={444}
-                                                    height={444}
-                                                    alt="Casino Image"
-                                                    src={item?.casino_info?.casino_image || ''}
-                                                />
+                                            <LazyCardImg img={item?.casino_info?.casino_image || ''} width="auto" />
                                             </span>
                                         </Link>
                                         <div className="deposit-top-bonuses-gamble__body">
@@ -169,12 +165,7 @@ export default function BlockType11({
                                             className="deposit-top-bonuses-gamble__image-block"
                                         >
                                             <span className="deposit-top-bonuses-gamble__image ibg--custom">
-                                                <Image
-                                                    width={444}
-                                                    height={444}
-                                                    alt="Casino Image"
-                                                    src={item?.casino_info?.casino_image || ''}
-                                                />
+                                            <LazyCardImg img={item?.casino_info?.casino_image || ''} width="auto" />
                                             </span>
                                         </Link>
                                         <div className="deposit-top-bonuses-gamble__body">

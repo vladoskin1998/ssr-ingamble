@@ -11,6 +11,7 @@ import Link from 'next/link'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 const BlockType9 = memo(function BlockType9({
     data,
@@ -94,7 +95,7 @@ const BlockType9 = memo(function BlockType9({
                                                 aria-label="Put your description here."
                                                 className="item-essential-programs-gamble__logo"
                                             >
-                                                <Image width={444} height={444} alt="Casino Image" src={item.card_logo || ''} />
+                                                <LazyCardImg img={item.card_logo || ''} />
                                             </Link>
                                         </div>
                                         <div className="item-essential-programs-gamble__body">
@@ -162,7 +163,7 @@ const BlockType9 = memo(function BlockType9({
                                                 {item?.keypoints?.map((itp, idk) => (
                                                     <div className="features-essential-programs-gamble__item" key={idk}>
                                                         <div className="features-essential-programs-gamble__icon">
-                                                            <Image width={44} height={44} alt="Casino Image" src={itp.image || ''} />
+                                                          <LazyCardImg img={itp.image || ''} size="medium" />
                                                         </div>
                                                         <div className="features-essential-programs-gamble__info">
                                                             <div className="features-essential-programs-gamble__name">{itp.text_1}</div>

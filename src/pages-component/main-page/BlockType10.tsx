@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { SeeAllRoutes } from '@/context/FilterContext'
 import { CURRENTYEAR } from '@/helper'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType10({
     data,
@@ -89,12 +90,7 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image
-                                        width={444}
-                                        height={444}
-                                        alt="Casino Image"
-                                        src={data.items_block.data_cards?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                    />
+                                <LazyCardImg img={data.items_block.data_cards?.[1]?.casino_info?.casino_image || ''} />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -173,12 +169,7 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image
-                                        width={444}
-                                        height={444}
-                                        alt="Casino Image"
-                                        src={data.items_block.data_cards?.[2]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                    />
+                                <LazyCardImg img={data.items_block.data_cards?.[2]?.casino_info?.casino_image || ''} />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">
@@ -216,12 +207,7 @@ export default function BlockType10({
                                 className="different-casino-big__image-block"
                             >
                                 <span className="different-casino-big__image ibg--custom">
-                                    <Image
-                                        width={444}
-                                        height={444}
-                                        alt="Casino Image"
-                                        src={data.items_block.data_cards?.[3]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                    />
+                                  <LazyCardImg img={data.items_block.data_cards?.[3]?.casino_info?.casino_image || ''} />
                                 </span>
                             </Link>
                             <div className="different-casino-big__content">

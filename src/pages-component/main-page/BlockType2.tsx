@@ -15,6 +15,7 @@ import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType2({
     data,
@@ -138,14 +139,7 @@ export default function BlockType2({
                                                                                     className="casino-small-card__image ibg--custom"
                                                                                     prefetch={false} 
                                                                                 >
-                                                                                    <Image
-                                                                                        width={444}
-                                                                                        height={444}
-                                                                                        alt="Casino Image"
-                                                                                        src={item?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                                        loading="lazy"
-                                                                                        sizes="(max-width: 768px) 100px, (max-width: 1024px) 120px, 150px"
-                                                                                    />
+                                                                                    <LazyCardImg img={item?.casino_info?.casino_image || ''} size="medium" height="100%" width="100%" />
                                                                                 </Link>
                                                                             </div>
                                                                             <div className="casino-small-card__body">
@@ -273,14 +267,7 @@ export default function BlockType2({
                                                             prefetch={false} 
                                                         >
                                                             <span className="different-casino-bg__image ibg--custom">
-                                                                <Image
-                                                                    width={444}
-                                                                    height={444}
-                                                                    alt="Casino Image"
-                                                                    src={item.casino_info.casino_image || '/img/no-results.svg'}
-                                                                    loading="lazy"
-                                                                    sizes="(max-width: 768px) 200px, (max-width: 1024px) 250px, 300px"
-                                                                />
+                                                              <LazyCardImg img={item.casino_info.casino_image || ''} height="100%" width="100%" />
                                                             </span>
                                                         </Link>
                                                         <div className="different-casino-bg__content">

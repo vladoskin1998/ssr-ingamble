@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { LoyaltyInRankRangeResponse } from '@/types'
 import $api from '@/http'
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 
 const getFilteringLoyaltiesList = async () => {
@@ -84,7 +85,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                         className="item-essential-programs-gamble__logo"
                                                         prefetch={false} // отключаем предзагрузку для мобильных
                                                     >
-                                                        <Image src={item.card_logo || '/img/no-results.svg'} alt={'card_logo'} width={444} height={444} />
+                                                        <LazyCardImg img={item.card_logo || ''} />
                                                     </Link>
                                                 ) : (
                                                     <div className="item-essential-programs-gamble__logo">
@@ -160,7 +161,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                     {item.keypoints.map((itp, idk) => (
                                                         <div className="features-essential-programs-gamble__item" key={idk}>
                                                             <div className="features-essential-programs-gamble__icon">
-                                                                <Image width={44} height={44} src={itp.image || '/img/no-results.svg'} alt="medium" />
+                                                              <LazyCardImg img={itp.image || ''} size="medium" />
                                                             </div>
                                                             <div className="features-essential-programs-gamble__info">
                                                                 <div className="features-essential-programs-gamble__name">{itp.text_1}</div>

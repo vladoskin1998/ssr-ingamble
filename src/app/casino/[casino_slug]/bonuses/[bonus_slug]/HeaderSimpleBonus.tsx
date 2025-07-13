@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 import { useFilterContext } from '@/context/FilterContext'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 const color_label = ['tags-casino-card__item_green', 'tags-casino-card__item_blue', 'tags-casino-card__item_purple', 'tags-casino-card__item_grass', 'tags-casino-card__item_orange']
 
@@ -59,25 +60,13 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                         <div className="casino-info__main main-casino-info">
                             <div className="main-casino-info__image-block">
                                 <div className="main-casino-info__image ibg--custom">
-                                    <Image
-                                        src={data?.bonus_image || '/img/no-results.svg'}
-                                        alt="main-img"
-                                        fill
-                                        style={{ objectFit: "cover" }}
-                                        priority
-                                    />
+                                <LazyCardImg img={data?.bonus_image || ''} imgLoading={'eager'} height="100%" width="100%" />
                                 </div>
                             </div>
                             {!isSmallScreen ? (
                                 <div className="main-casino-info__name name-main-casino-info">
                                     <Link className="name-main-casino-info__logo" href={`/casino/${data?.casino_slug}`} prefetch={false}>
-                                        <Image 
-                                            src={data?.casino_logo || ''} 
-                                            alt={`${data?.casino_name} logo`} 
-                                            width={80} 
-                                            height={80} 
-                                            priority
-                                        />
+                                    <LazyCardImg img={data?.casino_logo || ''} />
                                     </Link>
                                     <div className="name-main-casino-info__content">
                                         <Link href={`/casino/${data?.casino_slug}`} rel="noopener noreferrer" className="name-main-casino-info__title" prefetch={false}>

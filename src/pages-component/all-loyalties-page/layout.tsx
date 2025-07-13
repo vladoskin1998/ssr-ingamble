@@ -148,7 +148,7 @@ export default function AllLoyaltyLayout({
                                             prefetch={false}
                                             href={`/casino/${item.casino_slug}`}
                                             className="item-loyaltie-programs__image loyalty-img-custom"
-                                            style={{ position: 'relative' }}
+                                            // style={{ position: 'relative' }}
                                         >
                                             <Image src={item?.casino_image || '/img/no-results.svg'} fill alt={item.casino_slug} />
                                         </Link>

@@ -12,6 +12,7 @@ import { SeeAllButton } from './SeeAllButton'
 import { cloacingFetch, cloacingLink } from '@/helper'
 import Link from 'next/link'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeDataBlock<DataHomeItemsBlock>; isAutoPlay?: boolean }) {
     const sliderRef = useRef<SwiperRef | null>(null)
@@ -105,13 +106,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image width={444} height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.[0].casino_info.casino_image || '/img/no-results.svg'}
-                                                                            priority={index === 0}
-                                                                            loading={index === 0 ? "eager" : "lazy"}
-                                                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                                                        />
+                                                                      <LazyCardImg img={item?.[0].casino_info.casino_image || ''} size="medium" />
                                                                     </span>
                                                                 </Link>
                                                                 <div className="different-casino-standart__content">
@@ -168,13 +163,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image width={444} height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                            priority={index === 0}
-                                                                            loading={index === 0 ? "eager" : "lazy"}
-                                                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                                                        />
+                                                                      <LazyCardImg img={item?.[1]?.casino_info?.casino_image || ''} size="medium" />
                                                                     </span>
                                                                 </Link>
                                                                 <div className="different-casino-standart__content">
@@ -231,11 +220,7 @@ export default function BlockMType2M({ data, isAutoPlay = false }: { data: HomeD
                                                                     prefetch={false} // отключаем предзагрузку для мобильных
                                                                 >
                                                                     <span className="different-casino-standart__image ibg--custom">
-                                                                        <Image width={444} height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.[2]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                           
-                                                                        />
+                                                                      <LazyCardImg img={item?.[2]?.casino_info?.casino_image || ''} size="medium" />
                                                                     </span>
                                                                 </Link>
                                                                 <div className="different-casino-standart__content">

@@ -2,6 +2,7 @@
 import React from "react"
 import { SeeAllEssentialLoyaltyKeypoint } from "@/types"
 import Image from "next/image"
+import { LazyCardImg } from "@/components/lazy-img/LazyCardImg"
 
 const color_gifts = ['item-deposits_grass', 'item-deposits_ocean', 'item-deposits_purple', 'item-deposits_green']
 const blockWidth = (l: number | undefined) => {
@@ -44,7 +45,7 @@ export const LoyaltyRewnew = ({ loyalty_subtype }: { loyalty_subtype: SeeAllEsse
                                      className={`deposits__column ${blockWidth(loyalty_subtype?.length)}`}>
                                         <div className={`deposits__item item-deposits ${color_gifts[index % 4]}`}>
                                             <div className="item-loyalty-review__image">
-                                                <Image width={444} height={444} src={item?.image || '/img/no-results.svg'} alt={`${item?.text_1} - ${item?.text_2}`} loading="lazy" />
+                                            <LazyCardImg img={item?.image || ''} height="100%" width="100%" />
                                             </div>
                                             <div className="item-loyalty-review__content">
                                                 <div className="item-loyalty-review__label">{item?.text_1}</div>

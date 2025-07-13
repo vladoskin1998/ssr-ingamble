@@ -14,6 +14,7 @@ import { SeeAllButton } from './SeeAllButton'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 export default function BlockType3({
     data,
@@ -144,12 +145,7 @@ export default function BlockType3({
                                                                             href={`/casino/${item?.[0]?.casino_info?.casino_slug}`}
                                                                             className="different-casino-standart__image ibg--custom"
                                                                         >
-                                                                            <Image
-                                                                                width={444}
-                                                                                height={444}
-                                                                                alt="Casino Image"
-                                                                                src={item?.[0]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                            />
+                                                                            <LazyCardImg img={item?.[0]?.casino_info?.casino_image || ''} width="100%" height="100%" />
                                                                         </Link>
                                                                     </div>
                                                                     <div className="different-casino-standart__content">
@@ -215,12 +211,7 @@ export default function BlockType3({
                                                                                 className="different-casino-standart__image ibg--custom"
                                                                                 href={`/casino/${item?.[1]?.casino_info?.casino_slug}`}
                                                                             >
-                                                                                <Image
-                                                                                    width={444}
-                                                                                    height={444}
-                                                                                    alt="Casino Image"
-                                                                                    src={item?.[1]?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                                />
+                                                                                <LazyCardImg img={item?.[1]?.casino_info?.casino_image || ''} height="100%" width="100%" />
                                                                             </Link>
                                                                         </div>
                                                                         <div className="different-casino-standart__content">
@@ -336,12 +327,7 @@ export default function BlockType3({
                                                                         href={`/casino/${item?.casino_info?.casino_slug}/bonuses/${item?.bonus_info?.bonus_slug}`}
                                                                         className="item-baner-row-block__image ibg--custom"
                                                                     >
-                                                                        <Image
-                                                                            width={444}
-                                                                            height={444}
-                                                                            alt="Casino Image"
-                                                                            src={item?.bonus_info?.bonus_image || '/img/no-results.svg'}
-                                                                        />
+                                                                        <LazyCardImg img={item?.bonus_info?.bonus_image || ''} height="100%" width="100%" />
                                                                     </Link>
                                                                     <div className="item-baner-row-block__row">
                                                                         <div className="item-baner-row-block__column">
@@ -351,12 +337,7 @@ export default function BlockType3({
                                                                                     href={`/casino/${item?.casino_info?.casino_slug}`}
                                                                                 >
                                                                                     <div className="casino-small-card__image ibg--custom">
-                                                                                        <Image
-                                                                                            width={444}
-                                                                                            height={444}
-                                                                                            alt="Casino Image"
-                                                                                            src={item?.casino_info?.casino_image || '/img/no-results.svg'}
-                                                                                        />
+                                                                                      <LazyCardImg img={item?.casino_info?.casino_image || ''} size="medium" height="100%" width="100%" />
                                                                                     </div>
                                                                                 </Link>
                                                                                 <div className="casino-small-card__body">

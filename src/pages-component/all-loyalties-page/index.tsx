@@ -15,6 +15,7 @@ import AllLoyaltyLayout from './layout'
 import { headers } from 'next/headers'
 import { CloakingButton } from './cloaking-button'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 
 
@@ -89,9 +90,9 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                 <Link
                                     href={`/casino/${item.casino_slug}`}
                                     className="item-loyaltie-programs__image loyalty-img-custom"
-                                    style={{ position: 'relative' }}
+                                    // style={{ position: 'relative' }}
                                 >
-                                    <Image src={item?.casino_image || ''} fill alt={item.casino_slug} />
+                                    <LazyCardImg img={item?.casino_image || ''} width="100%" />
                                 </Link>
                             </div>
                             <div className="item-loyaltie-programs__content content-item-loyaltie-programs">
@@ -109,8 +110,8 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                     {item.loyalty_program.loyalty_keypoint.map((it: SeeAllEssentialLoyaltyKeypoint, index: number) => (
                                         <div key={index} className="features-essential-programs-gamble__column">
                                             <div className="features-essential-programs-gamble__item">
-                                                <div className="features-essential-programs-gamble__icon " style={{ position: 'relative' }}>
-                                                    <Image src={it?.image || ''} width={44} height={44} alt={'loyalty_keypoint'} />
+                                                <div className="features-essential-programs-gamble__icon ">
+                                                <LazyCardImg img={it?.image || ''} width="100%" size="medium" />
                                                 </div>
                                                 <div className="features-essential-programs-gamble__info">
                                                     <div className="features-essential-programs-gamble__name">{it.text_1}</div>
