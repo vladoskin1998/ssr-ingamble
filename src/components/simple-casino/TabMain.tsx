@@ -302,7 +302,7 @@ export const TabMain = ({
                                                                 >
                                                                     <div className="block-info-review__element element-block-info-review">
                                                                         <div className="element-block-info-review__image ibg--custom ibg--bg ibg-center">
-                                                                            <LazyCardImg img={pm?.image || ''} size="medium" height="100%" width="100%" />
+                                                                            <LazyCardImg img={pm?.image || ''} size="medium" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -324,7 +324,7 @@ export const TabMain = ({
                                                 >
                                                     <div className="block-info-review__element element-block-info-review">
                                                         <div className="element-block-info-review__image ibg--custom ibg--bg ibg-center">
-                                                            <LazyCardImg img={pm?.image || ''} size="medium" height="100%" width="100%" />
+                                                            <LazyCardImg img={pm?.image || ''} size="medium" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -378,7 +378,7 @@ export const TabMain = ({
                                                             >
                                                                 <div className="block-info-review__element element-block-info-review">
                                                                     <div className="element-block-info-review__icon">
-                                                                        <LazyCardImg img={lw?.image || ''} size="small" height="auto" width="100%" />
+                                                                        <LazyCardImg img={lw?.image || ''} size="small" />
                                                                     </div>
                                                                     <div className="element-block-info-review__value">{lw.name}</div>
                                                                 </div>
@@ -399,7 +399,7 @@ export const TabMain = ({
                                             >
                                                 <div className="block-info-review__element element-block-info-review">
                                                     <div className="element-block-info-review__icon">
-                                                        <LazyCardImg img={lw?.image || ''} height="auto" size="small" width="100%" />
+                                                        <LazyCardImg img={lw?.image || ''} size="small" />
                                                     </div>
                                                     <div className="element-block-info-review__value">{lw.name}</div>
                                                 </div>
@@ -455,7 +455,7 @@ export const TabMain = ({
                                                                 >
                                                                     <div className="block-info-review__element element-block-info-review">
                                                                         <div className="element-block-info-review__image ibg--custom ibg--bg ibg-center">
-                                                                            <LazyCardImg img={gp?.image || ''} size="medium" height="auto" width="100%" />
+                                                                            <LazyCardImg img={gp?.image || ''} size="medium" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -477,7 +477,7 @@ export const TabMain = ({
                                                 >
                                                     <div className="block-info-review__element element-block-info-review">
                                                         <div className="element-block-info-review__image ibg--custom ibg--bg ibg-center">
-                                                            <LazyCardImg img={gp?.image || ''} size="medium" height="auto" width="100%" />
+                                                            <LazyCardImg img={gp?.image || ''} size="medium" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -529,7 +529,7 @@ export const TabMain = ({
                                                             >
                                                                 <a aria-label="Put your description here." className="block-info-review__element element-block-info-review">
                                                                     <div className="element-block-info-review__icon ibg--custom ibg--bg ibg-center">
-                                                                        <LazyCardImg img={gt?.image || ''} size="medium" height="auto" width="100%" />
+                                                                        <LazyCardImg img={gt?.image || ''} size="medium" />
                                                                     </div>
                                                                     <div className="element-block-info-review__value">{gt?.name}</div>
                                                                 </a>
@@ -555,7 +555,7 @@ export const TabMain = ({
                                                     className="block-info-review__element element-block-info-review"
                                                 >
                                                     <div className="element-block-info-review__icon ibg--custom ibg--bg ibg-center">
-                                                        <LazyCardImg img={gt?.image || ''} size="medium" height="auto" width="100%" />
+                                                        <LazyCardImg img={gt?.image || ''} size="medium" />
                                                     </div>
                                                     <div className="element-block-info-review__value">{gt.name}</div>
                                                 </div>
@@ -655,7 +655,7 @@ export const TabMain = ({
                                     aria-label="Put your description here."
                                     target="_blank"
                                 >
-                                    <LazyCardImg img={data?.bonuses.find((ssb) => ssb.special_side_bar)?.bonus_image || ''} width="100%" />
+                                    <LazyCardImg img={data?.bonuses.find((ssb) => ssb.special_side_bar)?.bonus_image || ''} />
                                 </a>
                                 {/* <a
                                 href="https://www.youtube.com/watch?v=IBcwhaYP6Uk"
