@@ -2,11 +2,12 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
-import { useEffect, useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '@/types'
 import { useFilterContext } from '@/context/FilterContext'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation' // добавьте импорт
+import { usePathname } from 'next/navigation'
+import { useIsMobile } from '@/hooks/useResponsive'
 
 export const Categories = ({
     type_category = DataHomeItemsBlockEnumCategory.all_category as DataHomeItemsBlockCategoryType,
@@ -30,14 +31,16 @@ export const Categories = ({
         return filteredCategory
     }, [category, type_category, pathname])
 
-    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 480 : false)
+    // ✅ ЗМІНА: Використовуємо безпечний hook замість прямого доступу до window
+    const { isMobile } = useIsMobile(false)
 
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 480)
-        window.addEventListener('resize', handleResize)
-
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
+    // ❌ ВИДАЛЕНО: Старий код з прямим доступом до window
+    // const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 480 : false)
+    // useEffect(() => {
+    //     const handleResize = () => setIsMobile(window.innerWidth <= 480)
+    //     window.addEventListener('resize', handleResize)
+    //     return () => window.removeEventListener('resize', handleResize)
+    // }, [])
 
     if (!listCategory) {
         return null

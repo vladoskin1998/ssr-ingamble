@@ -1,9 +1,5 @@
-
 import Image from 'next/image';
 import '../../../styles/footer.css';
-
-
-
 
 export default function Footer() {
 

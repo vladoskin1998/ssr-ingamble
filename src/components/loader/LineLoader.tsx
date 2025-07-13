@@ -1,5 +1,3 @@
-'use client'
-
 export const LineLoader = ({ size }: { size?: 'large' | 'medium' | 'small' }) => {
     return (
         <div className={`loader-body loader-body-size-${size}`}>
