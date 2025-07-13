@@ -335,10 +335,10 @@ export default function SimpleCasinos() {
                                         </div>
                                     </div>
                                     <div className="loyalty-review__body">
-                                        {data?.dataCurrentCasinos?.loyalty_program?.loyalty_keypoint?.slice(0, 6).map((lk) => (
+                                        {data?.dataCurrentCasinos?.loyalty_program?.loyalty_keypoint?.slice(0, 6).map((lk: { text_1: string; text_2: string; image: string }) => (
                                             <div 
+                                              key={lk.text_1 + lk.text_2 + lk.image}
                                               className="loyalty-review__column"
-                                              key={lk.id}
                                             >
                                                 <div className="loyalty-review__item item-loyalty-review">
                                                     <div className="item-loyalty-review__image">

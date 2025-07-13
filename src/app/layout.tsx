@@ -12,6 +12,32 @@ export const metadata: Metadata = {
     title: 'inGamble - Premium Gambling Platform',
     description:
         'Explore inGamble, the top platform for online casino reviews. Access the most extensive array of bonuses, loyalty programs, and detailed casino analysis tailored to your preferences. Trusted by players worldwide for honesty and transparency.',
+    keywords: 'online casino, casino reviews, gambling, bonuses, loyalty programs, casino analysis, slot games, trusted casinos, casino ratings, gambling guide',
+    authors: [{ name: 'inGamble Team' }],
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+        },
+    },
+    openGraph: {
+        title: 'inGamble - Premium Gambling Platform',
+        description: 'Explore inGamble, the top platform for online casino reviews. Access the most extensive array of bonuses, loyalty programs, and detailed casino analysis.',
+        type: 'website',
+        siteName: 'inGamble',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'inGamble - Premium Gambling Platform',
+        description: 'Explore inGamble, the top platform for online casino reviews.',
+    },
+    icons: {
+        icon: '/img/favicon.png',
+        shortcut: '/img/favicon.png',
+        apple: '/img/favicon.png',
+    },
 }
 
 export default function RootLayout({
@@ -24,29 +50,12 @@ export default function RootLayout({
             <head>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-                <link rel="icon" href="/src/assets/img/favicon.png" type="image/x-icon" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" />
                 <noscript>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" />
                 </noscript>
 
-                <Script src={`https://www.googletagmanager.com/gtag/js?id=G-42W5MNLRR0`} strategy="afterInteractive" async />
-                <Script id="gtag-init" strategy="afterInteractive">
-                    {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-42W5MNLRR0');
-          `}
-                </Script>
-
-                <link rel="icon" href="/src/assets/img/favicon.png" type="image/x-icon" />
-
-                <meta name="description" content="%VITE_META_DESCRIPTION%" />
-                <meta name="keywords" content="%VITE_META_KEYWORDS%" />
-                <meta name="author" content="%VITE_META_AUTHOR%" />
-                <title>inGamble - Premium Gambling Platform</title>
-                <base href="/" />
+                <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
             </head>
             <body>
                 <RootLayoutProvider>
@@ -69,6 +78,16 @@ export default function RootLayout({
                         </div>
                     </div>
                 </RootLayoutProvider>
+
+                <Script src={`https://www.googletagmanager.com/gtag/js?id=G-42W5MNLRR0`} strategy="afterInteractive" />
+                <Script id="gtag-init" strategy="afterInteractive">
+                    {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-42W5MNLRR0');
+          `}
+                </Script>
             </body>
         </html>
     )
