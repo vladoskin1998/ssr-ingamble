@@ -17,6 +17,7 @@ import { isMobileDevice } from '@/helper/adaprive-bahavior'
 import Link from 'next/link'
 import Image from 'next/image'
 import { CloakingButton } from './cloaking-button'
+import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 
 const SubscribeForm = lazy(() => import('../../components/subscribe/SubscribeForm'))
@@ -150,7 +151,7 @@ export default function AllLoyaltyLayout({
                                             className="item-loyaltie-programs__image loyalty-img-custom"
                                             // style={{ position: 'relative' }}
                                         >
-                                            <Image src={item?.casino_image || '/img/no-results.svg'} fill alt={item.casino_slug} />
+                                            <LazyCardImg img={item?.casino_image || ''} width="100%" />
                                         </Link>
                                     </div>
                                     <div className="item-loyaltie-programs__content content-item-loyaltie-programs">
