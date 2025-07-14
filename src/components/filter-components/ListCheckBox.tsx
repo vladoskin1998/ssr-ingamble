@@ -22,7 +22,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
     height = 240,
     keyType,
 }: {
-    initState: (number | string)[]
+    initState: (number | string)[] | undefined
     isImageShow?: boolean,
     list:
         | {
@@ -75,7 +75,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
 
   
     useEffect(() => {
-        setLocalFilterItems(initState.map(item => Number(item)) )
+        setLocalFilterItems(initState?.map(item => Number(item)) || [])
     }, [initState])
 
     return (
