@@ -238,7 +238,7 @@ export default function AllLoyaltyLayout({
             }
             
             // Оновлюємо URL без повного перезавантаження
-            const link = loyaltie_slug ? `/all-loyalties/${loyaltie_slug}/${nextPage}` : `/all-loyalties/${nextPage}`;
+            const link = loyaltie_slug ? `/all-loyalties/${loyaltie_slug}` : `/all-loyalties`;
             window.history.pushState({}, '', link);
         } catch (error) {
             console.error('Error loading more items:', error);

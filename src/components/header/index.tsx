@@ -200,7 +200,7 @@ export const Header = () => {
                                     </Link>
                                 </li>
                                 <li className="menu-header__item">
-                                    <Link rel="nofollow noopener" href="/all-loyalties/1" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}>
+                                    <Link rel="nofollow noopener" href="/all-loyalties" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}>
                                         <span>Loyalties</span>
                                     </Link>
                                 </li>
@@ -422,7 +422,7 @@ export const Header = () => {
                                     </li>
                                     <li className="menu-header__item">
                                         <Link
-                                            href="/all-loyalties/1"
+                                            href="/all-loyalties"
                                             aria-label="Put your description here."
                                             onClick={() => {
                                                 handleBurgerClose()

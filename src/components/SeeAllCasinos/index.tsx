@@ -1,3 +1,4 @@
+'use client'
 import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'

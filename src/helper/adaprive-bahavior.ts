@@ -1,3 +1,4 @@
+'use client'
 interface ParentOriginal {
     parent: HTMLElement;
     index: number;
