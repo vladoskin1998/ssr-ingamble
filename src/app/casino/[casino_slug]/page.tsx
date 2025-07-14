@@ -189,7 +189,12 @@ export default function SimpleCasinos() {
                                                                 />
                                                             </div>
                                                         )}
-                                                        <div className={`country-content-casino-info__text `}>{`${geoLocation?.isAllowed ? 'Accepts players from' : 'Doesn’t accept players from'} ${geoLocation?.countryName}`}</div>
+                                                            <div className={`country-content-casino-info__text `}>
+                                                            {geoLocation?.countryName && geoLocation.countryName !== 'Unknown' 
+                                                                ? `${geoLocation?.isAllowed ? 'Accepts players from' : 'Doesn\'t accept players from'} ${geoLocation.countryName}`
+                                                                : `${geoLocation?.isAllowed ? 'Accepts players' : 'Limited access'}`
+                                                            }
+                                                        </div>
                                                     </div>
                                                     <a
                                                         // href={data?.dataCurrentCasinos?.link_tc || ''}
