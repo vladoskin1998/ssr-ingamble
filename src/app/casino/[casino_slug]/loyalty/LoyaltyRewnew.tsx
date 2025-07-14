@@ -41,7 +41,7 @@ export const LoyaltyRewnew = ({ loyalty_subtype }: { loyalty_subtype: SeeAllEsse
                         <div className="deposits__row">
                             {loyalty_subtype?.map((item, index) => {
                                 return (
-                                    <div key='`${item.text_1}-${item.text_2}-${index}`'
+                                    <div key={`${item.text_1}-${item.text_2}-${index}`}
                                      className={`deposits__column ${blockWidth(loyalty_subtype?.length)}`}>
                                         <div className={`deposits__item item-deposits ${color_gifts[index % 4]}`}>
                                             <div className="item-loyalty-review__image">
