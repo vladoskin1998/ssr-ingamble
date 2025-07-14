@@ -1,27 +1,33 @@
 // Footer CLS Prevention Script
-// Shows footer only after main content has loaded to prevent layout shifts
-// Модифіковано для роботи з React гідратацією
+// Enhanced version for lazy-loaded footer with fallback
+// Works with both lazy loading and visibility approach
 
 (function() {
     'use strict';
     
-    // Використовуємо унікальні класи, які не будуть конфліктувати з гідратацією
     function showFooter() {
-        // Запускаємо з затримкою, щоб дати React закінчити гідратацію
         setTimeout(function() {
+            // For lazy-loaded footer
+            const footerPlaceholder = document.querySelector('.footer-placeholder');
+            if (footerPlaceholder) {
+                footerPlaceholder.style.display = 'none';
+            }
+            
+            // Fallback for traditional approach
             document.body.classList.add('footer-visible');
             document.documentElement.classList.add('footer-visible');
             
             const footer = document.querySelector('.footer');
             if (footer) {
                 footer.classList.add('footer-visible');
+                footer.style.visibility = 'visible';
             }
         }, 50);
     }
     
     function checkContentLoaded() {
         // Check if main content exists and has substantial height
-        const mainContent = document.querySelector('.main-page, .casino-page, .bonuses-page, [class*="page"], .main-gamble, main, .gamble__body > *:not(.footer)');
+        const mainContent = document.querySelector('.main-page, .casino-page, .bonuses-page, [class*="page"], .main-gamble, main, .gamble__body > *:not(.footer):not(.footer-placeholder)');
         
         if (mainContent && mainContent.offsetHeight > 100) {
             showFooter();
@@ -53,21 +59,21 @@
     }
     
     // Fallback: Show footer after reasonable delay
-    setTimeout(showFooter, 500);
+    setTimeout(showFooter, 1000);
     
-    // Check periodically for content load (faster checks)
+    // Check periodically for content load
     let checkCount = 0;
     const checkInterval = setInterval(function() {
         checkCount++;
         
-        if (checkContentLoaded() || checkCount > 15) {
+        if (checkContentLoaded() || checkCount > 20) {
             clearInterval(checkInterval);
         }
-    }, 50);
+    }, 100);
     
     // Also check on window load
     window.addEventListener('load', function() {
-        setTimeout(showFooter, 50);
+        setTimeout(showFooter, 100);
     });
     
     // Check when React/Next.js hydration completes
@@ -75,6 +81,6 @@
         if (window.React || window.__NEXT_DATA__) {
             showFooter();
         }
-    }, 300);
+    }, 500);
     
 })();

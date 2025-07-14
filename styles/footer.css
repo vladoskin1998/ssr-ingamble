@@ -2,10 +2,78 @@ footer{
   display: block;
 }
 
-.footer {
-    /* Default state - DO NOT CHANGE - CLS fixes override this */
+/* Footer CLS prevention - CSS-only approach */
+.footer-container {
+  /* Always reserve space for footer */
+  min-height: 600px;
+  width: calc(100% - 80px);
+  margin-left: 80px;
+  position: relative;
+}
+
+.footer-container .footer {
+  /* Hide footer initially to prevent flash */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+  min-height: 600px;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Show footer when body has footer-visible class */
+body.footer-visible .footer-container .footer {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive behavior */
+@media (max-width: 650.98px) {
+  .footer-container {
+    min-height: 500px;
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .footer-container .footer {
+    min-height: 500px;
+  }
+}
+
+/* Sidebar responsive behavior */
+body.resize .footer-container {
+  width: calc(100% - 350px);
+  margin-left: 350px;
+}
+
+@media (max-width: 1650.98px) {
+  body.resize .footer-container {
+    margin-left: 320px;
+    width: calc(100% - 320px);
+  }
+}
+
+@media (max-width: 1355.98px) {
+  body.resize .footer-container {
     width: calc(100% - 80px);
     margin-left: 80px;
+  }
+}
+
+@media (max-width: 650.98px) {
+  body.resize .footer-container {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.footer {
+    /* Updated for new CLS prevention approach */
+    width: 100%;
+    margin: 0;
     contain: layout style paint;
     min-height: 600px;
     will-change: auto;
@@ -15,43 +83,11 @@ footer{
   
   @media (max-width: 650.98px) {
     .footer {
-      width: 100%;
-      margin-left: 0;
       min-height: 500px;
     }
   }
   
-  .footer.resize {
-    /* Resize state - DO NOT CHANGE - CLS fixes override this */
-    width: calc(100% - 350px);
-    margin-left: 350px;
-    min-height: 600px;
-    transition: none;
-  }
-  
-  @media (max-width: 1650.98px) {
-    .footer.resize {
-      margin-left: 320px;
-      width: calc(100% - 320px);
-      min-height: 600px;
-    }
-  }
-  
-  @media (max-width: 1355.98px) {
-    .footer.resize {
-      width: calc(100% - 80px);
-      margin-left: 80px;
-      min-height: 600px;
-    }
-  }
-  
-  @media (max-width: 650.98px) {
-    .footer.resize {
-      width: 100%;
-      margin-left: 0;
-      min-height: 500px;
-    }
-  }
+  /* Rest of footer styles... */
   @media (max-width: 1650.98px) {
     .footer.resize .menu-footer {
       padding: 60px 40px 0 0;
@@ -787,3 +823,52 @@ footer{
       fill: var(--Text-Txt_Sec, rgba(255, 255, 255, 0.5019607843));
     }
   }
+  /* Footer placeholder to prevent CLS - matches footer dimensions */
+.footer-placeholder {
+  width: calc(100% - 80px);
+  margin-left: 80px;
+  min-height: 600px;
+  contain: layout style paint;
+  will-change: auto;
+  transition: none;
+  position: relative;
+}
+
+@media (max-width: 650.98px) {
+  .footer-placeholder {
+    width: 100%;
+    margin-left: 0;
+    min-height: 500px;
+  }
+}
+
+.footer-placeholder.resize {
+  width: calc(100% - 350px);
+  margin-left: 350px;
+  min-height: 600px;
+  transition: none;
+}
+
+@media (max-width: 1650.98px) {
+  .footer-placeholder.resize {
+    margin-left: 320px;
+    width: calc(100% - 320px);
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 1355.98px) {
+  .footer-placeholder.resize {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 650.98px) {
+  .footer-placeholder.resize {
+    width: 100%;
+    margin-left: 0;
+    min-height: 500px;
+  }
+}

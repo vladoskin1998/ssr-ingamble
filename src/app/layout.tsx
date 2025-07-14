@@ -3,7 +3,6 @@ import '../../styles/style.css'
 import '../components/loader/loader.css'
 import '../../styles//header.css'
 import Navbar from '@/components/navbar'
-import Footer from '@/components/footer'
 import { Header } from '@/components/header'
 import RootLayoutProvider from '@/context/RootLayoutProvider'
 import Script from 'next/script'
@@ -71,9 +70,6 @@ export default function RootLayout({
                             <div className="gamble__body">
                                 <Header />
                             < >{children}</>
-                           
-                                    <Footer />
-                                
                             </div>
                         </div>
                     </div>

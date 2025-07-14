@@ -23,7 +23,7 @@ import { SiblingBonus } from './SiblingBonus'
 
 import { OtherBestReloadBonus } from './OtherBestBonus'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
-const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
+const Footer = lazy(() => import('@/components/footer'))
 const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
 const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 
@@ -155,7 +155,7 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                     <HarryStyles img="/img/casino-person/5.webp" title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
-                    <BottomInfo />
+                    <Footer />
                 </div>
             </main>
         </div>

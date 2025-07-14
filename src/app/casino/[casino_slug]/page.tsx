@@ -25,7 +25,7 @@ import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import Image from 'next/image'
-const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
+const Footer = lazy(() => import('@/components/footer'))
 const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
 
@@ -521,7 +521,7 @@ export default function SimpleCasinos() {
                         <HighRankedCasinos />
                         <CheckMoreWhatSuitsYouBest />
                         <SubscribeForm />
-                        <BottomInfo />
+                        <Footer />
                     </div>
                 </main>
             {/* </Wraper> */}
