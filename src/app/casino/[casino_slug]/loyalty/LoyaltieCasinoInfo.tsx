@@ -140,7 +140,7 @@ export const LoyaltieCasinoInfo = ({
                                                     {Array(data?.stars || 5)
                                                         .fill(0)
                                                         .map((_, id) => (  // ✅ Виправлено key
-                                                            <div key={`star-${id}`} className="item-features-content-casino-info__star">
+                                                            <div key={`star-${data.casino_slug}-${id}`} className="item-features-content-casino-info__star">
                                                                 <Image width={16} height={16} src={'/img/icons/star.svg'} alt="star" />
                                                             </div>
                                                         ))}

@@ -157,22 +157,26 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
         
         const category = useMemo(() => {
             return shuffleArray([
-                ...([...(dataCategories?.bonus_categories || [])]?.map((item) => ({
+                ...([...(dataCategories?.bonus_categories || [])]?.map((item, index) => ({
                     name: item.name,
                     slug: item.slug,
                     categoryType: DataHomeItemsBlockEnumCategory.bonus_category as DataHomeItemsBlockCategoryType,
+                    // Додаємо унікальний ідентифікатор
+                    uniqueId: `bonus-${item.slug}-${index}`
                 })) || []),
-                ...([...(dataCategories?.casino_categories || [])]?.map((item) => ({
+                ...([...(dataCategories?.casino_categories || [])]?.map((item, index) => ({
                     name: item.name,
                     slug: item.slug,
-
                     categoryType: DataHomeItemsBlockEnumCategory.casino_category as DataHomeItemsBlockCategoryType,
+                    // Додаємо унікальний ідентифікатор
+                    uniqueId: `casino-${item.slug}-${index}`
                 })) || []),
-                ...LOYALTIECATEGORYIES.map((item) => ({
+                ...LOYALTIECATEGORYIES.map((item, index) => ({
                     name: item.name,
                     slug: item.slug,
-
                     categoryType: DataHomeItemsBlockEnumCategory.loyaltie_category as DataHomeItemsBlockCategoryType,
+                    // Додаємо унікальний ідентифікатор
+                    uniqueId: `loyalty-${item.slug}-${index}`
                 })),
             ])
         }, [dataCategories])

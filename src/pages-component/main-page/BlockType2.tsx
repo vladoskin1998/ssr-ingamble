@@ -108,7 +108,7 @@ export default function BlockType2({
                                                 }}
                                             >
                                                 {bigCards?.map((item, index) => (
-                                                    <SwiperSlide key={index}>
+                                                    <SwiperSlide key={`big-card-${item?.casino_info?.casino_slug}-${item?.bonus_info?.bonus_slug}-${index}`}>
                                                         <div
                                                             className="baner-row-block__slide slide-baner-row-block swiper-slide"
                                                             style={{
@@ -156,7 +156,7 @@ export default function BlockType2({
                                                                                     {item.casino_info.additional_casino_params.map(
                                                                                         (it, cindex) => (
                                                                                             <span
-                                                                                                key={cindex}
+                                                                                                key={`big-card-param-${cindex}-${it}`}
                                                                                                 className="casino-small-card__info-link"
                                                                                             >
                                                                                                 {it}
@@ -255,7 +255,7 @@ export default function BlockType2({
                                         >
                                             {smallCards.map((item, index) => (
                                                 <SwiperSlide
-                                                    key={index}
+                                                    key={`small-card-${item?.casino_info?.casino_slug}-${index}`}
                                                     className="slider__slide slide-slider slide-slider__different-casino-bg swiper-slide"
                                                 >
                                                     <div className="slide-slider__item different-casino-bg">
@@ -282,7 +282,7 @@ export default function BlockType2({
                                                             </Link>
                                                             <div className="different-casino-bg__info">
                                                                 {item.casino_info.additional_casino_params.map((it, cindex) => (
-                                                                    <span key={cindex} className="different-casino-bg__info-link">
+                                                                    <span key={`small-card-param-${cindex}-${it}`} className="different-casino-bg__info-link">
                                                                         {it}
                                                                     </span>
                                                                 ))}

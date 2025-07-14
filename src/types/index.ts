@@ -891,7 +891,7 @@ export interface FooCategorySanitazeLinkReturnType {
     seeAllFoo?: () => void
 }
 
-export type FormatedCategoryType = {  name: string; categoryType: DataHomeItemsBlockCategoryType; slug: string; callback?: () => void }
+export type FormatedCategoryType = {  name: string; categoryType: DataHomeItemsBlockCategoryType; slug: string; uniqueId: string; callback?: () => void }
 
 
 export interface NAMETITLECATEGORYSLUGType {

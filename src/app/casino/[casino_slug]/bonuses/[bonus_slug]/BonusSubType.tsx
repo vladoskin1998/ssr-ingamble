@@ -26,7 +26,7 @@ export const BonusSubType = ({ bonus_subtype }: { bonus_subtype: { name: string 
                                 const [part1, part2] = item.name.split('|').map((s) => s.trim())
 
                                 return (
-                                    <div key={index} className={`deposits__column ${blockWidth(bonus_subtype.length)}`}>
+                                    <div key={`bonus-subtype-${index}-${item.name}`} className={`deposits__column ${blockWidth(bonus_subtype.length)}`}>
                                         <div className={`deposits__item item-deposits ${color_gifts[index % 4]}`}>
                                             <div className="item-deposits__icon icon-item-deposits">
                                                 <div className="icon-item-deposits__img">

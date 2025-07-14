@@ -156,7 +156,7 @@ export default function SeeAllCasinos() {
 
                             <div className="main-loyaltie-programs__items loyaltie-programs__items">
                                 {displayedData?.map((item, index) => (
-                                    <div key={index} className="loyaltie-programs__item item-loyaltie-programs">
+                                    <div key={`casino-${item.casino_slug}-${item.casino_name}-${index}`} className="loyaltie-programs__item item-loyaltie-programs">
                                         <div className="item-loyaltie-programs__row">
                                             <div className="item-loyaltie-programs__main">
                                                 <Link href={`/casino/${item.casino_slug}`} aria-label="Put your description here." className="item-loyaltie-programs__image item-loyaltie-programs__image-custom">
@@ -263,7 +263,7 @@ export default function SeeAllCasinos() {
                                                     <div className="content-item-loyaltie-programs__column content-item-loyaltie-programs__column_features">
                                                         <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
                                                             {item?.loyalty_program?.loyalty_keypoint?.slice(0, 3).map((it, key) => (
-                                                                <div key={key} className="features-essential-programs-gamble__column">
+                                                                <div key={`keypoint-${item.casino_slug}-${key}-${it.text_1}`} className="features-essential-programs-gamble__column">
                                                                     <div className="features-essential-programs-gamble__item">
                                                                         <div className="features-essential-programs-gamble__icon">
                                                                             <LazyCardImg img={it?.image || ''} size="medium" width="100%" />

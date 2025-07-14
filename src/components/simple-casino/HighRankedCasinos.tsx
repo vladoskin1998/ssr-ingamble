@@ -151,10 +151,10 @@ export const HighRankedCasinos = () => {
                                             }
                                             return acc
                                         }, [])
-                                        .map((item) => (
+                                        .map((item, pairIndex) => (
                                             <SwiperSlide 
                                               className="slider__slide slide-slider swiper-slide"
-                                              key={item?.[0]?.casino_slug || item?.[1]?.casino_slug}
+                                              key={`casino-pair-${pairIndex}-${item?.[0]?.casino_slug || 'empty'}-${item?.[1]?.casino_slug || 'empty'}`}
                                             >
                                                 <div className="slide-slider__item item-slide-slider">
                                                     <Link href={`/casino/${item?.[0]?.casino_slug}`} aria-label="View casino details" className="item-slide-slider__image-block">
@@ -172,7 +172,7 @@ export const HighRankedCasinos = () => {
                                                                 ?.map((l, ct) => (
                                                                     <div 
                                                                       className={`tags-casino-card__item ${getTagColorByindex(ct)}`}
-                                                                      key={l}
+                                                                      key={`tag-first-${item?.[0]?.casino_slug}-${ct}-${l}`}
                                                                     >
                                                                         <span className="tags-casino-card__item-label">{l}</span>
                                                                     </div>
@@ -210,7 +210,7 @@ export const HighRankedCasinos = () => {
                                                                 ?.map((l, ct) => (
                                                                     <div 
                                                                       className={`tags-casino-card__item ${getTagColorByindex(ct)}`}
-                                                                      key={l}
+                                                                      key={`tag-second-${item?.[1]?.casino_slug}-${ct}-${l}`}
                                                                     >
                                                                         <span className="tags-casino-card__item-label">{l}</span>
                                                                     </div>
@@ -265,10 +265,10 @@ export const HighRankedCasinos = () => {
                                             },
                                         }}
                                     >
-                                        {dataCasino?.map((item) => (
+                                        {dataCasino?.map((item, itemIndex) => (
                                             <SwiperSlide 
                                               className="slider__slide slide-slider swiper-slide"
-                                              key={item?.casino_slug}
+                                              key={`casino-mobile-${item?.casino_slug}-${itemIndex}`}
                                             >
                                                 <div className="slide-slider__item item-slide-slider">
                                                     <Link href={`/casino/${item?.casino_slug}`} aria-label="View casino details" className="item-slide-slider__image-block">
@@ -286,7 +286,7 @@ export const HighRankedCasinos = () => {
                                                                 ?.map((l, ct) => (
                                                                     <div 
                                                                       className={`tags-casino-card__item ${getTagColorByindex(ct)}`}
-                                                                      key={l}
+                                                                      key={`tag-mobile-${item?.casino_slug}-${ct}-${l}`}
                                                                     >
                                                                         <span className="tags-casino-card__item-label">{l}</span>
                                                                     </div>

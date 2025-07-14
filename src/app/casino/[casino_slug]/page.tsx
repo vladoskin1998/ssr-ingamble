@@ -259,7 +259,7 @@ export default function SimpleCasinos() {
                                                                     {Array(data?.dataCurrentCasinos?.stars || 4)
                                                                         .fill(0)
                                                                         .map((st, sdi) => (
-                                                                            <div key={sdi + st} className="item-features-content-casino-info__star">
+                                                                            <div key={`star-${data?.dataCurrentCasinos?.casino_slug}-${sdi}`} className="item-features-content-casino-info__star">
                                                                                 <Image src="/img/icons/star.svg" width={12} height={12} alt="star" />
                                                                             </div>
                                                                         ))}
@@ -335,9 +335,9 @@ export default function SimpleCasinos() {
                                         </div>
                                     </div>
                                     <div className="loyalty-review__body">
-                                        {data?.dataCurrentCasinos?.loyalty_program?.loyalty_keypoint?.slice(0, 6).map((lk: { text_1: string; text_2: string; image: string }) => (
+                                        {data?.dataCurrentCasinos?.loyalty_program?.loyalty_keypoint?.slice(0, 6).map((lk: { text_1: string; text_2: string; image: string }, lkIndex: number) => (
                                             <div 
-                                              key={lk.text_1 + lk.text_2 + lk.image}
+                                              key={`loyalty-keypoint-${data?.dataCurrentCasinos?.casino_slug}-${lkIndex}-${lk.text_1}`}
                                               className="loyalty-review__column"
                                             >
                                                 <div className="loyalty-review__item item-loyalty-review">

@@ -605,7 +605,7 @@ export const TabMain = ({
                                                             if (!tool) return null // Пропустить, если значение false
 
                                                             return (
-                                                                <div key={index} className="block-info-review__elements-column">
+                                                                <div key={`responsible-tool-popup-${index}-${responsibleGameLabels[index]}`} className="block-info-review__elements-column">
                                                                     <div className="block-info-review__element element-block-info-review">
                                                                         <div className="element-block-info-review__icon">
                                                                           <img src="/img/icons/info-review-check.svg" alt="check" />
@@ -627,7 +627,7 @@ export const TabMain = ({
                                             if (!tool) return null
 
                                             return (
-                                                <div key={index} className="block-info-review__elements-column">
+                                                <div key={`responsible-tool-${index}-${responsibleGameLabels[index]}`} className="block-info-review__elements-column">
                                                     <div className="block-info-review__element element-block-info-review">
                                                         <div className="element-block-info-review__icon">
                                                           <Image src="/img/icons/info-review-check.svg" sizes="(max-width: 768px) 20px, 20px" width={24} height={24} alt="check" />

@@ -18,7 +18,6 @@ import { LogoLoader } from '../../components/loader/LogoLoader'
 import '@/components/SeeAllCasinos/style.css'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { v4 as uuidv4 } from 'uuid'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { NoResult } from '@/components/no-result'
@@ -264,13 +263,13 @@ const ListDisplayData = memo(
     }) => {
         return (
             <div className="main-loyaltie-programs__items loyaltie-programs__items">
-                {displayedData?.map((item) => (
+                {displayedData?.map((item, index) => (
                     <div 
                       className="loyaltie-programs__item item-loyaltie-programs"
-                      key={item.casino_slug || item.casino_slug || uuidv4()}>
+                      key={`filter-casino-${item.casino_slug || item.casino_name}-${index}`}>
                         <div className="item-loyaltie-programs__row">
                             <div className="item-loyaltie-programs__main">
-                                <Link rel="nofollow noopener" aria-label="Put your description here." className="item-loyaltie-programs__image item-loyaltie-programs__image-custom " key={uuidv4()} href={`/casino/${item.casino_slug}`}>
+                                <Link rel="nofollow noopener" aria-label="Put your description here." className="item-loyaltie-programs__image item-loyaltie-programs__image-custom " href={`/casino/${item.casino_slug}`}>
                                     <LazyCardImg img={item?.casino_image || ''} height="100%" width="100%" />
                                 </Link>
                             </div>
@@ -360,7 +359,7 @@ const ListDisplayData = memo(
                                     <div className="content-item-loyaltie-programs__column content-item-loyaltie-programs__column_features">
                                         <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
                                             {item?.loyalty_program?.loyalty_keypoint?.slice(0, 3).map((it, idx) => (
-                                                <div className="features-essential-programs-gamble__column" key={it?.image || it?.text_1 || idx}>
+                                                <div className="features-essential-programs-gamble__column" key={`loyalty-keypoint-${item.casino_slug}-${idx}-${it?.text_1 || idx}`}>
                                                     <div className="features-essential-programs-gamble__item">
                                                         <div className="features-essential-programs-gamble__icon">
                                                             <LazyCardImg img={it?.image || ''} size="medium" width="100%" />

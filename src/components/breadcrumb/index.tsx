@@ -16,7 +16,7 @@ export const BreadCrumb = ({
             <div className="breadcrumbs__container container">
                 <div className="breadcrumbs__list">
                     {path.map((item, index) => (
-                        <div className="breadcrumbs__item" key={index}>
+                        <div className="breadcrumbs__item" key={`breadcrumb-${index}-${item.name}-${item.link}`}>
                             {index < path.length - 1 ? (
                             
                                     <Link className="breadcrumbs__link"  href={item.link} rel="nofollow noopener" aria-label={item.name}>

@@ -73,7 +73,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                 className="slider__wrapper swiper-wrapper"
                             >
                                 {LoyaltieDataHigh?.map((item: LoyaltyInRankRangeResponse, index: number) => (
-                                    <SwiperSlide key={index}>
+                                    <SwiperSlide key={`loyalty-${item?.loyalty_slug || item?.casino_slug}-${index}`}>
                                         <div
                                             className="slide-slider__item essential-programs-gamble__item item-essential-programs-gamble"
                                         >
@@ -127,7 +127,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                                     <div className="value-item-stats-essential-programs-gamble__stars value-item-stats-essential-programs-gamble__stars_5">
                                                                         {item.stars.map((it, idstar) => (
                                                                             <div
-                                                                                key={idstar + 111}
+                                                                                key={`star-${item?.loyalty_slug}-${idstar}-${it}`}
                                                                                 className="value-item-stats-essential-programs-gamble__star"
                                                                             >
                                                                                 <Image
@@ -159,7 +159,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                                 </div>
                                                 <div className="item-essential-programs-gamble__features features-essential-programs-gamble">
                                                     {item.keypoints.map((itp, idk) => (
-                                                        <div className="features-essential-programs-gamble__item" key={idk}>
+                                                        <div className="features-essential-programs-gamble__item" key={`keypoint-${item?.loyalty_slug}-${idk}-${itp?.text_1}`}>
                                                             <div className="features-essential-programs-gamble__icon">
                                                               <LazyCardImg img={itp.image || ''} size="medium" />
                                                             </div>

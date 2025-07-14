@@ -84,7 +84,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
             <div className="main-loyaltie-programs__items loyaltie-programs__items">
                 {/* ✅ ЗМІНА: Типізовано allData mapping з правильним типом */}
                 {allData?.map((item: SeeAllEssentialLoyaltyCasino, index: number) => (
-                    <div key={index} className="loyaltie-programs__item item-loyaltie-programs">
+                    <div key={`loyalty-${item.casino_slug}-${index}`} className="loyaltie-programs__item item-loyaltie-programs">
                         <div className="item-loyaltie-programs__row">
                             <div className="item-loyaltie-programs__main">
                                 <Link
@@ -108,7 +108,7 @@ export default async function SeeAllEssentialsLoyalty({ loyaltie_slug, currentPa
                                 <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
                                     {/* ✅ ЗМІНА: Типізовано loyalty_keypoint mapping */}
                                     {item.loyalty_program.loyalty_keypoint.map((it: SeeAllEssentialLoyaltyKeypoint, index: number) => (
-                                        <div key={index} className="features-essential-programs-gamble__column">
+                                        <div key={`loyalty-keypoint-${item.casino_slug}-${index}-${it.text_1}`} className="features-essential-programs-gamble__column">
                                             <div className="features-essential-programs-gamble__item">
                                                 <div className="features-essential-programs-gamble__icon ">
                                                 <LazyCardImg img={it?.image || ''} width="100%" size="medium" />

@@ -131,7 +131,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                 </div>
                                 <div className="casino-card__tags tags-casino-card">
                                     {data?.labels.map((item, index) => (
-                                        <div key={index} className={`tags-casino-card__item ${color_label[index]}`}>
+                                        <div key={`bonus-label-${index}-${item?.name}`} className={`tags-casino-card__item ${color_label[index]}`}>
                                             <span className="tags-casino-card__item-label"></span>
                                             <span className="tags-casino-card__item-value">{item?.name}</span>
                                         </div>

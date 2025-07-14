@@ -284,7 +284,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                         {data?.wagering_contribution
                                             ?.sort((a, b) => b.value - a.value)
                                             ?.map((item, index) => (
-                                                <div key={index} className={`content-bonus-information__item item-content-bonus-information ${index + 1 === data?.wagering_contribution?.length && "''"}`}>
+                                                <div key={`wagering-contribution-${index}-${item?.description || 'item'}`} className={`content-bonus-information__item item-content-bonus-information ${index + 1 === data?.wagering_contribution?.length && "''"}`}>
                                                     {item?.description ? (
                                                         <>
                                                             <div className="item-content-bonus-information__label">{item?.description}</div>
@@ -444,7 +444,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                     <div className="popup-item-content-bonus-information__lits-block">
                                                                         <ul className="popup-item-content-bonus-information__list">
                                                                             {data?.restriction_game?.game?.map((item, index) => (
-                                                                                <li key={index} className="popup-item-content-bonus-information__list-item">
+                                                                                <li key={`restricted-game-${index}-${item.name || 'slot'}`} className="popup-item-content-bonus-information__list-item">
                                                                                     <span className="popup-item-content-bonus-information__list-link">{item.name || 'slot'}</span>
                                                                                 </li>
                                                                             ))}
@@ -501,7 +501,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                     <div className="popup-item-content-bonus-information__row">
                                                                         {data?.game_providers?.map((item, index) => (
                                                                             <div
-                                                                                key={index}
+                                                                                key={`game-provider-${index}-${item.name || 'slot'}`}
                                                                                 className="popup-item-content-bonus-information__game game-popup-item-content-bonus-information popup-item-content-bonus-information__column"
                                                                             >
                                                                                 <span className="game-popup-item-content-bonus-information__icon">
@@ -563,7 +563,7 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
                                                                     <div className="popup-item-content-bonus-information__lits-block">
                                                                         <ul className="popup-item-content-bonus-information__list">
                                                                             {data?.blocked_countries?.map((item, index) => (
-                                                                                <li key={index} className="popup-item-content-bonus-information__list-item">
+                                                                                <li key={`blocked-country-${index}-${item.name || 'Country'}`} className="popup-item-content-bonus-information__list-item">
                                                                                     <span className="popup-item-content-bonus-information__list-link">{item.name || 'Country'}</span>
                                                                                 </li>
                                                                             ))}
