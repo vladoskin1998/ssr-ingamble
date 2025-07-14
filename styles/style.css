@@ -18709,14 +18709,11 @@ white-space: nowrap;
 
 /* Фіксація для іконок в блоках info-review */
 .element-block-info-review__icon img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  position: absolute;
-  top: 0;
-  left: 0;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  position: relative;
+  display: block;
 }
 
 /* Override ibg--custom styles for info review icons */
@@ -18732,11 +18729,14 @@ white-space: nowrap;
 } */
 
 /* Забезпечуємо правильне позиціонування батьківського контейнера */
-/* .element-block-info-review__icon {
+.element-block-info-review__icon {
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-} */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Специфічні стилі для різних типів блоків */
 .block-info-review_languages .element-block-info-review__icon img,

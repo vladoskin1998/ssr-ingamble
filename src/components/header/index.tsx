@@ -299,7 +299,7 @@ export const Header = () => {
                         <div className="header__column header__column_first">
                             <div className="sidebar-gamble__top top-sidebar-gamble">
                                 <Link href="/" className="top-sidebar-gamble__logo">
-                                    <Image src="/img/logo-icon.svg" width={22} height={22} alt="logo-icon" />
+                                    <Image src="/img/logo-icon.svg" width={22} height={22} alt="logo-icon" priority />
                                 </Link>
                             </div>
                             <Link href="/" className="header__logo logo">

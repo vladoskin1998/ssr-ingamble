@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react'
+import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react'
 import {
     BonusFilterBodyType,
     CasinoFilterBodyType,
@@ -12,7 +12,6 @@ import {
     LoyaltiesFilterBodyType,
 } from '../types'
 
-import $api from '../http'
 import { useQuery } from '@tanstack/react-query'
 import { baseURL, CURRENTYEAR } from '../helper'
 import { useRouter } from 'next/navigation'
@@ -144,15 +143,15 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
      const router = useRouter()
     const [currentRouteFilter, setCurrentRouteFilter] = useState<RouteToNextFilter>(RouteToNextFilter.DEFAULT)
 
-    const handlerCurrentRouteFilter = (v: RouteToNextFilter) => {
+    const handlerCurrentRouteFilter = useCallback((v: RouteToNextFilter) => {
         if (currentRouteFilter !== v) {
             setCurrentRouteFilter(v)
         }
-    }
+    }, [currentRouteFilter])
 
     const [searchGlobal, setSeachGlobal] = useState('')
 
-    const handlerSeachGlobal = (v: string) => setSeachGlobal(v)
+    const handlerSeachGlobal = useCallback((v: string) => setSeachGlobal(v), [])
 
     const [casinoFilters, setCasinoFilters] = useState<CasinoFilterBodyType>(initialCasinoFilters)
 
@@ -160,13 +159,13 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     const [loyaltiesFilters, setLoyaltiesFilters] = useState<LoyaltiesFilterBodyType>(initialLoyaltiesFilters)
 
-    const handlerClearAllFilters = () => {
+    const handlerClearAllFilters = useCallback(() => {
         handlerCurrentRouteFilter(RouteToNextFilter.DEFAULT)
         setCasinoFilters(initialCasinoFilters)
         setBonusFilters(initialBonusFilters)
         setLoyaltiesFilters(initialLoyaltiesFilters)
          router?.push('/')
-    }
+    }, [handlerCurrentRouteFilter, router])
 
     const { data } = useQuery({
         queryKey: ['get-datas-filter'],
@@ -174,7 +173,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         staleTime: Infinity,
     })
 
-    const fooCategorySanitazeLink = ({ type_category, slug }: FooCategorySanitazeLinkPropType): FooCategorySanitazeLinkReturnType => {
+    const fooCategorySanitazeLink = useCallback(({ type_category, slug }: FooCategorySanitazeLinkPropType): FooCategorySanitazeLinkReturnType => {
         if (slug === 'vpn-friendly-casinos') {
             return {
                 seeAllLink: '/filter-casinos/vpn-friendly-casinos',
@@ -223,7 +222,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
 
         return { seeAllLink: `/all-${SeeAllRoutes[type_category]}${slug ? `/${slug}` : ''}`, seeAllFoo: () => {} }
-    }
+    }, [])
 
     const value = useMemo(
         () => ({
@@ -241,7 +240,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             handlerClearAllFilters,
             fooCategorySanitazeLink,
         }),
-        [data, searchGlobal, casinoFilters, bonusFilters, loyaltiesFilters, currentRouteFilter],
+        [data, searchGlobal, handlerSeachGlobal, casinoFilters, bonusFilters, loyaltiesFilters, currentRouteFilter, handlerCurrentRouteFilter, handlerClearAllFilters, fooCategorySanitazeLink],
     )
 
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

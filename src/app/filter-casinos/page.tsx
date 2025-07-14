@@ -129,24 +129,35 @@ export default function FilterCasino() {
     useEffect(() => {
         setCurrentPage(1)
         debouncedFetchFilter(casinoFilters, refetch)
+        
+        // Очищаємо дані при зміні фільтрів
+        setAllData([])
+        
         if (!isMobile && typeof window !== 'undefined') {
             window.scrollTo({
                 behavior: 'smooth',
                 top: 0,
             })
-        } else {
-            setAllData([])
         }
     }, [casinoFilters, refetch, isMobile])
 
     useEffect(() => {
-        if (data?.results && isMobile) {
-            setAllData((s) => [...s, ...data?.results])
-        }
-        if (!allData.length && data?.results) {
-            setAllData(data?.results)
-        }
-    }, [data, isMobile, allData.length])
+        if (!data?.results) return
+
+        setAllData((prevData) => {
+            if (isMobile) {
+                // В мобільному режимі додаємо нові результати до існуючих
+                // Перевіряємо, чи вже існують ці дані, щоб уникнути дублікатів
+                const newResults = data.results.filter(newItem => 
+                    !prevData.some(existingItem => existingItem.casino_slug === newItem.casino_slug)
+                )
+                return [...prevData, ...newResults]
+            } else {
+                // В desktop режимі повністю заміняємо дані
+                return data.results
+            }
+        })
+    }, [data, isMobile])
 
     useEffect(() => {
         initializeAdaptiveBehavior()

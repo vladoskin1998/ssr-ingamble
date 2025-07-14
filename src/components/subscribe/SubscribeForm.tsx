@@ -67,7 +67,7 @@ export default function SubscribeForm() {
                     <div className="subscribe__row">
                         <div className="subscribe__column">
                             <Link href="/" aria-label="Put your description here." rel="noopener noreferrer" className="subscribe__logo">
-                                <Image src="/img/logo-icon.svg" alt="logo" width={60} height={60} />
+                                <Image src="/img/logo-icon.svg" alt="logo" width={60} height={60} style={{ width: 'auto', height: 'auto' }} />
                             </Link>
                             <div className="subscribe__content">
                                 <div className="subscribe__title">
