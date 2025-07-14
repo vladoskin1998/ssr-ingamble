@@ -192,6 +192,11 @@ export const saveLikesToStorage = (
     id: number,
     likeType: 'like' | 'dislike' | ''
 ): void => {
+    // SSR safe check
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return;
+    }
+    
     try {
         const storedData = JSON.parse(localStorage.getItem('likesData') || '{}');
 
@@ -228,6 +233,11 @@ export const saveLikesToStorage = (
 
 
 export const getLikeByIdAndType = (type: 'bonus_like' | 'casino_like' | 'loyalty_like', id: number): 'like' | 'dislike' | null => {
+    // SSR safe check
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return null;
+    }
+    
     const likesData = JSON.parse(localStorage.getItem('likesData') || '{}');
 
     // Проверяем наличие типа и ID в данных

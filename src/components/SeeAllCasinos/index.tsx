@@ -18,6 +18,7 @@ import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { cloacingFetch, cloacingLink, NumberAssociaty, sanitizeNumberLike } from '../../helper'
 import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
+import { useIsTablet } from '@/hooks/useResponsive'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
@@ -34,8 +35,8 @@ const pathBreadCrumb = [
     },
 ]
 
-const getAllCasinosFetchData = async (page: number, slug: string | null) => {
-    const response = await $api.get(`get-see-all-casinos-category${slug ? '/' + slug : ''}/?page=${page}&page_size=${countPageSize}`)
+const getAllCasinosFetchData = async (page: number, slug: string | null, pageSize: number) => {
+    const response = await $api.get(`get-see-all-casinos-category${slug ? '/' + slug : ''}/?page=${page}&page_size=${pageSize}`)
     return response.data
 }
 
@@ -60,13 +61,19 @@ export const WithdrawalSeeAllCasinos = (n: { daily: number | null; weekly: numbe
     return ''
 }
 
- const countPageSize = window.innerWidth < 900 ? 8 : 15
+// ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
+// const countPageSize = window.innerWidth < 900 ? 8 : 15
 
 export default function SeeAllCasinos() {
     // document.title = "All Casino"
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 900)
+    
+    // ЗМІНА: Використовуємо useIsTablet для SSR сумісності
+    const { isMobile } = useIsTablet()
+    
+    // ЗМІНА: Додаємо динамічний countPageSize на основі isMobile
+    const countPageSize = isMobile ? 8 : 15
 
      const { casino_slug } = useParams()
 
@@ -81,8 +88,8 @@ export default function SeeAllCasinos() {
     const {  category } = useAdaptiveBehavior()
 
     const { data, isLoading } = useQuery<SeeAllCasinosCategoryResponse>({
-        queryKey: ['get-see-all-loyalties', currentPage, slug],
-        queryFn: () => getAllCasinosFetchData(currentPage, slug),
+        queryKey: ['get-see-all-loyalties', currentPage, slug, countPageSize],
+        queryFn: () => getAllCasinosFetchData(currentPage, slug, countPageSize),
         placeholderData: keepPreviousData,
         staleTime: 1000 * 60 * 5,
     })
@@ -102,17 +109,11 @@ export default function SeeAllCasinos() {
             })
             return
         }
-    }, [data, slug])
+    }, [data, slug, currentPage, isMobile])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
     }, [isLoading])
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 900)
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
 
         const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'Casino List'
     const displayedData = isMobile ? allData : data?.casino?.results
@@ -192,7 +193,7 @@ export default function SeeAllCasinos() {
                                                                     <div className="info-content-item-loyaltie-programs__item item-info-content-item-loyaltie-programs">
                                                                         <div className="item-info-content-item-loyaltie-programs__label">Min Dep</div>
                                                                         <div className="item-info-content-item-loyaltie-programs__value">{`${item.min_dep?.[0]?.value} ${
-                                                                            window.location.origin.includes('ingamble.com') ? '$' : '$ USDT'
+                                                                            typeof window !== 'undefined' && window.location.origin.includes('ingamble.com') ? '$' : '$ USDT'
                                                                         }`}</div>
                                                                     </div>
                                                                     <div className="info-content-item-loyaltie-programs__item item-info-content-item-loyaltie-programs">

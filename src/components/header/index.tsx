@@ -89,6 +89,11 @@ export const Header = () => {
     }, [isBodyLocked, isSidebarActive])
 
     useEffect(() => {
+        // ЗМІНА: Додано SSR перевірку для DOM операцій
+        if (typeof window === 'undefined' || typeof document === 'undefined') {
+            return;
+        }
+        
         const gambleBody = document.querySelector('.gamble__body')
 
         if (gambleBody && window.innerWidth <= 650.98) {

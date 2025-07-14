@@ -31,6 +31,11 @@ const dinamicAdapt = (
 };
 
 export default function initializeAdaptiveBehavior() {
+    // SSR safe check - avoid running on server
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return;
+    }
+    
     const da_elements = document.querySelectorAll('[data-da]') as NodeListOf<HTMLElement>;
     const parents_original: ParentOriginal[] = [];
     const attr_elements: string[] = [];

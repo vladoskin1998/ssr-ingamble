@@ -8,6 +8,7 @@ import { CasinoFilterBodyType, FilterCasinoPostResponse, SeeAllCasinosType } fro
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { memo, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '../../context/AppContext'
+import { useIsTablet } from '@/hooks/useResponsive'
 import { rankCasinosSeeAll, WithdrawalSeeAllCasinos } from '@/components/SeeAllCasinos'
 import { cloacingFetch, cloacingLink, filterEmptyValues, getTitleFilterCategories, NumberAssociaty, sanitizeNumberLike, sliceString } from '../../helper'
 import { PaginationPage } from '../../components/pagination/PaginationPage'
@@ -28,7 +29,8 @@ const BottomInfo = dynamic(() => import('../../components/footer/BottomInfo'))
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('../../components/subscribe/SubscribeForm'))
 
-const countPageSize = window.innerWidth < 900 ? 8 : 15
+// ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
+// const countPageSize = window.innerWidth < 900 ? 8 : 15
 
 interface License {
     id?: number
@@ -79,9 +81,9 @@ const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading, i
     fetchFunction(filters).finally(() => setLoading(false))
 })
 
-const getFilteringCasinoList = async (payload: CasinoFilterBodyType, page: number) => {
+const getFilteringCasinoList = async (payload: CasinoFilterBodyType, page: number, pageSize: number = 15) => {
     const body = filterEmptyValues(payload)
-    const response = await $api.post(`filter/casinos/?page=${page}&page_size=${countPageSize}`, body)
+    const response = await $api.post(`filter/casinos/?page=${page}&page_size=${pageSize}`, body)
     return response.data
 }
 
@@ -94,12 +96,20 @@ export default function FilterCasino() {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 900)
+    
+    // ЗМІНА: Використовуємо безпечний hook замість прямого window доступу
+    const { isMobile } = useIsTablet(false)
+    const [countPageSize, setCountPageSize] = useState(15) // default для сервера
+    
+    // ЗМІНА: Ініціалізуємо countPageSize на основі isMobile
+    useEffect(() => {
+        setCountPageSize(isMobile ? 8 : 15)
+    }, [isMobile])
 
     const [isDebouncedLoading, setIsDebouncedLoading] = useState(true)
     const { data, isLoading, refetch } = useQuery<FilterCasinoPostResponse>({
-      queryKey: ['filter/casinos', casinoFilters, currentPage], 
-      queryFn: () => getFilteringCasinoList(casinoFilters, currentPage),
+      queryKey: ['filter/casinos', casinoFilters, currentPage, countPageSize], 
+      queryFn: () => getFilteringCasinoList(casinoFilters, currentPage, countPageSize),
       placeholderData: keepPreviousData,  // ← змінено з keepPreviousData: true
       enabled: false,
     })
@@ -115,12 +125,12 @@ export default function FilterCasino() {
 
     useEffect(() => {
         debouncedFetchPagination(casinoFilters, refetch, setIsDebouncedLoading, isMobile)
-    }, [currentPage, refetch, setCurrentPage])
+    }, [currentPage, refetch, casinoFilters, isMobile])
 
     useEffect(() => {
         setCurrentPage(1)
         debouncedFetchFilter(casinoFilters, refetch)
-        if (!isMobile) {
+        if (!isMobile && typeof window !== 'undefined') {
             window.scrollTo({
                 behavior: 'smooth',
                 top: 0,
@@ -128,7 +138,7 @@ export default function FilterCasino() {
         } else {
             setAllData([])
         }
-    }, [casinoFilters, refetch])
+    }, [casinoFilters, refetch, isMobile])
 
     useEffect(() => {
         if (data?.results && isMobile) {
@@ -137,19 +147,13 @@ export default function FilterCasino() {
         if (!allData.length && data?.results) {
             setAllData(data?.results)
         }
-    }, [data])
+    }, [data, isMobile, allData.length])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
     }, [isLoading, isSidebarActive])
 
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 900)
-        window.addEventListener('resize', handleResize)
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
+    // ЗМІНА: Видалено resize handler, оскільки використовуємо useIsTablet hook
 
     const displayedData = isMobile ? allData : data?.results
 
@@ -176,7 +180,10 @@ export default function FilterCasino() {
         }))
     }
 
-    const title = getTitleFilterCategories({ slug: casino_slug, item: makeListFilterHeader(casinoFilters) })
+    const title = getTitleFilterCategories({ 
+        slug: Array.isArray(casino_slug) ? casino_slug[0] : casino_slug, 
+        item: makeListFilterHeader(casinoFilters) 
+    })
     if (isDebouncedLoading) return <LogoLoader />
 
     return (
@@ -297,7 +304,7 @@ const ListDisplayData = memo(
                                                     <div className="info-content-item-loyaltie-programs__item item-info-content-item-loyaltie-programs">
                                                         <div className="item-info-content-item-loyaltie-programs__label">Min Dep</div>
                                                         <div className="item-info-content-item-loyaltie-programs__value">
-                                                            {item.min_dep?.[0]?.value ? `${item.min_dep?.[0]?.value} ${window.location.origin.includes('ingamble.com') ? '$' : '$ USDT'}` : 'Unlimited'}
+                                                            {item.min_dep?.[0]?.value ? `${item.min_dep?.[0]?.value} ${typeof window !== 'undefined' && window.location.origin.includes('ingamble.com') ? '$' : '$ USDT'}` : 'Unlimited'}
                                                         </div>
                                                     </div>
                                                     <div className="info-content-item-loyaltie-programs__item item-info-content-item-loyaltie-programs">

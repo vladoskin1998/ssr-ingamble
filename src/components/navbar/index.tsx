@@ -77,17 +77,20 @@ const Navbar = () => {
         // Use CSS variables instead of class manipulation to prevent CLS
         requestAnimationFrame(() => {
             // Set CSS variable on body for sidebar state
-            document.body.classList.toggle('sidebar-active', isSidebarActive)
-            
-            // Keep original logic for compatibility but with reduced CLS impact
-            const header = document.querySelector('.header') as HTMLElement
-            const footer = document.querySelector('.footer') as HTMLElement
-            const main = document.querySelector('main') as HTMLElement
-            
-            if (window.innerWidth > 650.98) {
-                if (header) header.classList.toggle('resize', isSidebarActive)
-                if (footer) footer.classList.toggle('resize', isSidebarActive)
-                if (main) main.classList.toggle('resize', isSidebarActive)
+            // ЗМІНА: Додано SSR перевірку для DOM операцій
+            if (typeof document !== 'undefined') {
+                document.body.classList.toggle('sidebar-active', isSidebarActive)
+                
+                // Keep original logic for compatibility but with reduced CLS impact
+                const header = document.querySelector('.header') as HTMLElement
+                const footer = document.querySelector('.footer') as HTMLElement
+                const main = document.querySelector('main') as HTMLElement
+                
+                if (typeof window !== 'undefined' && window.innerWidth > 650.98) {
+                    if (header) header.classList.toggle('resize', isSidebarActive)
+                    if (footer) footer.classList.toggle('resize', isSidebarActive)
+                    if (main) main.classList.toggle('resize', isSidebarActive)
+                }
             }
         })
         

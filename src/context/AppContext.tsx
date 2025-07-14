@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useEffect, ReactNode, useState, useMemo, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { AllCategoriesHomeDataResponse, DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '../types'
+import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '../types'
 import $api from '../http';
 import {   LOYALTIECATEGORYIES, shuffleArray } from '../helper';
 import initializeAdaptiveBehavior from '../helper/adaprive-bahavior';
@@ -42,6 +42,11 @@ const getRandomDate = (startDate: Date, endDate: Date): Date => {
 
 
 const getLastUpdateDate = (): Date | null => {
+    // ЗМІНА: Додано SSR перевірку для localStorage
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return null;
+    }
+    
     const storedDate = localStorage?.getItem('lastUpdate');
     const date = storedDate ? new Date(storedDate) : null;
 
@@ -55,6 +60,11 @@ const getLastUpdateDate = (): Date | null => {
 
 
 const setLastUpdateDate = (date: Date): void => {
+    // ЗМІНА: Додано SSR перевірку для localStorage
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+        return;
+    }
+    
     if (isNaN(date?.getTime())) {
         console?.error('Invalid date passed to setLastUpdateDate:', date);
         return;
@@ -179,7 +189,7 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
                 handlerSidebarActive,
                 lastUpdate,
             }),
-            [isTogglePlay, category, isSidebarActive, lastUpdate],
+            [isTogglePlay, category, isSidebarActive, lastUpdate, handlerSidebarActive],
         )
 
             const actions = useMemo(

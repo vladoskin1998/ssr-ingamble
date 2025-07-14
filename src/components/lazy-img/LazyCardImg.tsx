@@ -1,13 +1,17 @@
 'use client'
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { LineLoader } from '../loader/LineLoader'
-import { LazyImgHomeType } from '@/pages-component/main-page'
 import Image from 'next/image'
 
+interface Props {
+  img?: string
+  size?: 'large' | 'medium' | 'small'
+  width?: string
+  height?: string
+  imgLoading?: 'lazy' | 'eager'
+}
+
 export const LazyCardImg = memo(({ img, size, width = 'auto', height, imgLoading = 'lazy' }: Props) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  
   // Визначаємо чи це внутрішній чи зовнішній URL
   const isExternalUrl = img?.startsWith('http')
   
@@ -18,13 +22,12 @@ export const LazyCardImg = memo(({ img, size, width = 'auto', height, imgLoading
   if (isExternalUrl) {
     // Для зовнішніх URL використовуємо звичайний img
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={img}
         alt={img}
         loading={imgLoading}
         style={{ height, width }}
-        onLoad={() => setIsLoading(false)}
-        onError={() => setHasError(true)}
       />
     )
   }
@@ -38,7 +41,6 @@ export const LazyCardImg = memo(({ img, size, width = 'auto', height, imgLoading
       height={height ? parseInt(height) : 0}
       style={{ width, height }}
       loading={imgLoading}
-      onLoad={() => setIsLoading(false)}
     />
   )
 })
