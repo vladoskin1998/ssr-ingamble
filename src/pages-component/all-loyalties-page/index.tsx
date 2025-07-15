@@ -24,8 +24,6 @@ const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
 
-const countPageSize = window.innerWidth < 900 ? 8 : 15
-
 const pathBreadCrumb = [
     {
         name: 'Home',
@@ -47,9 +45,9 @@ const NAMETITLECATEGORYSLUG: NAMETITLECATEGORYSLUGType = {
     gifts: { key: 'gifts', value: true },
 }
 
-const getFilteringLoyaltiesList = async (payload: LoyaltiesFilterBodyType, page: number) => {
+const getFilteringLoyaltiesList = async (payload: LoyaltiesFilterBodyType, page: number, pageSize: number) => {
     const body = filterEmptyValues(payload)
-    const response = await $api.post(`filter/loyalty/?page=${page}&page_size=${countPageSize}`, body)
+    const response = await $api.post(`filter/loyalty/?page=${page}&page_size=${pageSize}`, body)
     return response.data
 }
 
@@ -64,11 +62,14 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllEssentialLoyaltyCasino[]>([])
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 900)
+    const [isMobile, setIsMobile] = useState(false)
+    
+    // Initialize countPageSize based on screen size
+    const countPageSize = isMobile ? 8 : 15
 
     const { data, isLoading } = useQuery({
-      queryKey: ['filter/loyalty', loyaltiesFilters, currentPage],
-      queryFn: () => getFilteringLoyaltiesList(loyaltiesFilters, currentPage),
+      queryKey: ['filter/loyalty', loyaltiesFilters, currentPage, countPageSize],
+      queryFn: () => getFilteringLoyaltiesList(loyaltiesFilters, currentPage, countPageSize),
       placeholderData: keepPreviousData, // заміна keepPreviousData: true
       staleTime: 1000 * 60 * 5,
     })
@@ -115,6 +116,9 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
     }, [data, currentPage, isMobile])
 
     useEffect(() => {
+        // Initialize mobile state after component mounts to avoid SSR issues
+        setIsMobile(window.innerWidth < 900)
+        
         const handleResize = () => setIsMobile(window.innerWidth < 900)
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
