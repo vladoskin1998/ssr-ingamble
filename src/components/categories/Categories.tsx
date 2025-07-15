@@ -150,7 +150,7 @@ const ItemCategory = ({ item }: { item: FormatedCategoryType }) => {
     return (
         <Link
             rel="nofollow noopener"
-            href={item.categoryType === DataHomeItemsBlockEnumCategory.loyaltie_category ? seeAllLink : `${seeAllLink}/1`}
+            href={seeAllLink}
             onClick={seeAllFoo}
             aria-label="Put your description here."
             className="slide-filter-tags-gamble__btn"
