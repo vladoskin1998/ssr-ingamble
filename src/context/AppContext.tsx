@@ -23,11 +23,27 @@ const AdaptiveContext = createContext<AdaptiveContextType | undefined>(undefined
 const HandlerSidebarActiveContext = createContext<HandlerSidebarActiveContextType | undefined>(undefined)
 
 const getTogglePlay = async () => {
-       const response = await $api.get('get-toggle-play/')
-       return response.data
+    // Використовуємо Next.js API Route якщо увімкнено
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch('/api/toggle-play')
+        if (!response.ok) throw new Error('Failed to fetch toggle play')
+        return await response.json()
+    }
+    
+    // Fallback до старого API
+    const response = await $api.get('get-toggle-play/')
+    return response.data
 }
 
 const getDataHomePageCategories = async () => {
+    // Використовуємо Next.js API Route якщо увімкнено
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch('/api/categories')
+        if (!response.ok) throw new Error('Failed to fetch categories')
+        return await response.json()
+    }
+    
+    // Fallback до старого API
     const response = await $api.get("get-data-home-page-categories/")
     return response.data
 }
@@ -51,7 +67,6 @@ const getLastUpdateDate = (): Date | null => {
     const date = storedDate ? new Date(storedDate) : null;
 
     if (date && isNaN(date?.getTime())) {
-        console.error('Invalid date stored in localStorage:', storedDate);
         return null;
     }
 
@@ -66,7 +81,6 @@ const setLastUpdateDate = (date: Date): void => {
     }
     
     if (isNaN(date?.getTime())) {
-        console?.error('Invalid date passed to setLastUpdateDate:', date);
         return;
     }
     localStorage.setItem('lastUpdate', date.toISOString());
@@ -93,11 +107,12 @@ const formatDate = (date: Date): string => {
 
 export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-
     const pathname = usePathname()
     const [isSidebarActive, setSidebarActive] = useState(false)
+    const [isClient, setIsClient] = useState(false)
     
     useEffect(() => {
+        setIsClient(true)
         const handleResize = () => {
             initializeAdaptiveBehavior();
         };
@@ -115,25 +130,24 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
     const [lastUpdate, setLastUpdate] = useState<string>('');
 
     useEffect(() => {
-     
+        // Виконувати тільки на клієнті
+        if (typeof window === 'undefined') return;
+        
         const lastUpdateDate = getLastUpdateDate();
         const today = getCurrentDate();
         const threeDaysAgo = getThreeDaysAgo();
 
         if (!lastUpdateDate) {
-       
             const randomDate = getRandomDate(threeDaysAgo, today);
             setLastUpdate(formatDate(randomDate));
             setLastUpdateDate(randomDate);
         } else {
             const lastUpdateDateStr = formatDate(lastUpdateDate);
             if (lastUpdateDate < threeDaysAgo) {
-
                 const randomDate = getRandomDate(threeDaysAgo, today);
                 setLastUpdate(formatDate(randomDate));
                 setLastUpdateDate(randomDate);
             } else {
-
                 setLastUpdate(lastUpdateDateStr);
             }
         }
@@ -156,7 +170,7 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
     
         
         const category = useMemo(() => {
-            return shuffleArray([
+            const categories = [
                 ...([...(dataCategories?.bonus_categories || [])]?.map((item, index) => ({
                     name: item.name,
                     slug: item.slug,
@@ -178,8 +192,15 @@ export const AdaptiveProvider: React.FC<{ children: ReactNode }> = ({ children }
                     // Додаємо унікальний ідентифікатор
                     uniqueId: `loyalty-${item.slug}-${index}`
                 })),
-            ])
-        }, [dataCategories])
+            ]
+            
+            // Не перемішуємо на сервері або до гідратації, щоб уникнути hydration mismatch
+            if (!isClient) {
+                return categories
+            }
+            
+            return shuffleArray(categories)
+        }, [dataCategories, isClient])
 
         const handlerSidebarActive = useCallback((b:boolean) => {
             setSidebarActive(b)

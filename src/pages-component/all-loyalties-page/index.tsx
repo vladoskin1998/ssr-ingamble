@@ -51,6 +51,33 @@ const getFilteringLoyaltiesList = async (payload: LoyaltiesFilterBodyType, page:
     return response.data
 }
 
+// Helper function to create unique identifier for casino items
+const createUniqueId = (item: SeeAllEssentialLoyaltyCasino, index: number): string => {
+    const safeName = item.casino_name?.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase() || 'unknown'
+    const safeSlug = item.casino_slug || `casino-${index}`
+    return `${safeSlug}-${safeName}-${index}`
+}
+
+// Helper function to remove duplicates from array based on casino_slug
+const removeDuplicates = (items: SeeAllEssentialLoyaltyCasino[]): SeeAllEssentialLoyaltyCasino[] => {
+    const seen = new Set<string>()
+    const duplicates: string[] = []
+    const result = items.filter(item => {
+        if (seen.has(item.casino_slug)) {
+            duplicates.push(item.casino_slug)
+            return false
+        }
+        seen.add(item.casino_slug)
+        return true
+    })
+    
+    if (duplicates.length > 0) {
+        console.warn('Removed duplicate casino items:', duplicates)
+    }
+    
+    return result
+}
+
 export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug?: string | null }) {
     // document.title = "All Essentials Loyalty"
 
@@ -74,6 +101,12 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
       staleTime: 1000 * 60 * 5,
     })
 
+    // Reset data when filters change (not just page)
+    useEffect(() => {
+        setAllData([])
+        setCurrentPage(1)
+    }, [loyaltiesFilters])
+
     useEffect(() => {
         if (loyaltie_slug && NAMETITLECATEGORYSLUG[loyaltie_slug]) {
             const { key, value } = NAMETITLECATEGORYSLUG[loyaltie_slug]
@@ -82,36 +115,39 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                 ...initialLoyaltiesFilters,
                 [key]: value,
             })
+            
+            // Clear existing data when filters change
+            setAllData([])
+            setCurrentPage(1)
         }
 
         window.scrollTo(0, 0)
 
         return () => {
             setLoyaltiesFilters(initialLoyaltiesFilters)
+            setAllData([])
         }
     }, [loyaltie_slug, setLoyaltiesFilters])
 
     useEffect(() => {
-        if (data?.results) {
-            setAllData((s) => [...s, ...data?.results])
+        if (!data?.results) {
+            return
         }
-    }, [data, currentPage, isMobile])
 
-    useEffect(() => {
-        if (isMobile && !data?.results) {
-            setAllData([])
-            return
-        }
-        if (isMobile && currentPage === 1 && data?.results) {
-            setAllData(data?.results)
-            return
-        }
         if (isMobile) {
-            setAllData((s) => {
-                const combinedData = [...s, ...(data?.results || [])]
-                return combinedData
-            })
-            return
+            if (currentPage === 1) {
+                // For mobile on first page, replace all data
+                setAllData(removeDuplicates(data.results))
+            } else {
+                // For mobile on subsequent pages, append new unique items
+                setAllData((prevData) => {
+                    const combinedData = [...prevData, ...data.results]
+                    return removeDuplicates(combinedData)
+                })
+            }
+        } else {
+            // For desktop, always replace data (no pagination accumulation)
+            setAllData(removeDuplicates(data.results))
         }
     }, [data, currentPage, isMobile])
 
@@ -128,7 +164,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
         initializeAdaptiveBehavior()
     }, [isLoading])
 
-    const displayedData = isMobile ? allData : data?.results
+    const displayedData = allData
 
     if (isLoading) return <LogoLoader />
 
@@ -161,10 +197,14 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                 </div>
                             </div>
                             <div className="main-loyaltie-programs__items loyaltie-programs__items">
-                                {displayedData?.map((item: SeeAllEssentialLoyaltyCasino) => (
+                                {displayedData?.map((item: SeeAllEssentialLoyaltyCasino, index: number) => {
+                                    // Create a more unique key using multiple identifiers
+                                    const uniqueKey = createUniqueId(item, index)
+                                    
+                                    return (
                                     <div 
                                       className="loyaltie-programs__item item-loyaltie-programs"
-                                      key={item.casino_slug}
+                                      key={uniqueKey}
                                     >
                                         <div className="item-loyaltie-programs__row">
                                             <div className="item-loyaltie-programs__main">
@@ -183,10 +223,10 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                                     </div>
                                                 </div>
                                                 <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
-                                                    {item.loyalty_program.loyalty_keypoint.map((it: { text_1: string; text_2: string; image?: string | null }) => (
+                                                    {item.loyalty_program.loyalty_keypoint.map((it: { text_1: string; text_2: string; image?: string | null }, keypointIndex: number) => (
                                                         <div 
                                                           className="features-essential-programs-gamble__column"
-                                                          key={it.text_1}
+                                                          key={`${uniqueKey}-keypoint-${keypointIndex}`}
                                                         >
                                                             <div className="features-essential-programs-gamble__item">
                                                                 <div className="features-essential-programs-gamble__icon ">
@@ -211,7 +251,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                                                     <div className="item-essential-programs-gamble__rating-items items-rating-essential-programs-gamble">
                                                                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((level) => (
                                                                             <div
-                                                                                key={level}
+                                                                                key={`${uniqueKey}-rating-${level}`}
                                                                                 className={`items-rating-essential-programs-gamble__item items-rating-essential-programs-gamble__item_${level} ${
                                                                                     level <= (Number(item?.loyalty_program?.loyalty_rank) || 10) && 'full'
                                                                                 }`}
@@ -246,7 +286,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                             </div>
                                         </div>
                                     </div>
-                                ))}
+                                )})}
                             </div>
                             <PaginationPage
                                 countElem={data?.count}

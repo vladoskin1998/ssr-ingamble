@@ -35,6 +35,16 @@ const pathBreadCrumb = [
 ]
 
 const getAllBonusFetchData = async (page: number, slug: string | null, countPageSize: number) => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const params = new URLSearchParams()
+        if (slug) params.set('slug', slug)
+        params.set('page', page.toString())
+        params.set('page_size', countPageSize.toString())
+        
+        const response = await fetch(`/api/see-all-bonuses?${params}`)
+        return response.json()
+    }
+    
     const response = await $api.get(`get-see-all-bonus-category${slug ? '/' + slug : ''}/?page=${page}&page_size=${countPageSize}`)
     return response.data
 }

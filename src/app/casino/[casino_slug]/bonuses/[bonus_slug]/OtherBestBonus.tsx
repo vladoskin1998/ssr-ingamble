@@ -12,6 +12,11 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 const getFilteringBonusList = async () => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch('/api/bonuses-rank-range')
+        return response.json()
+    }
+    
     const response = await $api.get(`bonuses-in-rank-range/`)
     return response.data
 }

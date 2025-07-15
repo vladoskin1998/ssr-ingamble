@@ -10,6 +10,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const getFilteringCasinoList = async () => {
+    // Використовуємо Next.js API Route якщо увімкнено
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch('/api/casinos-rank-range')
+        if (!response.ok) throw new Error('Failed to fetch casinos in rank range')
+        return await response.json()
+    }
+    
+    // Fallback до старого API
     const response = await $api.get(`casinos-in-rank-range/`)
     return { dataCasinosRes: response.data }
 }

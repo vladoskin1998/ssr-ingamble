@@ -12,8 +12,6 @@ export const BonusSubType = ({ bonus_subtype }: { bonus_subtype: { name: string 
         }
     }
 
-    console.log('bonus_subtype', bonus_subtype)
-    
     if (!bonus_subtype?.length) return <></>
 
     return (

@@ -112,7 +112,6 @@
             
             img.onerror = function() {
                 // Fallback for failed images
-                console.warn('LCP candidate image failed to load:', this.src);
             };
         });
     }

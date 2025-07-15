@@ -126,8 +126,7 @@ export async function applyCasinoFilters(
 
         // Перенаправлення на сторінку з фільтрами
         redirect(`/filter-casinos?${searchParams.toString()}`)
-    } catch (error) {
-        console.error('Помилка при застосуванні фільтрів казино:', error)
+    } catch {
         return {
             error: 'Помилка при застосуванні фільтрів'
         }
@@ -237,8 +236,7 @@ export async function applyBonusFilters(
         })
 
         redirect(`/filter-bonuses?${searchParams.toString()}`)
-    } catch (error) {
-        console.error('Помилка при застосуванні фільтрів бонусів:', error)
+    } catch {
         return {
             error: 'Помилка при застосуванні фільтрів'
         }
@@ -328,8 +326,7 @@ export async function applyLoyaltiesFilters(
         })
 
         redirect(`/filter-loyalties?${searchParams.toString()}`)
-    } catch (error) {
-        console.error('Помилка при застосуванні фільтрів програм лояльності:', error)
+    } catch {
         return {
             error: 'Помилка при застосуванні фільтрів'
         }

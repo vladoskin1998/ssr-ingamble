@@ -29,6 +29,12 @@ const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
 
 const getCurrentLoyaltiesFetchData = async (slug: string) => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch(`/api/loyalty-program/${slug}`)
+        const dataCurrentLoyaltie = await response.json()
+        return { dataCurrentLoyaltie, headers: response.headers }
+    }
+    
     const response = await $api.get(`get-data-loyalty-program/${slug}/`)
     const headers = response.headers
     return { dataCurrentLoyaltie: response.data, headers }

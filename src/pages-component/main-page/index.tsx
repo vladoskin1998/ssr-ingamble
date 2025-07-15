@@ -61,31 +61,57 @@ const categoriesTypeBySrc = (
 }
 
 const getHomeDataFetch = async (src: string) => {
-    try {
-        const response = await $api.get(src)
+    if (process.env.USE_NEXT_API === 'true') {
+        // Визначаємо базовий URL автоматично
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                       (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+        const apiUrl = `${baseUrl}/api/home-data?src=${encodeURIComponent(src)}`
         
-        return {
-            dataHome: response.data?.data_blocks || [],
-            dataHomeMobile: response.data?.data_blocks_m || [],
-            headers: response.headers,
+        const response = await fetch(apiUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+            },
+        })
+        
+        if (response.ok) {
+            const data = await response.json()
+            return {
+                dataHome: data.dataHome || [],
+                dataHomeMobile: data.dataHomeMobile || [],
+                headers: data.headers || {},
+            }
         }
-    } catch {
-        return {
-            dataHome: [],
-            dataHomeMobile: [],
-            headers: {},
-        }
+    }
+    
+    const response = await $api.get(src)
+    return {
+        dataHome: response.data?.data_blocks || [],
+        dataHomeMobile: response.data?.data_blocks_m || [],
+        headers: response.headers,
     }
 }
 
 
 const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
-    try {
-        const response = await $api.get('get-block-by-country/')
-        return response.data
-    } catch {
-        return null
+    if (process.env.USE_NEXT_API === 'true') {
+        // Визначаємо базовий URL автоматично
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                       (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+        const apiUrl = `${baseUrl}/api/block-by-country`
+        
+        const response = await fetch(apiUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+            },
+        })
+        
+        if (response.ok) {
+            return await response.json()
+        }
     }
+    
+    const response = await $api.get('get-block-by-country/')
+    return response.data
 }
 
 const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlock>, index: number, src: string) => {
@@ -150,69 +176,48 @@ const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlo
             )
         case BlockTypeNumber.BlockType11:
             return <BlockType11 data={block as HomeDataBlock<DataHomeItemsBlock>} />
-        // default:
-        //     return (
-        //         <div style={{ padding: '20px', backgroundColor: '#fff3cd', border: '1px solid #ffeaa7', borderRadius: '8px', margin: '10px 0' }}>
-        //             <h3>Невідомий тип блоку</h3>
-        //             <p>Блок #{index + 1} не може бути відображений</p>
-        //         </div>
-        //     )
     }
 }
 
 export default async function MainPage({ src }: { src: string }) {
-    try {
-        const userAgent = (await headers()).get('user-agent') || ''
-        const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
+    const userAgent = (await headers()).get('user-agent') || ''
+    const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent)
 
-        // Load data from API
-        const data = await getHomeDataFetch(src)
-        let blockByCountry: HomeDataBlock | null = await getBlockByCountry()
+    const data = await getHomeDataFetch(src)
+    let blockByCountry: HomeDataBlock | null = await getBlockByCountry()
 
-        const { blocks_sequence_number } = categoriesTypeBySrc(src)
-        if (blockByCountry) {
-            blockByCountry = {
-                ...blockByCountry,
-                blocks_sequence_number: blocks_sequence_number,
-            }
+    const { blocks_sequence_number } = categoriesTypeBySrc(src)
+    if (blockByCountry) {
+        blockByCountry = {
+            ...blockByCountry,
+            blocks_sequence_number: blocks_sequence_number,
         }
-
-        const blocksToRender = [
-            ...(isMobile ? data.dataHomeMobile : data?.dataHome || []),
-            ...(blockByCountry ? [blockByCountry] : []),
-            {
-                blocks_sequence_number: Number(data?.dataHome?.length) + 10,
-                items_block: {} as DataHomeItemsBlock,
-            },
-        ]
-            .filter(Boolean)
-            .sort((a, b) => (a?.blocks_sequence_number || 0) - (b?.blocks_sequence_number || 0))
-
-        return (
-            <main className="gamble__main main-gamble">
-                <div className="main-gamble__body">
-                    <Categories type_category={categoriesTypeBySrc(src).type_category} />
-                    {blocksToRender.map((block, index) => (
-                        <div key={`block-${block?.blocks_sequence_number || index}`}>
-                            {renderBlock(block, index, src)}
-                        </div>
-                    ))}
-                    <Suspense>
-                        <BlockFooterWrapper />
-                    </Suspense>
-                </div>
-            </main>
-        )
-    } catch {
-        return (
-            <main className="gamble__main main-gamble">
-                <div className="main-gamble__body">
-                    <div style={{ padding: '40px 20px', textAlign: 'center', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '8px', margin: '20px' }}>
-                        <h2>Помилка завантаження сторінки</h2>
-                        <p>Виникла помилка при завантаженні даних. Спробуйте оновити сторінку.</p>
-                    </div>
-                </div>
-            </main>
-        )
     }
+
+    const blocksToRender = [
+        ...(isMobile ? data.dataHomeMobile : data?.dataHome || []),
+        ...(blockByCountry ? [blockByCountry] : []),
+        {
+            blocks_sequence_number: Number(data?.dataHome?.length) + 10,
+            items_block: {} as DataHomeItemsBlock,
+        },
+    ]
+        .filter(Boolean)
+        .sort((a, b) => (a?.blocks_sequence_number || 0) - (b?.blocks_sequence_number || 0))
+
+    return (
+        <main className="gamble__main main-gamble">
+            <div className="main-gamble__body">
+                <Categories type_category={categoriesTypeBySrc(src).type_category} />
+                {blocksToRender.map((block, index) => (
+                    <div key={`block-${block?.blocks_sequence_number || index}`}>
+                        {renderBlock(block, index, src)}
+                    </div>
+                ))}
+                <Suspense>
+                    <BlockFooterWrapper />
+                </Suspense>
+            </div>
+        </main>
+    )
 }

@@ -7,7 +7,6 @@ export const metadata: Metadata = {
 
 const AllBonus = async ({ params }: { params: Promise<{ params: string[] }> }) => {
     const dataparam = await params
-    console.log(dataparam, 'dataparam')
     
     // Передаємо перший параметр як casinoSlug
     const bonusSlug = dataparam?.params?.[0] || null

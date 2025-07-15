@@ -14,6 +14,11 @@ import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 
 
 const getFilteringLoyaltiesList = async () => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch('/api/loyalty-programs-rank-range')
+        return response.json()
+    }
+    
     const response = await $api.get(`loyalty-programs-in-rank-range/`)
     return response.data
 }

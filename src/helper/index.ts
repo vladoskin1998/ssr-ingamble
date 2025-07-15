@@ -204,7 +204,6 @@ export const saveLikesToStorage = (
 
         // Проверка структуры данных
         if (typeof storedData !== 'object' || storedData === null) {
-            console.warn('Invalid data in localStorage, resetting to empty object.');
             localStorage.setItem('likesData', JSON.stringify({}));
             return;
         }
@@ -228,8 +227,8 @@ export const saveLikesToStorage = (
 
         // Сохраняем обновленные данные
         localStorage.setItem('likesData', JSON.stringify(storedData));
-    } catch (error) {
-        console.error('Error saving likes to storage:', error);
+    } catch {
+        // Ignore storage errors
     }
 };
 

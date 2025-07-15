@@ -37,10 +37,14 @@ const SafetyIndexRatingLevel = (n: number) => {
 }
 
 const getCurrentCasinosFetchData = async (slug: string) => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch(`/api/casino/${slug}`)
+        const dataCurrentCasinos = await response.json()
+        return { dataCurrentCasinos, headers: response.headers }
+    }
+    
     const response = await $api.get(`get-data-casino/${slug}/`)
-
     const headers = response.headers
-
     return { dataCurrentCasinos: response.data, headers }
 }
 

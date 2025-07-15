@@ -45,8 +45,7 @@ export async function subscribeUser(
             success: true,
             message: 'Ви успішно підписалися! 🎉'
         }
-    } catch (error) {
-        console.error('Помилка при підписці:', error)
+    } catch {
         return {
             error: 'Помилка при підписці. Спробуйте ще раз.',
             success: false

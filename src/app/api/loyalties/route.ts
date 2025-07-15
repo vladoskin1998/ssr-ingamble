@@ -25,7 +25,6 @@ export async function GET(request: Request) {
         
         return NextResponse.json(pageData);
     } catch (error) {
-        console.error('Error fetching loyalties data:', error);
         return NextResponse.json(
             { error: 'Failed to fetch data' },
             { status: 500 }
@@ -55,7 +54,6 @@ async function getLoyaltiesPageData({ page, slug }: { page: number; slug?: strin
             total_pages: Math.ceil(data.count / 10) // Calculate total_pages if not provided by API
         };
     } catch (error) {
-        console.error('API Error:', error);
         throw new Error('Failed to fetch loyalty data from API');
     }
 }

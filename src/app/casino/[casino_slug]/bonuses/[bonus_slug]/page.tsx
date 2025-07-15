@@ -28,9 +28,14 @@ const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
 const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 
 const getBonusDataFetch = async ({ slug }: { slug: string | null }) => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const response = await fetch(`/api/bonus/${slug}`)
+        const dataBonus = await response.json()
+        return { dataBonus, headers: response.headers }
+    }
+    
     const response = await $api.get(`get-data-bonus/${slug}/`)
     const headers = response.headers
-
     return { dataBonus: response.data, headers }
 }
 

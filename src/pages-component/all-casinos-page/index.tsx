@@ -36,6 +36,16 @@ const pathBreadCrumb = [
 ]
 
 const getAllCasinosFetchData = async (page: number, slug: string | null, pageSize: number) => {
+    if (process.env.USE_NEXT_API === 'true') {
+        const params = new URLSearchParams()
+        if (slug) params.set('slug', slug)
+        params.set('page', page.toString())
+        params.set('page_size', pageSize.toString())
+        
+        const response = await fetch(`/api/see-all-casinos?${params}`)
+        return response.json()
+    }
+    
     const response = await $api.get(`get-see-all-casinos-category${slug ? '/' + slug : ''}/?page=${page}&page_size=${pageSize}`)
     return response.data
 }
@@ -120,10 +130,6 @@ export default function SeeAllCasinos({ casinoSlug }: { casinoSlug?: string | nu
 
         const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'Casino List'
     const displayedData = isMobile ? allData : data?.casino?.results
-
-
-    console.log(!displayedData?.length && isLoading)
-    
 
     if (isLoading) return <LogoLoader />
 
