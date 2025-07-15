@@ -1,3 +1,4 @@
+'use client'
 import ReactPaginate from 'react-paginate'
 import './style.css'
 import { useEffect, useState } from 'react'

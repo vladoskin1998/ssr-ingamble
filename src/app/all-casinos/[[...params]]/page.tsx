@@ -39,7 +39,7 @@ const AllCasinos = async ({ params }: { params: Promise<{ params: string[] }> })
     const { casino_slug, currentPage } = getSlugAndPage(dataparam)
     console.log(dataparam, 'dataparam')
 
-    return <SeeAllCasinos />
+    return <SeeAllCasinos casino_slug={casino_slug} currentPage={Number(currentPage)} />
 }
 
 export default AllCasinos

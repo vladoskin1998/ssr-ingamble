@@ -2,8 +2,7 @@
 import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
-// import { Wraper } from '../Wraper'
-// import like from '../../assets/img/icons/like.svg'
+
 import Image from 'next/image'
 import './style.css'
 import dynamic from 'next/dynamic'
