@@ -53,11 +53,14 @@ const getFilteringLoyaltiesList = async (payload: LoyaltiesFilterBodyType, page:
     return response.data
 }
 
-export default function SeeAllEssentialsLoyalty() {
+export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug?: string | null }) {
     // document.title = "All Essentials Loyalty"
 
     const { loyaltiesFilters, setLoyaltiesFilters } = useFilterContext()
-    const { loyaltie_slug } = useParams()
+    const params = useParams()
+    
+    // Використовуємо пропс loyaltieSlug замість params.loyaltie_slug
+    const loyaltie_slug = (loyaltieSlug || params.loyaltie_slug) as string | undefined
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllEssentialLoyaltyCasino[]>([])
@@ -71,7 +74,7 @@ export default function SeeAllEssentialsLoyalty() {
     })
 
     useEffect(() => {
-        if (loyaltie_slug) {
+        if (loyaltie_slug && NAMETITLECATEGORYSLUG[loyaltie_slug]) {
             const { key, value } = NAMETITLECATEGORYSLUG[loyaltie_slug]
 
             setLoyaltiesFilters({
@@ -85,13 +88,13 @@ export default function SeeAllEssentialsLoyalty() {
         return () => {
             setLoyaltiesFilters(initialLoyaltiesFilters)
         }
-    }, [loyaltie_slug])
+    }, [loyaltie_slug, setLoyaltiesFilters])
 
     useEffect(() => {
         if (data?.results) {
             setAllData((s) => [...s, ...data?.results])
         }
-    }, [data])
+    }, [data, currentPage, isMobile])
 
     useEffect(() => {
         if (isMobile && !data?.results) {
@@ -109,7 +112,7 @@ export default function SeeAllEssentialsLoyalty() {
             })
             return
         }
-    }, [data])
+    }, [data, currentPage, isMobile])
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 900)
@@ -154,7 +157,7 @@ export default function SeeAllEssentialsLoyalty() {
                                 </div>
                             </div>
                             <div className="main-loyaltie-programs__items loyaltie-programs__items">
-                                {displayedData?.map((item: any) => (
+                                {displayedData?.map((item: SeeAllEssentialLoyaltyCasino) => (
                                     <div 
                                       className="loyaltie-programs__item item-loyaltie-programs"
                                       key={item.casino_slug}
@@ -176,7 +179,7 @@ export default function SeeAllEssentialsLoyalty() {
                                                     </div>
                                                 </div>
                                                 <div className="content-item-loyaltie-programs__features features-essential-programs-gamble">
-                                                    {item.loyalty_program.loyalty_keypoint.map((it: any) => (
+                                                    {item.loyalty_program.loyalty_keypoint.map((it: { text_1: string; text_2: string; image?: string | null }) => (
                                                         <div 
                                                           className="features-essential-programs-gamble__column"
                                                           key={it.text_1}

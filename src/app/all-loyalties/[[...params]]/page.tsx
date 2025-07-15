@@ -8,8 +8,11 @@ export const metadata: Metadata = {
 const AllLoyalties = async ({ params }: { params: Promise<{ params: string[] }> }) => {
     const dataparam = await params
     console.log(dataparam, 'dataparam')
+    
+    // Передаємо перший параметр як loyaltie_slug
+    const loyaltieSlug = dataparam?.params?.[0] || null
 
-    return <SeeAllEssentialsLoyalty />
+    return <SeeAllEssentialsLoyalty loyaltieSlug={loyaltieSlug} />
 }
 
 export default AllLoyalties
