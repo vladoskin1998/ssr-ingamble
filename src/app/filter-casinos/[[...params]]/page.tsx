@@ -3,14 +3,14 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { Categories } from '@/components/categories/Categories'
 import { FilterHeaderList, makeListFilterHeader } from '@/components/filter-components/FilterHeaderList'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
-import $api from '../../http'
-import { CasinoFilterBodyType, FilterCasinoPostResponse, SeeAllCasinosType } from '../../types'
+import $api from '../../../http'
+import { CasinoFilterBodyType, FilterCasinoPostResponse, SeeAllCasinosType } from '../../../types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { memo, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { useIsTablet } from '@/hooks/useResponsive'
 import { rankCasinosSeeAll, WithdrawalSeeAllCasinos } from '@/pages-component/all-casinos-page'
-import { cloacingFetch, cloacingLink, filterEmptyValues, getTitleFilterCategories, NumberAssociaty, sanitizeNumberLike, sliceString } from '../../helper'
+import { cloacingFetch, cloacingLink, filterEmptyValues, getTitleFilterCategories, NumberAssociaty, sanitizeNumberLike, sliceString } from '../../../helper'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 import { debounce } from 'lodash'
 import { LogoLoader } from '@/components/loader/LogoLoader'
@@ -22,11 +22,11 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { NoResult } from '@/components/no-result'
 import { BreadCrumb } from '@/components/breadcrumb/index'
-import initializeAdaptiveBehavior from '../../helper/adaprive-bahavior'
+import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 
-const BottomInfo = dynamic(() => import('../../components/footer/BottomInfo'))
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('../../components/subscribe/SubscribeForm'))
+const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
+const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
 
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15

@@ -1,21 +1,21 @@
 'use client'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { Categories } from '../../components/categories/Categories'
-import { FilterHeaderList, makeListFilterHeader } from '../../components/filter-components/FilterHeaderList'
-import { initialBonusFilters, initialCasinoFilters, useFilterContext } from '../../context/FilterContext'
-import $api from '../../http'
-import { BonusFilterBodyType, CasinoFilterBodyType, FilterBonusPostResponse, SeeAllBonus } from '../../types'
+import { Categories } from '../../../components/categories/Categories'
+import { FilterHeaderList, makeListFilterHeader } from '../../../components/filter-components/FilterHeaderList'
+import { initialBonusFilters, initialCasinoFilters, useFilterContext } from '../../../context/FilterContext'
+import $api from '../../../http'
+import { BonusFilterBodyType, CasinoFilterBodyType, FilterBonusPostResponse, SeeAllBonus } from '../../../types'
 // import { Wraper } from '../Wraper'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 // import like from '/img/icons/like.svg'
 import dynamic from 'next/dynamic'
 import { memo, useEffect, useState } from 'react'
-import { useAdaptiveBehavior } from '../../context/AppContext'
+import { useAdaptiveBehavior } from '../../../context/AppContext'
 // import star from '/img/icons/star.svg'
-import { cloacingFetch, cloacingLink, filterEmptyValues, getTagColorByindex, getTitleFilterCategories, sanitizeNumberLike } from '../../helper'
-import { PaginationPage } from '../../components/pagination/PaginationPage'
+import { cloacingFetch, cloacingLink, filterEmptyValues, getTagColorByindex, getTitleFilterCategories, sanitizeNumberLike } from '../../../helper'
+import { PaginationPage } from '../../../components/pagination/PaginationPage'
 import { debounce } from 'lodash'
-import { LogoLoader } from '../../components/loader/LogoLoader'
+import { LogoLoader } from '../../../components/loader/LogoLoader'
 // import searchImg from '/img/icons/search-filter.svg'
 import { v4 as uuidv4 } from 'uuid'
 // 1. Заміна роутінгу з react-router-dom на Next.js
@@ -24,13 +24,13 @@ import Link from 'next/link' // замість { Link } з 'react-router-dom'
 import Image from 'next/image'
 import { NoResult } from '@/components/no-result'
 import { BreadCrumb } from '@/components/breadcrumb/index'
-import initializeAdaptiveBehavior from '../../helper/adaprive-bahavior'
+import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 // ЗМІНА 9: Додано useParams для client component
 // В Next.js App Router для client components використовується useParams hook
 import { useParams } from 'next/navigation'
-const BottomInfo = dynamic(() => import('../../components/footer/BottomInfo'))
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('../../components/subscribe/SubscribeForm'))
+const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
+const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
 
 // ЗМІНА 1: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // Старий код: const countPageSize = window.innerWidth < 900 ? 10 : 20
