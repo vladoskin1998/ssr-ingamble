@@ -27,6 +27,7 @@ import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
+const Footer = dynamic(() => import('../../../components/footer'))
 
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
@@ -255,6 +256,7 @@ export default function FilterCasino() {
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
         // </Wraper>

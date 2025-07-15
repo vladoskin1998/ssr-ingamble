@@ -27,6 +27,7 @@ import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
+const Footer = lazy(() => import('@/components/footer'))
 
 const getCurrentLoyaltiesFetchData = async (slug: string) => {
     if (process.env.USE_NEXT_API === 'true') {
@@ -154,6 +155,7 @@ export default function SimpleLoyalties() {
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </Suspense>
             </div>
         </main>

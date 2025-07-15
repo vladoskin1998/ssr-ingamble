@@ -22,6 +22,7 @@ import dynamic from 'next/dynamic'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
+const Footer = dynamic(() => import('@/components/footer'))
 
 const pathBreadCrumb = [
     {
@@ -69,6 +70,8 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
 
     useEffect(() => {
         setSlug(Array.isArray(bonus_slug) ? bonus_slug[0] || '' : bonus_slug || '')
+        setAllData([]) // Reset data when slug changes
+        setCurrentPage(1) // Reset pagination
         window.scrollTo(0, 0)
     }, [bonus_slug])
 
@@ -90,7 +93,10 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
         }
         if (isMobile) {
             setAllData((s) => {
-                const combinedData = [...s, ...(data?.bonuses?.results || [])]
+                const newItems = data?.bonuses?.results || []
+                const existingIds = new Set(s.map(item => item.bonus_id))
+                const uniqueNewItems = newItems.filter(item => !existingIds.has(item.bonus_id))
+                const combinedData = [...s, ...uniqueNewItems]
                 return combinedData
             })
             return
@@ -109,6 +115,26 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
     }, [])
 
     const displayedData = isMobile ? allData : data?.bonuses?.results
+
+    // Debug: Check for duplicate bonus_ids
+    useEffect(() => {
+        if (displayedData?.length) {
+            const bonusIds = displayedData.map(item => item.bonus_id)
+            const duplicates = bonusIds.filter((id, index) => bonusIds.indexOf(id) !== index)
+            if (duplicates.length > 0) {
+                console.warn('Duplicate bonus_ids found:', duplicates)
+                console.log('All bonus_ids:', bonusIds)
+            }
+        }
+    }, [displayedData])
+
+    // Generate unique key for each bonus item
+    const generateUniqueKey = (item: SeeAllBonusType, index: number) => {
+        // Use bonus_id as primary identifier, fallback to combination if needed
+        const primaryId = item.bonus_id || 'no-id'
+        const secondaryId = item.bonus_slug || 'no-slug'
+        return `bonus-${primaryId}-${secondaryId}-${index}`
+    }
 
     useEffect(() => {
         initializeAdaptiveBehavior()
@@ -148,10 +174,10 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
                             </div>
 
                             <div className="main-see-all__row custom-main-see-all__row">
-                                {displayedData?.map((item) => (
+                                {displayedData?.map((item, index) => (
                                     <div 
                                       className="main-see-all__column"
-                                      key={item.bonus_slug}
+                                      key={generateUniqueKey(item, index)}
                                       >
                                         <div className="slide-slider__item casino-card">
                                             <div className="casino-card__top">
@@ -192,7 +218,7 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
                                                         ?.map((it, id) => (
                                                             <div 
                                                               className={`tags-casino-card__item ${getTagColorByindex(id)}`}
-                                                              key={typeof it === 'string' ? it : it.name}
+                                                              key={`${item.bonus_id}-${typeof it === 'string' ? it : it.name}-${id}`}
                                                               >
                                                                 <span className="tags-casino-card__item-label">{typeof it === 'string' ? it : it.name}</span>
                                                             </div>
@@ -249,6 +275,7 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
     )

@@ -23,6 +23,7 @@ import dynamic from 'next/dynamic'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
+const Footer = dynamic(() => import('@/components/footer'))
 
 const pathBreadCrumb = [
     {
@@ -307,6 +308,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
     )

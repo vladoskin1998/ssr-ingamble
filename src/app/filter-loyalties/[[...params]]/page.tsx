@@ -25,6 +25,7 @@ import Image from 'next/image'
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
+const Footer = dynamic(() => import('@/components/footer'))
 
 const debouncedFetchFilter = debounce((filters, fetchFunction) => fetchFunction(filters), 700)
 
@@ -188,6 +189,7 @@ export default function FilterLoyalty() {
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
     )

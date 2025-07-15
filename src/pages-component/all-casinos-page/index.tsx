@@ -22,6 +22,7 @@ import { useIsTablet } from '@/hooks/useResponsive'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
 const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
+const Footer = dynamic(() => import('@/components/footer'))
 
 
 const pathBreadCrumb = [
@@ -315,6 +316,7 @@ export default function SeeAllCasinos({ casinoSlug }: { casinoSlug?: string | nu
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
         // </Wraper>

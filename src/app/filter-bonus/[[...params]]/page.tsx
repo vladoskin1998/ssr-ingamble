@@ -31,6 +31,7 @@ import { useParams } from 'next/navigation'
 const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
+const Footer = dynamic(() => import('../../../components/footer'))
 
 // ЗМІНА 1: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // Старий код: const countPageSize = window.innerWidth < 900 ? 10 : 20
@@ -240,6 +241,7 @@ export default function FilterBonus() {
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
                     <BottomInfo />
+                    <Footer />
                 </div>
             </main>
         // </Wraper>
