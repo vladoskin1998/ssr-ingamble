@@ -29,7 +29,7 @@ export default function CheckMoreWhatSuitsYouBest() {
                 <div className="bottom-filter-tags__top top">
                     <div className="top__title-block">
                         <span className="top__title-icon">
-                            <Image width={444} height={444} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
+                            <Image width={18} height={18} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
                         </span>
                         <h2 className="top__title">Get More of What Suits You Best</h2>
                     </div>
