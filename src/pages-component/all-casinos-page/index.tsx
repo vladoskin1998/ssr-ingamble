@@ -27,7 +27,7 @@ const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
 const pathBreadCrumb = [
     {
         name: 'Home',
-        link: '/    ',
+        link: '/',
     },
     {
         name: 'All Casinos',
@@ -64,7 +64,7 @@ export const WithdrawalSeeAllCasinos = (n: { daily: number | null; weekly: numbe
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
 
-export default function SeeAllCasinos() {
+export default function SeeAllCasinos({ casinoSlug }: { casinoSlug?: string | null }) {
     // document.title = "All Casino"
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
@@ -75,7 +75,10 @@ export default function SeeAllCasinos() {
     // ЗМІНА: Додаємо динамічний countPageSize на основі isMobile
     const countPageSize = isMobile ? 8 : 15
 
-     const { casino_slug } = useParams()
+    const params = useParams()
+    
+    // Використовуємо пропс casinoSlug замість прямого отримання з params
+    const casino_slug = casinoSlug || params.casino_slug
 
     const [slug, setSlug] = useState<string>(Array.isArray(casino_slug) ? casino_slug[0] || '' : casino_slug || '')
 
@@ -136,7 +139,7 @@ export default function SeeAllCasinos() {
                                       ...pathBreadCrumb,
                                       {
                                           name: titlePage || 'Categories',
-                                          link: `/all-bonuses/${slug}`,
+                                          link: `/all-casinos/${slug}`,
                                       },
                                   ]
                                 : pathBreadCrumb

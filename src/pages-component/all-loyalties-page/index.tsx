@@ -29,7 +29,7 @@ const countPageSize = window.innerWidth < 900 ? 8 : 15
 const pathBreadCrumb = [
     {
         name: 'Home',
-        link: '/    ',
+        link: '/',
     },
     {
         name: 'Essential VIP Loyalty Programs',
