@@ -121,10 +121,10 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
         if (displayedData?.length) {
             const bonusIds = displayedData.map(item => item.bonus_id)
             const duplicates = bonusIds.filter((id, index) => bonusIds.indexOf(id) !== index)
-            if (duplicates.length > 0) {
-                console.warn('Duplicate bonus_ids found:', duplicates)
-                console.log('All bonus_ids:', bonusIds)
-            }
+            // if (duplicates.length > 0) {
+            //     console.warn('Duplicate bonus_ids found:', duplicates)
+            //     console.log('All bonus_ids:', bonusIds)
+            // }
         }
     }, [displayedData])
 

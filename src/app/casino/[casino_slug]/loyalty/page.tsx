@@ -18,6 +18,13 @@ import { Categories } from '@/components/categories/Categories'
 import { BreadCrumb } from '@/components/breadcrumb'
 import { GeoLocationAllowdType } from '@/types'
 import { EssentialVIPLoyaltyPrograms } from '../bonuses/[bonus_slug]/EssentialVIPLoyaltyPrograms'
+
+// Interface for CloudFlare headers
+interface CloudFlareHeaders {
+    'cf-ipcountry-code'?: string
+    'cf-ipcountry'?: string
+    [key: string]: string | undefined
+}
 import { SiblingBonus } from '../bonuses/[bonus_slug]/SiblingBonus'
 // import { OtherBestReloadBonus } from '../bonuses/bonus_slug/OtherBestBonus'
 import { HarryStyles } from '../bonuses/[bonus_slug]/HarryStyles'
@@ -74,11 +81,12 @@ export default function SimpleLoyalties() {
 
     useEffect(() => {
         if (data?.headers) {
-            const countryCode = data.headers['cf-ipcountry-code']
-            const countryName = data.headers['cf-ipcountry']
+            const headers = data.headers as CloudFlareHeaders
+            const countryCode = headers['cf-ipcountry-code'] || ''
+            const countryName = headers['cf-ipcountry'] || ''
             
             const countryImg = Country?.general?.countries?.find((it) => {
-                return it.code === countryCode || it.name.toLocaleLowerCase() === countryName?.toLocaleLowerCase()
+                return it.code === countryCode || (countryName && it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase())
             })?.flag_image
 
             const idCountry = data.dataCurrentLoyaltie?.blocked_countries?.find(

@@ -18,6 +18,20 @@ import { LogoLoader } from '@/components/loader/LogoLoader'
 import { GeoLocationAllowdType } from '@/types'
 
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
+
+// Interface for CloudFlare headers
+interface CloudFlareHeaders {
+    'cf-ipcountry-code'?: string
+    'cf-ipcountry'?: string
+    [key: string]: string | undefined
+}
+
+// Interface for blocked country item
+interface BlockedCountry {
+    id: number
+    code: string
+    name?: string
+}
 import { useFilterContext } from '@/context/FilterContext'
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 
@@ -94,14 +108,15 @@ export default function SimpleCasinos() {
     useEffect(() => {
         if (data?.headers) {
             // Axios нормалізує заголовки до lowercase, тому треба використовувати правильні імена
-            const countryCode = data?.headers?.['cf-ipcountry-code']
-            const countryName = data?.headers?.['cf-ipcountry']
+            const headers = data?.headers as CloudFlareHeaders
+            const countryCode = headers?.['cf-ipcountry-code'] || ''
+            const countryName = headers?.['cf-ipcountry'] || ''
 
             const countryImg = Country?.general?.countries?.find((it) => {
-                return it.code === countryCode || it.name.toLocaleLowerCase() === countryName?.toLocaleLowerCase()
+                return it.code === countryCode || (countryName && it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase())
             })?.flag_image
 
-            const idCountry = data.dataCurrentCasinos?.blocked_countries?.find((item: any) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
+            const idCountry = data.dataCurrentCasinos?.blocked_countries?.find((item: BlockedCountry) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id
 
             setGeoLocation({
                 countryCode: countryCode || '',

@@ -18,6 +18,13 @@ import { HowToGetBonus } from './HowToGetBonus'
 
 import { HarryStyles } from './HarryStyles'
 import { EssentialVIPLoyaltyPrograms } from './EssentialVIPLoyaltyPrograms'
+
+// Interface for CloudFlare headers
+interface CloudFlareHeaders {
+    'cf-ipcountry-code'?: string
+    'cf-ipcountry'?: string
+    [key: string]: string | undefined
+}
 import { useFilterContext } from '@/context/FilterContext'
 import { SiblingBonus } from './SiblingBonus'
 
@@ -78,12 +85,12 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
 
     useEffect(() => {
         if (data?.headers) {
-            const headers = data?.headers
-            const countryCode = headers?.['cf-ipcountry-code']
-            const countryName = headers?.['cf-ipcountry']
+            const headers = data?.headers as CloudFlareHeaders
+            const countryCode = headers?.['cf-ipcountry-code'] || ''
+            const countryName = headers?.['cf-ipcountry'] || ''
 
             const countryImg = (Country?.general?.countries )?.find((it) => {
-                return it.code === countryCode || it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase()
+                return it.code === countryCode || (countryName && it.name.toLocaleLowerCase() === countryName.toLocaleLowerCase())
             })?.flag_image
 
             const idCountry = data.dataBonus?.blocked_countries?.find((item: any) => item?.code?.toLocaleLowerCase() === countryCode?.toLocaleLowerCase())?.id

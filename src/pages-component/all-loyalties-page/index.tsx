@@ -72,9 +72,9 @@ const removeDuplicates = (items: SeeAllEssentialLoyaltyCasino[]): SeeAllEssentia
         return true
     })
     
-    if (duplicates.length > 0) {
-        console.warn('Removed duplicate casino items:', duplicates)
-    }
+    // if (duplicates.length > 0) {
+    //     console.warn('Removed duplicate casino items:', duplicates)
+    // }
     
     return result
 }
