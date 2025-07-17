@@ -9,16 +9,16 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { DataHomeItemsBlockEnumCategory, LoyaltiesFilterBodyType, NAMETITLECATEGORYSLUGType, SeeAllEssentialLoyaltyCasino } from '../../types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import './style.css'
-import { LogoLoader } from '@/components/loader/LogoLoader'
 
-import { useEffect, useState, useMemo, Suspense } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
-import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { useParams } from 'next/navigation'
 import { initialLoyaltiesFilters, useFilterContext } from '@/context/FilterContext'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { usePageLoading } from '@/hooks/usePageLoading'
 
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
@@ -124,6 +124,12 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
       // Don't disable query - let it run with initial filters
     })
 
+    // Додаємо хук для керування завантаженням сторінки
+    const { markAsLoaded } = usePageLoading({
+        autoComplete: false, // Ручне керування
+        dependencies: [data, allData]
+    })
+
     // Reset data when filters change (not just page)
     useEffect(() => {
         setAllData([])
@@ -172,13 +178,23 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
     // Use data directly if allData is empty to ensure immediate rendering
     const displayedData = allData.length > 0 ? allData : (data?.results ? removeDuplicates(data.results) : [])
 
+    // Позначаємо контент як завантажений коли дані готові
+    useEffect(() => {
+        if (!isLoading && displayedData.length >= 0) {
+            const timer = setTimeout(() => {
+                markAsLoaded()
+            }, 600) // Невелика затримка для плавності
+            
+            return () => clearTimeout(timer)
+        }
+    }, [isLoading, displayedData.length, markAsLoaded])
+
     // Show loader only on initial load, not when data is already available
     // if (isLoading) {
     //     return <LogoLoader />
     // }
 
     return (
-      <Suspense fallback={<LogoLoader />}>
             <main className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.loyaltie_category} />
@@ -219,9 +235,9 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                         >
                                             <div className="item-loyaltie-programs__row">
                                                 <div className="item-loyaltie-programs__main">
-                                                    <Link href={`/casino/${item.casino_slug}`} className="item-loyaltie-programs__image loyalty-img-custom">
+                                                    <LoadingLink href={`/casino/${item.casino_slug}`} className="item-loyaltie-programs__image loyalty-img-custom">
                                                         <LazyCardImg img={item?.casino_image || ''} width="100%" />
-                                                    </Link>
+                                                    </LoadingLink>
                                                 </div>
                                                 <div className="item-loyaltie-programs__content content-item-loyaltie-programs">
                                                     <div className="content-item-loyaltie-programs__top top-content-item-loyaltie-programs">
@@ -289,9 +305,9 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                                                             >
                                                                 Visit Casino
                                                             </a>
-                                                            <Link href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`} aria-label="Put your description here." className="bottom-content-item-loyaltie-programs__btn-more">
+                                                            <LoadingLink href={`/casino/${item.loyalty_program.loyalty_slug}/loyalty`} aria-label="Put your description here." className="bottom-content-item-loyaltie-programs__btn-more">
                                                                 Read More
-                                                            </Link>
+                                                            </LoadingLink>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,7 +344,5 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                     <Footer />
                 </div>
             </main>
-  
-            </Suspense>
     )
 }

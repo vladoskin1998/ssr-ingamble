@@ -3,7 +3,7 @@ import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import './style.css'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -145,6 +145,7 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
     if (isLoading) return <LogoLoader />
 
     return (
+        <Suspense fallback={<LogoLoader />}>
             <main className="gamble__see-all main-gamble see-all">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.bonus_category} />
@@ -278,5 +279,6 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
                     <Footer />
                 </div>
             </main>
+        </Suspense>
     )
 }

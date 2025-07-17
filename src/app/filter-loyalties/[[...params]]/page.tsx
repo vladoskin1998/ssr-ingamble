@@ -131,7 +131,7 @@ export default function FilterLoyalty() {
     }
 
     return (
-        <Suspense fallback={<LogoLoader />}>
+        // <Suspense fallback={<LogoLoader />}>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories />
@@ -189,7 +189,7 @@ export default function FilterLoyalty() {
                     <Footer />
                 </div>
             </main>
-        </Suspense>
+        // </Suspense>
     )
 }
 
