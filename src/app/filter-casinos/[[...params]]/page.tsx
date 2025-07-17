@@ -6,7 +6,7 @@ import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
 import $api from '../../../http'
 import { CasinoFilterBodyType, FilterCasinoPostResponse, SeeAllCasinosType } from '../../../types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
-import { memo, useEffect, useState } from 'react'
+import { memo, Suspense, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { useIsTablet } from '@/hooks/useResponsive'
 import { rankCasinosSeeAll, WithdrawalSeeAllCasinos } from '@/pages-component/all-casinos-page'
@@ -197,6 +197,7 @@ export default function FilterCasino() {
 
     return (
         // <Wraper>
+        <Suspense fallback={<LogoLoader />}>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories />
@@ -257,7 +258,7 @@ export default function FilterCasino() {
                     <Footer />
                 </div>
             </main>
-        // </Wraper>
+        </Suspense>
     )
 }
 

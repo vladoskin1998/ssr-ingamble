@@ -9,7 +9,7 @@ import { BonusFilterBodyType, CasinoFilterBodyType, FilterBonusPostResponse, See
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 // import like from '/img/icons/like.svg'
 import dynamic from 'next/dynamic'
-import { memo, useEffect, useState } from 'react'
+import { memo, Suspense, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '../../../context/AppContext'
 // import star from '/img/icons/star.svg'
 import { cloacingFetch, cloacingLink, filterEmptyValues, getTagColorByindex, getTitleFilterCategories, sanitizeNumberLike } from '../../../helper'
@@ -96,6 +96,7 @@ export default function FilterBonus() {
       queryFn: () => getFilteringBonusList(bonusFilters, currentPage, countPageSize),
       placeholderData: keepPreviousData,  // ← змінено з keepPreviousData: true
       enabled: false,
+      // suspense: true,
   })
 
     // ЗМІНА 8: Оновлена логіка для отримання slug з useParams
@@ -178,10 +179,11 @@ export default function FilterBonus() {
     }, [isLoading])
 
     const title = getTitleFilterCategories({ slug, item: makeListFilterHeader(bonusFilters) })
-    if (isDebouncedLoading) return <LogoLoader />
+    // if (isDebouncedLoading) return <LogoLoader />
 
     return (
         // <Wraper>
+          <Suspense fallback={<LogoLoader />}>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories />
@@ -242,7 +244,7 @@ export default function FilterBonus() {
                     <Footer />
                 </div>
             </main>
-        // </Wraper>
+        </Suspense >
     )
 }
 

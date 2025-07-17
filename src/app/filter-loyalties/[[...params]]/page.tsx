@@ -1,5 +1,5 @@
 'use client'
-import { memo, useEffect, useState } from 'react'
+import { memo, Suspense, useEffect, useState } from 'react'
 import { Categories } from '@/components/categories/Categories'
 import { FilterHeaderList } from '@/components/filter-components/FilterHeaderList'
 import {  useAdaptiveBehavior } from '@/context/AppContext'
@@ -130,9 +130,8 @@ export default function FilterLoyalty() {
         }))
     }
 
-    if (isDebouncedLoading) return <LogoLoader />
-
     return (
+        <Suspense fallback={<LogoLoader />}>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories />
@@ -190,6 +189,7 @@ export default function FilterLoyalty() {
                     <Footer />
                 </div>
             </main>
+        </Suspense>
     )
 }
 

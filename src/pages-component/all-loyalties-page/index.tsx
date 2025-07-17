@@ -11,7 +11,7 @@ import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import './style.css'
 import { LogoLoader } from '@/components/loader/LogoLoader'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, Suspense } from 'react'
 import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -173,11 +173,12 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
     const displayedData = allData.length > 0 ? allData : (data?.results ? removeDuplicates(data.results) : [])
 
     // Show loader only on initial load, not when data is already available
-    if (isLoading && allData.length === 0) {
-        return <LogoLoader />
-    }
+    // if (isLoading) {
+    //     return <LogoLoader />
+    // }
 
     return (
+      <Suspense fallback={<LogoLoader />}>
             <main className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.loyaltie_category} />
@@ -327,5 +328,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
                     <Footer />
                 </div>
             </main>
+  
+            </Suspense>
     )
 }

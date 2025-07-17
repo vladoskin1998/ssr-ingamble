@@ -1,4 +1,4 @@
-import { LogoLoader } from '@/components/loader/LogoLoader'
+// import { LogoLoader } from '@/components/loader/LogoLoader'
 import MainPage from '@/pages-component/main-page'
 
 export default async function Main() {
