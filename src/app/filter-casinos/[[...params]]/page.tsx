@@ -73,10 +73,8 @@ const LicenseElem: React.FC<LicenseElemProps> = ({ filtersDataLicenses, casinoFi
 
 const debouncedFetchFilter = debounce((filters, fetchFunction) => fetchFunction(filters), 500)
 
-const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading, isMobile) => {
-    if (!isMobile) {
-        setLoading(true)
-    }
+const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading) => {
+    setLoading(true)
 
     fetchFunction(filters).finally(() => setLoading(false))
 })
@@ -124,7 +122,7 @@ export default function FilterCasino() {
     // }, [casino_slug])
 
     useEffect(() => {
-        debouncedFetchPagination(casinoFilters, refetch, setIsDebouncedLoading, isMobile)
+        debouncedFetchPagination(casinoFilters, refetch, setIsDebouncedLoading)
     }, [currentPage, refetch, casinoFilters, isMobile])
 
     useEffect(() => {

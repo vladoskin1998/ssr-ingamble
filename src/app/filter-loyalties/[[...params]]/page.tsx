@@ -29,10 +29,8 @@ const Footer = dynamic(() => import('@/components/footer'))
 
 const debouncedFetchFilter = debounce((filters, fetchFunction) => fetchFunction(filters), 700)
 
-const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading, isMobile) => {
-    if (!isMobile) {
-        setLoading(true)
-    }
+const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading) => {
+    setLoading(true)
 
     fetchFunction(filters).finally(() => setLoading(false))
 })
@@ -74,7 +72,7 @@ export default function FilterLoyalty() {
     }, [])
 
     useEffect(() => {
-        debouncedFetchPagination(loyaltiesFilters, refetch, setIsDebouncedLoading, isMobile)
+        debouncedFetchPagination(loyaltiesFilters, refetch, setIsDebouncedLoading)
     }, [currentPage, loyaltiesFilters, isMobile, refetch])
 
     useEffect(() => {

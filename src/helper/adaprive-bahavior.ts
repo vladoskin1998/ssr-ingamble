@@ -12,6 +12,17 @@ const dinamicAdapt = (
     // Add requestAnimationFrame to reduce layout thrashing
     requestAnimationFrame(() => {
         match_media.forEach((mediaQuery, i) => {
+            // 🛡️ ЗАХИСТ: Перевіряємо чи елемент не є лодером
+            if (da_elements[i] && (
+                da_elements[i].classList.contains('loader-body-line') ||
+                da_elements[i].classList.contains('preloader-1__body') ||
+                da_elements[i].classList.contains('loader-body') ||
+                da_elements[i].closest('.loader-body-line') ||
+                da_elements[i].closest('.preloader-1__body')
+            )) {
+                return; // Пропускаємо лодери
+            }
+
             const [className, index] = attr_elements[i].split(', ');
             const element = document.querySelector(`.${className}`);
             const targetIndex = parseInt(index, 10);
@@ -37,7 +48,37 @@ export default function initializeAdaptiveBehavior() {
         return;
     }
     
-    const da_elements = document.querySelectorAll('[data-da]') as NodeListOf<HTMLElement>;
+    // 🛡️ ФІЛЬТРАЦІЯ: Виключаємо лодери з adaptive behavior
+    const allDataDaElements = document.querySelectorAll('[data-da]') as NodeListOf<HTMLElement>;
+    const filteredElements = Array.from(allDataDaElements).filter(item => {
+        // Виключаємо елементи лодера
+        return !(
+            item.classList.contains('loader-body-line') ||
+            item.classList.contains('preloader-1__body') ||
+            item.classList.contains('loader-body') ||
+            item.closest('.loader-body-line') ||
+            item.closest('.preloader-1__body')
+        );
+    });
+    
+    // Конвертуємо відфільтрований масив в NodeList-подібну структуру
+    const da_elements = {
+        length: filteredElements.length,
+        forEach: (callback: (item: HTMLElement, index: number) => void) => {
+            filteredElements.forEach(callback);
+        },
+        [Symbol.iterator]: function* () {
+            for (const element of filteredElements) {
+                yield element;
+            }
+        }
+    } as unknown as NodeListOf<HTMLElement>;
+    
+    // Додаємо індексер для доступу по індексу
+    filteredElements.forEach((element, index) => {
+        (da_elements as NodeListOf<HTMLElement> & Record<number, HTMLElement>)[index] = element;
+    });
+    
     const parents_original: ParentOriginal[] = [];
     const attr_elements: string[] = [];
     const match_media: MediaQueryList[] = [];

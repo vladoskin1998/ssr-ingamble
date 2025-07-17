@@ -41,10 +41,8 @@ const Footer = dynamic(() => import('../../../components/footer'))
 const debouncedFetchFilter = debounce((filters: BonusFilterBodyType, fetchFunction: () => Promise<any>) => fetchFunction(), 500)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const debouncedFetchPagination = debounce((filters: BonusFilterBodyType, fetchFunction: () => Promise<any>, setLoading: (loading: boolean) => void, isMobile: boolean) => {
-    if (!isMobile) {
-        setLoading(true)
-    }
+const debouncedFetchPagination = debounce((filters: BonusFilterBodyType, fetchFunction: () => Promise<any>, setLoading: (loading: boolean) => void) => {
+    setLoading(true) // Показуємо лодер на всіх пристроях
 
     fetchFunction().finally(() => setLoading(false))
 })
@@ -110,7 +108,7 @@ export default function FilterBonus() {
     }, [bonus_slug])
 
     useEffect(() => {
-        debouncedFetchPagination(bonusFilters, refetch, setIsDebouncedLoading, isMobile)
+        debouncedFetchPagination(bonusFilters, refetch, setIsDebouncedLoading)
     }, [currentPage, refetch, setCurrentPage, bonusFilters, isMobile])
 
     useEffect(() => {
