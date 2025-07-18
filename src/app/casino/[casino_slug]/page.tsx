@@ -9,12 +9,12 @@ import { TabMain } from '@/components/simple-casino/TabMain'
 import { HighRankedCasinos } from '@/components/simple-casino/HighRankedCasinos'
 import { Harry } from '@/components/simple-casino/Harry'
 import { PopupReadMore } from '@/components/simple-casino/PopupReadMore'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import $api from '@/http'
 import Link from 'next/link' 
 import { useParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import { GeoLocationAllowdType } from '@/types'
 
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
@@ -33,15 +33,22 @@ interface BlockedCountry {
     name?: string
 }
 import { useFilterContext } from '@/context/FilterContext'
+import { useLoading } from '@/context/LoadingContext'
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import Image from 'next/image'
-const Footer = lazy(() => import('@/components/footer'))
-const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
 
 
 const SafetyIndexRatingLevel = (n: number) => {
@@ -68,12 +75,13 @@ export default function SimpleCasinos() {
 
     const [openModal, setOpenModal] = useState(false)
     const { casino_slug } = useParams()
+    const { setContentLoaded } = useLoading()
 
     // Convert params to string since Next.js params can be string | string[]
     const slugParam = Array.isArray(casino_slug) ? casino_slug[0] : casino_slug
     const [slug, setSlug] = useState<string>(slugParam || '')
 
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['get-data-casino', slug],
         queryFn: () => getCurrentCasinosFetchData(slug),
         staleTime: Infinity,
@@ -126,8 +134,11 @@ export default function SimpleCasinos() {
                 countryImg,
                 idCountry,
             })
+
+            // Повідомляємо що контент завантажено
+            setContentLoaded()
         }
-    }, [data, Country])
+    }, [data, Country, setContentLoaded])
 
     const handlerOpen = (s: boolean) => {
         setOpenModal(s)
@@ -150,7 +161,6 @@ export default function SimpleCasinos() {
  
     return (
         <>
-        <Suspense fallback={<LogoLoader />}>
             <PopupReadMore openModal={openModal} handlerOpen={handlerOpen} data={data?.dataCurrentCasinos} />
 
             {/* <Wraper> */}
@@ -544,7 +554,6 @@ export default function SimpleCasinos() {
                         <Footer />
                     </div>
                 </main>
-            </Suspense>
         </>
     )
 }
