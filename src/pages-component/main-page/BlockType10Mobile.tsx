@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { SeeAllRoutes } from '@/context/FilterContext'
 import { CURRENTYEAR } from '@/helper'
 
@@ -75,12 +76,11 @@ export default function BlockType10Mobile({
                                     </div>
                                 </div>
                                 <div className="top__column">
-                                    <Link
+                                    <LoadingLink
                                         href={`/all-${SeeAllRoutes[data?.items_block?.type_category]}${
                                             data?.items_block?.category?.slug || '/img/no-results.svg' ? `/${data?.items_block?.category?.slug}` : ''
                                         }`}
                                         className="top__btn"
-                                        prefetch={false} 
                                     >
                                         <span>See All</span>
                                         <span className="top__btn-arrow">
@@ -88,7 +88,7 @@ export default function BlockType10Mobile({
                                                 <use xlinkHref="#arrow"></use>
                                             </svg>
                                         </span>
-                                    </Link>
+                                    </LoadingLink>
                                 </div>
                             </div>
                         </div>

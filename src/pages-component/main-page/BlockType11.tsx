@@ -4,6 +4,7 @@ import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import '../../../styles/style-type-10-11.css'
 
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { cloacingFetch, cloacingLink } from '@/helper'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
@@ -146,14 +147,14 @@ export default function BlockType11({
                                         </div>
                                     </div>
                                     <div className="top__column">
-                                        <Link href={`/all-casinos/top-crypto-casinos`} className="top__btn">
+                                        <LoadingLink href={`/all-casinos/top-crypto-casinos`} className="top__btn">
                                             <span>See All</span>
                                             <span className="top__btn-arrow">
                                                 <svg>
                                                     <use xlinkHref="#arrow"></use>
                                                 </svg>
                                             </span>
-                                        </Link>
+                                        </LoadingLink>
                                     </div>
                                 </div>
                             </div>

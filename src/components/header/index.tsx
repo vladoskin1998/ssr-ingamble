@@ -190,15 +190,15 @@ export const Header = () => {
                                     </Link>
                                 </li>
                                 <li className="menu-header__item">
-                                    <Link rel="nofollow noopener" href="/bonuses" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/bonuses') && 'current'}`}>
+                                    <LoadingLink rel="nofollow noopener" href="/bonuses" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/bonuses') && 'current'}`}>
                                         <span>Bonuses</span>
-                                    </Link>
+                                    </LoadingLink>
                                 </li>
                                 <li className="menu-header__item">
-                                    <Link rel="nofollow noopener" href="/casinos" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/casinos') && 'current'}`}>
+                                    <LoadingLink rel="nofollow noopener" href="/casinos" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/casinos') && 'current'}`}>
                                         <span></span>
                                         <span>{ 'Casinos'}</span>
-                                    </Link>
+                                    </LoadingLink>
                                 </li>
                                 <li className="menu-header__item">
                                     <LoadingLink rel="nofollow noopener" href="/all-loyalties" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}>
@@ -397,7 +397,7 @@ export const Header = () => {
                                     </li>
 
                                     <li className="menu-header__item">
-                                        <Link
+                                        <LoadingLink
                                             href="/bonuses"
                                             aria-label="Put your description here."
                                             onClick={() => {
@@ -406,10 +406,10 @@ export const Header = () => {
                                             className={`menu-header__link ${activeLink.includes('/bonuses') && 'current'}`}
                                         >
                                             <span>Bonuses</span>
-                                        </Link>
+                                        </LoadingLink>
                                     </li>
                                     <li className="menu-header__item">
-                                        <Link
+                                        <LoadingLink
                                             href="/casinos"
                                             aria-label="Put your description here."
                                             onClick={() => {
@@ -419,7 +419,7 @@ export const Header = () => {
                                         >
                                             <span>{ 'Casinos'}</span>
                                             <span></span>
-                                        </Link>
+                                        </LoadingLink>
                                     </li>
                                     <li className="menu-header__item">
                                         <LoadingLink

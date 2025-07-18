@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '@/types'
 import { useFilterContext } from '@/context/FilterContext'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useResponsive'
 
@@ -84,42 +85,39 @@ export const Categories = ({
                         <>
                             {pathname !== '/bonuses' && (
                                 <SwiperSlide key={1} style={{ width: 'auto' }}>
-                                    <Link
+                                    <LoadingLink
                                         rel="nofollow noopener"
                                         href={'/bonuses'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
-                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Bonuses
-                                    </Link>
+                                    </LoadingLink>
                                 </SwiperSlide>
                             )}
 
                             {pathname !== '/casinos' && (
                                 <SwiperSlide key={3} style={{ width: 'auto' }}>
-                                    <Link
+                                    <LoadingLink
                                         rel="nofollow noopener"
                                         href={'/casinos'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
-                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Casinos
-                                    </Link>
+                                    </LoadingLink>
                                 </SwiperSlide>
                             )}
                             {pathname !== '/all-loyalties' && (
                                 <SwiperSlide key={2} style={{ width: 'auto' }}>
-                                    <Link
+                                    <LoadingLink
                                         rel="nofollow noopener"
                                         href={'/all-loyalties'}
                                         aria-label="Put your description here."
                                         className="slide-filter-tags-gamble__btn"
-                                        prefetch={false} // отключаем предзагрузку для мобильных
                                     >
                                         Loyalty
-                                    </Link>
+                                    </LoadingLink>
                                 </SwiperSlide>
                             )}
                         </>

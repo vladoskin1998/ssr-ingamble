@@ -5,6 +5,7 @@ import '../../../styles/style-type-10-11.css'
 import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { SeeAllRoutes } from '@/context/FilterContext'
 import { CURRENTYEAR } from '@/helper'
 import Image from 'next/image'
@@ -148,14 +149,14 @@ export default function BlockType10({
                                 <span>The Best</span>
                                 {` Casinos of ${CURRENTYEAR}`}
                             </div>
-                            <Link
+                            <LoadingLink
                                 href={`/all-${SeeAllRoutes[data?.items_block?.type_category]}${
                                     data?.items_block?.category?.slug || '' ? `/${data?.items_block?.category?.slug}` : ''
                                 }`}
                                 className="best-casinos-2024-2-gamble__btn"
                             >
                                 See All
-                            </Link>
+                            </LoadingLink>
                         </div>
                     </div>
                     <div className="best-casinos-2024-2-gamble__column best-casinos-2024-2-gamble__column_small">

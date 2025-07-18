@@ -11,6 +11,7 @@ import { DataHomeItemsBlock, HomeDataBlock } from '@/types'
 import { SeeAllButton } from './SeeAllButton'
 import { cloacingFetch, cloacingLink } from '@/helper'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 
 import { Autoplay } from 'swiper/modules'
@@ -282,12 +283,12 @@ export default function BlockType5({
                                 Bonus from <br />
                                 <span>Live Dealers</span>
                             </div>
-                            <Link href={'/all-bonuses/best-live-bonuses'} className="best-live-dealer-casinos-gamble__btn ">
+                            <LoadingLink href={'/all-bonuses/best-live-bonuses'} className="best-live-dealer-casinos-gamble__btn ">
                                 <span>
                                     <Image src="/img/icons/gift.svg" alt="gift" width={20} height={20} />
                                 </span>
                                 Get Bonus
-                            </Link>
+                            </LoadingLink>
                         </div>
                     </div>
                 </div>

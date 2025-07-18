@@ -52,20 +52,20 @@ export const LoadingProvider: React.FC<{ children: ReactNode }> = ({ children })
         }
     }, [pathname, navigationStarted])
 
-    // Автоматичне зупинення лоадера після зміни маршруту
+    // ВИДАЛЕНО автоматичне зупинення - тепер тільки ручне керування!
+    
+    // Fallback для сторінок без ручного керування (безпечна затримка)
     useEffect(() => {
-        if (navigationStarted) {
-            const timer = setTimeout(() => {
-                setIsContentLoaded(true)
-                setTimeout(() => {
-                    setIsGlobalLoading(false)
-                    setNavigationStarted(false)
-                }, 300)
-            }, 100) // Мінімальний час показу лоадера
+        if (navigationStarted && isGlobalLoading) {
+            // Максимальний час показу лоадера - 5 секунд
+            const fallbackTimer = setTimeout(() => {
+                console.warn('LoadingContext: Fallback timeout reached - stopping loader automatically')
+                setContentLoaded()
+            }, 5000)
 
-            return () => clearTimeout(timer)
+            return () => clearTimeout(fallbackTimer)
         }
-    }, [pathname, navigationStarted])
+    }, [navigationStarted, isGlobalLoading, setContentLoaded])
 
     const value = {
         isGlobalLoading,
