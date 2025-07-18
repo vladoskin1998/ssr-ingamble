@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'swiper/css'
 import { useQuery } from '@tanstack/react-query'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import $api from '@/http'
 import { BreadCrumb } from '@/components/breadcrumb/index'
 import { GeoLocationAllowdType } from '@/types'
@@ -11,8 +12,6 @@ import { BonusSubType } from './BonusSubType'
 import { Categories } from '@/components/categories/Categories'
 import { LastUpdate } from './LastUpdate'
 
-
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import { HeaderSimpleBonus } from './HeaderSimpleBonus'
 import { HowToGetBonus } from './HowToGetBonus'
 
@@ -26,13 +25,21 @@ interface CloudFlareHeaders {
     [key: string]: string | undefined
 }
 import { useFilterContext } from '@/context/FilterContext'
+import { useLoading } from '@/context/LoadingContext'
 import { SiblingBonus } from './SiblingBonus'
 
 import { OtherBestReloadBonus } from './OtherBestBonus'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
-const Footer = lazy(() => import('@/components/footer'))
-const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
-const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
+
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
 
 const getBonusDataFetch = async ({ slug }: { slug: string | null }) => {
     if (process.env.USE_NEXT_API === 'true') {
@@ -57,6 +64,7 @@ export default function SimpleBonus() {
 
 function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
     const { data: Country } = useFilterContext()
+    const { setContentLoaded } = useLoading()
 
     const [slug, setSlug] = useState<string>(bonusSlug || '')
 
@@ -76,11 +84,13 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
         idCountry: null,
     })
 
-    const { data, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['get-data-bonus', slug],
         queryFn: () => getBonusDataFetch({ slug }),
         staleTime: Infinity,
         enabled: !!slug,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
     })
 
     useEffect(() => {
@@ -103,6 +113,9 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                 countryImg,
                 idCountry,
             })
+            
+            // Повідомляємо що контент завантажено
+            setContentLoaded()
         }
         initializeAdaptiveBehavior()
 
@@ -113,16 +126,13 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
         //     .toLocaleLowerCase()}`f
 
         // window.history.pushState({}, "", newUrl)
-    }, [data, Country])
+    }, [data, Country, setContentLoaded])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading])
-
-     if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
+    }, [geoLocation])
 
     return (
-      <Suspense fallback={<LogoLoader />}>
         <div>
             <main className="gamble__simple-bonus main-gamble simple-bonus">
                 <div className="main-gamble__body">
@@ -172,6 +182,5 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                 </div>
             </main>
         </div>
-      </Suspense>
     )
 }
