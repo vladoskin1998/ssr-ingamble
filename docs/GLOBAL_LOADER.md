@@ -92,9 +92,9 @@ const handleClick = () => {
 
 ### ✅ /all-bonuses  
 - **Архітектура**: Server page → AllBonusesClient → SeeAllBonus
-- **Стан**: Повністю впроваджено з колбек-системою
+- **Стан**: Повністю впроваджено з колбек-системою + IntersectionObserver
 - **LoadingLink**: ✅ Впроваджено у всіх посиланнях
-- **Затримка**: 800ms для плавного відображення контенту
+- **Затримка**: IntersectionObserver + requestAnimationFrame для точного відстеження рендерингу
 
 ### LoadingLink впроваджено в компонентах:
 - ✅ `src/components/header/index.tsx` - навігаційне меню (2 посилання на /all-loyalties)

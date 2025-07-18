@@ -3,7 +3,7 @@ import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 
-import { Suspense, useEffect, useState, useMemo } from 'react'
+import { Suspense, useEffect, useState, useMemo, forwardRef } from 'react'
 import './style.css'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -51,13 +51,10 @@ const getAllBonusFetchData = async (page: number, slug: string | null, countPage
     return response.data
 }
 
-export default function SeeAllBonus({ 
-    bonusSlug, 
-    onContentReady 
-}: { 
+const SeeAllBonus = forwardRef<HTMLElement, { 
     bonusSlug?: string | null
     onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}) {
+}>(({ bonusSlug, onContentReady }, ref) => {
     // // document.title = "All Bonus"
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -162,7 +159,7 @@ export default function SeeAllBonus({
 
     return (
         <Suspense fallback={<LogoLoader />}>
-            <main className="gamble__see-all main-gamble see-all">
+            <main ref={ref} className="gamble__see-all main-gamble see-all">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.bonus_category} />
                     <BreadCrumb
@@ -297,4 +294,8 @@ export default function SeeAllBonus({
             </main>
         </Suspense>
     )
-}
+})
+
+SeeAllBonus.displayName = 'SeeAllBonus'
+
+export default SeeAllBonus
