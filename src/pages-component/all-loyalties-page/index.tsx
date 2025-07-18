@@ -79,7 +79,13 @@ const removeDuplicates = (items: SeeAllEssentialLoyaltyCasino[]): SeeAllEssentia
     return result
 }
 
-export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug?: string | null }) {
+export default function SeeAllEssentialsLoyalty({ 
+    loyaltieSlug, 
+    onContentReady 
+}: { 
+    loyaltieSlug?: string | null
+    onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
+}) {
     // document.title = "All Essentials Loyalty"
 
     const { loyaltiesFilters } = useFilterContext()
@@ -124,7 +130,7 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
       // Don't disable query - let it run with initial filters
     })
 
-    // Додаємо хук для керування завантаженням сторінки
+    // Додаємо хук для керування завантаженням сторінки (тільки якщо немає зовнішнього колбека)
     const { markAsLoaded } = usePageLoading({
         autoComplete: false, // Ручне керування
         dependencies: [data, allData]
@@ -180,14 +186,21 @@ export default function SeeAllEssentialsLoyalty({ loyaltieSlug }: { loyaltieSlug
 
     // Позначаємо контент як завантажений коли дані готові
     useEffect(() => {
-        if (!isLoading && displayedData.length >= 0) {
-            const timer = setTimeout(() => {
-                markAsLoaded()
-            }, 600) // Невелика затримка для плавності
-            
-            return () => clearTimeout(timer)
+        if (onContentReady) {
+            // Використовуємо зовнішній колбек якщо він переданий
+            const cleanup = onContentReady(isLoading, displayedData.length)
+            return cleanup
+        } else {
+            // Fallback на внутрішню логіку якщо колбек не переданий
+            if (!isLoading && displayedData.length >= 0) {
+                const timer = setTimeout(() => {
+                    markAsLoaded()
+                }, 600)
+                
+                return () => clearTimeout(timer)
+            }
         }
-    }, [isLoading, displayedData.length, markAsLoaded])
+    }, [isLoading, displayedData.length, onContentReady, markAsLoaded])
 
     // Show loader only on initial load, not when data is already available
     // if (isLoading) {
