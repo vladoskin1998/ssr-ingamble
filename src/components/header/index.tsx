@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
@@ -200,9 +201,9 @@ export const Header = () => {
                                     </Link>
                                 </li>
                                 <li className="menu-header__item">
-                                    <Link rel="nofollow noopener" href="/all-loyalties" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}>
+                                    <LoadingLink rel="nofollow noopener" href="/all-loyalties" aria-label="Put your description here." className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}>
                                         <span>Loyalties</span>
-                                    </Link>
+                                    </LoadingLink>
                                 </li>
                             </ul>
                         </nav>
@@ -421,7 +422,7 @@ export const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="menu-header__item">
-                                        <Link
+                                        <LoadingLink
                                             href="/all-loyalties"
                                             aria-label="Put your description here."
                                             onClick={() => {
@@ -430,7 +431,7 @@ export const Header = () => {
                                             className={`menu-header__link ${activeLink.includes('/all-loyalties') && 'current'}`}
                                         >
                                             <span>Loyalties</span>
-                                        </Link>
+                                        </LoadingLink>
                                     </li>
                                     <li className="menu-header__item">
                                         <button

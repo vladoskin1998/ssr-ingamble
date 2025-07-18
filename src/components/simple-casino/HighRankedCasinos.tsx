@@ -7,6 +7,7 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import {  getTagColorByindex, sanitizeNumberLike } from '../../helper'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import Image from 'next/image'
 
 const getFilteringCasinoList = async () => {
@@ -124,9 +125,9 @@ export const HighRankedCasinos = () => {
                                     {'Other '} <span>High Ranked</span>
                                     {' Casinos'}
                                 </div>
-                                <Link href="/all-casinos" aria-label="See all high ranked casinos" className="baner-row-block__btn best-casinos-2024-2-gamble__btn">
+                                <LoadingLink href="/all-casinos" aria-label="See all high ranked casinos" className="baner-row-block__btn best-casinos-2024-2-gamble__btn">
                                     See All
-                                </Link>
+                                </LoadingLink>
                             </div>
                         </div>
                     </div>

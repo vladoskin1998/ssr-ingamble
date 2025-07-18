@@ -8,6 +8,7 @@ import { EssentialItemsBlock, HomeDataBlock } from '@/types'
 
 import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 
 import { Autoplay } from 'swiper/modules'
 import Image from 'next/image'
@@ -41,7 +42,7 @@ const BlockType9 = memo(function BlockType9({
                             {data.items_block.subtitle && <div className="top__subtitle">{data.items_block.subtitle}</div>}
                         </div>
                         <div className="top__column">
-                            <Link
+                            <LoadingLink
                                 rel="nofollow noopener"
                                 href="/all-loyalties"
                                 aria-label="Put your description here."
@@ -53,7 +54,7 @@ const BlockType9 = memo(function BlockType9({
                                         <use xlinkHref="#arrow"></use>
                                     </svg>
                                 </span>
-                            </Link>
+                            </LoadingLink>
                         </div>
                     </div>
                 </div>

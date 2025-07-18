@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import Image from 'next/image'
 import { LoyaltyInRankRangeResponse } from '@/types'
 import $api from '@/http'
@@ -42,7 +43,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                 </div>
                             </div>
                             <div className="top__column">
-                                <Link
+                                <LoadingLink
                                     rel="nofollow noopener"
                                     href="/all-loyalties"
                                     aria-label="Put your description here."
@@ -54,7 +55,7 @@ export const EssentialVIPLoyaltyPrograms = () => {
                                             <use xlinkHref="#arrow"></use>
                                         </svg>
                                     </span>
-                                </Link>
+                                </LoadingLink>
                             </div>
                         </div>
                     </div>
