@@ -4,7 +4,7 @@ import { useFilterContext } from '@/context/FilterContext'
 import { sliceString } from '@/helper'
 import {  useState } from 'react'
 import { FormatedCategoryType } from '@/types'
-import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import Image from 'next/image'
 
 export default function CheckMoreWhatSuitsYouBest() {
@@ -91,13 +91,13 @@ const ItemCategory = ({ item, isMobile }: { item: FormatedCategoryType; isMobile
     })
 
     return (
-        <Link
+        <LoadingLink
             href={seeAllLink}
             onClick={seeAllFoo}
             aria-label="Put your description here."
             className="bottom-filter-tags__btn slide-filter-tags-gamble__btn"
         >
             {isMobile ? sliceString(item?.name, 23) : item?.name}
-        </Link>
+        </LoadingLink>
     )
 }

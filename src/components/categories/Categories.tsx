@@ -5,7 +5,6 @@ import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppConte
 import { useMemo } from 'react'
 import { DataHomeItemsBlockCategoryType, DataHomeItemsBlockEnumCategory, FormatedCategoryType } from '@/types'
 import { useFilterContext } from '@/context/FilterContext'
-import Link from 'next/link'
 import { LoadingLink } from '@/components/LoadingLink'
 import { usePathname } from 'next/navigation'
 import { useIsMobile } from '@/hooks/useResponsive'
@@ -146,7 +145,7 @@ const ItemCategory = ({ item }: { item: FormatedCategoryType }) => {
     )
 
     return (
-        <Link
+        <LoadingLink
             rel="nofollow noopener"
             href={seeAllLink}
             onClick={seeAllFoo}
@@ -155,6 +154,6 @@ const ItemCategory = ({ item }: { item: FormatedCategoryType }) => {
             prefetch={false} // отключаем предзагрузку для мобильных
         >
             {item?.name}
-        </Link>
+        </LoadingLink>
     )
 }
