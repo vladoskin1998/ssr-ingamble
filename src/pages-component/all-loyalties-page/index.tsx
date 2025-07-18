@@ -10,7 +10,7 @@ import { DataHomeItemsBlockEnumCategory, LoyaltiesFilterBodyType, NAMETITLECATEG
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import './style.css'
 
-import { useEffect, useState, useMemo, forwardRef } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
 import { LoadingLink } from '@/components/LoadingLink'
 import { useParams } from 'next/navigation'
@@ -18,12 +18,19 @@ import { initialLoyaltiesFilters, useFilterContext } from '@/context/FilterConte
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { usePageLoading } from '@/hooks/usePageLoading'
 
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
-const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
-const Footer = dynamic(() => import('@/components/footer'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
 
 const pathBreadCrumb = [
     {
@@ -79,10 +86,15 @@ const removeDuplicates = (items: SeeAllEssentialLoyaltyCasino[]): SeeAllEssentia
     return result
 }
 
-const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, { 
+const SeeAllEssentialsLoyalty = ({ 
+    loyaltieSlug,
+    onContentReady,
+    setContentLoaded 
+}: { 
     loyaltieSlug?: string | null
     onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}>(({ loyaltieSlug, onContentReady }, ref) => {
+    setContentLoaded?: () => void
+}) => {
     // document.title = "All Essentials Loyalty"
 
     const { loyaltiesFilters } = useFilterContext()
@@ -125,12 +137,6 @@ const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, {
       placeholderData: keepPreviousData, // заміна keepPreviousData: true
       staleTime: 1000 * 60 * 5,
       // Don't disable query - let it run with initial filters
-    })
-
-    // Додаємо хук для керування завантаженням сторінки (тільки якщо немає зовнішнього колбека)
-    const { markAsLoaded } = usePageLoading({
-        autoComplete: false, // Ручне керування
-        dependencies: [data, allData]
     })
 
     // Reset data when filters change (not just page)
@@ -183,21 +189,15 @@ const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, {
 
     // Позначаємо контент як завантажений коли дані готові
     useEffect(() => {
-        if (onContentReady) {
-            // Використовуємо зовнішній колбек якщо він переданий
+        if (setContentLoaded && !isLoading && displayedData.length >= 0) {
+            // Використовуємо стандартну логіку setContentLoaded
+            setContentLoaded()
+        } else if (onContentReady) {
+            // Fallback на старий колбек якщо він переданий
             const cleanup = onContentReady(isLoading, displayedData.length)
             return cleanup
-        } else {
-            // Fallback на внутрішню логіку якщо колбек не переданий
-            if (!isLoading && displayedData.length >= 0) {
-                const timer = setTimeout(() => {
-                    markAsLoaded()
-                }, 600)
-                
-                return () => clearTimeout(timer)
-            }
         }
-    }, [isLoading, displayedData.length, onContentReady, markAsLoaded])
+    }, [isLoading, displayedData.length, setContentLoaded, onContentReady])
 
     // Show loader only on initial load, not when data is already available
     // if (isLoading) {
@@ -205,7 +205,7 @@ const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, {
     // }
 
     return (
-            <main ref={ref} className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
+            <main className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.loyaltie_category} />
                     <BreadCrumb
@@ -355,7 +355,7 @@ const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, {
                 </div>
             </main>
     )
-})
+}
 
 SeeAllEssentialsLoyalty.displayName = 'SeeAllEssentialsLoyalty'
 

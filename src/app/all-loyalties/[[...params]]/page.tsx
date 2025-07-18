@@ -1,6 +1,4 @@
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
 import AllLoyaltiesClient from '@/app/all-loyalties/[[...params]]/AllLoyaltiesClient'
 
 export const metadata: Metadata = {
@@ -14,11 +12,7 @@ const AllLoyalties = async ({ params }: { params: Promise<{ params: string[] }> 
     // Передаємо перший параметр як loyaltie_slug
     const loyaltieSlug = dataparam?.params?.[0] || null
 
-    return (
-      <Suspense fallback={<LogoLoader />}>
-        <AllLoyaltiesClient loyaltieSlug={loyaltieSlug} />
-      </Suspense>
-    )
+    return <AllLoyaltiesClient loyaltieSlug={loyaltieSlug} />
 }
 
 export default AllLoyalties
