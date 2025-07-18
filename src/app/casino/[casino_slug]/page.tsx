@@ -9,7 +9,7 @@ import { TabMain } from '@/components/simple-casino/TabMain'
 import { HighRankedCasinos } from '@/components/simple-casino/HighRankedCasinos'
 import { Harry } from '@/components/simple-casino/Harry'
 import { PopupReadMore } from '@/components/simple-casino/PopupReadMore'
-import { lazy, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import $api from '@/http'
 import Link from 'next/link' 
 import { useParams } from 'next/navigation'
@@ -146,10 +146,11 @@ export default function SimpleCasinos() {
     }, [openModal])
 
  
-    if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
+    // if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
  
     return (
         <>
+        <Suspense fallback={<LogoLoader />}>
             <PopupReadMore openModal={openModal} handlerOpen={handlerOpen} data={data?.dataCurrentCasinos} />
 
             {/* <Wraper> */}
@@ -543,7 +544,7 @@ export default function SimpleCasinos() {
                         <Footer />
                     </div>
                 </main>
-            {/* </Wraper> */}
+            </Suspense>
         </>
     )
 }

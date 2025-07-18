@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'swiper/css'
 import { useQuery } from '@tanstack/react-query'
-import { lazy, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import $api from '@/http'
 import { BreadCrumb } from '@/components/breadcrumb/index'
 import { GeoLocationAllowdType } from '@/types'
@@ -122,6 +122,7 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
      if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
 
     return (
+      <Suspense fallback={<LogoLoader />}>
         <div>
             <main className="gamble__simple-bonus main-gamble simple-bonus">
                 <div className="main-gamble__body">
@@ -171,5 +172,6 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                 </div>
             </main>
         </div>
+      </Suspense>
     )
 }
