@@ -3,19 +3,19 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { Categories } from '../../../components/categories/Categories'
 import { FilterHeaderList, makeListFilterHeader } from '../../../components/filter-components/FilterHeaderList'
 import { initialBonusFilters, initialCasinoFilters, useFilterContext } from '../../../context/FilterContext'
+import { useLoading } from '@/context/LoadingContext'
 import $api from '../../../http'
 import { BonusFilterBodyType, CasinoFilterBodyType, FilterBonusPostResponse, SeeAllBonus } from '../../../types'
 // import { Wraper } from '../Wraper'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 // import like from '/img/icons/like.svg'
 import dynamic from 'next/dynamic'
-import { memo, Suspense, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '../../../context/AppContext'
 // import star from '/img/icons/star.svg'
 import { cloacingFetch, cloacingLink, filterEmptyValues, getTagColorByindex, getTitleFilterCategories, sanitizeNumberLike } from '../../../helper'
 import { PaginationPage } from '../../../components/pagination/PaginationPage'
 import { debounce } from 'lodash'
-import { LogoLoader } from '../../../components/loader/LogoLoader'
 // import searchImg from '/img/icons/search-filter.svg'
 import { v4 as uuidv4 } from 'uuid'
 // 1. Заміна роутінгу з react-router-dom на Next.js
@@ -28,10 +28,18 @@ import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 // ЗМІНА 9: Додано useParams для client component
 // В Next.js App Router для client components використовується useParams hook
 import { useParams } from 'next/navigation'
-const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
-const Footer = dynamic(() => import('../../../components/footer'))
+const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('../../../components/footer'), {
+    loading: () => null,
+})
 
 // ЗМІНА 1: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // Старий код: const countPageSize = window.innerWidth < 900 ? 10 : 20
@@ -67,6 +75,7 @@ export default function FilterBonus() {
     const { isShowPlayButton } = useAdaptiveBehavior()
 
     const { bonusFilters, setBonusFilters } = useFilterContext()
+    const { setContentLoaded } = useLoading()
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllBonus[]>([])
@@ -86,8 +95,6 @@ export default function FilterBonus() {
             setCountPageSize(mobile ? 10 : 20)
         }
     }, [])
-
-    const [isDebouncedLoading, setIsDebouncedLoading] = useState(true)
 
     // ЗМІНА 5: Оновлений useQuery з передачею countPageSize як параметра
     // Додано countPageSize в dependencies array для правильного re-fetch
@@ -109,7 +116,7 @@ export default function FilterBonus() {
     }, [bonus_slug])
 
     useEffect(() => {
-        debouncedFetchPagination(bonusFilters, refetch, setIsDebouncedLoading)
+        debouncedFetchPagination(bonusFilters, refetch, () => {})
     }, [currentPage, refetch, setCurrentPage, bonusFilters, isMobile])
 
     useEffect(() => {
@@ -132,6 +139,8 @@ export default function FilterBonus() {
         }
         if (isMobile && currentPage === 1 && data?.results) {
             setAllData(data?.results)
+            // Повідомляємо що контент завантажено
+            setContentLoaded()
             return
         }
         if (isMobile) {
@@ -141,7 +150,11 @@ export default function FilterBonus() {
             })
             return
         }
-    }, [data, isMobile, currentPage])
+        // Для десктопу також повідомляємо що контент завантажено
+        if (data?.results) {
+            setContentLoaded()
+        }
+    }, [data, isMobile, currentPage, setContentLoaded])
 
     // ЗМІНА 6: Оновлений useEffect для resize handler
     // Додано перевірку existence window і правильну ініціалізацію
@@ -179,11 +192,10 @@ export default function FilterBonus() {
     }, [isLoading])
 
     const title = getTitleFilterCategories({ slug, item: makeListFilterHeader(bonusFilters) })
-    // if (isDebouncedLoading) return <LogoLoader />
 
     return (
         // <Wraper>
-          <Suspense fallback={<LogoLoader />}>
+        <>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories />
@@ -244,7 +256,7 @@ export default function FilterBonus() {
                     <Footer />
                 </div>
             </main>
-        </Suspense >
+        </>
     )
 }
 

@@ -3,17 +3,17 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { Categories } from '@/components/categories/Categories'
 import { FilterHeaderList, makeListFilterHeader } from '@/components/filter-components/FilterHeaderList'
 import { initialCasinoFilters, useFilterContext } from '@/context/FilterContext'
+import { useLoading } from '@/context/LoadingContext'
 import $api from '../../../http'
 import { CasinoFilterBodyType, FilterCasinoPostResponse, SeeAllCasinosType } from '../../../types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
-import { memo, Suspense, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { useIsTablet } from '@/hooks/useResponsive'
 import { rankCasinosSeeAll, WithdrawalSeeAllCasinos } from '@/pages-component/all-casinos-page'
 import { cloacingFetch, cloacingLink, filterEmptyValues, getTitleFilterCategories, NumberAssociaty, sanitizeNumberLike, sliceString } from '../../../helper'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 import { debounce } from 'lodash'
-import { LogoLoader } from '@/components/loader/LogoLoader'
 // import searchImg from '../../assets/img/icons/search-filter.svg'
 import '@/pages-component/all-casinos-page/style.css'
 import Image from 'next/image'
@@ -24,10 +24,18 @@ import { NoResult } from '@/components/no-result'
 import { BreadCrumb } from '@/components/breadcrumb/index'
 import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 
-const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'))
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'))
-const Footer = dynamic(() => import('../../../components/footer'))
+const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('../../../components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('../../../components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('../../../components/footer'), {
+    loading: () => null,
+})
 
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
@@ -91,6 +99,7 @@ export default function FilterCasino() {
 
     const { isSidebarActive } = useAdaptiveBehavior()
     const { data: filtersData, casinoFilters, setCasinoFilters } = useFilterContext()
+    const { setContentLoaded } = useLoading()
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
@@ -104,7 +113,6 @@ export default function FilterCasino() {
         setCountPageSize(isMobile ? 8 : 15)
     }, [isMobile])
 
-    const [isDebouncedLoading, setIsDebouncedLoading] = useState(true)
     const { data, isLoading, refetch } = useQuery<FilterCasinoPostResponse>({
       queryKey: ['filter/casinos', casinoFilters, currentPage, countPageSize], 
       queryFn: () => getFilteringCasinoList(casinoFilters, currentPage, countPageSize),
@@ -122,7 +130,7 @@ export default function FilterCasino() {
     // }, [casino_slug])
 
     useEffect(() => {
-        debouncedFetchPagination(casinoFilters, refetch, setIsDebouncedLoading)
+        debouncedFetchPagination(casinoFilters, refetch, () => {})
     }, [currentPage, refetch, casinoFilters, isMobile])
 
     useEffect(() => {
@@ -156,7 +164,10 @@ export default function FilterCasino() {
                 return data.results
             }
         })
-    }, [data, isMobile])
+
+        // Повідомляємо що контент завантажено
+        setContentLoaded()
+    }, [data, isMobile, setContentLoaded])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
@@ -193,11 +204,10 @@ export default function FilterCasino() {
         slug: Array.isArray(casino_slug) ? casino_slug[0] : casino_slug, 
         item: makeListFilterHeader(casinoFilters) 
     })
-    if (isDebouncedLoading) return <LogoLoader />
 
     return (
         // <Wraper>
-        <Suspense fallback={<LogoLoader />}>
+        <>
             <main className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories />
@@ -258,7 +268,7 @@ export default function FilterCasino() {
                     <Footer />
                 </div>
             </main>
-        </Suspense>
+        </>
     )
 }
 
