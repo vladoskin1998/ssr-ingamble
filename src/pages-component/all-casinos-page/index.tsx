@@ -12,12 +12,12 @@ import { useEffect, useState } from 'react'
 import {  useAdaptiveBehavior } from '../../context/AppContext'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import { PAYOUTSPEED, SeeAllCasinosType, SeeAllCasinosCategoryResponse, DataHomeItemsBlockEnumCategory } from '../../types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { cloacingFetch, cloacingLink, NumberAssociaty, sanitizeNumberLike } from '../../helper'
 import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
+import { usePageLoading } from '@/hooks/usePageLoading'
 import { useIsTablet } from '@/hooks/useResponsive'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
@@ -75,10 +75,19 @@ export const WithdrawalSeeAllCasinos = (n: { daily: number | null; weekly: numbe
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
 
-export default function SeeAllCasinos({ casinoSlug }: { casinoSlug?: string | null }) {
+export default function SeeAllCasinos({ 
+    casinoSlug, 
+    onContentReady 
+}: { 
+    casinoSlug?: string | null
+    onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
+}) {
     // document.title = "All Casino"
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
+    
+    // Global loader hook
+    const { markAsLoaded } = usePageLoading()
     
     // ЗМІНА: Використовуємо useIsTablet для SSR сумісності
     const { isMobile } = useIsTablet()
@@ -129,10 +138,20 @@ export default function SeeAllCasinos({ casinoSlug }: { casinoSlug?: string | nu
         initializeAdaptiveBehavior()
     }, [isLoading])
 
-        const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'Casino List'
+    const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'Casino List'
     const displayedData = isMobile ? allData : data?.casino?.results
 
-    if (isLoading) return <LogoLoader />
+    // Handle content loading and callback
+    useEffect(() => {
+        if (!isLoading && data) {
+            const dataLength = displayedData?.length || 0
+            const cleanup = onContentReady?.(false, dataLength)
+            markAsLoaded()
+            
+            // Return cleanup function if provided
+            return cleanup
+        }
+    }, [isLoading, data, displayedData, onContentReady, markAsLoaded])
 
     return (
         // <Wraper>
