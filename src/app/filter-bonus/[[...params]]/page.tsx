@@ -103,6 +103,8 @@ export default function FilterBonus() {
       queryFn: () => getFilteringBonusList(bonusFilters, currentPage, countPageSize),
       placeholderData: keepPreviousData,  // ← змінено з keepPreviousData: true
       enabled: false,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
       // suspense: true,
   })
 
@@ -139,18 +141,20 @@ export default function FilterBonus() {
         }
         if (isMobile && currentPage === 1 && data?.results) {
             setAllData(data?.results)
-            // Повідомляємо що контент завантажено
+            // Повідомляємо що контент завантажено для мобільного (перша сторінка)
             setContentLoaded()
             return
         }
         if (isMobile) {
             setAllData((s) => {
                 const combinedData = [...s, ...(data?.results || [])]
+                // Для мобільного також повідомляємо про завантаження додаткових сторінок
+                setContentLoaded()
                 return combinedData
             })
             return
         }
-        // Для десктопу також повідомляємо що контент завантажено
+        // Для десктопу повідомляємо що контент завантажено
         if (data?.results) {
             setContentLoaded()
         }
@@ -189,7 +193,7 @@ export default function FilterBonus() {
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading])
+    }, [data])
 
     const title = getTitleFilterCategories({ slug, item: makeListFilterHeader(bonusFilters) })
 
