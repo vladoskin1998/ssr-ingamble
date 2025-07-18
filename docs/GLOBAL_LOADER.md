@@ -82,18 +82,27 @@ const handleClick = () => {
 - **Архітектура**: Server page → AllLoyaltiesClient → SeeAllEssentialsLoyalty
 - **Стан**: Повністю впроваджено з колбек-системою
 - **LoadingLink**: ✅ Впроваджено у всіх посиланнях
+- **Затримка**: 800ms для плавного відображення контенту
 
 ### ✅ /all-casinos  
 - **Архітектура**: Server page → AllCasinosClient → SeeAllCasinos
 - **Стан**: Повністю впроваджено з колбек-системою
 - **LoadingLink**: ✅ Впроваджено у всіх посиланнях
+- **Затримка**: 800ms для плавного відображення контенту
+
+### ✅ /all-bonuses  
+- **Архітектура**: Server page → AllBonusesClient → SeeAllBonus
+- **Стан**: Повністю впроваджено з колбек-системою
+- **LoadingLink**: ✅ Впроваджено у всіх посиланнях
+- **Затримка**: 800ms для плавного відображення контенту
 
 ### LoadingLink впроваджено в компонентах:
 - ✅ `src/components/header/index.tsx` - навігаційне меню (2 посилання на /all-loyalties)
 - ✅ `src/components/simple-casino/HighRankedCasinos.tsx` - кнопка "See All" → /all-casinos
 - ✅ `src/app/casino/[casino_slug]/bonuses/[bonus_slug]/SiblingBonus.tsx` - "See All" → /all-casinos
 - ✅ `src/app/casino/[casino_slug]/bonuses/[bonus_slug]/EssentialVIPLoyaltyPrograms.tsx` - "See All" → /all-loyalties
-- ✅ `src/pages-component/main-page/BlockType9.tsx` - "See All" → /all-loyalties
+- ✅ `src/pages-component/main-page/BlockType9.tsx` - "See All" → /all-loйalties
+- ✅ `src/app/casino/[casino_slug]/bonuses/[bonus_slug]/OtherBestBonus.tsx` - "See All" → /all-bonuses
 
 ## Приклад використання на сторінці
 

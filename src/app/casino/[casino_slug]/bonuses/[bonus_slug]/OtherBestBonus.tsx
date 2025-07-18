@@ -9,6 +9,7 @@ import { getTagColorByindex, shuffleArray } from '@/helper'
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { LoadingLink } from '@/components/LoadingLink'
 import { useParams } from 'next/navigation'
 
 const getFilteringBonusList = async () => {
@@ -51,14 +52,14 @@ export const OtherBestReloadBonus = ({ casinoName }: { casinoName?: string }) =>
                                 </div>
                             </div>
                             <div className="top__column">
-                                <Link rel="nofollow noopener" href="/all-bonuses" aria-label="Put your description here." className="top__btn">
+                                <LoadingLink rel="nofollow noopener" href="/all-bonuses" aria-label="Put your description here." className="top__btn">
                                     <span>See All</span>
                                     <span className="top__btn-arrow">
                                         <svg>
                                             <use xlinkHref="#arrow"></use>
                                         </svg>
                                     </span>
-                                </Link>
+                                </LoadingLink>
                             </div>
                         </div>
                     </div>

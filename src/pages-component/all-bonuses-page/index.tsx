@@ -3,7 +3,7 @@ import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 
-import { Suspense, useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, useMemo } from 'react'
 import './style.css'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -18,6 +18,7 @@ import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { usePageLoading } from '@/hooks/usePageLoading'
 
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
@@ -50,13 +51,22 @@ const getAllBonusFetchData = async (page: number, slug: string | null, countPage
     return response.data
 }
 
-export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }) {
+export default function SeeAllBonus({ 
+    bonusSlug, 
+    onContentReady 
+}: { 
+    bonusSlug?: string | null
+    onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
+}) {
     // // document.title = "All Bonus"
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllBonusType[]>([])
     const [isMobile, setIsMobile] = useState(false)
     const { category, isShowPlayButton } = useAdaptiveBehavior()
+    
+    // Global loader hook
+    const { markAsLoaded } = usePageLoading()
     
     // Динамічний countPageSize на основі isMobile
     const countPageSize = isMobile ? 10 : 20
@@ -114,19 +124,9 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
         return () => window.removeEventListener('resize', updateMobile)
     }, [])
 
-    const displayedData = isMobile ? allData : data?.bonuses?.results
-
-    // Debug: Check for duplicate bonus_ids
-    useEffect(() => {
-        if (displayedData?.length) {
-            const bonusIds = displayedData.map(item => item.bonus_id)
-            const duplicates = bonusIds.filter((id, index) => bonusIds.indexOf(id) !== index)
-            // if (duplicates.length > 0) {
-            //     console.warn('Duplicate bonus_ids found:', duplicates)
-            //     console.log('All bonus_ids:', bonusIds)
-            // }
-        }
-    }, [displayedData])
+    const displayedData = useMemo(() => {
+        return isMobile ? allData : data?.bonuses?.results
+    }, [isMobile, allData, data?.bonuses?.results])
 
     // Generate unique key for each bonus item
     const generateUniqueKey = (item: SeeAllBonusType, index: number) => {
@@ -140,9 +140,25 @@ export default function SeeAllBonus({ bonusSlug }: { bonusSlug?: string | null }
         initializeAdaptiveBehavior()
     }, [isLoading])
 
-    const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'All Bonuses'
+    // Handle content loading and callback
+    useEffect(() => {
+        if (onContentReady) {
+            // Використовуємо зовнішній колбек якщо він переданий
+            const cleanup = onContentReady(isLoading, displayedData?.length || 0)
+            return cleanup
+        } else {
+            // Fallback на внутрішню логіку якщо колбек не переданий
+            if (!isLoading && displayedData && displayedData.length >= 0) {
+                const timer = setTimeout(() => {
+                    markAsLoaded()
+                }, 800) // Затримка для плавності
+                
+                return () => clearTimeout(timer)
+            }
+        }
+    }, [isLoading, data, displayedData, allData, onContentReady, markAsLoaded])
 
-    if (isLoading) return <LogoLoader />
+    const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'All Bonuses'
 
     return (
         <Suspense fallback={<LogoLoader />}>
