@@ -336,3 +336,106 @@ const { markAsLoaded } = usePageLoading({
 
 ### **Результат:**
 Система тепер покриває **100%** навігаційних елементів проекту, забезпечуючи повністю консистентний досвід користувача з глобальним лоадером.
+
+---
+
+## 🛠️ **КРИТИЧНЕ ВИПРАВЛЕННЯ: Конфлікт механізмів лоадера**
+
+### ❌ **Виявлена проблема в all-casinos:**
+
+Аналогічна проблема була знайдена і в `/all-casinos/[[...params]]` сторінці:
+
+#### **Проблема 1: Автоматичне зупинення в LoadingContext**
+```typescript
+// Було в LoadingContext.tsx (лінії 60-71)
+useEffect(() => {
+    if (navigationStarted) {
+        const timer = setTimeout(() => {
+            setContentLoaded() // ← ЛОАДЕР ЗУПИНЯВСЯ через 100ms!
+        }, 100)
+    }
+}, [pathname, navigationStarted])
+```
+
+#### **Проблема 2: Подвійне керування в all-casinos**
+```typescript
+// SeeAllCasinos мав власний usePageLoading()
+const { markAsLoaded } = usePageLoading() 
+
+// AllCasinosClient мав свій usePageLoading()  
+const { markAsLoaded } = usePageLoading({
+    autoComplete: false,
+    dependencies: [casinoSlug]
+})
+```
+
+### ✅ **Виправлення:**
+
+#### **1. LoadingContext.tsx** - Видалено автоматичне зупинення:
+```typescript
+// БУЛО:
+setTimeout(() => {
+    setContentLoaded()
+}, 100) // ← Передчасне зупинення
+
+// СТАЛО:
+// Тільки ручне керування + fallback 5 секунд для безпеки
+setTimeout(() => {
+    console.warn('Fallback timeout reached')
+    setContentLoaded()
+}, 5000)
+```
+
+#### **2. AllCasinosClient.tsx** - Приведено до стандарту:
+```typescript
+// БУЛО: Тільки setTimeout 800ms
+const timer = setTimeout(() => {
+    markAsLoaded()
+}, 800)
+
+// СТАЛО: IntersectionObserver + requestAnimationFrame
+const observer = new IntersectionObserver((entries) => {
+    if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                markAsLoaded()
+            })
+        })
+    }
+}, { threshold: 0.1, rootMargin: '50px' })
+```
+
+#### **3. SeeAllCasinos.tsx** - Видалено подвійне керування:
+```typescript
+// ВИДАЛЕНО: Дублюючий usePageLoading()
+const { markAsLoaded } = usePageLoading() // ← Конфліктував
+
+// ДОДАНО: forwardRef для ref передачі
+const SeeAllCasinos = forwardRef<HTMLElement, Props>(
+    ({ casinoSlug, onContentReady }, ref) => {
+        return <main ref={ref}>...</main>
+    }
+)
+```
+
+### 🎯 **Результат:**
+
+Тепер **всі три сторінки** (`/all-loyalties`, `/all-casinos`, `/all-bonuses`) працюють **консистентно**:
+
+1. ✅ **Єдиний механізм**: IntersectionObserver + requestAnimationFrame
+2. ✅ **Точний timing**: Лоадер зникає тільки коли контент **повністю відрендерений**
+3. ✅ **Fallback захист**: 5 секунд максимум + 1.5 секунди для IntersectionObserver
+4. ✅ **Немає конфліктів**: Одне джерело керування на сторінку
+
+### 📋 **Тепер система працює так:**
+
+```
+1. LoadingLink → startLoading()
+2. Навігація → лоадер активний
+3. Сторінка завантажується → лоадер продовжує працювати  
+4. IntersectionObserver → виявляє 10% контенту видимо
+5. requestAnimationFrame × 2 → гарантує завершення рендерингу
+6. markAsLoaded() → лоадер зникає з затримкою 300ms
+```
+
+**Проблема з передчасним зникненням лоадера повністю вирішена! 🚀**

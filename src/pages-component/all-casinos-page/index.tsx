@@ -8,7 +8,7 @@ import './style.css'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, forwardRef } from 'react'
 import {  useAdaptiveBehavior } from '../../context/AppContext'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -17,7 +17,6 @@ import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { cloacingFetch, cloacingLink, NumberAssociaty, sanitizeNumberLike } from '../../helper'
 import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
-import { usePageLoading } from '@/hooks/usePageLoading'
 import { useIsTablet } from '@/hooks/useResponsive'
 const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
 const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
@@ -75,19 +74,13 @@ export const WithdrawalSeeAllCasinos = (n: { daily: number | null; weekly: numbe
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
 
-export default function SeeAllCasinos({ 
-    casinoSlug, 
-    onContentReady 
-}: { 
+const SeeAllCasinos = forwardRef<HTMLElement, { 
     casinoSlug?: string | null
     onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}) {
+}>(({ casinoSlug, onContentReady }, ref) => {
     // document.title = "All Casino"
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
-    
-    // Global loader hook
-    const { markAsLoaded } = usePageLoading()
     
     // ЗМІНА: Використовуємо useIsTablet для SSR сумісності
     const { isMobile } = useIsTablet()
@@ -146,16 +139,15 @@ export default function SeeAllCasinos({
         if (!isLoading && data) {
             const dataLength = displayedData?.length || 0
             const cleanup = onContentReady?.(false, dataLength)
-            markAsLoaded()
             
             // Return cleanup function if provided
             return cleanup
         }
-    }, [isLoading, data, displayedData, onContentReady, markAsLoaded])
+    }, [isLoading, data, displayedData, onContentReady])
 
     return (
         // <Wraper>
-            <main className="gamble__casinos-filtered main-gamble casinos-filtered">
+            <main ref={ref} className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.casino_category} />
                     <BreadCrumb
@@ -340,4 +332,8 @@ export default function SeeAllCasinos({
             </main>
         // </Wraper>
     )
-}
+})
+
+SeeAllCasinos.displayName = 'SeeAllCasinos'
+
+export default SeeAllCasinos
