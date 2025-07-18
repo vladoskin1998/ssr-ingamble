@@ -31,7 +31,6 @@ const debouncedFetchFilter = debounce((filters, fetchFunction) => fetchFunction(
 
 const debouncedFetchPagination = debounce((filters, fetchFunction, setLoading) => {
     setLoading(true)
-
     fetchFunction(filters).finally(() => setLoading(false))
 })
 
@@ -53,10 +52,6 @@ export default function FilterLoyalty() {
 
     // Calculate page size based on window width, with proper client-side check
     const countPageSize = typeof window !== 'undefined' ? (window.innerWidth < 900 ? 8 : 15) : 15
-
-    //filter/loyalty/?page_size=100
-
-    const [isDebouncedLoading, setIsDebouncedLoading] = useState(true)
     //FilterLoyaltiesPostResponse
     const { data, isLoading, refetch } = useQuery<FilterLoyaltiesPostResponse>({
       queryKey: ['filter/loyalty', loyaltiesFilters, currentPage],
@@ -72,7 +67,7 @@ export default function FilterLoyalty() {
     }, [])
 
     useEffect(() => {
-        debouncedFetchPagination(loyaltiesFilters, refetch, setIsDebouncedLoading)
+        debouncedFetchPagination(loyaltiesFilters, refetch, () => {})
     }, [currentPage, loyaltiesFilters, isMobile, refetch])
 
     useEffect(() => {
@@ -131,65 +126,71 @@ export default function FilterLoyalty() {
     }
 
     return (
-        // <Suspense fallback={<LogoLoader />}>
-            <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
-                <div className="main-gamble__body">
-                    <Categories />
-                    <BreadCrumb
-                        path={[
-                            {
-                                name: 'Home',
-                                link: '/',
-                            },
-                            {
-                                name: 'Loyalties Filters',
-                                link: '#',
-                            },
-                        ]}
-                    />
-                    <FilterHeaderList initList={loyaltiesFilters} clearAll={clearAll} clearOne={(v) => handlerClearOne(v)} />
-                    <section className="loyaltie-programs__main main-loyaltie-programs">
-                        <div className="main-loyaltie-programs__container container">
-                            <div className="results-filter-scenarios__top top">
-                                <div className="top__title-block">
-                                    <span className="top__title-icon">
-                                      <Image width={18} height={18} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
-                                  
-                                    </span>
-                                    <h2 className="top__title">Results</h2>
+        <>
+            {(isLoading || !data || !displayedData?.length) && <LogoLoader />}
+            <Suspense fallback={<LogoLoader />}>
+                <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
+                    <div className="main-gamble__body">
+                        <Categories />
+                        <BreadCrumb
+                            path={[
+                                {
+                                    name: 'Home',
+                                    link: '/',
+                                },
+                                {
+                                    name: 'Loyalties Filters',
+                                    link: '#',
+                                },
+                            ]}
+                        />
+                        <FilterHeaderList initList={loyaltiesFilters} clearAll={clearAll} clearOne={(v) => handlerClearOne(v)} />
+                        <section className="loyaltie-programs__main main-loyaltie-programs">
+                            <div className="main-loyaltie-programs__container container">
+                                <div className="results-filter-scenarios__top top">
+                                    <div className="top__title-block">
+                                        <span className="top__title-icon">
+                                          <Image width={18} height={18} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
+                                      
+                                        </span>
+                                        <h2 className="top__title">Results</h2>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <>
-                                <LisDisplayedData displayedData={displayedData} />
-                            </>
-                            {!displayedData?.length && !isLoading ? (
-                                <NoResult />
-                            ) : (
-                                <PaginationPage
-                                    countElem={data?.count}
-                                    currentPage={currentPage}
-                                    countPageElem={countPageSize}
-                                    setCurrentPage={(s) => {
-                                        setCurrentPage(s)
-                                        if (!isMobile) {
-                                            window.scrollTo({
-                                                behavior: 'smooth',
-                                                top: 0,
-                                            })
-                                        }
-                                    }}
-                                />
-                            )}
-                        </div>
-                    </section>
-                    <CheckMoreWhatSuitsYouBest />
-                    <SubscribeForm />
-                    <BottomInfo />
-                    <Footer />
-                </div>
-            </main>
-        // </Suspense>
+                                {data && displayedData?.length ? (
+                                    <>
+                                        <LisDisplayedData displayedData={displayedData} />
+                                    </>
+                                ) : null}
+                                
+                                {!displayedData?.length && !isLoading ? (
+                                    <NoResult />
+                                ) : (
+                                    <PaginationPage
+                                        countElem={data?.count}
+                                        currentPage={currentPage}
+                                        countPageElem={countPageSize}
+                                        setCurrentPage={(s) => {
+                                            setCurrentPage(s)
+                                            if (!isMobile) {
+                                                window.scrollTo({
+                                                    behavior: 'smooth',
+                                                    top: 0,
+                                                })
+                                            }
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        </section>
+                        <CheckMoreWhatSuitsYouBest />
+                        <SubscribeForm />
+                        <BottomInfo />
+                        <Footer />
+                    </div>
+                </main>
+            </Suspense>
+        </>
     )
 }
 
