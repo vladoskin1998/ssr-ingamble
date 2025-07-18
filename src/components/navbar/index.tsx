@@ -17,6 +17,7 @@ import LoyaltiesFilter from './LoyaltiesFilter'
 
 
 import { useAdaptiveBehavior, useHandlerSidebarActive } from '@/context/AppContext'
+import { useLoading } from '@/context/LoadingContext'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -54,6 +55,7 @@ const LengthApplyFilter = ({
 const Navbar = () => {
     const { isSidebarActive } = useAdaptiveBehavior()
         const { handlerSidebarActive } = useHandlerSidebarActive()
+    const { startLoading } = useLoading()
     const [isGambleBodyHidden, setGambleBodyHidden] = useState(false)
     const [isDefaultOpen, setIsDefaultOpen] = useState<DefaultOpenType>('')
 
@@ -351,7 +353,10 @@ const Navbar = () => {
                             </div>
                             <div className="bottom-form-filters__column">
                                 <Link
-                                    onClick={() => handlerSidebarActive(false)}
+                                    onClick={() => {
+                                        handlerSidebarActive(false)
+                                        startLoading() // Запускаємо лоадер відразу
+                                    }}
                                     href={currentRouteFilter === RouteToNextFilter.DEFAULT ? '/' + currentRouteFilter : `/filter-${currentRouteFilter}`}
                                     className="bottom-form-filters__btn bottom-form-filters__btn_submit"
                                 >
