@@ -1,9 +1,10 @@
 'use client'
-import { memo, Suspense, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { Categories } from '@/components/categories/Categories'
 import { FilterHeaderList } from '@/components/filter-components/FilterHeaderList'
 import {  useAdaptiveBehavior } from '@/context/AppContext'
 import { initialLoyaltiesFilters, useFilterContext } from '@/context/FilterContext'
+import { useLoading } from '@/context/LoadingContext'
 // import { Wraper } from '../Wraper'
 import { FilterLoyaltiesPostResponse, LoyaltiesFilterBodyType, SeeAllEssentialLoyaltyCasino } from '@/types'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -22,10 +23,18 @@ import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 
-const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
-const Footer = dynamic(() => import('@/components/footer'))
+const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
 
 const debouncedFetchFilter = debounce((filters, fetchFunction) => fetchFunction(filters), 700)
 
@@ -45,6 +54,7 @@ export default function FilterLoyalty() {
 
     const {  isSidebarActive } = useAdaptiveBehavior()
     const { loyaltiesFilters, setLoyaltiesFilters } = useFilterContext()
+    const { setContentLoaded } = useLoading()
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllEssentialLoyaltyCasino[]>([])
@@ -90,6 +100,8 @@ export default function FilterLoyalty() {
         }
         if (isMobile && currentPage === 1 && data?.results) {
             setAllData(data?.results)
+            // Повідомляємо що контент завантажено
+            setContentLoaded()
             return
         }
         if (isMobile) {
@@ -99,7 +111,11 @@ export default function FilterLoyalty() {
             })
             return
         }
-    }, [data, isMobile, currentPage])
+        // Для десктопу також повідомляємо що контент завантажено
+        if (data?.results) {
+            setContentLoaded()
+        }
+    }, [data, isMobile, currentPage, setContentLoaded])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
@@ -128,68 +144,66 @@ export default function FilterLoyalty() {
     return (
         <>
             {(isLoading || !data || !displayedData?.length) && <LogoLoader />}
-            <Suspense fallback={<LogoLoader />}>
-                <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
-                    <div className="main-gamble__body">
-                        <Categories />
-                        <BreadCrumb
-                            path={[
-                                {
-                                    name: 'Home',
-                                    link: '/',
-                                },
-                                {
-                                    name: 'Loyalties Filters',
-                                    link: '#',
-                                },
-                            ]}
-                        />
-                        <FilterHeaderList initList={loyaltiesFilters} clearAll={clearAll} clearOne={(v) => handlerClearOne(v)} />
-                        <section className="loyaltie-programs__main main-loyaltie-programs">
-                            <div className="main-loyaltie-programs__container container">
-                                <div className="results-filter-scenarios__top top">
-                                    <div className="top__title-block">
-                                        <span className="top__title-icon">
-                                          <Image width={18} height={18} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
-                                      
-                                        </span>
-                                        <h2 className="top__title">Results</h2>
-                                    </div>
+            <main className="gamble__casinos-filtered main-gamble casinos-filtered loyaltie-filtered__main">
+                <div className="main-gamble__body">
+                    <Categories />
+                    <BreadCrumb
+                        path={[
+                            {
+                                name: 'Home',
+                                link: '/',
+                            },
+                            {
+                                name: 'Loyalties Filters',
+                                link: '#',
+                            },
+                        ]}
+                    />
+                    <FilterHeaderList initList={loyaltiesFilters} clearAll={clearAll} clearOne={(v) => handlerClearOne(v)} />
+                    <section className="loyaltie-programs__main main-loyaltie-programs">
+                        <div className="main-loyaltie-programs__container container">
+                            <div className="results-filter-scenarios__top top">
+                                <div className="top__title-block">
+                                    <span className="top__title-icon">
+                                      <Image width={18} height={18} loading="lazy" src="/img/icons/search-filter.svg" alt="search" />
+                                  
+                                    </span>
+                                    <h2 className="top__title">Results</h2>
                                 </div>
-
-                                {data && displayedData?.length ? (
-                                    <>
-                                        <LisDisplayedData displayedData={displayedData} />
-                                    </>
-                                ) : null}
-                                
-                                {!displayedData?.length && !isLoading ? (
-                                    <NoResult />
-                                ) : (
-                                    <PaginationPage
-                                        countElem={data?.count}
-                                        currentPage={currentPage}
-                                        countPageElem={countPageSize}
-                                        setCurrentPage={(s) => {
-                                            setCurrentPage(s)
-                                            if (!isMobile) {
-                                                window.scrollTo({
-                                                    behavior: 'smooth',
-                                                    top: 0,
-                                                })
-                                            }
-                                        }}
-                                    />
-                                )}
                             </div>
-                        </section>
-                        <CheckMoreWhatSuitsYouBest />
-                        <SubscribeForm />
-                        <BottomInfo />
-                        <Footer />
-                    </div>
-                </main>
-            </Suspense>
+
+                            {data && displayedData?.length ? (
+                                <>
+                                    <LisDisplayedData displayedData={displayedData} />
+                                </>
+                            ) : null}
+                            
+                            {!displayedData?.length && !isLoading ? (
+                                <NoResult />
+                            ) : (
+                                <PaginationPage
+                                    countElem={data?.count}
+                                    currentPage={currentPage}
+                                    countPageElem={countPageSize}
+                                    setCurrentPage={(s) => {
+                                        setCurrentPage(s)
+                                        if (!isMobile) {
+                                            window.scrollTo({
+                                                behavior: 'smooth',
+                                                top: 0,
+                                            })
+                                        }
+                                    }}
+                                />
+                            )}
+                        </div>
+                    </section>
+                    <CheckMoreWhatSuitsYouBest />
+                    <SubscribeForm />
+                    <BottomInfo />
+                    <Footer />
+                </div>
+            </main>
         </>
     )
 }
