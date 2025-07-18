@@ -10,7 +10,7 @@ import { DataHomeItemsBlockEnumCategory, LoyaltiesFilterBodyType, NAMETITLECATEG
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import './style.css'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, forwardRef } from 'react'
 import { cloacingFetch, cloacingLink, filterEmptyValues, LOYALTIECATEGORYIES } from '@/helper'
 import { LoadingLink } from '@/components/LoadingLink'
 import { useParams } from 'next/navigation'
@@ -79,13 +79,10 @@ const removeDuplicates = (items: SeeAllEssentialLoyaltyCasino[]): SeeAllEssentia
     return result
 }
 
-export default function SeeAllEssentialsLoyalty({ 
-    loyaltieSlug, 
-    onContentReady 
-}: { 
+const SeeAllEssentialsLoyalty = forwardRef<HTMLElement, { 
     loyaltieSlug?: string | null
     onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}) {
+}>(({ loyaltieSlug, onContentReady }, ref) => {
     // document.title = "All Essentials Loyalty"
 
     const { loyaltiesFilters } = useFilterContext()
@@ -208,7 +205,7 @@ export default function SeeAllEssentialsLoyalty({
     // }
 
     return (
-            <main className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
+            <main ref={ref} className="gamble__loyaltie-programs main-gamble loyaltie-programs loyaltie-filtered__main">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.loyaltie_category} />
                     <BreadCrumb
@@ -358,4 +355,8 @@ export default function SeeAllEssentialsLoyalty({
                 </div>
             </main>
     )
-}
+})
+
+SeeAllEssentialsLoyalty.displayName = 'SeeAllEssentialsLoyalty'
+
+export default SeeAllEssentialsLoyalty

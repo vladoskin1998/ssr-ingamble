@@ -80,9 +80,9 @@ const handleClick = () => {
 
 ### ✅ /all-loyalties
 - **Архітектура**: Server page → AllLoyaltiesClient → SeeAllEssentialsLoyalty
-- **Стан**: Повністю впроваджено з колбек-системою
+- **Стан**: Повністю впроваджено з колбек-системою + IntersectionObserver
 - **LoadingLink**: ✅ Впроваджено у всіх посиланнях
-- **Затримка**: 800ms для плавного відображення контенту
+- **Затримка**: IntersectionObserver + requestAnimationFrame для точного відстеження рендерингу
 
 ### ✅ /all-casinos  
 - **Архітектура**: Server page → AllCasinosClient → SeeAllCasinos
