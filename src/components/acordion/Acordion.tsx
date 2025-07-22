@@ -29,8 +29,21 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
 
     const calculateTotalHeight = useCallback((element: HTMLElement): number => {
         let totalHeight = element.scrollHeight
-        const nestedAccordions = element.querySelectorAll(".accordion-item")
+        
+        // Додаткова перевірка для вкладених елементів
+        const children = element.children
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i] as HTMLElement
+            if (child && child.scrollHeight > 0) {
+                const childHeight = child.scrollHeight
+                // Уникаємо подвійного підрахунку
+                if (childHeight > totalHeight) {
+                    totalHeight = Math.max(totalHeight, childHeight)
+                }
+            }
+        }
 
+        const nestedAccordions = element.querySelectorAll(".accordion-item")
         nestedAccordions.forEach((nestedAccordion) => {
             if (nestedAccordion instanceof HTMLElement) {
                 totalHeight += calculateTotalHeight(nestedAccordion)
@@ -45,7 +58,25 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
             const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
             setMaxHeight(`${contentHeight}px`)
         }
-    }, [calculateTotalHeight])
+    }, [calculateTotalHeight, content, isOpen])
+
+    // ResizeObserver для динамічного відстеження змін контенту
+    useEffect(() => {
+        if (!bodyRefAcc?.current) return
+
+        const resizeObserver = new ResizeObserver(() => {
+            if (bodyRefAcc?.current && isOpen) {
+                const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
+                setMaxHeight(`${contentHeight}px`)
+            }
+        })
+
+        resizeObserver.observe(bodyRefAcc.current)
+
+        return () => {
+            resizeObserver.disconnect()
+        }
+    }, [calculateTotalHeight, isOpen])
 
     // Sync internal state with defaultOpen prop changes
     useEffect(() => {
@@ -80,6 +111,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
             if (newState === true) {
                 setTimeout(() => {
                     setIsHidden("visible")
+                    // Перерахунок висоти після відкриття
+                    if (bodyRefAcc?.current) {
+                        const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
+                        setMaxHeight(`${contentHeight}px`)
+                    }
                 }, 300)
             } else {
                 setIsHidden("hidden")
@@ -109,7 +145,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
                 ref={bodyRefAcc}
                 style={{
                     ...styles.accordionItemPanel,
-                    overflow: isHidden,
+                    visibility: isHidden,
                     maxHeight: isOpen ? maxHeight : "0",
                 }}
             >
@@ -129,5 +165,6 @@ const styles = {
     },
     accordionItemPanel: {
         transition: "max-height 0.3s ease-in-out",
+        overflow: "hidden" as const,
     },
 }

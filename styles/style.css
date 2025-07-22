@@ -18517,6 +18517,16 @@ h3 {
   max-height: 240px;
 } */
 
+/* Accordion стилі для правильної роботи */
+.cusom-react-accordion .accordion-item {
+  box-sizing: border-box;
+}
+
+.content-bonus-information {
+  min-height: fit-content;
+  box-sizing: border-box;
+}
+
 @media (max-width: 480px) {
   .home--main--pc {
     display: none;
