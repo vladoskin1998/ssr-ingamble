@@ -1,11 +1,13 @@
 import { GetDataBonusResponse } from '@/types'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { cloacingFetch, cloacingLink, getLikeByIdAndType, sanitizeNumberLike, saveLikesToStorage } from '@/helper'
+import { cloacingFetch, getLikeByIdAndType, sanitizeNumberLike, saveLikesToStorage } from '@/helper'
+import { useSafeCloacingLink } from '@/hooks/useSafeCloacingLink'
 import Image from 'next/image'
 
 export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined }) => {
     const [like, setLike] = useState<'' | 'like' | 'dislike'>('')
+    const safeCloacingHref = useSafeCloacingLink(data?.casino_name)
 
     useEffect(() => {
         if (!data?.id) {
@@ -44,7 +46,7 @@ export const HowToGetBonus = ({ data }: { data: GetDataBonusResponse | undefined
                                 <div className="main-get-bonus__btns">
                                     <div className="main-get-bonus__btns-item">
                                         <a
-                                            href={cloacingLink(data?.casino_name)}
+                                            href={safeCloacingHref}
                                             onClick={(e) => {
                                                 e.stopPropagation()
                                                 e.preventDefault()
