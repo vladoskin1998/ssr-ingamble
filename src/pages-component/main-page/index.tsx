@@ -100,42 +100,42 @@ const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
     } catch (error) {
         console.error('Error fetching block by country via $api:', error)
         
-        try {
-            // Fallback - прямий запит до зовнішнього API
-            const response = await fetch('https://ig-api-prod.incasinowetrust.com/api/v1/get-block-by-country/', {
-                headers: {
-                    'Accept': 'application/json',
-                    'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
-                },
-            })
+        // try {
+        //     // Fallback - прямий запит до зовнішнього API
+        //     const response = await fetch('https://ig-api-prod.incasinowetrust.com/api/v1/get-block-by-country/', {
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+        //         },
+        //     })
             
-            if (response.ok) {
-                return await response.json()
-            }
-        } catch (fetchError) {
-            console.error('Error fetching block by country via direct fetch:', fetchError)
-        }
+        //     if (response.ok) {
+        //         return await response.json()
+        //     }
+        // } catch (fetchError) {
+        //     console.error('Error fetching block by country via direct fetch:', fetchError)
+        // }
         
         // Останній fallback до локального API
-        if (process.env.USE_NEXT_API === 'true') {
-            try {
-                const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                               (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
-                const apiUrl = `${baseUrl}/api/block-by-country`
+        // if (process.env.USE_NEXT_API === 'true') {
+        //     try {
+        //         const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+        //                        (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+        //         const apiUrl = `${baseUrl}/api/block-by-country`
                 
-                const fallbackResponse = await fetch(apiUrl, {
-                    headers: {
-                        'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
-                    },
-                })
+        //         const fallbackResponse = await fetch(apiUrl, {
+        //             headers: {
+        //                 'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+        //             },
+        //         })
                 
-                if (fallbackResponse.ok) {
-                    return await fallbackResponse.json()
-                }
-            } catch (localApiError) {
-                console.error('Error fetching block by country via local API:', localApiError)
-            }
-        }
+        //         if (fallbackResponse.ok) {
+        //             return await fallbackResponse.json()
+        //         }
+        //     } catch (localApiError) {
+        //         console.error('Error fetching block by country via local API:', localApiError)
+        //     }
+        // }
         
         return null
     }
