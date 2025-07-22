@@ -94,46 +94,50 @@ const getHomeDataFetch = async (src: string) => {
 
 const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
     try {
-        // Прямий запит до зовнішнього API
-        const response = await fetch('https://ig-api-prod.incasinowetrust.com/api/v1/get-block-by-country/', {
-            headers: {
-                'Accept': 'application/json',
-                'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
-            },
-        })
+        // Основний варіант через $api (як було раніше)
+        const response = await $api.get('get-block-by-country/')
+        return response.data
+    } catch (error) {
+        console.error('Error fetching block by country via $api:', error)
         
-        if (response.ok) {
-            return await response.json()
-        }
-        
-        // Fallback до локального API якщо зовнішній недоступний
-        if (process.env.USE_NEXT_API === 'true') {
-            const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                           (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
-            const apiUrl = `${baseUrl}/api/block-by-country`
-            
-            const fallbackResponse = await fetch(apiUrl, {
+        try {
+            // Fallback - прямий запит до зовнішнього API
+            const response = await fetch('https://ig-api-prod.incasinowetrust.com/api/v1/get-block-by-country/', {
                 headers: {
+                    'Accept': 'application/json',
                     'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
                 },
             })
             
-            if (fallbackResponse.ok) {
-                return await fallbackResponse.json()
+            if (response.ok) {
+                return await response.json()
+            }
+        } catch (fetchError) {
+            console.error('Error fetching block by country via direct fetch:', fetchError)
+        }
+        
+        // Останній fallback до локального API
+        if (process.env.USE_NEXT_API === 'true') {
+            try {
+                const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                               (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+                const apiUrl = `${baseUrl}/api/block-by-country`
+                
+                const fallbackResponse = await fetch(apiUrl, {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+                    },
+                })
+                
+                if (fallbackResponse.ok) {
+                    return await fallbackResponse.json()
+                }
+            } catch (localApiError) {
+                console.error('Error fetching block by country via local API:', localApiError)
             }
         }
         
         return null
-    } catch (error) {
-        console.error('Error fetching block by country:', error)
-        
-        // Останній fallback через $api
-        try {
-            const response = await $api.get('get-block-by-country/')
-            return response.data
-        } catch {
-            return null
-        }
     }
 }
 
