@@ -1,6 +1,4 @@
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import type { Metadata } from 'next'
-import { Suspense } from 'react'
 import AllCasinosClient from './AllCasinosClient'
 
 export const metadata: Metadata = {
@@ -15,9 +13,7 @@ const AllCasinos = async ({ params }: { params: Promise<{ params: string[] }> })
     const casinoSlug = dataparam?.params?.[0] || null
 
     return (
-        <Suspense fallback={<LogoLoader />}>
-            <AllCasinosClient casinoSlug={casinoSlug} />
-        </Suspense>
+        <AllCasinosClient casinoSlug={casinoSlug} />
     )
 }
 

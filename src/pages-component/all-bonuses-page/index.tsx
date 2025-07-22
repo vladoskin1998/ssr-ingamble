@@ -3,11 +3,10 @@ import { BreadCrumb } from '@/components/breadcrumb/index'
 import { Categories } from '@/components/categories/Categories'
 import { PaginationPage } from '@/components/pagination/PaginationPage'
 
-import { Suspense, useEffect, useState, useMemo, forwardRef } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { LogoLoader } from '@/components/loader/LogoLoader'
 import { useAdaptiveBehavior } from '@/context/AppContext'
 import { SeeAllBonus as SeeAllBonusType, SeeAllBonusResponse, DataHomeItemsBlockEnumCategory } from '@/types'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
@@ -18,12 +17,19 @@ import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { usePageLoading } from '@/hooks/usePageLoading'
 
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
-const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
-const Footer = dynamic(() => import('@/components/footer'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
 
 const pathBreadCrumb = [
     {
@@ -51,19 +57,19 @@ const getAllBonusFetchData = async (page: number, slug: string | null, countPage
     return response.data
 }
 
-const SeeAllBonus = forwardRef<HTMLElement, { 
+function SeeAllBonus({ 
+    bonusSlug,
+    setContentLoaded
+}: { 
     bonusSlug?: string | null
-    onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}>(({ bonusSlug, onContentReady }, ref) => {
+    setContentLoaded: () => void
+}) {
     // // document.title = "All Bonus"
 
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllBonusType[]>([])
     const [isMobile, setIsMobile] = useState(false)
     const { category, isShowPlayButton } = useAdaptiveBehavior()
-    
-    // Global loader hook
-    const { markAsLoaded } = usePageLoading()
     
     // Динамічний countPageSize на основі isMobile
     const countPageSize = isMobile ? 10 : 20
@@ -82,11 +88,13 @@ const SeeAllBonus = forwardRef<HTMLElement, {
         window.scrollTo(0, 0)
     }, [bonus_slug])
 
-    const { data, isLoading } = useQuery<SeeAllBonusResponse>({
+    const { data } = useQuery<SeeAllBonusResponse>({
       queryKey: ['get-see-all-bonus-category/', currentPage, slug, countPageSize],
       queryFn: () => getAllBonusFetchData(currentPage, slug, countPageSize),
       placeholderData: keepPreviousData,
       staleTime: 1000 * 60 * 5, // 5 хвилин
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
     })
 
     useEffect(() => {
@@ -96,6 +104,8 @@ const SeeAllBonus = forwardRef<HTMLElement, {
         }
         if (isMobile && currentPage === 1 && data?.bonuses?.results) {
             setAllData(data?.bonuses?.results)
+            // Повідомляємо що контент завантажено для мобільного (перша сторінка)
+            setContentLoaded()
             return
         }
         if (isMobile) {
@@ -104,11 +114,17 @@ const SeeAllBonus = forwardRef<HTMLElement, {
                 const existingIds = new Set(s.map(item => item.bonus_id))
                 const uniqueNewItems = newItems.filter(item => !existingIds.has(item.bonus_id))
                 const combinedData = [...s, ...uniqueNewItems]
+                // Для мобільного також повідомляємо про завантаження додаткових сторінок
+                setContentLoaded()
                 return combinedData
             })
             return
         }
-    }, [data, slug, currentPage, isMobile])
+        // Для десктопу повідомляємо що контент завантажено
+        if (data?.bonuses?.results) {
+            setContentLoaded()
+        }
+    }, [data, slug, currentPage, isMobile, setContentLoaded])
 
     useEffect(() => {
         // Безпечна ініціалізація для SSR
@@ -121,9 +137,7 @@ const SeeAllBonus = forwardRef<HTMLElement, {
         return () => window.removeEventListener('resize', updateMobile)
     }, [])
 
-    const displayedData = useMemo(() => {
-        return isMobile ? allData : data?.bonuses?.results
-    }, [isMobile, allData, data?.bonuses?.results])
+    const displayedData = isMobile ? allData : data?.bonuses?.results
 
     // Generate unique key for each bonus item
     const generateUniqueKey = (item: SeeAllBonusType, index: number) => {
@@ -135,31 +149,12 @@ const SeeAllBonus = forwardRef<HTMLElement, {
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading])
-
-    // Handle content loading and callback
-    useEffect(() => {
-        if (onContentReady) {
-            // Використовуємо зовнішній колбек якщо він переданий
-            const cleanup = onContentReady(isLoading, displayedData?.length || 0)
-            return cleanup
-        } else {
-            // Fallback на внутрішню логіку якщо колбек не переданий
-            if (!isLoading && displayedData && displayedData.length >= 0) {
-                const timer = setTimeout(() => {
-                    markAsLoaded()
-                }, 800) // Затримка для плавності
-                
-                return () => clearTimeout(timer)
-            }
-        }
-    }, [isLoading, data, displayedData, allData, onContentReady, markAsLoaded])
+    }, [data])
 
     const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'All Bonuses'
 
     return (
-        <Suspense fallback={<LogoLoader />}>
-            <main ref={ref} className="gamble__see-all main-gamble see-all">
+            <main className="gamble__see-all main-gamble see-all">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.bonus_category} />
                     <BreadCrumb
@@ -266,7 +261,7 @@ const SeeAllBonus = forwardRef<HTMLElement, {
                                 ))}
                             </div>
 
-                            {!displayedData?.length && !isLoading ? (
+                            {!displayedData?.length ? (
                                 <NoResult />
                             ) : (
                                 <PaginationPage
@@ -292,10 +287,7 @@ const SeeAllBonus = forwardRef<HTMLElement, {
                     <Footer />
                 </div>
             </main>
-        </Suspense>
     )
-})
-
-SeeAllBonus.displayName = 'SeeAllBonus'
+}
 
 export default SeeAllBonus

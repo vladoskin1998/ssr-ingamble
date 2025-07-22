@@ -8,7 +8,7 @@ import './style.css'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect, useState, forwardRef } from 'react'
+import { useEffect, useState } from 'react'
 import {  useAdaptiveBehavior } from '../../context/AppContext'
 import $api from '@/http'
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
@@ -18,10 +18,18 @@ import { cloacingFetch, cloacingLink, NumberAssociaty, sanitizeNumberLike } from
 import { NoResult } from '@/components/no-result'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import { useIsTablet } from '@/hooks/useResponsive'
-const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'))
-const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'))
-const Footer = dynamic(() => import('@/components/footer'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
 
 
 const pathBreadCrumb = [
@@ -74,10 +82,13 @@ export const WithdrawalSeeAllCasinos = (n: { daily: number | null; weekly: numbe
 // ЗМІНА: Видалено window.innerWidth на рівні модуля для SSR сумісності
 // const countPageSize = window.innerWidth < 900 ? 8 : 15
 
-const SeeAllCasinos = forwardRef<HTMLElement, { 
+function SeeAllCasinos({ 
+    casinoSlug,
+    setContentLoaded
+}: { 
     casinoSlug?: string | null
-    onContentReady?: (isLoading: boolean, dataLength: number) => (() => void) | undefined
-}>(({ casinoSlug, onContentReady }, ref) => {
+    setContentLoaded: () => void
+}) {
     // document.title = "All Casino"
     const [currentPage, setCurrentPage] = useState(1)
     const [allData, setAllData] = useState<SeeAllCasinosType[]>([])
@@ -103,11 +114,13 @@ const SeeAllCasinos = forwardRef<HTMLElement, {
 
     const {  category } = useAdaptiveBehavior()
 
-    const { data, isLoading } = useQuery<SeeAllCasinosCategoryResponse>({
+    const { data } = useQuery<SeeAllCasinosCategoryResponse>({
         queryKey: ['get-see-all-loyalties', currentPage, slug, countPageSize],
         queryFn: () => getAllCasinosFetchData(currentPage, slug, countPageSize),
         placeholderData: keepPreviousData,
         staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
     })
     useEffect(() => {
         if (isMobile && !data?.casino?.results) {
@@ -116,38 +129,35 @@ const SeeAllCasinos = forwardRef<HTMLElement, {
         }
         if (isMobile && currentPage === 1 && data?.casino?.results) {
             setAllData(data?.casino?.results)
+            // Повідомляємо що контент завантажено для мобільного (перша сторінка)
+            setContentLoaded()
             return
         }
         if (isMobile) {
             setAllData((s) => {
                 const combinedData = [...s, ...(data?.casino?.results || [])]
+                // Для мобільного також повідомляємо про завантаження додаткових сторінок  
+                setContentLoaded()
                 return combinedData
             })
             return
         }
-    }, [data, slug, currentPage, isMobile])
+        // Для десктопу повідомляємо що контент завантажено
+        if (data?.casino?.results) {
+            setContentLoaded()
+        }
+    }, [data, slug, currentPage, isMobile, setContentLoaded])
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading])
+    }, [data])
 
     const titlePage = slug ? data?.category_name || category?.find((item) => item?.slug === slug)?.name : 'Casino List'
     const displayedData = isMobile ? allData : data?.casino?.results
 
-    // Handle content loading and callback
-    useEffect(() => {
-        if (!isLoading && data) {
-            const dataLength = displayedData?.length || 0
-            const cleanup = onContentReady?.(false, dataLength)
-            
-            // Return cleanup function if provided
-            return cleanup
-        }
-    }, [isLoading, data, displayedData, onContentReady])
-
     return (
         // <Wraper>
-            <main ref={ref} className="gamble__casinos-filtered main-gamble casinos-filtered">
+            <main className="gamble__casinos-filtered main-gamble casinos-filtered">
                 <div className="main-gamble__body">
                     <Categories type_category={DataHomeItemsBlockEnumCategory.casino_category} />
                     <BreadCrumb
@@ -332,8 +342,6 @@ const SeeAllCasinos = forwardRef<HTMLElement, {
             </main>
         // </Wraper>
     )
-})
-
-SeeAllCasinos.displayName = 'SeeAllCasinos'
+}
 
 export default SeeAllCasinos
