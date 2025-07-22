@@ -93,14 +93,11 @@ const getHomeDataFetch = async (src: string) => {
 
 
 const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
-    if (process.env.USE_NEXT_API === 'true') {
-        // Визначаємо базовий URL автоматично
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                       (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
-        const apiUrl = `${baseUrl}/api/block-by-country`
-        
-        const response = await fetch(apiUrl, {
+    try {
+        // Прямий запит до зовнішнього API
+        const response = await fetch('https://ig-api-prod.incasinowetrust.com/api/v1/get-block-by-country/', {
             headers: {
+                'Accept': 'application/json',
                 'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
             },
         })
@@ -108,10 +105,36 @@ const getBlockByCountry = async (): Promise<HomeDataBlock | null> => {
         if (response.ok) {
             return await response.json()
         }
+        
+        // Fallback до локального API якщо зовнішній недоступний
+        if (process.env.USE_NEXT_API === 'true') {
+            const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                           (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000')
+            const apiUrl = `${baseUrl}/api/block-by-country`
+            
+            const fallbackResponse = await fetch(apiUrl, {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (compatible; NextJS-SSR)',
+                },
+            })
+            
+            if (fallbackResponse.ok) {
+                return await fallbackResponse.json()
+            }
+        }
+        
+        return null
+    } catch (error) {
+        console.error('Error fetching block by country:', error)
+        
+        // Останній fallback через $api
+        try {
+            const response = await $api.get('get-block-by-country/')
+            return response.data
+        } catch {
+            return null
+        }
     }
-    
-    const response = await $api.get('get-block-by-country/')
-    return response.data
 }
 
 const renderBlock = (block: HomeDataBlock<DataHomeItemsBlock | EssentialItemsBlock>, index: number, src: string) => {
