@@ -34,7 +34,8 @@ interface BlockedCountry {
 }
 import { useFilterContext } from '@/context/FilterContext'
 import { useLoading } from '@/context/LoadingContext'
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
+import { cloacingFetch, sanitizeNumberLike } from '@/helper'
+import { useSafeCloacingLink } from '@/hooks/useSafeCloacingLink'
 
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import 'swiper/css'
@@ -99,6 +100,9 @@ export default function SimpleCasinos() {
     }, [casino_slug, slug])
 
     const { data: Country, setCasinoFilters } = useFilterContext()
+
+    // Безпечний cloaking link який уникає hydration errors
+    const safeCloacingHref = useSafeCloacingLink(data?.dataCurrentCasinos?.name)
 
     const [geoLocation, setGeoLocation] = useState<GeoLocationAllowdType>({
         countryCode: '',
@@ -237,7 +241,7 @@ export default function SimpleCasinos() {
                                                 </div>
                                                 {geoLocation?.isAllowed ? (
                                                     <a
-                                                        href={cloacingLink(data?.dataCurrentCasinos.name)}
+                                                        href={safeCloacingHref}
                                                         onClick={(e) => {
                                                             e.stopPropagation()
                                                             e.preventDefault()

@@ -147,17 +147,14 @@ export const sanitizeLink = (s: string | undefined) => {
 
 export const cloacingLink = (s: string | undefined): string => {
     if (typeof window === 'undefined') {
-        // SSR: верните исходный url или null, или ничего не делайте
+        // SSR: повертаємо статичний URL для уникнення hydration mismatch
         return `https://ingamble.com/go`
     }
     if (!s) {
         return `https://${window.location.host}`;
     }
 
-    // const parsedUrl = new URL(s);
-
-    // const parts = parsedUrl.hostname.split('.');
-    // const domen = parts[0] === 'www' ? parts[1] : parts[0];
+    // Клієнт: генеруємо динамічний URL на основі назви казино
     const domen = s.toLocaleLowerCase().replace(/\s/gm, '-')
     return `https://${window.location.host}${domen && '/' + sanitizeLink(domen)}/go`;
 };

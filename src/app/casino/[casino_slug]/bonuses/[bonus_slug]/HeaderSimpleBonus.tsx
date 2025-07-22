@@ -1,10 +1,11 @@
 import { GeoLocationAllowdType, GetDataBonusResponse, WageringBonusPlusDepositType } from '@/types'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cloacingFetch, cloacingLink, sanitizeNumberLike } from '@/helper'
+import { cloacingFetch, sanitizeNumberLike } from '@/helper'
 import { useFilterContext } from '@/context/FilterContext'
 import { LazyCardImg } from '@/components/lazy-img/LazyCardImg'
 import { useResponsive } from '@/hooks/useResponsive'
+import { useSafeCloacingLink } from '@/hooks/useSafeCloacingLink'
 
 const color_label = ['tags-casino-card__item_green', 'tags-casino-card__item_blue', 'tags-casino-card__item_purple', 'tags-casino-card__item_grass', 'tags-casino-card__item_orange']
 
@@ -36,6 +37,9 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
     const { isMobile: isSmallScreen } = useResponsive(1023.98, false)
 
     const { setCasinoFilters } = useFilterContext()
+
+    // Безпечний cloaking link який уникає hydration errors
+    const safeCloacingHref = useSafeCloacingLink(data?.casino_name)
 
     // ❌ ВИДАЛЕНО: Старий код з прямим доступом до window
     // const [isSmallScreen, setIsSmallScreen] = useState<boolean>(window.innerWidth <= 1023.98)
@@ -150,7 +154,7 @@ export const HeaderSimpleBonus = ({ data, geoLocation }: { data?: GetDataBonusRe
                                 </div>
                                 {geoLocation?.isAllowed ? (
                                     <a
-                                        href={cloacingLink(data?.casino_name)}
+                                        href={safeCloacingHref}
                                         onClick={(e) => {
                                             e.stopPropagation()
                                             e.preventDefault()
