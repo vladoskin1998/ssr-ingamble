@@ -69,6 +69,8 @@ export default function FilterLoyalty() {
       placeholderData: keepPreviousData,
       staleTime: 1000 * 60 * 5,
       enabled: false, // якщо потрібно вручну викликати refetch
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
     })
 
     useEffect(() => {
@@ -119,7 +121,7 @@ export default function FilterLoyalty() {
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading, isSidebarActive])
+    }, [data, isSidebarActive])
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 900)

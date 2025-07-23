@@ -118,6 +118,8 @@ export default function FilterCasino() {
       queryFn: () => getFilteringCasinoList(casinoFilters, currentPage, countPageSize),
       placeholderData: keepPreviousData,  // ← змінено з keepPreviousData: true
       enabled: false,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
     })
 
     const { casino_slug } = useParams()
@@ -171,7 +173,7 @@ export default function FilterCasino() {
 
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [isLoading, isSidebarActive])
+    }, [data, isSidebarActive])
 
     // ЗМІНА: Видалено resize handler, оскільки використовуємо useIsTablet hook
 

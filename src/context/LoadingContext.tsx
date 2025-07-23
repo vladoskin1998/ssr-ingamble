@@ -15,7 +15,7 @@ interface LoadingContextType {
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined)
 
 export const LoadingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [isGlobalLoading, setIsGlobalLoading] = useState(false)
+    const [isGlobalLoading, setIsGlobalLoading] = useState(true) // Починаємо з true для показу лоадера при завантаженні
     const [isContentLoaded, setIsContentLoaded] = useState(false)
     const [navigationStarted, setNavigationStarted] = useState(false)
     const pathname = usePathname()
@@ -51,6 +51,74 @@ export const LoadingProvider: React.FC<{ children: ReactNode }> = ({ children })
             setIsContentLoaded(false)
         }
     }, [pathname, navigationStarted])
+
+    // Слухач оновлення сторінки (refresh)
+    useEffect(() => {
+        const handleBeforeUnload = () => {
+            // Запускаємо лоадер при оновленні сторінки
+            setIsGlobalLoading(true)
+            setIsContentLoaded(false)
+            setNavigationStarted(true)
+        }
+
+        // Слухач для виявлення що сторінка завантажується (після refresh)
+        const handleLoad = () => {
+            // При завантаженні сторінки показуємо лоадер
+            setIsGlobalLoading(true)
+            setIsContentLoaded(false)
+            setNavigationStarted(true)
+        }
+
+        // Додаємо слухачі тільки на клієнті
+        if (typeof window !== 'undefined') {
+            window.addEventListener('beforeunload', handleBeforeUnload)
+            
+            // Якщо сторінка завантажується (включаючи refresh)
+            if (document.readyState === 'loading') {
+                handleLoad()
+            }
+        }
+
+        return () => {
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('beforeunload', handleBeforeUnload)
+            }
+        }
+    }, [])
+
+    // Слухач готовності DOM для автоматичного запуску лоадера при refresh
+    useEffect(() => {
+        // При першому завантаженні компонента завжди показуємо лоадер
+        setIsGlobalLoading(true)
+        setIsContentLoaded(false)
+        setNavigationStarted(true)
+
+        // Якщо документ ще завантажується, продовжуємо показувати лоадер
+        if (typeof window !== 'undefined') {
+            const handleDOMContentLoaded = () => {
+                // DOM завантажено, але ресурси можуть ще завантажуватися
+                // Лоадер буде вимкнено через setContentLoaded в компонентах
+            }
+
+            const handleLoad = () => {
+                // Вся сторінка завантажена
+                // Лоадер буде вимкнено через setContentLoaded в компонентах
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', handleDOMContentLoaded)
+            }
+            
+            if (document.readyState !== 'complete') {
+                window.addEventListener('load', handleLoad)
+            }
+
+            return () => {
+                document.removeEventListener('DOMContentLoaded', handleDOMContentLoaded)
+                window.removeEventListener('load', handleLoad)
+            }
+        }
+    }, []) // Виконується тільки один раз при монтуванні
 
     // ВИДАЛЕНО автоматичне зупинення - тепер тільки ручне керування!
     
