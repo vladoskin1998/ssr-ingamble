@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate'
 import './style.css'
 import { useEffect, useState } from 'react'
 import { isMobileDevice } from '@/helper/adaprive-bahavior'
+import { useLoading } from '@/context/LoadingContext'
 
 export const PaginationPage = ({ 
     currentPage = 1, 
@@ -24,6 +25,7 @@ export const PaginationPage = ({
     // Use directTotalPages if provided, otherwise calculate
     const totalPages = directTotalPages !== null ? directTotalPages : Math.ceil(countElem / countPageElem)
     const [isMobile, setIsMobile] = useState(false)
+    const { startLoading } = useLoading()
 
     // Визначаємо тип пристрою при монтуванні компонента
     useEffect(() => {
@@ -39,6 +41,8 @@ export const PaginationPage = ({
 
     const handlePageChange = (selectedItem: { selected: number }) => {
         const newPage = selectedItem.selected + 1
+        // Запускаємо лоадер при зміні сторінки
+        startLoading()
         setCurrentPage(newPage)
     }
 
@@ -47,6 +51,9 @@ export const PaginationPage = ({
         
         if (currentPage < totalPages) {
             const nextPage = currentPage + 1;
+            
+            // Запускаємо лоадер при "Show More"
+            startLoading()
             
             if (isMobile && onShowMore) {
                 // Для мобільних використовуємо спеціальну функцію

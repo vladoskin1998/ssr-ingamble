@@ -15409,6 +15409,14 @@ h3 {
     margin: -2px 0 40px 0;
   }
 }
+.main-gamble__best-live-dealer-casinos {
+  margin: -2px 0 60px 0;
+}
+@media (max-width: 480.98px) {
+  .main-gamble__best-live-dealer-casinos {
+    margin: -2px 0 40px 0;
+  }
+}
 .main-gamble__best-live-dealer-casinos .casino-small-card__rating-icon {
   margin: 1px 4px 0 0;
 }
