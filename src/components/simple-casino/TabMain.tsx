@@ -4,7 +4,8 @@ import { CasinoReview } from './CasinoReview'
 import { RewievCasinoDataResponse } from '../../types'
 import { useAdaptiveBehavior } from '../../context/AppContext'
 import { LazyCardImg } from '../../components/lazy-img/LazyCardImg'
-import { cloacingFetch, cloacingLink } from '../../helper'
+import { cloacingFetch } from '../../helper'
+import { useSafeCloacingLink } from '../../hooks/useSafeCloacingLink'
 import Image from 'next/image'
 
 enum TabType {
@@ -45,6 +46,10 @@ export const TabMain = ({
     const { lastUpdate } = useAdaptiveBehavior()
     const [activeTab, setActiveTab] = useState<TabType>(TabType.General)
     const [openModal, setOpenModal] = useState(initStateOpenModal)
+
+    // Безпечні cloaking links для уникнення hydration errors
+    const bonusCloacingLink = useSafeCloacingLink(data?.url || data?.casino_affiliate_link)
+    const casinoCloacingLink = useSafeCloacingLink(data?.name)
 
     const countryImg = Country?.find((it) => {
         return it.code === data?.licenses?.[0]?.country_code || it?.name?.toLocaleLowerCase() === data?.licenses?.[0].name.toLocaleLowerCase()
@@ -645,7 +650,7 @@ export const TabMain = ({
                             <div className="bonus-info-review__image-block">
                                 <a
                                     className="bonus-info-review__image ibg--custom"
-                                    href={cloacingLink(data?.url || data?.casino_affiliate_link)}
+                                    href={bonusCloacingLink}
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         e.preventDefault()
@@ -667,7 +672,7 @@ export const TabMain = ({
                             <div className="bonus-info-review__content">
                                 <h2 className="bonus-info-review__title">{data?.bonuses.find((ssb) => ssb.special_side_bar)?.name || ''}</h2>
                                 <a
-                                    href={cloacingLink(data?.name)}
+                                    href={casinoCloacingLink}
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         e.preventDefault()

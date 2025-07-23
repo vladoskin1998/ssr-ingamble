@@ -54,6 +54,7 @@ const getBonusDataFetch = async ({ slug }: { slug: string | null }) => {
 }
 
 import { useParams } from 'next/navigation'
+import BottomInfo from '@/components/footer/BottomInfo'
 
 export default function SimpleBonus() {
     const params = useParams()
@@ -178,6 +179,7 @@ function SimpleBonusClient({ bonusSlug }: { bonusSlug: string }) {
                     <HarryStyles img="/img/casino-person/5.webp" title="ASHLING O'BRIEN" subtitle="Content Maker, Casino Promotions Analyst" />
                     <CheckMoreWhatSuitsYouBest />
                     <SubscribeForm />
+                    <BottomInfo />
                     <Footer />
                 </div>
             </main>

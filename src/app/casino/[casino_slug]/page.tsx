@@ -41,6 +41,7 @@ import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import Image from 'next/image'
+import BottomInfo from '@/components/footer/BottomInfo'
 const Footer = dynamic(() => import('@/components/footer'), {
     loading: () => null,
 })
@@ -555,6 +556,7 @@ export default function SimpleCasinos() {
                         <HighRankedCasinos />
                         <CheckMoreWhatSuitsYouBest />
                         <SubscribeForm />
+                        <BottomInfo />
                         <Footer />
                     </div>
                 </main>

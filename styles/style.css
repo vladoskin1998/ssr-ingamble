@@ -16505,8 +16505,9 @@ h3 {
 }
 .item-essential-programs-gamble__bottom {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 .item-essential-programs-gamble__bottom-column {
   flex: 0 1 50%;
@@ -16568,6 +16569,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-wrap: nowrap;
   text-align: center;
   height: 42px;
   width: 100%;
