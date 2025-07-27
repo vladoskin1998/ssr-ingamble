@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '../../styles/style.css'
 import '../components/loader/loader.css'
 import '../../styles//header.css'
-import Navbar from '@/components/navbar'
+import NavbarWrapper from '@/components/client-wrappers/NavbarWrapper'
 import { Header } from '@/components/header'
 import RootLayoutProvider from '@/context/RootLayoutProvider'
 import Script from 'next/script'
@@ -66,7 +66,7 @@ export default function RootLayout({
                             </svg>
                         </div>
                         <div className="gamble">
-                            <Navbar />
+                            <NavbarWrapper />
                             <div className="gamble__body">
                                 <Header />
                             < >{children}</>
