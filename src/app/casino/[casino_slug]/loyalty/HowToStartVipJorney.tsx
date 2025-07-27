@@ -106,7 +106,7 @@ export const HowToStartVipJorney = (data: {
                   </div>
                   <div className="main-get-bonus__btns-item">
                     <a
-                      href={data?.link_tc}
+                      // href={data?.link_tc}
                       target="_blank"
                       rel="nofollow noopener"
                       className="main-get-bonus__btn main-get-bonus__btn_apply"
