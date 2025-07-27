@@ -51,7 +51,7 @@ export const PopupReadMore: React.FC<PopupReadMoreProps> = ({ openModal, handler
                     <div className="popup__top top-popup">
                         <h3 className="top-popup__title">{data?.name} review</h3>
                         <button className="top-popup__close popup-close" onClick={() => handlerOpen(false)}>
-                            <Image src="/img/icons/close.svg" alt="close" width={30} height={30} />
+                            <Image src="/img/icons/close.svg" alt="close" width={13} height={13} />
                         </button>
                     </div>
                     <div className="popup__main main-popup">
