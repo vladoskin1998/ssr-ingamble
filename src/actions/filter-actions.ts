@@ -174,6 +174,76 @@ export async function applyBonusFilters(
             }
         }
 
+        const bonusMinDepMin = formData.get('bonus_min_dep_min')
+        const bonusMinDepMax = formData.get('bonus_min_dep_max')
+        
+        if (bonusMinDepMin && bonusMinDepMax) {
+            filters.bonus_min_dep = {
+                min: Number(bonusMinDepMin),
+                max: Number(bonusMinDepMax)
+            }
+        }
+
+        const bonusLikesMin = formData.get('bonus_likes_min')
+        const bonusLikesMax = formData.get('bonus_likes_max')
+        
+        if (bonusLikesMin && bonusLikesMax) {
+            filters.bonus_likes = {
+                min: Number(bonusLikesMin),
+                max: Number(bonusLikesMax)
+            }
+        }
+
+        const bonusMaxBetMin = formData.get('bonus_max_bet_min')
+        const bonusMaxBetMax = formData.get('bonus_max_bet_max')
+        
+        if (bonusMaxBetMin && bonusMaxBetMax) {
+            filters.bonus_max_bet = {
+                min: Number(bonusMaxBetMin),
+                max: Number(bonusMaxBetMax)
+            }
+        }
+
+        const freeSpinAmountMin = formData.get('free_spin_amount_min')
+        const freeSpinAmountMax = formData.get('free_spin_amount_max')
+        
+        if (freeSpinAmountMin && freeSpinAmountMax) {
+            filters.free_spin_amount = {
+                min: Number(freeSpinAmountMin),
+                max: Number(freeSpinAmountMax)
+            }
+        }
+
+        const bonusValueMin = formData.get('bonus_value_min')
+        const bonusValueMax = formData.get('bonus_value_max')
+        
+        if (bonusValueMin && bonusValueMax) {
+            filters.bonus_value = {
+                min: Number(bonusValueMin),
+                max: Number(bonusValueMax)
+            }
+        }
+
+        const bonusAmountMin = formData.get('bonus_amount_min')
+        const bonusAmountMax = formData.get('bonus_amount_max')
+        
+        if (bonusAmountMin && bonusAmountMax) {
+            filters.bonus_amount = {
+                min: Number(bonusAmountMin),
+                max: Number(bonusAmountMax)
+            }
+        }
+
+        const bonusMaxWinMin = formData.get('bonus_max_win_min')
+        const bonusMaxWinMax = formData.get('bonus_max_win_max')
+        
+        if (bonusMaxWinMin && bonusMaxWinMax) {
+            filters.bonus_max_win = {
+                min: Number(bonusMaxWinMin),
+                max: Number(bonusMaxWinMax)
+            }
+        }
+
         // Boolean поля - прибираю неіснуючі поля
         const sticky = formData.get('sticky')
         if (sticky !== null) {

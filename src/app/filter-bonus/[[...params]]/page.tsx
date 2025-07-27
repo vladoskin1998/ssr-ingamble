@@ -17,7 +17,6 @@ import { cloacingFetch, cloacingLink, filterEmptyValues, getTagColorByindex, get
 import { PaginationPage } from '../../../components/pagination/PaginationPage'
 import { debounce } from 'lodash'
 // import searchImg from '/img/icons/search-filter.svg'
-import { v4 as uuidv4 } from 'uuid'
 // 1. Заміна роутінгу з react-router-dom на Next.js
 import Link from 'next/link' // замість { Link } з 'react-router-dom'
 // 2. Заміна <img> на <Image> з next/image для оптимізації зображень
@@ -268,9 +267,9 @@ export default function FilterBonus() {
 const ListDisplayData = memo(({ displayedData, isShowPlayButton }: { displayedData: SeeAllBonus[] | undefined; isShowPlayButton: boolean }) => {
     return (
         <div className="main-see-all__row custom-main-see-all__row">
-            {displayedData?.map((item) => (
+            {displayedData?.map((item, index) => (
                 <div 
-                  key={item.bonus_slug || item.casino_slug || uuidv4()}
+                  key={`${item.casino_slug}-${item.bonus_slug}-${index}`}
                   className="main-see-all__column">
                     <div className="slide-slider__item casino-card">
                         <div className="casino-card__top">
