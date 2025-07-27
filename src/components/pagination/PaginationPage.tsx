@@ -1,5 +1,5 @@
 'use client'
-import ReactPaginate from 'react-paginate'
+import ReactPaginateClient from './ReactPaginateClient'
 import './style.css'
 import { useEffect, useState } from 'react'
 import { isMobileDevice } from '@/helper/adaprive-bahavior'
@@ -25,10 +25,12 @@ export const PaginationPage = ({
     // Use directTotalPages if provided, otherwise calculate
     const totalPages = directTotalPages !== null ? directTotalPages : Math.ceil(countElem / countPageElem)
     const [isMobile, setIsMobile] = useState(false)
+    const [isClient, setIsClient] = useState(false)
     const { startLoading } = useLoading()
 
     // Визначаємо тип пристрою при монтуванні компонента
     useEffect(() => {
+        setIsClient(true)
         setIsMobile(isMobileDevice());
         
         const handleResize = () => {
@@ -90,10 +92,10 @@ export const PaginationPage = ({
             ) : (
                 <></>
             )}
-            {totalPages <= 1 ? (
+            {totalPages <= 1 || !isClient ? (
                 <></>
             ) : (
-                <ReactPaginate
+                <ReactPaginateClient
                     previousLabel={
                         currentPage > 1 ? (
                             <button>

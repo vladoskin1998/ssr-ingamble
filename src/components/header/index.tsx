@@ -116,14 +116,31 @@ export const Header = () => {
             if ((e.code === 'Enter' || e.key === 'Enter') && casinoFilters?.casino_name) {
                 navTo()
             }
+            if (e.code === 'Escape' || e.key === 'Escape') {
+                setSearchShow(false)
+                setSearchFocus(false)
+            }
+        }
+
+        const onClickOutside = (e: MouseEvent) => {
+            const target = e.target as HTMLElement
+            const searchForm = target.closest('.form-header')
+            const searchIcon = target.closest('.form-header__icon')
+            
+            if (!searchForm && !searchIcon && searchShow) {
+                setSearchShow(false)
+                setSearchFocus(false)
+            }
         }
 
         document.addEventListener('keydown', onKeydown)
+        document.addEventListener('click', onClickOutside)
 
         return () => {
             document.removeEventListener('keydown', onKeydown)
+            document.removeEventListener('click', onClickOutside)
         }
-    }, [casinoFilters.casino_name, navTo])
+    }, [casinoFilters.casino_name, navTo, searchShow])
 
     useEffect(() => {
         if (pathname === '/bonuses' || pathname?.includes('/all-bonuses')) {
@@ -345,9 +362,12 @@ export const Header = () => {
                                     <button
                                         className="form-item__icon form-item__icon_delete"
                                         onClick={() => {
-                                            setSearchShow(true)
                                             setCasinoFilters(initialCasinoFilters)
                                             setSearchFocus(false)
+                                            // Приховуємо поле пошуку на мобільних після очищення
+                                            if (window.innerWidth <= 650.98) {
+                                                setSearchShow(false)
+                                            }
                                         }}
                                     >
                                         <svg>
@@ -360,11 +380,22 @@ export const Header = () => {
                                         </svg>
                                     </button>
                                 </div>
-                                <a href="" aria-label="Put your description here." className={`form-header__icon ${searchShow ? 'hide' : ''}`}>
+                                <button 
+                                    type="button"
+                                    aria-label="Open search" 
+                                    className={`form-header__icon ${searchShow ? 'hide' : ''}`}
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        setSearchShow(true)
+                                        setTimeout(() => {
+                                            handleFocus()
+                                        }, 150)
+                                    }}
+                                >
                                     <svg>
                                         <use xlinkHref="#search"></use>
                                     </svg>
-                                </a>
+                                </button>
                             </div>
 
                             <a href="" aria-label="Put your description here." className={`header__burger ${isMenuOpen ? 'active' : ''}`} onClick={(e) => handleBurgerOpen(e)}>
