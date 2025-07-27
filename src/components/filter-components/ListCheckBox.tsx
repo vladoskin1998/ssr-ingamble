@@ -42,20 +42,17 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
     keyType?: string
 }) => {
     const [searchText, setSearchText] = useState("")
-    const [localFilterItems, setLocalFilterItems] = useState<number[]>([])
+    const [localFilterItems, setLocalFilterItems] = useState<(number | string)[]>([])
 
-    const checkboxItem = (id: number) => {
+    const checkboxItem = (id: number | string) => {
         setLocalFilters((prevFilters) => {
-            const isSelected = (
-                prevFilters[field as keyof M] as number[]
-            ).includes(id)
+            const currentValues = prevFilters[field as keyof M] as (number | string)[]
+            const isSelected = currentValues.includes(id)
             return {
                 ...prevFilters,
                 [field]: isSelected
-                    ? (prevFilters[field as keyof M] as number[]).filter(
-                          (item) => item !== id
-                      )
-                    : [...(prevFilters[field as keyof M] as number[]), id],
+                    ? currentValues.filter((item) => item !== id)
+                    : [...currentValues, id],
             }
         })
         setLocalFilterItems((prevFilters) => {
@@ -75,7 +72,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
 
   
     useEffect(() => {
-        setLocalFilterItems(initState?.map(item => Number(item)) || [])
+        setLocalFilterItems(initState || [])
     }, [initState])
 
     return (
@@ -109,7 +106,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
                         {({ index, style }) => {
                             const itemFilter = filteredCountries?.[index]
                             const isChecked = localFilterItems?.includes(
-                                Number(itemFilter?.id) || 0
+                                itemFilter?.id || 0
                             )
                             return (
                                 <div className="radio-form-filter__item" style={style}>
@@ -118,7 +115,7 @@ const ListCheck = <M extends CasinoFilterBodyType | BonusFilterBodyType>({
                                         type="checkbox"
                                         checked={isChecked ?? false}
                                         className="radio-form-filter__input form-filter__input"
-                                        onChange={() => checkboxItem(Number(itemFilter?.id))}
+                                        onChange={() => checkboxItem(itemFilter?.id || 0)}
                                     />
                                     <label
                                         htmlFor={`${keyType}${field}formFilterPlayersFrom${itemFilter?.name}`}
