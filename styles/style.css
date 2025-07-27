@@ -7341,6 +7341,16 @@ h3 {
   overflow: visible;
 } 
 
+/* Забезпечуємо правильне відображення попапів у accordion */
+.cusom-react-accordion .accordion-item:has(.content-bonus-information.visiable .popup-item-content-bonus-information.active) {
+  overflow: visible !important;
+}
+
+/* Fallback для браузерів, які не підтримують :has() */
+.accordion-item.popup-active {
+  overflow: visible !important;
+} 
+
 .item-content-bonus-information-last-child{
   margin-bottom: 20px ;
 }
@@ -7620,7 +7630,7 @@ h3 {
   right: 0;
   bottom: 0;
   transform: translate(-8px, -32.29px);
-  z-index: 1;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

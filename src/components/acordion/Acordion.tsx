@@ -147,6 +147,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
                     ...styles.accordionItemPanel,
                     visibility: isHidden,
                     maxHeight: isOpen ? maxHeight : "0",
+                    position: "relative",
                 }}
             >
                 {content}

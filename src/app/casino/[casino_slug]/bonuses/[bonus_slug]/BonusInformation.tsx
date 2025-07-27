@@ -55,6 +55,20 @@ export const BonusInformation = ({ data }: { data: GetDataBonusResponse | undefi
         }
     }, [])
 
+    // Додаємо логіку для управління overflow accordion при відкритті попапів
+    useEffect(() => {
+        const hasOpenModal = Object.values(openModal).some(Boolean)
+        const accordionItems = document.querySelectorAll('.accordion-item')
+        
+        accordionItems.forEach((item) => {
+            if (hasOpenModal) {
+                item.classList.add('popup-active')
+            } else {
+                item.classList.remove('popup-active')
+            }
+        })
+    }, [openModal])
+
     useEffect(() => {
         if (BonusInfoIsOpen.Restrictions) {
             setTimeout(() => {
