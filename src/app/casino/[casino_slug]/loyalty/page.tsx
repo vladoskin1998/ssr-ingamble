@@ -2,7 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query'
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
 import { LoyaltieCasinoInfo } from './LoyaltieCasinoInfo'
@@ -18,6 +18,7 @@ import { Categories } from '@/components/categories/Categories'
 import { BreadCrumb } from '@/components/breadcrumb'
 import { GeoLocationAllowdType } from '@/types'
 import { EssentialVIPLoyaltyPrograms } from '../bonuses/[bonus_slug]/EssentialVIPLoyaltyPrograms'
+import { useLoading } from '@/context/LoadingContext'
 
 // Interface for CloudFlare headers
 interface CloudFlareHeaders {
@@ -30,11 +31,20 @@ import { SiblingBonus } from '../bonuses/[bonus_slug]/SiblingBonus'
 import { HarryStyles } from '../bonuses/[bonus_slug]/HarryStyles'
 import { useFilterContext } from '@/context/FilterContext'
 import initializeAdaptiveBehavior from '@/helper/adaprive-bahavior'
+import dynamic from 'next/dynamic'
 
-const CheckMoreWhatSuitsYouBest = lazy(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'))
-const SubscribeForm = lazy(() => import('@/components/subscribe/SubscribeForm'))
-const BottomInfo = lazy(() => import('@/components/footer/BottomInfo'))
-const Footer = lazy(() => import('@/components/footer'))
+const CheckMoreWhatSuitsYouBest = dynamic(() => import('@/components/categories/CheckMoreWhatSuitsYouBest'), {
+    loading: () => null,
+})
+const SubscribeForm = dynamic(() => import('@/components/subscribe/SubscribeForm'), {
+    loading: () => null,
+})
+const BottomInfo = dynamic(() => import('@/components/footer/BottomInfo'), {
+    loading: () => null,
+})
+const Footer = dynamic(() => import('@/components/footer'), {
+    loading: () => null,
+})
 
 const getCurrentLoyaltiesFetchData = async (slug: string) => {
     if (process.env.USE_NEXT_API === 'true') {
@@ -52,6 +62,7 @@ export default function SimpleLoyalties() {
     const params = useParams()
     const casinoSlug = params.casino_slug as string
     const { data: Country } = useFilterContext()
+    const { setContentLoaded } = useLoading()
 
     const [slug, setSlug] = useState<string>(casinoSlug || '')
     const [geoLocation, setGeoLocation] = useState<GeoLocationAllowdType>({
@@ -104,9 +115,16 @@ export default function SimpleLoyalties() {
         }
     }, [data, Country])
 
+    // Повідомляємо що контент завантажено коли є дані та геолокація
+    useEffect(() => {
+        if (data?.dataCurrentLoyaltie && geoLocation.isLoadedGeo) {
+            setContentLoaded()
+        }
+    }, [data, geoLocation.isLoadedGeo, setContentLoaded])
+
     useEffect(() => {
         initializeAdaptiveBehavior()
-    }, [geoLocation])
+    }, [data])
 
     if (isLoading || !geoLocation.isLoadedGeo) return <LogoLoader />
     
@@ -159,12 +177,10 @@ export default function SimpleLoyalties() {
                     title={'JEFF MURPHY'}
                     subtitle={'Content Maker, Crypto & Gambling Enthusiast'}
                 />
-                <Suspense fallback={<></>}>
-                    <CheckMoreWhatSuitsYouBest />
-                    <SubscribeForm />
-                    <BottomInfo />
-                    <Footer />
-                </Suspense>
+                <CheckMoreWhatSuitsYouBest />
+                <SubscribeForm />
+                <BottomInfo />
+                <Footer />
             </div>
         </main>
     )
