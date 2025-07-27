@@ -45,39 +45,7 @@ const LoyaltyLevelItem = ({
                             <h3 className="top-item-inner-information-loyaltie__level">Level {item?.level}</h3>
                         </div>
                         <div className="top-item-inner-information-loyaltie__column">
-                            <div className="top-item-inner-information-loyaltie__icons">
-                                {/* ✅ ЗМІНА 3: Замінено ReactSVG на Next.js Image з proper обробкою */}
-                                {item?.images?.map((im: any, idx: number) => (
-                                    <div key={`image-${item?.level}-${idx}`} className="top-item-inner-information-loyaltie__icons-item top-item-information-loyaltie__icon">
-                                        {/* ✅ Перевіряємо чи це SVG файл */}
-                                        {im?.image?.endsWith('.svg') ? (
-                                            // ✅ Для SVG використовуємо Image компонент з особливими налаштуваннями
-                                            <Image
-                                                src={im.image}
-                                                alt={`Loyalty level ${item?.level} icon ${idx + 1}`}
-                                                width={20}
-                                                height={20}
-                                                loading="lazy"
-                                                style={{ 
-                                                    width: 'auto', 
-                                                    height: 'auto',
-                                                    maxWidth: '20px',
-                                                    maxHeight: '20px'
-                                                }}
-                                            />
-                                        ) : (
-                                            // ✅ Для інших форматів використовуємо звичайний Image
-                                            <Image
-                                                src={im?.image || '/img/icons/default-loyalty.svg'}
-                                                alt={`Loyalty level ${item?.level} icon ${idx + 1}`}
-                                                width={20}
-                                                height={20}
-                                                loading="lazy"
-                                            />
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
+
                             <div className="top-item-inner-information-loyaltie__arrow">
                                 <svg>
                                     <use xlinkHref="#arrow"></use>
