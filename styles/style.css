@@ -18542,6 +18542,16 @@ h3 {
   box-sizing: border-box;
 }
 
+/* Accordion animation states */
+.accordion-item--closed {
+  visibility: hidden;
+  max-height: 0px !important;
+}
+
+.accordion-item--open {
+  visibility: visible;
+}
+
 .content-bonus-information {
   min-height: fit-content;
   box-sizing: border-box;

@@ -18,11 +18,8 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
     isNested = false,
 }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen || isNested)
-    const [maxHeight, setMaxHeight] = useState<string>("0")
     const [isAnimating, setIsAnimating] = useState<boolean>(false)
-    const [isHidden, setIsHidden] = useState<"hidden" | "visible">(
-        isOpen ? "visible" : "hidden"
-    )
+    const [isHydrated, setIsHydrated] = useState<boolean>(false)
     const { toggle } = useAccordion()
     const headerRef = useRef<HTMLDivElement>(null)
     const bodyRefAcc = useRef<HTMLDivElement | null>(null)
@@ -53,21 +50,30 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
         return totalHeight
     }, [])
 
+    // Set up hydration flag to avoid SSR mismatch
     useEffect(() => {
-        if (bodyRefAcc?.current) {
+        setIsHydrated(true)
+    }, [])
+
+    useEffect(() => {
+        if (bodyRefAcc?.current && isHydrated) {
             const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
-            setMaxHeight(`${contentHeight}px`)
+            if (isOpen) {
+                bodyRefAcc.current.style.maxHeight = `${contentHeight}px`
+            } else {
+                bodyRefAcc.current.style.maxHeight = "0px"
+            }
         }
-    }, [calculateTotalHeight, content, isOpen])
+    }, [calculateTotalHeight, content, isOpen, isHydrated])
 
     // ResizeObserver для динамічного відстеження змін контенту
     useEffect(() => {
-        if (!bodyRefAcc?.current) return
+        if (!bodyRefAcc?.current || !isHydrated) return
 
         const resizeObserver = new ResizeObserver(() => {
             if (bodyRefAcc?.current && isOpen) {
                 const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
-                setMaxHeight(`${contentHeight}px`)
+                bodyRefAcc.current.style.maxHeight = `${contentHeight}px`
             }
         })
 
@@ -76,7 +82,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
         return () => {
             resizeObserver.disconnect()
         }
-    }, [calculateTotalHeight, isOpen])
+    }, [calculateTotalHeight, isOpen, isHydrated])
 
     // Sync internal state with defaultOpen prop changes
     useEffect(() => {
@@ -108,17 +114,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
 
         setIsOpen((prevState) => {
             const newState = !prevState
-            if (newState === true) {
-                setTimeout(() => {
-                    setIsHidden("visible")
-                    // Перерахунок висоти після відкриття
-                    if (bodyRefAcc?.current) {
-                        const contentHeight = calculateTotalHeight(bodyRefAcc?.current)
-                        setMaxHeight(`${contentHeight}px`)
-                    }
-                }, 300)
-            } else {
-                setIsHidden("hidden")
+            if (newState === true && bodyRefAcc?.current) {
+                // Calculate and set height immediately when opening
+                const contentHeight = calculateTotalHeight(bodyRefAcc.current)
+                bodyRefAcc.current.style.maxHeight = `${contentHeight}px`
+            } else if (newState === false && bodyRefAcc?.current) {
+                // Set height to 0 when closing
+                bodyRefAcc.current.style.maxHeight = "0px"
             }
             return newState
         })
@@ -141,13 +143,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = memo( ({
                 {heading}
             </div>
             <div 
-                className="accordion-item" 
+                className={`accordion-item ${isOpen ? 'accordion-item--open' : 'accordion-item--closed'}`}
                 ref={bodyRefAcc}
                 style={{
                     ...styles.accordionItemPanel,
-                    visibility: isHidden,
-                    maxHeight: isOpen ? maxHeight : "0",
-                    position: "relative",
+                    ...(isHydrated ? {} : { maxHeight: isOpen ? 'auto' : '0', visibility: isOpen ? 'visible' : 'hidden' })
                 }}
             >
                 {content}
@@ -167,5 +167,6 @@ const styles = {
     accordionItemPanel: {
         transition: "max-height 0.3s ease-in-out",
         overflow: "hidden" as const,
+        position: "relative" as const,
     },
 }

@@ -28,6 +28,7 @@ import initializeAdaptiveBehavior from '../../../helper/adaprive-bahavior'
 // ЗМІНА 9: Додано useParams для client component
 // В Next.js App Router для client components використовується useParams hook
 import { useParams } from 'next/navigation'
+import '@/pages-component/all-bonuses-page/style.css'
 const BottomInfo = dynamic(() => import('../../../components/footer/BottomInfo'), {
     loading: () => null,
 })

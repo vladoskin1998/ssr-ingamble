@@ -448,6 +448,7 @@ export type GeneralFilterDataType = {
 export type CasinoFilterDataType = {
     max_min_deposit_value: number;
     max_min_wagering_value: number;
+    max_casino_likes_value: number;
     live_chat_competence: {
         value: string;
         label: string;

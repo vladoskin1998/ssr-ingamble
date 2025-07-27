@@ -81,7 +81,7 @@ export default function CasinoFilterContent ({
                             <span className="title-form-filter__count">1</span>
                         </h3>
                     }
-                    content={<RangeSlider initState={casinoFilters.casino_likes} field="casino_likes" minmax={[1, 10000]} setLocalFilters={setCasinoFilters} />}
+                    content={<RangeSlider initState={casinoFilters.casino_likes} field="casino_likes" minmax={[1, datasFilterCasino?.max_casino_likes_value || 10000]} setLocalFilters={setCasinoFilters} />}
                 />
             </div>
 
