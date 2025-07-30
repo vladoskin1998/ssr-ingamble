@@ -13,10 +13,25 @@ const NavbarWrapper = () => {
     useEffect(() => {
         // Only reset filters if pathname actually changed (not on first render)
         if (prevPathnameRef.current !== null && prevPathnameRef.current !== pathname) {
-            handlerCurrentRouteFilter(RouteToNextFilter.DEFAULT)
-            setCasinoFilters(initialCasinoFilters)
-            setBonusFilters(initialBonusFilters)
-            setLoyaltiesFilters(initialLoyaltiesFilters)
+            const isNavigatingToFilterPage = pathname.startsWith('/filter-')
+            
+            if (isNavigatingToFilterPage) {
+                // Set appropriate currentRouteFilter based on the filter page
+                if (pathname.startsWith('/filter-casinos')) {
+                    handlerCurrentRouteFilter(RouteToNextFilter.CASINOS)
+                } else if (pathname.startsWith('/filter-bonus')) {
+                    handlerCurrentRouteFilter(RouteToNextFilter.BONUS)
+                } else if (pathname.startsWith('/filter-loyalties')) {
+                    handlerCurrentRouteFilter(RouteToNextFilter.LOYALTIES)
+                }
+                // Don't reset filters when navigating TO filter pages
+            } else {
+                // Reset filters when navigating away from filter pages OR to non-filter pages
+                handlerCurrentRouteFilter(RouteToNextFilter.DEFAULT)
+                setCasinoFilters(initialCasinoFilters)
+                setBonusFilters(initialBonusFilters)
+                setLoyaltiesFilters(initialLoyaltiesFilters)
+            }
         }
         prevPathnameRef.current = pathname
     }, [pathname, setCasinoFilters, setBonusFilters, setLoyaltiesFilters, handlerCurrentRouteFilter])

@@ -14,6 +14,7 @@ import { WithdrawalLimits } from "./WithdrawalLimits"
 import { MinimumDeposit } from "./MinimumDeposit"
 import { getFilterContentHeight } from "../../../helper"
 import { UnlimitedCheckBox } from "../../filter-components/UnlimitedCheckBox"
+import { useEffect } from "react"
 
 export default function CasinoFilterContent ({
     datasFilterCasino,
@@ -23,6 +24,21 @@ export default function CasinoFilterContent ({
         | undefined
 })  {
     const { casinoFilters, setCasinoFilters } = useFilterContext()
+
+    // Debug logging for casino_owner filters
+    useEffect(() => {
+        console.log('🎰 Casino Filters Changed:', {
+            casino_owner: casinoFilters.casino_owner,
+            allFilters: casinoFilters
+        })
+    }, [casinoFilters.casino_owner, casinoFilters])
+
+    useEffect(() => {
+        console.log('📊 Casino Owner Data Available:', {
+            available_owners: datasFilterCasino?.casino_owner,
+            count: datasFilterCasino?.casino_owner?.length
+        })
+    }, [datasFilterCasino?.casino_owner])
 
     return (
         <div className={`item-form-filters__body custom-item-form-filters__body`}>
@@ -81,7 +97,7 @@ export default function CasinoFilterContent ({
                             <span className="title-form-filter__count">1</span>
                         </h3>
                     }
-                    content={<RangeSlider initState={casinoFilters.casino_likes} field="casino_likes" minmax={[1, datasFilterCasino?.max_casino_likes_value || 10000]} setLocalFilters={setCasinoFilters} />}
+                    content={<RangeSlider initState={casinoFilters.casino_likes} field="casino_likes" minmax={[1, datasFilterCasino?.max_casino_likes_value || 100000]} setLocalFilters={setCasinoFilters} />}
                 />
             </div>
 
