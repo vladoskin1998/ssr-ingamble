@@ -147,7 +147,7 @@ export default function BlockType11({
                                         </div>
                                     </div>
                                     <div className="top__column">
-                                        <LoadingLink href={`/all-casinos/best-payid-casinos`} className="top__btn">
+                                        <LoadingLink href={`/all-casinos/top-crypto-casinos`} className="top__btn">
                                             <span>See All</span>
                                             <span className="top__btn-arrow">
                                                 <svg>
