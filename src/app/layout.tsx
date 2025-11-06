@@ -21,17 +21,6 @@ export const metadata: Metadata = {
             follow: true,
         },
     },
-    openGraph: {
-        title: 'inGamble - Premium Gambling Platform',
-        description: 'Explore inGamble, the top platform for online casino reviews. Access the most extensive array of bonuses, loyalty programs, and detailed casino analysis.',
-        type: 'website',
-        siteName: 'inGamble',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: 'inGamble - Premium Gambling Platform',
-        description: 'Explore inGamble, the top platform for online casino reviews.',
-    },
     icons: {
         icon: '/img/favicon.png',
         shortcut: '/img/favicon.png',
