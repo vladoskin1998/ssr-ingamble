@@ -16,7 +16,7 @@ export async function generateMetadata(
         console.log('generateMetadata: name from LOYALTIECATEGORYIES:', name)
 
         return {
-            title: `${name} | inGamble`,
+            title: `${name} Casino Loyalties | inGamble`,
             description: 'Find the best casino VIP programs and loyalty rewards.',
         }
     } catch (error) {
