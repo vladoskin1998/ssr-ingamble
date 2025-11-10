@@ -4,7 +4,8 @@ import AllLoyaltiesClient from '@/app/all-loyalties/[[...params]]/AllLoyaltiesCl
 
 
 export async function generateMetadata(
-    { params }: { params: { params?: string[] } }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    { params }: { params: any }
 ): Promise<Metadata> {
     try {
         const slug = params?.params?.[0]
