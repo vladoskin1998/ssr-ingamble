@@ -1,0 +1,242 @@
+{
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
+    "id": 472,
+    "files": [
+      "static/chunks/472.a3826d29d6854395.js"
+    ]
+  },
+  "..\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
+    "id": 9341,
+    "files": [
+      "static/chunks/9341.3de5922501c09e3c.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\SimpleCasinos.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\SimpleCasinos.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\SimpleCasinos.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\bonuses\\[bonus_slug]\\SimpleBonus.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\bonuses\\[bonus_slug]\\SimpleBonus.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\bonuses\\[bonus_slug]\\SimpleBonus.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\loyalty\\SimpleLoyalties.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\loyalty\\SimpleLoyalties.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\loyalty\\SimpleLoyalties.tsx -> @/components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "app\\casino\\[casino_slug]\\loyalty\\SimpleLoyalties.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "app\\filter-bonus\\[[...params]]\\FilterBonus.tsx -> ../../../components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\filter-bonus\\[[...params]]\\FilterBonus.tsx -> ../../../components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\filter-bonus\\[[...params]]\\FilterBonus.tsx -> ../../../components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "app\\filter-bonus\\[[...params]]\\FilterBonus.tsx -> ../../../components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "app\\filter-casinos\\[[...params]]\\FilterCasino.tsx -> ../../../components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\filter-casinos\\[[...params]]\\FilterCasino.tsx -> ../../../components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\filter-casinos\\[[...params]]\\FilterCasino.tsx -> ../../../components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "app\\filter-casinos\\[[...params]]\\FilterCasino.tsx -> ../../../components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "app\\filter-loyalties\\[[...params]]\\FilterLoyalty.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "app\\filter-loyalties\\[[...params]]\\FilterLoyalty.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "app\\filter-loyalties\\[[...params]]\\FilterLoyalty.tsx -> @/components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "app\\filter-loyalties\\[[...params]]\\FilterLoyalty.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "components\\pagination\\ReactPaginateClient.tsx -> react-paginate": {
+    "id": 1597,
+    "files": [
+      "static/chunks/1597.3aa1b9d1745f8116.js"
+    ]
+  },
+  "pages-component\\all-bonuses-page\\index.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "pages-component\\all-bonuses-page\\index.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "pages-component\\all-bonuses-page\\index.tsx -> @/components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "pages-component\\all-bonuses-page\\index.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "pages-component\\all-casinos-page\\index.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "pages-component\\all-casinos-page\\index.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "pages-component\\all-casinos-page\\index.tsx -> @/components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "pages-component\\all-casinos-page\\index.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  },
+  "pages-component\\all-loyalties-page\\index.tsx -> @/components/categories/CheckMoreWhatSuitsYouBest": {
+    "id": 2949,
+    "files": [
+      "static/chunks/2949.1b77d2c32de79bf5.js"
+    ]
+  },
+  "pages-component\\all-loyalties-page\\index.tsx -> @/components/footer": {
+    "id": 7024,
+    "files": [
+      "static/css/55f5d22d71c35674.css",
+      "static/chunks/7024-12b652e459ea4f80.js"
+    ]
+  },
+  "pages-component\\all-loyalties-page\\index.tsx -> @/components/footer/BottomInfo": {
+    "id": 5813,
+    "files": [
+      "static/chunks/5813.5992dad013100fc1.js"
+    ]
+  },
+  "pages-component\\all-loyalties-page\\index.tsx -> @/components/subscribe/SubscribeForm": {
+    "id": 2563,
+    "files": [
+      "static/css/6baa3043de7c7d8d.css",
+      "static/chunks/2563.4033b139268ccb5d.js"
+    ]
+  }
+}

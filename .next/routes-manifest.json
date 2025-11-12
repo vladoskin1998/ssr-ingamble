@@ -1,0 +1,171 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/all-bonuses/[[...params]]",
+      "regex": "^/all\\-bonuses(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/all\\-bonuses(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    },
+    {
+      "page": "/all-casinos/[[...params]]",
+      "regex": "^/all\\-casinos(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/all\\-casinos(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    },
+    {
+      "page": "/all-loyalties/[[...params]]",
+      "regex": "^/all\\-loyalties(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/all\\-loyalties(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    },
+    {
+      "page": "/api/bonus/[slug]",
+      "regex": "^/api/bonus/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/api/bonus/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/casino/[slug]",
+      "regex": "^/api/casino/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/api/casino/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/loyalty-program/[slug]",
+      "regex": "^/api/loyalty\\-program/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/api/loyalty\\-program/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/casino/[casino_slug]",
+      "regex": "^/casino/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcasino_slug": "nxtPcasino_slug"
+      },
+      "namedRegex": "^/casino/(?<nxtPcasino_slug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/casino/[casino_slug]/bonuses/[bonus_slug]",
+      "regex": "^/casino/([^/]+?)/bonuses/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPcasino_slug": "nxtPcasino_slug",
+        "nxtPbonus_slug": "nxtPbonus_slug"
+      },
+      "namedRegex": "^/casino/(?<nxtPcasino_slug>[^/]+?)/bonuses/(?<nxtPbonus_slug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/casino/[casino_slug]/loyalty",
+      "regex": "^/casino/([^/]+?)/loyalty(?:/)?$",
+      "routeKeys": {
+        "nxtPcasino_slug": "nxtPcasino_slug"
+      },
+      "namedRegex": "^/casino/(?<nxtPcasino_slug>[^/]+?)/loyalty(?:/)?$"
+    },
+    {
+      "page": "/filter-bonus/[[...params]]",
+      "regex": "^/filter\\-bonus(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/filter\\-bonus(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    },
+    {
+      "page": "/filter-casinos/[[...params]]",
+      "regex": "^/filter\\-casinos(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/filter\\-casinos(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    },
+    {
+      "page": "/filter-loyalties/[[...params]]",
+      "regex": "^/filter\\-loyalties(?:/(.+?))?(?:/)?$",
+      "routeKeys": {
+        "nxtPparams": "nxtPparams"
+      },
+      "namedRegex": "^/filter\\-loyalties(?:/(?<nxtPparams>.+?))?(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/bonuses",
+      "regex": "^/bonuses(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/bonuses(?:/)?$"
+    },
+    {
+      "page": "/casinos",
+      "regex": "^/casinos(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/casinos(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/privacy-policy",
+      "regex": "^/privacy\\-policy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy\\-policy(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "Next-Router-Segment-Prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  },
+  "rewrites": []
+}
